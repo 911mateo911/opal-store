@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        red_hat_display: ['--font-red_hat_display']
+        red_hat_display: ['--font-red_hat_display'],
+        inter: ['--font-inter']
       },
       colors: {
         'grey-1': '#f6f6f7',

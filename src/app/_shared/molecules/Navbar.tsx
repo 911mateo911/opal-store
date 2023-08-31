@@ -1,15 +1,15 @@
 import clsx from 'clsx';
 import React from 'react';
-import { font_RedHatDisplay } from './fonts';
+import { font_RedHatDisplay } from '../fonts';
 import Link from 'next/link';
-import { Logo } from './atoms/Logo';
-import { FilledButton } from './atoms/FilledButton';
+import { Logo } from '../atoms/Logo';
+import { FilledButton } from '../atoms/FilledButton';
 
 export const Navbar = () => {
   return (
     <div className={clsx(
       font_RedHatDisplay.className,
-      'p-4 flex items-center justify-between fixed top-3 left-1/2 -translate-x-1/2 z-50',
+      'p-4 flex items-center justify-between fixed top-3 left-1/2 -translate-x-1/2 z-50 bg-white',
       'w-navbar_width shadow-navbar_shadow border border-solid border-grey-10 rounded-[10px]',
       'dark:bg-grey-90 dark:border-grey-100'
     )} >
