@@ -1,10 +1,16 @@
 'use client';
 
-import { TextInput } from "emeralb/app/_shared/atoms/TextInput/TextInput";
+import { TextInput } from "emeralb/app/_shared/atoms/TextInput";
 
 export const PublishForm = () => {
   return (
-    <div>
+    <div className="pt-2 px-[10px]" >
+      <h2>
+        Produkti juaj?
+      </h2>
+      <h6>
+        Titulli
+      </h6>
       <TextInput
         value="mateo"
         name="text"
