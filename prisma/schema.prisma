@@ -1,0 +1,31 @@
+datasource db {
+  url      = env("DATABASE_URL")
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model USER {
+  id String @id @unique
+}
+
+model PRODUCT {
+  id       String             @id @unique
+  category PRODUCT_CATEGORIES
+  currency PRODUCT_CURRENCY
+}
+
+enum PRODUCT_CATEGORIES {
+  CAR
+  APARTMENT
+}
+
+enum PRODUCT_CURRENCY {
+  ALL
+  EUR
+  USD
+  GBP
+  OTHER
+}

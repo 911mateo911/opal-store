@@ -1,8 +1,10 @@
 'use client';
 
 import clsx from "clsx";
+import { Select } from "emeralb/app/_shared/atoms/Select";
 import { TextInput } from "emeralb/app/_shared/atoms/TextInput";
 import { font_Inter, font_RedHatDisplay } from "emeralb/app/_shared/fonts";
+import { BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS, PRODUCT_CURRENCY_SELECT_OPTIONS } from "../_config";
 
 export const PublishForm = () => {
   return (
@@ -30,7 +32,43 @@ export const PublishForm = () => {
         name="text"
         onChange={console.log}
       />
-      <div className="pt-2 grid grid-cols-3" >
+      <div className="pt-2 grid grid-cols-3 mt-3 gap-2" >
+        <div>
+          <p className={clsx(
+            font_Inter.className,
+            'text-sm font-medium mb-1 text-center'
+          )} >
+            Kategori
+          </p>
+          <Select
+            values={BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS}
+            selectedValueKey='APARTMENT'
+          />
+        </div>
+        <div>
+          <p className={clsx(
+            font_Inter.className,
+            'text-sm font-medium mb-1 text-center'
+          )} >
+            Nenkategori
+          </p>
+          <Select
+            values={PRODUCT_CURRENCY_SELECT_OPTIONS}
+            selectedValueKey='USD'
+          />
+        </div>
+        <div>
+          <p className={clsx(
+            font_Inter.className,
+            'text-sm font-medium mb-1 text-center'
+          )} >
+            Monedha
+          </p>
+          <Select
+            values={PRODUCT_CURRENCY_SELECT_OPTIONS}
+            selectedValueKey='USD'
+          />
+        </div>
       </div>
     </div>
   )
