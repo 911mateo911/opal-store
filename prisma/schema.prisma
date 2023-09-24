@@ -12,9 +12,10 @@ model USER {
 }
 
 model PRODUCT {
-  id       String             @id @unique
-  category PRODUCT_CATEGORIES
-  currency PRODUCT_CURRENCY
+  id          String               @id @unique
+  category    PRODUCT_CATEGORIES
+  currency    PRODUCT_CURRENCY
+  advertIndex PRODUCT_ADVERT_INDEX
 }
 
 enum PRODUCT_CATEGORIES {
@@ -28,4 +29,10 @@ enum PRODUCT_CURRENCY {
   USD
   GBP
   OTHER
+}
+
+enum PRODUCT_ADVERT_INDEX {
+  GOLD
+  SILVER
+  REGULAR
 }

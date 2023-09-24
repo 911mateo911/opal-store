@@ -6,8 +6,21 @@ import { TextInput } from "emeralb/app/_shared/atoms/TextInput";
 import { font_Inter, font_RedHatDisplay } from "emeralb/app/_shared/fonts";
 import { BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS, PRODUCT_CURRENCY_SELECT_OPTIONS } from "../_config";
 import { FormSectionTitle } from "./FormSectionTitle";
+import { useForm } from "react-hook-form";
+import { NewProductFormFields, NewProductSchemaType, newProductSchema } from "../_formConfig";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export const PublishForm = () => {
+  const {
+    setValue
+  } = useForm<NewProductSchemaType>({
+    resolver: zodResolver(newProductSchema),
+  });
+
+  const onStringInputChange = (value: string, field: NewProductFormFields) => {
+    setValue(field, value);
+  };
+
   return (
     <div className="pt-2 px-[10px]" >
       <h2 className={clsx(
@@ -25,10 +38,9 @@ export const PublishForm = () => {
       )} >
         Nje titull i shkurter dhe permbledhes mbi produktin tend.
       </p>
-      <TextInput
-        value="mateo"
-        name="text"
-        onChange={console.log}
+      <TextInput<NewProductFormFields.title>
+        name={NewProductFormFields.title}
+        onChange={onStringInputChange}
       />
       <div className="pt-9 grid grid-cols-3 mt-3 gap-2" >
         <div>

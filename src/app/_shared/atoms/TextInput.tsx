@@ -4,10 +4,10 @@ import clsx from 'clsx';
 import React from 'react';
 import { font_RedHatDisplay } from '../fonts';
 
-interface TextInputProps {
-  value: string;
-  onChange: (value: string) => void;
-  name: string;
+interface TextInputProps<T extends string> {
+  value?: string;
+  onChange: (value: string, name: T) => void;
+  name: T;
   id?: string;
   type?: 'text' | 'number';
   className?: string;
@@ -19,7 +19,7 @@ interface TextInputProps {
 }
 
 // TODO: expand later
-export const TextInput = ({
+export function TextInput<T extends string>({
   name,
   onChange,
   value,
@@ -31,7 +31,7 @@ export const TextInput = ({
   placeholder,
   required,
   validateOn
-}: TextInputProps) => {
+}: TextInputProps<T>) {
   return (
     <input
       value={value}
@@ -48,7 +48,7 @@ export const TextInput = ({
         'dark:focus:outline-blue-900 dark:focus:outline-none',
         'dark:placeholder:text-grey-75 dark:focus:bg-grey-80'
       )}
-      onChange={({ target }) => onChange(target.value)}
+      onChange={({ target }) => onChange(target.value, name)}
     />
   )
 }
