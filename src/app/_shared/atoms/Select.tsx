@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import DownArrow from 'emeralb/app/_shared/icons/downArrow.svg'
 import { font_Inter, font_RedHatDisplay } from '../fonts';
+import { useClickOutside } from '../hooks/useClickOutside';
 
 interface SelectOption {
   element: React.ReactNode;
@@ -28,8 +29,12 @@ export function Select<T extends string>({ values, selectedValueKey, onSelect }:
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
   const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
+  const wrapperRef = useClickOutside<HTMLDivElement>(closeModal);
 
   const handleSelect = (option: SelectOption) => {
+    closeModal();
     onSelect?.(option);
   }
 
@@ -44,7 +49,7 @@ export function Select<T extends string>({ values, selectedValueKey, onSelect }:
   const options = Object.values<SelectOption>(values);
 
   return (
-    <div className='relative' >
+    <div className='relative' ref={wrapperRef} >
       <div
         className={clsx(
           'h-12 border border-solid border-grey-10 rounded-md bg-white cursor-pointer',
@@ -72,14 +77,17 @@ export function Select<T extends string>({ values, selectedValueKey, onSelect }:
         />
       </div>
       <div className={clsx(
-        'absolute top-[calc(100%_-_1px)] bg-white border border-solid border-grey-10 rounded-b-md w-full'
+        'absolute bg-white border border-solid border-grey-10 rounded-b-md w-full',
+        'opacity-0 invisible -z-10 top-1/2 transition-all',
+        isModalOpen && '!top-[calc(100%_-_1px)] !visible opacity-100 z-auto'
       )}>
         {options.map(option => (
           <div
             className={clsx(
-              'p-[10px] cursor-pointer border-b border-grey-5 [&:last-child]:border-none text-center text-sm font-normla',
+              'p-[10px] cursor-pointer border-b border-grey-5 [&:last-child]:border-none text-center text-sm font-normal',
               font_Inter.className,
-              'text-grey-85'
+              'text-grey-70 transition-all',
+              'hover:bg-grey-5 hover:text-grey-100'
             )}
             onClick={() => handleSelect(option)}
             key={option.value}
