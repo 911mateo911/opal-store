@@ -8,7 +8,7 @@ export default function PublishPageLayout(
   return (
     <div className="max-w-[1000px] mx-auto px-4 my-6 flex justify-center relative" >
       <PublishFormSidebar />
-      <div className='w-full bg-grey-1 rounded-lg' >
+      <div className='w-full bg-grey-1 rounded-lg dark:bg-grey-95' >
         <PublishFormHeader />
         {children}
       </div>

@@ -82,7 +82,8 @@ export function Select<N extends string, T extends string>({ values, selectedVal
         onClick={openModal}
       >
         <p className={clsx(
-          'text-sm m-0 text-center mx-6 w-full'
+          'text-sm m-0 text-center mx-6 w-full',
+          'dark:text-grey-10'
         )} >
           {selectedValue.element}
         </p>
@@ -97,7 +98,8 @@ export function Select<N extends string, T extends string>({ values, selectedVal
       <div className={clsx(
         'absolute bg-white border border-solid border-grey-10 rounded-b-md w-full',
         'opacity-0 invisible -z-10 top-1/2 transition-all',
-        modalState.isOpen && '!top-[calc(100%_-_1px)] !visible opacity-100 z-auto'
+        modalState.isOpen && '!top-[calc(100%_-_1px)] !visible opacity-100 z-auto',
+        'dark:bg-grey-90 dark:border-grey-90'
       )}>
         {options.map(option => (
           <div
@@ -105,7 +107,9 @@ export function Select<N extends string, T extends string>({ values, selectedVal
               'p-[10px] cursor-pointer border-b border-grey-5 [&:last-child]:border-none text-center text-sm font-normal',
               font_Inter.className,
               'text-grey-70 transition-all',
-              'hover:bg-grey-5 hover:text-grey-100'
+              'hover:bg-grey-5 hover:text-grey-100',
+              'dark:border-grey-85 dark:text-grey-10 dark:[&:first-child]:border-t',
+              'dark:hover:bg-grey-95 dark:hover:text-grey-5'
             )}
             onClick={() => handleSelect(option)}
             key={option.value}

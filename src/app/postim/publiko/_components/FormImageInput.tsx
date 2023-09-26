@@ -34,8 +34,6 @@ export const FormImageInput = ({ id, onChange }: FormImageInputProps) => {
       }
     };
 
-    target.value = '';
-
     if (!withPreviewFiles.length) {
       handleAddToast({
         content: (
@@ -59,6 +57,8 @@ export const FormImageInput = ({ id, onChange }: FormImageInputProps) => {
       });
     };
 
+    target.value = '';
+
     onChange(withPreviewFiles);
   }
 
@@ -69,6 +69,7 @@ export const FormImageInput = ({ id, onChange }: FormImageInputProps) => {
       className='invisible h-0.5 w-0'
       id={id}
       onChange={handleOnChange}
+      value=''
     />
   )
 }

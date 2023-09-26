@@ -10,7 +10,7 @@ export const Navbar = () => {
     <div className={clsx(
       font_RedHatDisplay.className,
       'p-4 flex items-center justify-between fixed top-3 left-1/2 -translate-x-1/2 z-40 bg-white',
-      'w-navbar_width shadow-navbar_shadow border border-solid border-grey-10 rounded-[10px]',
+      'w-navbar_width shadow-navbar_shadow border border-solid border-grey-10 rounded-[10px] max-w-7xl',
       'dark:bg-grey-90 dark:border-grey-80'
     )} >
       <Link href='/' >

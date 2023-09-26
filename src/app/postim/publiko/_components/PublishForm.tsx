@@ -46,7 +46,8 @@ export const PublishForm = () => {
     <div className="pt-2 px-[10px]" >
       <h2 className={clsx(
         "text-xl mb-2.5 mt-2 tracking-wide font-bold",
-        font_RedHatDisplay.className
+        font_RedHatDisplay.className,
+        'dark:text-grey-5'
       )} >
         Produkti juaj?
       </h2>
@@ -55,19 +56,22 @@ export const PublishForm = () => {
       </FormSectionTitle>
       <p className={clsx(
         "text-xs mb-0.5 font-normal text-grey-70",
-        font_Inter.className
+        font_Inter.className,
+        'dark:text-grey-20'
       )} >
         Nje titull i shkurter dhe permbledhes mbi produktin tend.
       </p>
       <TextInput<NewProductFormFields.title>
         name={NewProductFormFields.title}
         onChange={onStringInputChange}
+        placeholder="Shitet ..."
       />
       <div className="pt-9 grid grid-cols-3 mt-3 gap-2" >
         <div>
           <p className={clsx(
             font_Inter.className,
-            'text-sm font-medium mb-1 text-center'
+            'text-sm font-medium mb-1 text-center',
+            'dark:text-grey-20'
           )} >
             Kategori
           </p>
@@ -81,7 +85,8 @@ export const PublishForm = () => {
         <div>
           <p className={clsx(
             font_Inter.className,
-            'text-sm font-medium mb-1 text-center'
+            'text-sm font-medium mb-1 text-center',
+            'dark:text-grey-20'
           )} >
             Nenkategori
           </p>
@@ -95,7 +100,8 @@ export const PublishForm = () => {
         <div>
           <p className={clsx(
             font_Inter.className,
-            'text-sm font-medium mb-1 text-center'
+            'text-sm font-medium mb-1 text-center',
+            'dark:text-grey-20'
           )} >
             Monedha
           </p>
@@ -111,7 +117,7 @@ export const PublishForm = () => {
         <FormSectionTitle>
           Ngarko Imazhe
         </FormSectionTitle>
-        <div className="grid grid-cols-[1fr,_150px] w-full pb-2" >
+        <div className="grid grid-cols-[1fr,_150px] w-full pb-2 gap-[10px]" >
           <div>
             <FormImagePreview
               formControl={control}
@@ -120,8 +126,9 @@ export const PublishForm = () => {
           </div>
           <label
             className={clsx(
-              'flex items-center justify-center flex-col h-[150px] w-[150px] bg-grey-2 text-grey-30 shadow cursor-pointer transition-all',
-              'hover:bg-green-5 [&>img]:hover:scale-110 [&>p]:hover:text-green-100'
+              'flex items-center rounded-md justify-center flex-col h-[150px] w-[150px] bg-grey-2 text-grey-30 shadow cursor-pointer transition-all',
+              'hover:bg-green-5 [&>img]:hover:scale-110 [&>p]:hover:text-green-100',
+              'dark:bg-grey-85 dark:hover:bg-grey-70 dark:[&>p]:hover:text-grey-10'
             )}
             htmlFor={PRODUCT_FORM_IMAGE_PICKER_ID}
           >
@@ -130,11 +137,12 @@ export const PublishForm = () => {
               alt='camera_icon'
               width={32}
               height={32}
-              className="transition-all"
+              className="transition-all dark:invert"
             />
             <p className={clsx(
               font_RedHatDisplay.className,
-              'text-sm pt-1.5 text-grey-80 font-medium transition-all'
+              'text-sm pt-1.5 text-grey-80 font-medium transition-all',
+              'dark:text-grey-30'
             )} >
               Ngarko fotografi
             </p>

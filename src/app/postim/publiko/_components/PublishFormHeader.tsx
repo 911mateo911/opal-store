@@ -7,7 +7,8 @@ export const PublishFormHeader = () => {
   return (
     <div className={clsx(
       'px-[10px] py-3 rounded-lg border-solid border border-grey-10 flex',
-      'items-center justify-between bg-white'
+      'items-center justify-between bg-white',
+      'dark:bg-grey-90 dark:border-grey-95'
     )} >
       <FilledButton
         text='Mbrapa'
