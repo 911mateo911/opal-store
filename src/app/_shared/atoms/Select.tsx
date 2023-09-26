@@ -7,46 +7,64 @@ import DownArrow from 'emeralb/app/_shared/icons/downArrow.svg'
 import { font_Inter, font_RedHatDisplay } from '../fonts';
 import { useClickOutside } from '../hooks/useClickOutside';
 
-interface SelectOption {
+interface SelectOption<V extends string> {
   element: React.ReactNode;
-  value: string;
+  value: V;
 }
 
-export type SelectValues<T extends string> = Record<T, SelectOption>;
+export type SelectValues<T extends string> = Record<T, SelectOption<T>>;
 
-interface SelectProps<T extends string> {
+interface SelectProps<N extends string, T extends string> {
+  name: N;
   values: SelectValues<T>;
   selectedValueKey?: T;
-  onSelect?: (option: SelectOption) => void;
+  onSelect?: (optionValue: string, name: N) => void;
 };
 
-const EMPTY_VALUE: SelectOption = {
+const EMPTY_VALUE: SelectOption<string> = {
   element: '',
   value: ''
 };
 
-export function Select<T extends string>({ values, selectedValueKey, onSelect }: SelectProps<T>) {
-  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+interface SelectModalState<V extends string> {
+  isOpen: boolean;
+  value?: V
+}
 
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
+export function Select<N extends string, T extends string>({ values, selectedValueKey, onSelect, name }: SelectProps<N, T>) {
+  const [modalState, setModalState] = useState<SelectModalState<T>>({
+    isOpen: false,
+    value: selectedValueKey
+  });
+
+  const openModal = () => setModalState(currState => ({ ...currState, isOpen: true }));
+  const closeModal = (value?: T) => setModalState(currState => {
+    if (value) {
+      return {
+        value,
+        isOpen: false
+      }
+    } else {
+      return ({ ...currState, isOpen: false });
+    }
+  });
 
   const wrapperRef = useClickOutside<HTMLDivElement>(closeModal);
 
-  const handleSelect = (option: SelectOption) => {
-    closeModal();
-    onSelect?.(option);
+  const handleSelect = (option: SelectOption<T>) => {
+    closeModal(option.value);
+    onSelect?.(option.value, name);
   }
 
   const selectedValue = useMemo(() => {
-    if (!selectedValueKey) {
+    if (!modalState.value) {
       return EMPTY_VALUE;
     };
 
-    return values?.[selectedValueKey];
-  }, [selectedValueKey, values]);
+    return values?.[modalState.value];
+  }, [modalState.value, values]);
 
-  const options = Object.values<SelectOption>(values);
+  const options = Object.values<SelectOption<T>>(values);
 
   return (
     <div className='relative' ref={wrapperRef} >
@@ -59,7 +77,7 @@ export function Select<T extends string>({ values, selectedValueKey, onSelect }:
           'dark:bg-grey-90 dark:border-grey-80',
           'dark:focus:outline-blue-900 dark:focus:outline-none',
           'dark:placeholder:text-grey-75 dark:focus:bg-grey-80',
-          isModalOpen && 'rounded-b-none'
+          modalState.isOpen && 'rounded-b-none'
         )}
         onClick={openModal}
       >
@@ -73,13 +91,13 @@ export function Select<T extends string>({ values, selectedValueKey, onSelect }:
           alt='down_select_arrow'
           width={16}
           height={16}
-          className={clsx('absolute right-2.5 transition-all', isModalOpen && '-rotate-180')}
+          className={clsx('absolute right-2.5 transition-all', modalState.isOpen && '-rotate-180')}
         />
       </div>
       <div className={clsx(
         'absolute bg-white border border-solid border-grey-10 rounded-b-md w-full',
         'opacity-0 invisible -z-10 top-1/2 transition-all',
-        isModalOpen && '!top-[calc(100%_-_1px)] !visible opacity-100 z-auto'
+        modalState.isOpen && '!top-[calc(100%_-_1px)] !visible opacity-100 z-auto'
       )}>
         {options.map(option => (
           <div

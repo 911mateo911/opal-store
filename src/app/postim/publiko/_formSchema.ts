@@ -46,12 +46,17 @@ export enum NewProductFormFields {
   currency = 'currency'
 }
 
-// TODO: ADD validations
+// TODO: ADD validation messages
 export const newProductSchema = z.object({
   [NewProductFormFields.title]: z.string(),
   [NewProductFormFields.debatablePrice]: z.boolean(),
   [NewProductFormFields.description]: z.string(),
-  [NewProductFormFields.images]: z.array(z.instanceof(File)),
+  // check ImageWithPreview
+  [NewProductFormFields.images]: z.array(z.object({
+    preview: z.string(),
+    size: z.number(),
+    name: z.string()
+  })),
   [NewProductFormFields.location]: z.string(),
   [NewProductFormFields.price]: z.string(),
   [NewProductFormFields.isInSale]: z.boolean().optional(),

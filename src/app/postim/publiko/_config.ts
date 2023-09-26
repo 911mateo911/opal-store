@@ -10,7 +10,7 @@ export const BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS: SelectValues<PRODUCT_CATEGO
     element: 'Automjet',
     value: PRODUCT_CATEGORIES.CAR
   }
-}
+};
 
 export const PRODUCT_CURRENCY_SELECT_OPTIONS: SelectValues<PRODUCT_CURRENCY> = {
   ALL: {
@@ -33,4 +33,8 @@ export const PRODUCT_CURRENCY_SELECT_OPTIONS: SelectValues<PRODUCT_CURRENCY> = {
     element: 'Tjeter',
     value: PRODUCT_CURRENCY.OTHER
   }
-}
+};
+
+export const ALLOWED_IMAGE_TYPES = ['image/webp', 'image/png', 'image/jpeg'];
+
+export const PRODUCT_FORM_IMAGE_PICKER_ID = 'image_picker';

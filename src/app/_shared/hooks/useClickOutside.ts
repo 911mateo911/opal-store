@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useRef } from 'react';
 
-export const useClickOutside = <T extends HTMLElement>(handler: (event: Event) => void): RefObject<T> => {
+export const useClickOutside = <T extends HTMLElement>(handler: () => void): RefObject<T> => {
   const ref: RefObject<T> = useRef<T>(null);
 
   useEffect(() => {
@@ -9,7 +9,7 @@ export const useClickOutside = <T extends HTMLElement>(handler: (event: Event) =
 
       if (!ref.current || ref.current.contains(target)) return;
 
-      handler(event);
+      handler();
     };
 
     document.addEventListener('mousedown', listener);
