@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Navbar } from './_shared/molecules/Navbar'
+import { ToastController } from './_shared/molecules/Toast/ToastController'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,6 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className='dark:bg-grey-100' >
+        <ToastController />
         <Navbar />
         <div className='pt-24' >
           {children}

@@ -13,6 +13,7 @@ import { FormImagePreview } from "./FormImagePreview";
 import CameraIcon from 'emeralb/app/_shared/icons/camera.svg';
 import Image from 'next/image';
 import { FormImageInput } from "./FormImageInput";
+import { ImageWithPreview } from "emeralb/app/_shared/types";
 
 export const PublishForm = () => {
   const {
@@ -35,7 +36,11 @@ export const PublishForm = () => {
     URL.revokeObjectURL(imagePreview);
 
     setValue(NewProductFormFields.images, newImages);
-  }
+  };
+
+  const onSetImages = (images: ImageWithPreview[]) => {
+    setValue(NewProductFormFields.images, images);
+  };
 
   return (
     <div className="pt-2 px-[10px]" >
@@ -135,6 +140,7 @@ export const PublishForm = () => {
             </p>
             <FormImageInput
               id={PRODUCT_FORM_IMAGE_PICKER_ID}
+              onChange={onSetImages}
             />
           </label>
         </div>

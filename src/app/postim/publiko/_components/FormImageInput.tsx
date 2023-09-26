@@ -1,30 +1,65 @@
+'use client';
+
 import { ImageWithPreview } from 'emeralb/app/_shared/types';
 import React, { ChangeEvent } from 'react';
+import { ALLOWED_IMAGE_TYPES } from '../_config';
+import { useToast } from 'emeralb/app/_shared/molecules/Toast/useToast';
 
 interface FormImageInputProps {
   id: string;
+  onChange: (images: ImageWithPreview[]) => void;
 }
 
-export const FormImageInput = ({ id }: FormImageInputProps) => {
+export const FormImageInput = ({ id, onChange }: FormImageInputProps) => {
+  const { handleAddToast } = useToast();
+
   const handleOnChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const files = target.files;
 
-    if (!files) return;
+    if (!files || !files.length) return;
 
     const withPreviewFiles: ImageWithPreview[] = [];
 
-    // TODO: VALIDATE AND SEND TOAST MESSAGE, CREATE TOAST MESSAGE
     for (let index = 0; index < Number(files?.length); index++) {
-      withPreviewFiles.push(Object.assign(
-        files[index],
-        {
-          preview: URL.createObjectURL(files[index])
-        }
-      ));
-    }
-    // prevImages.current = withPreviewFiles;
+
+      const currentFile = files[index];
+
+      if (ALLOWED_IMAGE_TYPES.includes(currentFile.type)) {
+        withPreviewFiles.push(Object.assign(
+          currentFile,
+          {
+            preview: URL.createObjectURL(files[index])
+          }
+        ));
+      }
+    };
 
     target.value = '';
+
+    if (!withPreviewFiles.length) {
+      handleAddToast({
+        content: (
+          <>
+            Formati i lejuar eshte i tipit <b>.png</b> <b>.jpeg</b> <b>.webp</b>
+          </>
+        ),
+        type: 'danger'
+      });
+    };
+
+    if (withPreviewFiles.length < files.length) {
+      handleAddToast({
+        content: (
+          <>
+            Disa foto jane perjashtuar. <br />
+            Formati i lejuar eshte i tipit <b>.png</b> <b>.jpeg</b> <b>.webp</b>
+          </>
+        ),
+        type: 'warning'
+      });
+    };
+
+    onChange(withPreviewFiles);
   }
 
   return (
@@ -33,7 +68,7 @@ export const FormImageInput = ({ id }: FormImageInputProps) => {
       multiple
       className='invisible h-0.5 w-0'
       id={id}
-    // onChange={}
+      onChange={handleOnChange}
     />
   )
 }

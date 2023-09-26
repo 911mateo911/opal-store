@@ -83,6 +83,19 @@ const config: Config = {
       },
       boxShadow: {
         navbar_shadow: '0px 30px 60px rgb(0 0 0 / 4%)'
+      },
+      keyframes: {
+        fadeIn: {
+          from: {
+            opacity: '0'
+          },
+          to: {
+            opacity: '1'
+          }
+        }
+      },
+      animation: {
+        'fadeIn': 'fadeIn .2s ease-in-out forwards'
       }
     }
   },
