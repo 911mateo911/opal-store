@@ -33,7 +33,7 @@ export function Checkbox<T extends string>({
         className={clsx(
           'border-2 border-solid h-6 w-6 rounded-md',
           'flex items-center justify-center select-none',
-          isChecked ? 'bg-green-50 border-green-50' : 'border-grey-30 bg-white'
+          isChecked ? 'bg-green-50 border-green-50' : 'border-grey-30 bg-white dark:bg-grey-85'
         )}
       >
         {isChecked && (
@@ -49,9 +49,9 @@ export function Checkbox<T extends string>({
       {placeholder && (
         <p className={clsx(
           font_RedHatDisplay.className,
-          'text-sm tracking-wide text-grey-90',
+          'text-sm tracking-wide text-grey-90 select-none',
           isChecked ? 'font-semibold' : 'font-normal',
-          'select-none'
+          'dark:text-grey-20'
         )} >
           {placeholder}
         </p>

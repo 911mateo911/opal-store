@@ -1,5 +1,9 @@
 import { SelectValues } from "emeralb/app/_shared/atoms/Select";
-import { PRODUCT_CATEGORIES, PRODUCT_CURRENCY, PRODUCT_PREFERRED_COMMUNICATION } from '@prisma/client';
+import {
+  PRODUCT_CATEGORIES,
+  PRODUCT_CURRENCY,
+  PRODUCT_PREFERRED_COMMUNICATION
+} from '@prisma/client';
 
 export const BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS: SelectValues<PRODUCT_CATEGORIES> = {
   APARTMENT: {
@@ -9,6 +13,30 @@ export const BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS: SelectValues<PRODUCT_CATEGO
   CAR: {
     element: 'Automjet',
     value: PRODUCT_CATEGORIES.CAR
+  },
+  BUSINESS: {
+    element: 'Biznes',
+    value: PRODUCT_CATEGORIES.BUSINESS
+  },
+  ELECTRONICS: {
+    element: 'Elektronike',
+    value: PRODUCT_CATEGORIES.ELECTRONICS
+  },
+  HEALTH: {
+    element: 'Shendeti',
+    value: PRODUCT_CATEGORIES.HEALTH
+  },
+  HOUSEHOLDS_AND_FAMILY: {
+    element: 'Familje dhe paisje',
+    value: PRODUCT_CATEGORIES.HOUSEHOLDS_AND_FAMILY
+  },
+  JOBS: {
+    element: 'Pune',
+    value: PRODUCT_CATEGORIES.JOBS
+  },
+  SPORTS: {
+    element: 'Sporte',
+    value: PRODUCT_CATEGORIES.SPORTS
   }
 };
 
@@ -48,7 +76,7 @@ export const PREFERRED_COMMUNICATION_SELECT_OPTIONS: SelectValues<PRODUCT_PREFER
     element: 'Whatsapp',
     value: PRODUCT_PREFERRED_COMMUNICATION.WHATSAPP
   }
-}
+};
 
 export const ALLOWED_IMAGE_TYPES = ['image/webp', 'image/png', 'image/jpeg'];
 

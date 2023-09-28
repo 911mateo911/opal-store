@@ -38,14 +38,13 @@ export const PublishFormSidebar = ({ form }: PublishFormSidebarProps) => {
         Informacionet e kontaktit
       </h6>
       <p className={clsx(
-        font_Inter.className,
-        'font-normal text-base mt-[6px] text-grey-90',
-        'dark:text-grey-30'
+        font_RedHatDisplay.className,
+        'text-sm tracking-wider font-light text-grey-80 dark:text-grey-20 mt-2'
       )} >
         Prezantohuni duke plotesuar formen e meposhtme:
       </p>
-      <div className='mt-4 flex flex-col justify-center items-center gap-3' >
-        <div className='w-full' >
+      <div className='mt-8 flex flex-col justify-center items-center gap-5' >
+        <div className='w-full mt-0.5' >
           <InputTitle>
             Emer Mbiemer
           </InputTitle>

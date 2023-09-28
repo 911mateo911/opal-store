@@ -41,10 +41,11 @@ export function TextInput<T extends string, F extends FieldValues>({
   const renderedInput = useMemo(() => {
     const sharedClasses = clsx(
       font_RedHatDisplay.className,
-      'focus:outline-1 focus:outline-blue-70',
+      'focus:outline-1 focus:outline-blue-70 !outline-none',
       'dark:bg-grey-90 dark:border-grey-80',
       'dark:focus:outline-blue-900 dark:focus:outline-none',
-      'dark:placeholder:text-grey-75 dark:focus:bg-grey-80 dark:text-grey-20'
+      'dark:placeholder:text-grey-75 dark:focus:bg-grey-80 dark:text-grey-20',
+      inputError && 'border-red-50 border-2 dark:border-red-60'
     );
 
     if (textarea) {
@@ -54,8 +55,7 @@ export function TextInput<T extends string, F extends FieldValues>({
           onChange={({ target }) => onChange(target.value, name)}
           className={clsx(
             'resize-none rounded-md w-full p-4 border border-solid border-grey-10 h-[200px]',
-            sharedClasses,
-            inputError && 'border-red-50 border-2'
+            sharedClasses
           )}
           placeholder={placeholder}
           onBlur={() => onBlur?.(name)}
@@ -72,8 +72,7 @@ export function TextInput<T extends string, F extends FieldValues>({
           className={clsx(
             'h-12 border border-solid border-grey-10 rounded-md pl-4 w-full',
             className,
-            sharedClasses,
-            inputError && 'border-red-50 border-2'
+            sharedClasses
           )}
           onChange={({ target }) => onChange(target.value, name)}
           onBlur={() => onBlur?.(name)}

@@ -81,7 +81,7 @@ export const PublishForm = ({ form }: PublishFormProps) => {
         onBlur={onInputBlur}
         control={control}
       />
-      <div className="pt-9 grid grid-cols-3 mt-3 gap-2" >
+      <div className="pt-1.5 grid grid-cols-3 mt-3 gap-2" >
         <div>
           <p className={clsx(
             font_Inter.className,
@@ -93,7 +93,7 @@ export const PublishForm = ({ form }: PublishFormProps) => {
           <Select
             name={NewProductFormFields.category}
             values={BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS}
-            selectedValueKey='APARTMENT'
+            initialValue='APARTMENT'
             onSelect={onSimpleInputChange}
           />
         </div>
@@ -108,7 +108,7 @@ export const PublishForm = ({ form }: PublishFormProps) => {
           <Select
             name={NewProductFormFields.currency}
             values={PRODUCT_CURRENCY_SELECT_OPTIONS}
-            selectedValueKey='USD'
+            initialValue='USD'
             onSelect={onSimpleInputChange}
           />
         </div>
@@ -123,12 +123,12 @@ export const PublishForm = ({ form }: PublishFormProps) => {
           <Select
             name={NewProductFormFields.currency}
             values={PRODUCT_CURRENCY_SELECT_OPTIONS}
-            selectedValueKey='USD'
+            initialValue='USD'
             onSelect={onSimpleInputChange}
           />
         </div>
       </div>
-      <div className="pt-4" >
+      <div className="pt-3" >
         <FormSectionTitle>
           Ngarko Imazhe
         </FormSectionTitle>

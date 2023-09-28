@@ -17,7 +17,7 @@ export type SelectValues<T extends string> = Record<T, SelectOption<T>>;
 interface SelectProps<N extends string, T extends string> {
   name: N;
   values: SelectValues<T>;
-  selectedValueKey?: T;
+  initialValue?: T;
   onSelect?: (optionValue: string, name: N) => void;
 };
 
@@ -31,10 +31,10 @@ interface SelectModalState<V extends string> {
   value?: V
 }
 
-export function Select<N extends string, T extends string>({ values, selectedValueKey, onSelect, name }: SelectProps<N, T>) {
+export function Select<N extends string, T extends string>({ values, initialValue, onSelect, name }: SelectProps<N, T>) {
   const [modalState, setModalState] = useState<SelectModalState<T>>({
     isOpen: false,
-    value: selectedValueKey
+    value: initialValue
   });
 
   const openModal = () => setModalState(currState => ({ ...currState, isOpen: true }));
@@ -82,7 +82,7 @@ export function Select<N extends string, T extends string>({ values, selectedVal
         onClick={openModal}
       >
         <p className={clsx(
-          'text-sm m-0 text-center mx-6 w-full',
+          'text-sm m-0 text-center mx-6 w-full font-semibold',
           'dark:text-grey-10'
         )} >
           {selectedValue.element}
@@ -92,14 +92,14 @@ export function Select<N extends string, T extends string>({ values, selectedVal
           alt='down_select_arrow'
           width={16}
           height={16}
-          className={clsx('absolute right-2.5 transition-all', modalState.isOpen && '-rotate-180')}
+          className={clsx('absolute right-2.5 transition-all dark:invert', modalState.isOpen && '-rotate-180')}
         />
       </div>
       <div className={clsx(
         'absolute bg-white border border-solid border-grey-10 rounded-b-md w-full',
-        'opacity-0 invisible top-1/2 transition-all z-20',
+        'opacity-0 invisible top-1/2 transition-all z-30',
         modalState.isOpen && '!top-[calc(100%_-_1px)] !visible opacity-100 z-auto',
-        'dark:bg-grey-90 dark:border-grey-90'
+        'dark:bg-grey-90 dark:border-grey-85 dark:border-t-0'
       )}>
         {options.map(option => (
           <div

@@ -20,6 +20,9 @@ export const PublishFormHeader = () => {
           text='Ploteso Formen'
         />
         <Chip
+          text='Detaje'
+        />
+        <Chip
           text='Verifiko dhe publiko'
         />
         <Chip

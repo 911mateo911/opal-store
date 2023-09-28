@@ -6,6 +6,7 @@ import {
 } from "@prisma/client";
 import { z } from "zod";
 import { PRODUCT_FORM_CONFIG } from "./_config";
+import { GLOBAL_CONFIG } from "emeralb/app/_config";
 
 /**
  * postId: string;
@@ -73,7 +74,9 @@ export const newProductSchema = z.object({
   [NewProductFormFields.keywords]: z.array(z.string()),
   [NewProductFormFields.telephone]: z.string(),
   [NewProductFormFields.whatsapp]: z.string().optional(),
-  [NewProductFormFields.email]: z.string(),
+  [NewProductFormFields.email]: z.string()
+    .min(1, { message: 'Email nuk mund te jete bosh' })
+    .regex(GLOBAL_CONFIG.emailRegex, { message: 'Email eshte invalid' }),
   [NewProductFormFields.currency]: z.nativeEnum(PRODUCT_CURRENCY),
   [NewProductFormFields.fullName]: z.string()
     .min(1, { message: 'Emri nuk mund te jete bosh.' })
@@ -83,7 +86,12 @@ export const newProductSchema = z.object({
       };
 
       return true;
-    }, { message: 'Ju lutem shkruani emer + mbiemer' }),
+    }, { message: 'Ju lutem shkruani emer + mbiemer' })
+    .refine(providedString => {
+      const [firstName, lastName] = providedString.split(' ');
+
+      return firstName?.length > 2 && lastName?.length > 2;
+    }, { message: 'Emri i plote eshte invalid' }),
   [NewProductFormFields.preferredCommunication]: z.nativeEnum(PRODUCT_PREFERRED_COMMUNICATION)
 });
 
