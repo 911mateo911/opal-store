@@ -13,11 +13,13 @@ interface PublishFormSidebarProps {
 }
 
 export const PublishFormSidebar = ({ form }: PublishFormSidebarProps) => {
-  const { setValue } = form;
+  const { setValue, control, trigger } = form;
 
   const onStringInputChange = (value: string, field: NewProductFormFields) => {
     setValue(field, value);
   };
+
+  const onInputBlur = (field: NewProductFormFields) => trigger(field);
 
   return (
     <div className='max-w-xs sticky h-fit top-28 left-0 mr-5' >
@@ -47,40 +49,48 @@ export const PublishFormSidebar = ({ form }: PublishFormSidebarProps) => {
           <InputTitle>
             Emer Mbiemer
           </InputTitle>
-          <TextInput
+          <TextInput<NewProductFormFields.fullName, NewProductSchemaType>
             name={NewProductFormFields.fullName}
             onChange={onStringInputChange}
             placeholder='John Doe'
+            control={control}
+            onBlur={onInputBlur}
           />
         </div>
         <div className='w-full' >
           <InputTitle>
             Email
           </InputTitle>
-          <TextInput
+          <TextInput<NewProductFormFields.email, NewProductSchemaType>
             name={NewProductFormFields.email}
             onChange={onStringInputChange}
             placeholder='johndoe@apple.com'
+            control={control}
+            onBlur={onInputBlur}
           />
         </div>
         <div className='w-full' >
           <InputTitle>
             Telefon/Celular
           </InputTitle>
-          <TextInput
+          <TextInput<NewProductFormFields.telephone, NewProductSchemaType>
             name={NewProductFormFields.telephone}
             onChange={onStringInputChange}
             placeholder='+355-123456789'
+            control={control}
+            onBlur={onInputBlur}
           />
         </div>
         <div className='w-full' >
           <InputTitle>
             Whatsapp
           </InputTitle>
-          <TextInput
+          <TextInput<NewProductFormFields.whatsapp, NewProductSchemaType>
             name={NewProductFormFields.whatsapp}
             onChange={onStringInputChange}
             placeholder='+355-123456789'
+            control={control}
+            onBlur={onInputBlur}
           />
         </div>
       </div>

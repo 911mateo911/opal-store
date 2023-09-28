@@ -31,9 +31,9 @@ export function Checkbox<T extends string>({
       onClick={handleChange} >
       <div
         className={clsx(
-          'border-2 border-solid border-grey-30 bg-white h-6 w-6 rounded-md',
+          'border-2 border-solid h-6 w-6 rounded-md',
           'flex items-center justify-center select-none',
-          isChecked && 'bg-green-50 border-green-50'
+          isChecked ? 'bg-green-50 border-green-50' : 'border-grey-30 bg-white'
         )}
       >
         {isChecked && (

@@ -11,7 +11,7 @@ import {
   PRODUCT_FORM_IMAGE_PICKER_ID
 } from "../_config";
 import { FormSectionTitle } from "./FormSectionTitle";
-import { UseFormReturn } from "react-hook-form";
+import { UseFormReturn, useFormState } from "react-hook-form";
 import { NewProductFormFields, NewProductSchemaType } from "../_formSchema";
 import { FormImagePreview } from "./FormImagePreview";
 import CameraIcon from 'emeralb/app/_shared/icons/camera.svg';
@@ -27,11 +27,19 @@ interface PublishFormProps {
 };
 
 export const PublishForm = ({ form }: PublishFormProps) => {
-  const { setValue, getValues, control } = form;
+  const {
+    setValue,
+    getValues,
+    control,
+    handleSubmit,
+    trigger
+  } = form;
 
   const onSimpleInputChange = (value: string | boolean, field: NewProductFormFields) => {
     setValue(field, value);
   };
+
+  const onInputBlur = (field: NewProductFormFields) => trigger(field);
 
   const onDeleteImage = (imagePreview: string) => {
     const providedImages = getValues(NewProductFormFields.images);
@@ -46,6 +54,10 @@ export const PublishForm = ({ form }: PublishFormProps) => {
   const onSetImages = (images: ImageWithPreview[]) => {
     setValue(NewProductFormFields.images, images);
   };
+
+  const onSubmit = handleSubmit((formData) => {
+    console.log({ formData });
+  });
 
   return (
     <div className="pt-6 px-[10px]" >
@@ -62,10 +74,12 @@ export const PublishForm = ({ form }: PublishFormProps) => {
       <InputTitle>
         Nje titull i shkurter dhe permbledhes mbi produktin tend.
       </InputTitle>
-      <TextInput<NewProductFormFields.title>
+      <TextInput<NewProductFormFields.title, NewProductSchemaType>
         name={NewProductFormFields.title}
         onChange={onSimpleInputChange}
         placeholder="Shitet ..."
+        onBlur={onInputBlur}
+        control={control}
       />
       <div className="pt-9 grid grid-cols-3 mt-3 gap-2" >
         <div>
@@ -159,11 +173,13 @@ export const PublishForm = ({ form }: PublishFormProps) => {
         <FormSectionTitle>
           Pershkrimi
         </FormSectionTitle>
-        <TextInput
+        <TextInput<NewProductFormFields.description, NewProductSchemaType>
           textarea
           name={NewProductFormFields.description}
           onChange={onSimpleInputChange}
           placeholder="Nje permbledhje e vogel mbi produktin"
+          onBlur={onInputBlur}
+          control={control}
         />
       </div>
       <div className="pt-4" >
@@ -176,8 +192,9 @@ export const PublishForm = ({ form }: PublishFormProps) => {
               Preferoj te pergjigjem ne:
             </InputTitle>
             <Select
-              name={NewProductFormFields.whatsapp}
+              name={NewProductFormFields.preferredCommunication}
               values={PREFERRED_COMMUNICATION_SELECT_OPTIONS}
+              onSelect={onSimpleInputChange}
             />
           </div>
           <div className="flex justify-center items-center pt-[22px]" >
@@ -192,7 +209,7 @@ export const PublishForm = ({ form }: PublishFormProps) => {
       <div className="pb-[10px] pt-4" >
         <ActionButton
           text="Vazhdo"
-          onClick={console.log}
+          onClick={onSubmit}
         />
       </div>
     </div>

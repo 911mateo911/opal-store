@@ -56,8 +56,10 @@ export const PRODUCT_FORM_IMAGE_PICKER_ID = 'image_picker';
 
 interface PRODUCT_FORM_CONFIG_TYPE {
   titleMaxLength: number;
+  descMaxLength: number;
 }
 
 export const PRODUCT_FORM_CONFIG: PRODUCT_FORM_CONFIG_TYPE = {
-  titleMaxLength: 5000
+  titleMaxLength: 3000,
+  descMaxLength: 8000
 };
