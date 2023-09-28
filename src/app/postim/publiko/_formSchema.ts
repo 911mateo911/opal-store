@@ -1,4 +1,9 @@
-import { PRODUCT_ADVERT_INDEX, PRODUCT_CATEGORIES, PRODUCT_CURRENCY } from "@prisma/client";
+import {
+  PRODUCT_ADVERT_INDEX,
+  PRODUCT_CATEGORIES,
+  PRODUCT_CURRENCY,
+  PRODUCT_PREFERRED_COMMUNICATION
+} from "@prisma/client";
 import { z } from "zod";
 
 /**
@@ -43,7 +48,9 @@ export enum NewProductFormFields {
   telephone = 'telephone',
   whatsapp = 'whatsapp',
   email = 'email',
-  currency = 'currency'
+  currency = 'currency',
+  fullName = 'fullName',
+  preferredCommunication = 'preferredCommunication'
 }
 
 // TODO: ADD validation messages
@@ -51,7 +58,6 @@ export const newProductSchema = z.object({
   [NewProductFormFields.title]: z.string(),
   [NewProductFormFields.debatablePrice]: z.boolean(),
   [NewProductFormFields.description]: z.string(),
-  // check ImageWithPreview
   [NewProductFormFields.images]: z.array(z.object({
     preview: z.string(),
     size: z.number(),
@@ -67,7 +73,9 @@ export const newProductSchema = z.object({
   [NewProductFormFields.telephone]: z.string(),
   [NewProductFormFields.whatsapp]: z.string().optional(),
   [NewProductFormFields.email]: z.string(),
-  [NewProductFormFields.currency]: z.nativeEnum(PRODUCT_CURRENCY)
+  [NewProductFormFields.currency]: z.nativeEnum(PRODUCT_CURRENCY),
+  [NewProductFormFields.fullName]: z.string(),
+  [NewProductFormFields.preferredCommunication]: z.nativeEnum(PRODUCT_PREFERRED_COMMUNICATION)
 });
 
 export type NewProductSchemaType = z.infer<typeof newProductSchema>;

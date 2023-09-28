@@ -6,23 +6,22 @@ import { TextInput } from "emeralb/app/_shared/atoms/TextInput";
 import { font_Inter, font_RedHatDisplay } from "emeralb/app/_shared/fonts";
 import { BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS, PRODUCT_CURRENCY_SELECT_OPTIONS, PRODUCT_FORM_IMAGE_PICKER_ID } from "../_config";
 import { FormSectionTitle } from "./FormSectionTitle";
-import { useForm, useWatch } from "react-hook-form";
-import { NewProductFormFields, NewProductSchemaType, newProductSchema } from "../_formSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { UseFormReturn } from "react-hook-form";
+import { NewProductFormFields, NewProductSchemaType } from "../_formSchema";
 import { FormImagePreview } from "./FormImagePreview";
 import CameraIcon from 'emeralb/app/_shared/icons/camera.svg';
 import Image from 'next/image';
 import { FormImageInput } from "./FormImageInput";
 import { ImageWithPreview } from "emeralb/app/_shared/types";
+import DeleteIcon from 'emeralb/app/_shared/icons/delete.svg';
+import { InputTitle } from "./InputTitle";
 
-export const PublishForm = () => {
-  const {
-    setValue,
-    control,
-    getValues
-  } = useForm<NewProductSchemaType>({
-    resolver: zodResolver(newProductSchema),
-  });
+interface PublishFormProps {
+  form: UseFormReturn<NewProductSchemaType>
+};
+
+export const PublishForm = ({ form }: PublishFormProps) => {
+  const { setValue, getValues, control } = form;
 
   const onStringInputChange = (value: string, field: NewProductFormFields) => {
     setValue(field, value);
@@ -43,24 +42,20 @@ export const PublishForm = () => {
   };
 
   return (
-    <div className="pt-2 px-[10px]" >
+    <div className="pt-6 px-[10px]" >
       <h2 className={clsx(
-        "text-xl mb-2.5 mt-2 tracking-wide font-bold",
+        "text-xl mb-2.5 mt-2 tracking-wide font-bold text-grey-100",
         font_RedHatDisplay.className,
         'dark:text-grey-5'
       )} >
         Produkti juaj?
       </h2>
-      <FormSectionTitle>
+      <FormSectionTitle className="mt-5" >
         Titulli
       </FormSectionTitle>
-      <p className={clsx(
-        "text-xs mb-0.5 font-normal text-grey-70",
-        font_Inter.className,
-        'dark:text-grey-20'
-      )} >
+      <InputTitle>
         Nje titull i shkurter dhe permbledhes mbi produktin tend.
-      </p>
+      </InputTitle>
       <TextInput<NewProductFormFields.title>
         name={NewProductFormFields.title}
         onChange={onStringInputChange}
@@ -126,7 +121,8 @@ export const PublishForm = () => {
           </div>
           <label
             className={clsx(
-              'flex items-center rounded-md justify-center flex-col h-[150px] w-[150px] bg-grey-2 text-grey-30 shadow cursor-pointer transition-all',
+              'flex items-center rounded-md justify-center flex-col h-[150px] w-[150px]',
+              'bg-grey-2 text-grey-30 shadow cursor-pointer transition-all',
               'hover:bg-green-5 [&>img]:hover:scale-110 [&>p]:hover:text-green-100',
               'dark:bg-grey-85 dark:hover:bg-grey-70 dark:[&>p]:hover:text-grey-10'
             )}
@@ -152,6 +148,17 @@ export const PublishForm = () => {
             />
           </label>
         </div>
+      </div>
+      <div className="pt-4 pb-1" >
+        <FormSectionTitle>
+          Pershkrimi
+        </FormSectionTitle>
+        <TextInput
+          textarea
+          name={NewProductFormFields.description}
+          onChange={onStringInputChange}
+          placeholder="Nje permbledhje e vogel mbi produktin"
+        />
       </div>
     </div>
   )

@@ -16,6 +16,7 @@ interface TextInputProps<T extends string> {
   placeholder?: string;
   required?: boolean;
   onError?: (name: string) => void;
+  textarea?: boolean;
 }
 
 // TODO: expand later
@@ -30,8 +31,32 @@ export function TextInput<T extends string>({
   pattern,
   placeholder,
   required,
-  validateOn
+  validateOn,
+  textarea
 }: TextInputProps<T>) {
+
+  const sharedClasses = clsx(
+    font_RedHatDisplay.className,
+    'focus:outline-1 focus:outline-blue-70',
+    'dark:bg-grey-90 dark:border-grey-80',
+    'dark:focus:outline-blue-900 dark:focus:outline-none',
+    'dark:placeholder:text-grey-75 dark:focus:bg-grey-80 dark:text-grey-20'
+  )
+
+  if (textarea) {
+    return (
+      <textarea
+        name={name}
+        onChange={({ target }) => onChange(target.value, name)}
+        className={clsx(
+          'resize-none rounded-md w-full p-4 border border-solid border-grey-10 min-h-[200px]',
+          sharedClasses
+        )}
+        placeholder={placeholder}
+      />
+    )
+  }
+
   return (
     <input
       value={value}
@@ -40,13 +65,9 @@ export function TextInput<T extends string>({
       placeholder={placeholder}
       type={type}
       className={clsx(
-        'h-12 border border-solid border-grey-10 rounded-md pl-4',
-        font_RedHatDisplay.className,
-        'focus:outline-1 focus:outline-blue-70 w-full',
+        'h-12 border border-solid border-grey-10 rounded-md pl-4 w-full',
         className,
-        'dark:bg-grey-90 dark:border-grey-80',
-        'dark:focus:outline-blue-900 dark:focus:outline-none',
-        'dark:placeholder:text-grey-75 dark:focus:bg-grey-80'
+        sharedClasses
       )}
       onChange={({ target }) => onChange(target.value, name)}
     />

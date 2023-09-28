@@ -25,7 +25,6 @@ export const FormImagePreview = ({ formControl, onDelete }: FormImagePreviewProp
   const [sliderRef, instanceRef] = useKeenSlider(sliderOptions);
 
   useEffect(() => {
-    console.log('updated');
     instanceRef.current?.update(sliderOptions);
   }, [images, instanceRef]);
 

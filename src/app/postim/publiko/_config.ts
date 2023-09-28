@@ -1,5 +1,5 @@
 import { SelectValues } from "emeralb/app/_shared/atoms/Select";
-import { PRODUCT_CATEGORIES, PRODUCT_CURRENCY } from '@prisma/client';
+import { PRODUCT_CATEGORIES, PRODUCT_CURRENCY, PRODUCT_PREFERRED_COMMUNICATION } from '@prisma/client';
 
 export const BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS: SelectValues<PRODUCT_CATEGORIES> = {
   APARTMENT: {
@@ -34,6 +34,21 @@ export const PRODUCT_CURRENCY_SELECT_OPTIONS: SelectValues<PRODUCT_CURRENCY> = {
     value: PRODUCT_CURRENCY.OTHER
   }
 };
+
+export const PREFERRED_COMMUNICATION_SELECT_OPTIONS: SelectValues<PRODUCT_PREFERRED_COMMUNICATION> = {
+  EMAIL: {
+    element: 'Email',
+    value: PRODUCT_PREFERRED_COMMUNICATION.EMAIL
+  },
+  TEL: {
+    element: 'Telefon/Celular',
+    value: PRODUCT_PREFERRED_COMMUNICATION.TEL
+  },
+  WHATSAPP: {
+    element: 'Whatsapp',
+    value: PRODUCT_PREFERRED_COMMUNICATION.WHATSAPP
+  }
+}
 
 export const ALLOWED_IMAGE_TYPES = ['image/webp', 'image/png', 'image/jpeg'];
 

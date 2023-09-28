@@ -97,7 +97,7 @@ export function Select<N extends string, T extends string>({ values, selectedVal
       </div>
       <div className={clsx(
         'absolute bg-white border border-solid border-grey-10 rounded-b-md w-full',
-        'opacity-0 invisible -z-10 top-1/2 transition-all',
+        'opacity-0 invisible top-1/2 transition-all z-20',
         modalState.isOpen && '!top-[calc(100%_-_1px)] !visible opacity-100 z-auto',
         'dark:bg-grey-90 dark:border-grey-90'
       )}>
