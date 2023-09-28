@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import Image from 'next/image';
 
-interface FilledButtonProps {
+interface FilledChipButtonProps {
   text: string;
   className?: string;
   asLink?: boolean;
@@ -21,7 +21,7 @@ type LinkOrBtnType =
     to?: never;
   };
 
-export const FilledButton = (props: FilledButtonProps & LinkOrBtnType) => {
+export const FilledChipButton = (props: FilledChipButtonProps & LinkOrBtnType) => {
   const { textSize } = props;
 
   const btnClassName = clsx(

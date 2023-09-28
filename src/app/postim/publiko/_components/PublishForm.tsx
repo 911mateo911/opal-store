@@ -4,7 +4,12 @@ import clsx from "clsx";
 import { Select } from "emeralb/app/_shared/atoms/Select";
 import { TextInput } from "emeralb/app/_shared/atoms/TextInput";
 import { font_Inter, font_RedHatDisplay } from "emeralb/app/_shared/fonts";
-import { BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS, PRODUCT_CURRENCY_SELECT_OPTIONS, PRODUCT_FORM_IMAGE_PICKER_ID } from "../_config";
+import {
+  BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS,
+  PREFERRED_COMMUNICATION_SELECT_OPTIONS,
+  PRODUCT_CURRENCY_SELECT_OPTIONS,
+  PRODUCT_FORM_IMAGE_PICKER_ID
+} from "../_config";
 import { FormSectionTitle } from "./FormSectionTitle";
 import { UseFormReturn } from "react-hook-form";
 import { NewProductFormFields, NewProductSchemaType } from "../_formSchema";
@@ -13,8 +18,9 @@ import CameraIcon from 'emeralb/app/_shared/icons/camera.svg';
 import Image from 'next/image';
 import { FormImageInput } from "./FormImageInput";
 import { ImageWithPreview } from "emeralb/app/_shared/types";
-import DeleteIcon from 'emeralb/app/_shared/icons/delete.svg';
 import { InputTitle } from "./InputTitle";
+import { Checkbox } from "emeralb/app/_shared/atoms/Checkbox";
+import { ActionButton } from "emeralb/app/_shared/atoms/ActionButton";
 
 interface PublishFormProps {
   form: UseFormReturn<NewProductSchemaType>
@@ -23,7 +29,7 @@ interface PublishFormProps {
 export const PublishForm = ({ form }: PublishFormProps) => {
   const { setValue, getValues, control } = form;
 
-  const onStringInputChange = (value: string, field: NewProductFormFields) => {
+  const onSimpleInputChange = (value: string | boolean, field: NewProductFormFields) => {
     setValue(field, value);
   };
 
@@ -58,7 +64,7 @@ export const PublishForm = ({ form }: PublishFormProps) => {
       </InputTitle>
       <TextInput<NewProductFormFields.title>
         name={NewProductFormFields.title}
-        onChange={onStringInputChange}
+        onChange={onSimpleInputChange}
         placeholder="Shitet ..."
       />
       <div className="pt-9 grid grid-cols-3 mt-3 gap-2" >
@@ -74,7 +80,7 @@ export const PublishForm = ({ form }: PublishFormProps) => {
             name={NewProductFormFields.category}
             values={BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS}
             selectedValueKey='APARTMENT'
-            onSelect={onStringInputChange}
+            onSelect={onSimpleInputChange}
           />
         </div>
         <div>
@@ -89,7 +95,7 @@ export const PublishForm = ({ form }: PublishFormProps) => {
             name={NewProductFormFields.currency}
             values={PRODUCT_CURRENCY_SELECT_OPTIONS}
             selectedValueKey='USD'
-            onSelect={onStringInputChange}
+            onSelect={onSimpleInputChange}
           />
         </div>
         <div>
@@ -104,7 +110,7 @@ export const PublishForm = ({ form }: PublishFormProps) => {
             name={NewProductFormFields.currency}
             values={PRODUCT_CURRENCY_SELECT_OPTIONS}
             selectedValueKey='USD'
-            onSelect={onStringInputChange}
+            onSelect={onSimpleInputChange}
           />
         </div>
       </div>
@@ -149,15 +155,44 @@ export const PublishForm = ({ form }: PublishFormProps) => {
           </label>
         </div>
       </div>
-      <div className="pt-4 pb-1" >
+      <div className="pt-4" >
         <FormSectionTitle>
           Pershkrimi
         </FormSectionTitle>
         <TextInput
           textarea
           name={NewProductFormFields.description}
-          onChange={onStringInputChange}
+          onChange={onSimpleInputChange}
           placeholder="Nje permbledhje e vogel mbi produktin"
+        />
+      </div>
+      <div className="pt-4" >
+        <FormSectionTitle>
+          Te tjera
+        </FormSectionTitle>
+        <div className="grid grid-cols-[repeat(2,1fr)] w-full" >
+          <div>
+            <InputTitle>
+              Preferoj te pergjigjem ne:
+            </InputTitle>
+            <Select
+              name={NewProductFormFields.whatsapp}
+              values={PREFERRED_COMMUNICATION_SELECT_OPTIONS}
+            />
+          </div>
+          <div className="flex justify-center items-center pt-[22px]" >
+            <Checkbox
+              name={NewProductFormFields.debatablePrice}
+              onChange={onSimpleInputChange}
+              placeholder="Cmim i diskutueshem"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="pb-[10px] pt-4" >
+        <ActionButton
+          text="Vazhdo"
+          onClick={console.log}
         />
       </div>
     </div>

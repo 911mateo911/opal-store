@@ -15,7 +15,7 @@ export default function PublishPage() {
   return (
     <>
       <PublishFormSidebar form={form} />
-      <div className='w-full bg-grey-1 rounded-lg dark:bg-grey-95' >
+      <div className='w-full bg-grey-1 rounded-lg dark:bg-grey-95 mb-28' >
         <PublishFormHeader />
         <PublishForm form={form} />
       </div>

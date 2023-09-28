@@ -7,8 +7,6 @@ import React from 'react';
 import { NewProductFormFields, NewProductSchemaType } from '../_formSchema';
 import { UseFormReturn } from 'react-hook-form';
 import { InputTitle } from './InputTitle';
-import { Select } from 'emeralb/app/_shared/atoms/Select';
-import { PREFERRED_COMMUNICATION_SELECT_OPTIONS } from '../_config';
 
 interface PublishFormSidebarProps {
   form: UseFormReturn<NewProductSchemaType>
@@ -22,7 +20,7 @@ export const PublishFormSidebar = ({ form }: PublishFormSidebarProps) => {
   };
 
   return (
-    <div className='max-w-xs sticky h-fit top-32 left-0 mr-5' >
+    <div className='max-w-xs sticky h-fit top-28 left-0 mr-5' >
       <h2 className={clsx(
         font_RedHatDisplay.className,
         'font-black text-2xl text-grey-100',
@@ -83,17 +81,6 @@ export const PublishFormSidebar = ({ form }: PublishFormSidebarProps) => {
             name={NewProductFormFields.whatsapp}
             onChange={onStringInputChange}
             placeholder='+355-123456789'
-          />
-        </div>
-        <div className='w-full' >
-          <InputTitle>
-            Preferoj te pergjigjem ne:
-          </InputTitle>
-          <Select
-            name={NewProductFormFields.whatsapp}
-            // onChange={onStringInputChange}
-            // placeholder='+355-123456789'
-            values={PREFERRED_COMMUNICATION_SELECT_OPTIONS}
           />
         </div>
       </div>

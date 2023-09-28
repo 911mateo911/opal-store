@@ -5,6 +5,7 @@ import {
   PRODUCT_PREFERRED_COMMUNICATION
 } from "@prisma/client";
 import { z } from "zod";
+import { PRODUCT_FORM_CONFIG } from "./_config";
 
 /**
  * postId: string;
@@ -50,12 +51,14 @@ export enum NewProductFormFields {
   email = 'email',
   currency = 'currency',
   fullName = 'fullName',
-  preferredCommunication = 'preferredCommunication'
+  preferredCommunication = 'preferredCommunication',
 }
 
 // TODO: ADD validation messages
 export const newProductSchema = z.object({
-  [NewProductFormFields.title]: z.string(),
+  [NewProductFormFields.title]: z.string()
+    .min(0, { message: 'Titulli nuk mund te jet bosh.' })
+    .max(PRODUCT_FORM_CONFIG.titleMaxLength, { message: `Titulli duhet te jete max ${PRODUCT_FORM_CONFIG.titleMaxLength} karaktere.` }),
   [NewProductFormFields.debatablePrice]: z.boolean(),
   [NewProductFormFields.description]: z.string(),
   [NewProductFormFields.images]: z.array(z.object({

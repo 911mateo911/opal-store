@@ -3,7 +3,7 @@ import React from 'react';
 import { font_RedHatDisplay } from '../fonts';
 import Link from 'next/link';
 import { Logo } from '../atoms/Logo';
-import { FilledButton } from '../atoms/FilledButton';
+import { FilledChipButton } from '../atoms/FilledChipButton';
 
 export const Navbar = () => {
   return (
@@ -29,7 +29,7 @@ export const Navbar = () => {
         >
           Kategori
         </Link>
-        <FilledButton
+        <FilledChipButton
           className='ml-4'
           text='Kycu'
         />

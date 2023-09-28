@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Chip } from 'emeralb/app/_shared/atoms/Chip';
-import { FilledButton } from 'emeralb/app/_shared/atoms/FilledButton';
+import { FilledChipButton } from 'emeralb/app/_shared/atoms/FilledChipButton';
 import backIcon from 'emeralb/app/_shared/icons/backArrow.svg';
 
 export const PublishFormHeader = () => {
@@ -10,7 +10,7 @@ export const PublishFormHeader = () => {
       'items-center justify-between bg-white',
       'dark:bg-grey-90 dark:border-grey-95'
     )} >
-      <FilledButton
+      <FilledChipButton
         text='Mbrapa'
         icon={backIcon}
         textSize='sm'

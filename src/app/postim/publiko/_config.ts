@@ -53,3 +53,11 @@ export const PREFERRED_COMMUNICATION_SELECT_OPTIONS: SelectValues<PRODUCT_PREFER
 export const ALLOWED_IMAGE_TYPES = ['image/webp', 'image/png', 'image/jpeg'];
 
 export const PRODUCT_FORM_IMAGE_PICKER_ID = 'image_picker';
+
+interface PRODUCT_FORM_CONFIG_TYPE {
+  titleMaxLength: number;
+}
+
+export const PRODUCT_FORM_CONFIG: PRODUCT_FORM_CONFIG_TYPE = {
+  titleMaxLength: 5000
+};
