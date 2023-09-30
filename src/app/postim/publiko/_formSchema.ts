@@ -53,7 +53,9 @@ export enum NewProductFormFields {
   currency = 'currency',
   fullName = 'fullName',
   preferredCommunication = 'preferredCommunication',
-  deliveryAtYourPlace = 'deliveryAtYourPlace'
+  deliveryAtYourPlace = 'deliveryAtYourPlace',
+  formStep = 'formStep',
+  hasNextStep = 'hasNextStep'
 }
 
 // TODO: ADD validation messages
@@ -98,7 +100,9 @@ export const newProductSchema = z.object({
       return firstName?.length > 2 && lastName?.length > 2;
     }, { message: 'Emri i plote eshte invalid' }),
   [NewProductFormFields.preferredCommunication]: z.nativeEnum(PRODUCT_PREFERRED_COMMUNICATION),
-  [NewProductFormFields.deliveryAtYourPlace]: z.boolean()
+  [NewProductFormFields.deliveryAtYourPlace]: z.boolean(),
+  [NewProductFormFields.formStep]: z.number(),
+  [NewProductFormFields.hasNextStep]: z.boolean()
 });
 
 
@@ -121,5 +125,7 @@ export const newProductSchemaInitialValues: NewProductSchemaType = {
   telephone: '',
   title: '',
   whatsapp: '',
-  deliveryAtYourPlace: false
+  deliveryAtYourPlace: false,
+  formStep: 1,
+  hasNextStep: true
 };

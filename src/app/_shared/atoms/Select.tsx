@@ -7,7 +7,7 @@ import DownArrow from 'emeralb/app/_shared/icons/downArrow.svg'
 import { font_Inter, font_RedHatDisplay } from '../fonts';
 import { useClickOutside } from '../hooks/useClickOutside';
 
-interface SelectOption<V extends string> {
+export interface SelectOption<V extends string> {
   element: React.ReactNode;
   value: V;
 }

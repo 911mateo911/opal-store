@@ -1,4 +1,4 @@
-import { SelectValues } from "emeralb/app/_shared/atoms/Select";
+import { SelectOption, SelectValues } from "emeralb/app/_shared/atoms/Select";
 import {
   PRODUCT_CATEGORIES,
   PRODUCT_CURRENCY,
@@ -79,13 +79,20 @@ export const PREFERRED_COMMUNICATION_SELECT_OPTIONS: SelectValues<PRODUCT_PREFER
   }
 };
 
-type PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = Record<PRODUCT_CATEGORIES, Partial<SelectValues<PRODUCT_SUBCATEGORIES>>>;
+interface ProductSubCategoryMetaData {
+  hasNextStep?: boolean;
+};
+
+type ExtendedProductSubcategoryWithDataSelectOption<T extends string> = Partial<Record<T, SelectOption<T> & ProductSubCategoryMetaData>>;
+
+type PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = Record<PRODUCT_CATEGORIES, ExtendedProductSubcategoryWithDataSelectOption<PRODUCT_SUBCATEGORIES>>;
 
 export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = {
   [PRODUCT_CATEGORIES.APARTMENT]: {
     [PRODUCT_SUBCATEGORIES.APARTMENT__APARTMENT]: {
       element: 'Apartament',
-      value: PRODUCT_SUBCATEGORIES.APARTMENT__APARTMENT
+      value: PRODUCT_SUBCATEGORIES.APARTMENT__APARTMENT,
+      hasNextStep: true
     },
     [PRODUCT_SUBCATEGORIES.APARTMENT__AREA]: {
       element: 'Zone/Toke',
@@ -266,6 +273,13 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
       value: PRODUCT_SUBCATEGORIES.SPORTS__OUTDOOR_EQUIPMENT
     }
   }
+};
+
+export enum PRODUCT_FORM_STEPS {
+  GENERAL_FORM,
+  DETAILS_FORM,
+  VERIFY_AND_PUBLISH,
+  SHARE
 }
 
 export const ALLOWED_IMAGE_TYPES = ['image/webp', 'image/png', 'image/jpeg'];

@@ -5,10 +5,10 @@ import { Select, SelectValues } from 'emeralb/app/_shared/atoms/Select';
 import { NewProductFormFields, NewProductSchemaType, newProductSchema } from '../_formSchema';
 import { BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS, PRODUCT_SUBCATEGORIES_MAP } from '../_config';
 import { Control, UseFormGetValues, useWatch } from 'react-hook-form';
-import { PRODUCT_CATEGORIES } from '@prisma/client';
+import { PRODUCT_CATEGORIES, PRODUCT_SUBCATEGORIES } from '@prisma/client';
 
 interface FormCategorySegmentProps {
-  onInputChange: (value: string, name: NewProductFormFields) => void;
+  onInputChange: (value: string | boolean, name: NewProductFormFields) => void;
   formControl: Control<NewProductSchemaType>;
   getValues: UseFormGetValues<NewProductSchemaType>;
 }
@@ -33,9 +33,17 @@ export const FormCategorySegment = ({
 
     if (!currentSubCategoriesKeys.includes(currentSubCategory)) {
       const firstSubcategoryInMap = Object.values(currentSubCategoryFields)?.[0];
-      onInputChange(firstSubcategoryInMap.value, NewProductFormFields.subCategory)
+      onInputChange(firstSubcategoryInMap.value, NewProductFormFields.subCategory);
+      onInputChange(Boolean(firstSubcategoryInMap.hasNextStep), NewProductFormFields.hasNextStep);
     }
   }, [getValues, onInputChange, selectedCategory]);
+
+  const handleSubCategoryChange: FormCategorySegmentProps['onInputChange'] = (value, name) => {
+    const subCategory = PRODUCT_SUBCATEGORIES_MAP[selectedCategory][value as PRODUCT_SUBCATEGORIES];
+
+    onInputChange(value, name);
+    onInputChange(Boolean(subCategory?.hasNextStep), NewProductFormFields.hasNextStep);
+  }
 
   return (
     <>
@@ -65,7 +73,7 @@ export const FormCategorySegment = ({
         <Select
           name={NewProductFormFields.subCategory}
           values={productSubcategories}
-          onSelect={onInputChange}
+          onSelect={handleSubCategoryChange}
         />
       </div>
     </>

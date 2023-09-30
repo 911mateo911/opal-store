@@ -7,7 +7,8 @@ import { font_Inter, font_RedHatDisplay } from "emeralb/app/_shared/fonts";
 import {
   PREFERRED_COMMUNICATION_SELECT_OPTIONS,
   PRODUCT_CURRENCY_SELECT_OPTIONS,
-  PRODUCT_FORM_IMAGE_PICKER_ID
+  PRODUCT_FORM_IMAGE_PICKER_ID,
+  PRODUCT_FORM_STEPS
 } from "../_config";
 import { FormSectionTitle } from "./FormSectionTitle";
 import { UseFormReturn, useFormState } from "react-hook-form";
@@ -56,7 +57,9 @@ export const PublishForm = ({ form }: PublishFormProps) => {
   };
 
   const onSubmit = handleSubmit((formData) => {
+    // TODO: Validate and go to next form based on subcategory
     console.log({ formData });
+    setValue(NewProductFormFields.formStep, PRODUCT_FORM_STEPS.DETAILS_FORM);
   });
 
   return (
