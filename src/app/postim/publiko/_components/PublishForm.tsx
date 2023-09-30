@@ -5,7 +5,6 @@ import { Select } from "emeralb/app/_shared/atoms/Select";
 import { TextInput } from "emeralb/app/_shared/atoms/TextInput";
 import { font_Inter, font_RedHatDisplay } from "emeralb/app/_shared/fonts";
 import {
-  BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS,
   PREFERRED_COMMUNICATION_SELECT_OPTIONS,
   PRODUCT_CURRENCY_SELECT_OPTIONS,
   PRODUCT_FORM_IMAGE_PICKER_ID
@@ -21,6 +20,7 @@ import { ImageWithPreview } from "emeralb/app/_shared/types";
 import { InputTitle } from "./InputTitle";
 import { Checkbox } from "emeralb/app/_shared/atoms/Checkbox";
 import { ActionButton } from "emeralb/app/_shared/atoms/ActionButton";
+import { FormCategorySegment } from "./FormCategorySegment";
 
 interface PublishFormProps {
   form: UseFormReturn<NewProductSchemaType>
@@ -82,36 +82,11 @@ export const PublishForm = ({ form }: PublishFormProps) => {
         control={control}
       />
       <div className="pt-1.5 grid grid-cols-3 mt-3 gap-2" >
-        <div>
-          <p className={clsx(
-            font_Inter.className,
-            'text-sm font-medium mb-1 text-center',
-            'dark:text-grey-20'
-          )} >
-            Kategori
-          </p>
-          <Select
-            name={NewProductFormFields.category}
-            values={BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS}
-            initialValue='APARTMENT'
-            onSelect={onSimpleInputChange}
-          />
-        </div>
-        <div>
-          <p className={clsx(
-            font_Inter.className,
-            'text-sm font-medium mb-1 text-center',
-            'dark:text-grey-20'
-          )} >
-            Nenkategori
-          </p>
-          <Select
-            name={NewProductFormFields.currency}
-            values={PRODUCT_CURRENCY_SELECT_OPTIONS}
-            initialValue='USD'
-            onSelect={onSimpleInputChange}
-          />
-        </div>
+        <FormCategorySegment
+          onInputChange={onSimpleInputChange}
+          formControl={control}
+          getValues={getValues}
+        />
         <div>
           <p className={clsx(
             font_Inter.className,
@@ -186,7 +161,7 @@ export const PublishForm = ({ form }: PublishFormProps) => {
         <FormSectionTitle>
           Te tjera
         </FormSectionTitle>
-        <div className="grid grid-cols-[repeat(2,1fr)] w-full" >
+        <div className="grid gap-x-6 gap-y-2 grid-cols-[repeat(2,1fr)] w-full" >
           <div>
             <InputTitle>
               Preferoj te pergjigjem ne:
@@ -197,16 +172,35 @@ export const PublishForm = ({ form }: PublishFormProps) => {
               onSelect={onSimpleInputChange}
             />
           </div>
-          <div className="flex justify-center items-center pt-[22px]" >
+          <div className="flex items-center pt-[22px]" >
             <Checkbox
               name={NewProductFormFields.debatablePrice}
               onChange={onSimpleInputChange}
               placeholder="Cmim i diskutueshem"
             />
           </div>
+          <div>
+            <InputTitle>
+              Vendndodhja
+            </InputTitle>
+            <TextInput
+              name={NewProductFormFields.location}
+              onChange={onSimpleInputChange}
+              placeholder="Shteti, Qyteti, Rruga"
+              onBlur={onInputBlur}
+              control={control}
+            />
+          </div>
+          <div className="flex items-center pt-[22px]" >
+            <Checkbox
+              name={NewProductFormFields.deliveryAtYourPlace}
+              onChange={onSimpleInputChange}
+              placeholder="Mund te takohem ne vend te caktuar"
+            />
+          </div>
         </div>
       </div>
-      <div className="pb-[10px] pt-4" >
+      <div className="pb-[10px] pt-6" >
         <ActionButton
           text="Vazhdo"
           onClick={onSubmit}

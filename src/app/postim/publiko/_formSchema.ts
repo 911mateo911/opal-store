@@ -2,7 +2,8 @@ import {
   PRODUCT_ADVERT_INDEX,
   PRODUCT_CATEGORIES,
   PRODUCT_CURRENCY,
-  PRODUCT_PREFERRED_COMMUNICATION
+  PRODUCT_PREFERRED_COMMUNICATION,
+  PRODUCT_SUBCATEGORIES
 } from "@prisma/client";
 import { z } from "zod";
 import { PRODUCT_FORM_CONFIG } from "./_config";
@@ -44,6 +45,7 @@ export enum NewProductFormFields {
   price = 'price',
   advertIndex = 'advertIndex',
   category = 'category',
+  subCategory = 'subCategory',
   keywords = 'keywords',
   telephone = 'telephone',
   whatsapp = 'whatsapp',
@@ -51,6 +53,7 @@ export enum NewProductFormFields {
   currency = 'currency',
   fullName = 'fullName',
   preferredCommunication = 'preferredCommunication',
+  deliveryAtYourPlace = 'deliveryAtYourPlace'
 }
 
 // TODO: ADD validation messages
@@ -67,10 +70,12 @@ export const newProductSchema = z.object({
     size: z.number(),
     name: z.string()
   })),
-  [NewProductFormFields.location]: z.string(),
+  [NewProductFormFields.location]: z.string()
+    .min(1, { message: 'Vendndodhja nuk mund te jete bosh.' }),
   [NewProductFormFields.price]: z.string(),
   [NewProductFormFields.advertIndex]: z.nativeEnum(PRODUCT_ADVERT_INDEX),
   [NewProductFormFields.category]: z.nativeEnum(PRODUCT_CATEGORIES),
+  [NewProductFormFields.subCategory]: z.nativeEnum(PRODUCT_SUBCATEGORIES),
   [NewProductFormFields.keywords]: z.array(z.string()),
   [NewProductFormFields.telephone]: z.string(),
   [NewProductFormFields.whatsapp]: z.string().optional(),
@@ -92,7 +97,8 @@ export const newProductSchema = z.object({
 
       return firstName?.length > 2 && lastName?.length > 2;
     }, { message: 'Emri i plote eshte invalid' }),
-  [NewProductFormFields.preferredCommunication]: z.nativeEnum(PRODUCT_PREFERRED_COMMUNICATION)
+  [NewProductFormFields.preferredCommunication]: z.nativeEnum(PRODUCT_PREFERRED_COMMUNICATION),
+  [NewProductFormFields.deliveryAtYourPlace]: z.boolean()
 });
 
 
@@ -101,6 +107,7 @@ export type NewProductSchemaType = z.infer<typeof newProductSchema>;
 export const newProductSchemaInitialValues: NewProductSchemaType = {
   advertIndex: PRODUCT_ADVERT_INDEX.REGULAR,
   category: PRODUCT_CATEGORIES.APARTMENT,
+  subCategory: PRODUCT_SUBCATEGORIES.APARTMENT__APARTMENT,
   currency: PRODUCT_CURRENCY.ALL,
   debatablePrice: false,
   description: '',
@@ -113,5 +120,6 @@ export const newProductSchemaInitialValues: NewProductSchemaType = {
   price: '',
   telephone: '',
   title: '',
-  whatsapp: ''
+  whatsapp: '',
+  deliveryAtYourPlace: false
 };

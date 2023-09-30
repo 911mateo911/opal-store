@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import DownArrow from 'emeralb/app/_shared/icons/downArrow.svg'
@@ -28,14 +28,32 @@ const EMPTY_VALUE: SelectOption<string> = {
 
 interface SelectModalState<V extends string> {
   isOpen: boolean;
-  value?: V
-}
+  value?: V;
+};
 
-export function Select<N extends string, T extends string>({ values, initialValue, onSelect, name }: SelectProps<N, T>) {
+export function Select<N extends string, T extends string>({
+  values,
+  initialValue,
+  onSelect,
+  name
+}: SelectProps<N, T>) {
   const [modalState, setModalState] = useState<SelectModalState<T>>({
     isOpen: false,
     value: initialValue
   });
+
+  useEffect(() => {
+    if (!initialValue) {
+      const currentValues = Object.values<SelectOption<T>>(values);
+
+      if (currentValues.length) {
+        setModalState(currState => ({
+          ...currState,
+          value: currentValues[0].value
+        }))
+      }
+    }
+  }, [initialValue, values]);
 
   const openModal = () => setModalState(currState => ({ ...currState, isOpen: true }));
   const closeModal = (value?: T) => setModalState(currState => {
@@ -85,7 +103,7 @@ export function Select<N extends string, T extends string>({ values, initialValu
           'text-sm m-0 text-center mx-6 w-full font-semibold',
           'dark:text-grey-10'
         )} >
-          {selectedValue.element}
+          {selectedValue?.element}
         </p>
         <Image
           src={DownArrow}
@@ -96,27 +114,33 @@ export function Select<N extends string, T extends string>({ values, initialValu
         />
       </div>
       <div className={clsx(
-        'absolute bg-white border border-solid border-grey-10 rounded-b-md w-full',
-        'opacity-0 invisible top-1/2 transition-all z-30',
-        modalState.isOpen && '!top-[calc(100%_-_1px)] !visible opacity-100 z-auto',
+        'absolute border border-solid border-grey-10 rounded-b-md w-full',
+        'opacity-0 invisible top-1/2 transition-all z-30 overflow-auto max-h-60',
+        modalState.isOpen && '!top-[calc(100%_-_1px)] !visible opacity-100',
         'dark:bg-grey-90 dark:border-grey-85 dark:border-t-0'
       )}>
-        {options.map(option => (
-          <div
-            className={clsx(
-              'p-[10px] cursor-pointer border-b border-grey-5 [&:last-child]:border-none text-center text-sm font-normal',
-              font_Inter.className,
-              'text-grey-70 transition-all',
-              'hover:bg-grey-5 hover:text-grey-100',
-              'dark:border-grey-85 dark:text-grey-10 dark:[&:first-child]:border-t',
-              'dark:hover:bg-grey-95 dark:hover:text-grey-5'
-            )}
-            onClick={() => handleSelect(option)}
-            key={option.value}
-          >
-            {option.element}
-          </div>
-        ))}
+        {options.map(option => {
+          const isOptionSelected = option.value === modalState.value;
+
+          return (
+            <div
+              className={clsx(
+                'p-[10px] cursor-pointer border-b border-grey-5 [&:last-child]:border-none text-center text-sm font-normal',
+                font_Inter.className,
+                'text-grey-70 transition-all [&:last-child]:rounded-b-md',
+                'dark:border-grey-85 dark:text-grey-10 dark:[&:first-child]:border-t',
+                'dark:hover:bg-grey-95 dark:hover:text-grey-5',
+                isOptionSelected ?
+                  'bg-green-10 hover:bg-green-20 hover:text-green-80' :
+                  'bg-white hover:bg-grey-5 hover:text-grey-100'
+              )}
+              onClick={() => handleSelect(option)}
+              key={option.value}
+            >
+              {option.element}
+            </div>
+          )
+        })}
       </div>
     </div>
   )
