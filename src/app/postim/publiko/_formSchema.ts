@@ -55,7 +55,8 @@ export enum NewProductFormFields {
   preferredCommunication = 'preferredCommunication',
   deliveryAtYourPlace = 'deliveryAtYourPlace',
   formStep = 'formStep',
-  hasNextStep = 'hasNextStep'
+  hasNextStep = 'hasNextStep',
+  details = 'details'
 }
 
 // TODO: ADD validation messages
@@ -102,7 +103,15 @@ export const newProductSchema = z.object({
   [NewProductFormFields.preferredCommunication]: z.nativeEnum(PRODUCT_PREFERRED_COMMUNICATION),
   [NewProductFormFields.deliveryAtYourPlace]: z.boolean(),
   [NewProductFormFields.formStep]: z.number(),
-  [NewProductFormFields.hasNextStep]: z.boolean()
+  [NewProductFormFields.hasNextStep]: z.boolean(),
+  [NewProductFormFields.details]: z.record(
+    // TODO: type this
+    z.string(),
+    z.object({
+      type: z.string(),
+      content: z.string()
+    })
+  )
 });
 
 
@@ -127,5 +136,6 @@ export const newProductSchemaInitialValues: NewProductSchemaType = {
   whatsapp: '',
   deliveryAtYourPlace: false,
   formStep: 1,
-  hasNextStep: true
+  hasNextStep: true,
+  details: {}
 };

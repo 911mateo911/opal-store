@@ -7,10 +7,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model USER {
-  id String @id @unique
-}
-
 model PRODUCT {
   id                     String                          @id @unique
   category               PRODUCT_CATEGORIES
@@ -19,6 +15,39 @@ model PRODUCT {
   preferredCommunication PRODUCT_PREFERRED_COMMUNICATION
   subcategory            PRODUCT_SUBCATEGORIES
   condition              PRODUCT_CONDITION
+}
+
+model USER {
+  id             String              @id @unique
+  fullName       String
+  createdAt      DateTime            @default(now())
+  draftProductId String?
+  draftProduct   DRAFT_PRODUCT_FORM? @relation(fields: [draftProductId], references: [draftId])
+}
+
+model DRAFT_PRODUCT_FORM {
+  draftId         String                @id @unique
+  title           String
+  debatablePrice  Boolean
+  description     String
+  images          String[]
+  location        String
+  price           Int
+  advertIndex     PRODUCT_ADVERT_INDEX
+  sellerId        String
+  category        PRODUCT_CATEGORIES
+  subCategory     PRODUCT_SUBCATEGORIES
+  keywords        String[]
+  telephone       String
+  whatsapp        String
+  email           String
+  date            DateTime
+  slug            String
+  sluggedKeywords String
+  sellerName      String
+  currency        PRODUCT_CURRENCY
+  USER            USER[]
+  details         Json?
 }
 
 enum PRODUCT_CATEGORIES {
