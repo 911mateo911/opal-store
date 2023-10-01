@@ -5,14 +5,10 @@ import { TextInput } from 'emeralb/app/_shared/atoms/TextInput';
 import { font_Inter, font_RedHatDisplay } from 'emeralb/app/_shared/fonts';
 import React from 'react';
 import { NewProductFormFields, NewProductSchemaType } from '../_formSchema';
-import { UseFormReturn } from 'react-hook-form';
 import { InputTitle } from './InputTitle';
+import { ProductFormComponentBaseProps } from '../_config';
 
-interface PublishFormSidebarProps {
-  form: UseFormReturn<NewProductSchemaType>
-}
-
-export const PublishFormSidebar = ({ form }: PublishFormSidebarProps) => {
+export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
   const { setValue, control, trigger } = form;
 
   const onStringInputChange = (value: string, field: NewProductFormFields) => {

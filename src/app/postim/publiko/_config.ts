@@ -5,6 +5,8 @@ import {
   PRODUCT_PREFERRED_COMMUNICATION,
   PRODUCT_SUBCATEGORIES
 } from '@prisma/client';
+import { UseFormReturn } from "react-hook-form";
+import { NewProductSchemaType } from "./_formSchema";
 
 export const BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS: SelectValues<PRODUCT_CATEGORIES> = {
   APARTMENT: {
@@ -280,6 +282,10 @@ export enum PRODUCT_FORM_STEPS {
   DETAILS_FORM,
   VERIFY_AND_PUBLISH,
   SHARE
+};
+
+export interface ProductFormComponentBaseProps {
+  form: UseFormReturn<NewProductSchemaType>
 };
 
 export const ALLOWED_IMAGE_TYPES = ['image/webp', 'image/png', 'image/jpeg'];

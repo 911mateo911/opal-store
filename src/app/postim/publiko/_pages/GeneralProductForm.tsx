@@ -8,26 +8,22 @@ import {
   PREFERRED_COMMUNICATION_SELECT_OPTIONS,
   PRODUCT_CURRENCY_SELECT_OPTIONS,
   PRODUCT_FORM_IMAGE_PICKER_ID,
-  PRODUCT_FORM_STEPS
+  PRODUCT_FORM_STEPS,
+  ProductFormComponentBaseProps
 } from "../_config";
-import { FormSectionTitle } from "./FormSectionTitle";
-import { UseFormReturn, useFormState } from "react-hook-form";
+import { FormSectionTitle } from "../_components/FormSectionTitle";
 import { NewProductFormFields, NewProductSchemaType } from "../_formSchema";
-import { FormImagePreview } from "./FormImagePreview";
+import { FormImagePreview } from "../_components/FormImagePreview";
 import CameraIcon from 'emeralb/app/_shared/icons/camera.svg';
 import Image from 'next/image';
-import { FormImageInput } from "./FormImageInput";
+import { FormImageInput } from "../_components/FormImageInput";
 import { ImageWithPreview } from "emeralb/app/_shared/types";
-import { InputTitle } from "./InputTitle";
+import { InputTitle } from "../_components/InputTitle";
 import { Checkbox } from "emeralb/app/_shared/atoms/Checkbox";
 import { ActionButton } from "emeralb/app/_shared/atoms/ActionButton";
-import { FormCategorySegment } from "./FormCategorySegment";
+import { FormCategorySegment } from "../_components/FormCategorySegment";
 
-interface PublishFormProps {
-  form: UseFormReturn<NewProductSchemaType>
-};
-
-export const PublishForm = ({ form }: PublishFormProps) => {
+export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
   const {
     setValue,
     getValues,
