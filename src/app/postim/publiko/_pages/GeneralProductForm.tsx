@@ -59,7 +59,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
   });
 
   return (
-    <div className="pt-6 px-[10px]" >
+    <div className="pt-[14px]">
       <h2 className={clsx(
         "text-xl mb-2.5 mt-2 tracking-wide font-bold text-grey-100",
         font_RedHatDisplay.className,

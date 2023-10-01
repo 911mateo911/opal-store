@@ -4,7 +4,7 @@ import {
   NewProductSchemaType,
   newProductSchemaInitialValues
 } from "../_formSchema";
-import { ProductDetail } from "emeralb/app/_shared/productTypes";
+import { PRODUCT_DETAIL_FIELD } from "emeralb/app/_shared/productTypes";
 
 export const useProductDetails = (form: UseFormReturn<NewProductSchemaType>) => {
   const { control, setValue, getValues } = form;
@@ -15,12 +15,16 @@ export const useProductDetails = (form: UseFormReturn<NewProductSchemaType>) => 
     defaultValue: newProductSchemaInitialValues[NewProductFormFields.details]
   });
 
-  const setDetails = (detail: ProductDetail) => {
+  const setDetails = (content: string, type: PRODUCT_DETAIL_FIELD) => {
     const currentDetails = getValues(NewProductFormFields.details);
-    // setValue(NewProductFormFields.deta)
+    setValue(NewProductFormFields.details, {
+      ...currentDetails,
+      [type]: content
+    })
   }
 
   return {
-    details: productDetails
+    details: productDetails,
+    setDetails
   }
 }

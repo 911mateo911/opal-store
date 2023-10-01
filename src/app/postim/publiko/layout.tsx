@@ -25,7 +25,9 @@ export default function PublishPageLayout(
         <PublishFormSidebar form={form} />
         <div className='w-full bg-grey-1 rounded-lg dark:bg-grey-95 mb-28' >
           <PublishFormHeader form={form} />
-          {children}
+          <div className="p-[10px]" >
+            {children}
+          </div>
         </div>
       </FormProvider>
     </div>

@@ -8,6 +8,7 @@ import {
 import { z } from "zod";
 import { PRODUCT_FORM_CONFIG } from "./_config";
 import { GLOBAL_CONFIG } from "emeralb/app/_config";
+import { PRODUCT_DETAIL_FIELD } from "emeralb/app/_shared/productTypes";
 
 /**
  * postId: string;
@@ -106,11 +107,8 @@ export const newProductSchema = z.object({
   [NewProductFormFields.hasNextStep]: z.boolean(),
   [NewProductFormFields.details]: z.record(
     // TODO: type this
-    z.string(),
-    z.object({
-      type: z.string(),
-      content: z.string()
-    })
+    z.nativeEnum(PRODUCT_DETAIL_FIELD),
+    z.string().min(1, { message: 'Fusha eshte e detyrueshme.' })
   )
 });
 
