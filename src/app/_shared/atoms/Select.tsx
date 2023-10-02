@@ -14,21 +14,32 @@ export interface SelectOption<V extends string> {
 
 export type SelectValues<T extends string> = Record<T, SelectOption<T>>;
 
+// Created this to bypass the automatic sorting of JS object keys
+export type MapSelectValues<T extends string> = Map<T, SelectOption<T>>;
+
 interface SelectProps<N extends string, T extends string> {
   name: N;
-  values: SelectValues<T>;
+  values: SelectValues<T> | MapSelectValues<T>;
   initialValue?: T;
   onSelect?: (optionValue: string, name: N) => void;
-};
-
-const EMPTY_VALUE: SelectOption<string> = {
-  element: '',
-  value: ''
 };
 
 interface SelectModalState<V extends string> {
   isOpen: boolean;
   value?: V;
+};
+
+function getOptionsFromProps<N extends string, T extends string>(values: SelectProps<N, T>['values']) {
+  if (values instanceof Map) {
+    return Array.from(values.values());
+  };
+
+  return Object.values<SelectOption<T>>(values);
+}
+
+const EMPTY_VALUE: SelectOption<string> = {
+  element: '',
+  value: ''
 };
 
 export function Select<N extends string, T extends string>({
@@ -44,7 +55,7 @@ export function Select<N extends string, T extends string>({
 
   useEffect(() => {
     if (!initialValue) {
-      const currentValues = Object.values<SelectOption<T>>(values);
+      const currentValues = getOptionsFromProps(values);
 
       if (currentValues.length) {
         setModalState(currState => ({
@@ -79,10 +90,14 @@ export function Select<N extends string, T extends string>({
       return EMPTY_VALUE;
     };
 
+    if (values instanceof Map) {
+      return values.get(modalState.value);
+    }
+
     return values?.[modalState.value];
   }, [modalState.value, values]);
 
-  const options = Object.values<SelectOption<T>>(values);
+  const options = getOptionsFromProps(values);
 
   return (
     <div className='relative' ref={wrapperRef} >

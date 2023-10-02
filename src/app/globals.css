@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.rdp {
+  --rdp-accent-color: theme(colors.green-50) !important;
+  --rdp-background-color: theme(colors.green-5) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .rdp {
+    --rdp-accent-color: theme(colors.green-70) !important;
+    --rdp-background-color: theme(colors.green-10) !important;
+  }
+}
+

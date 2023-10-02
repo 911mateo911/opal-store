@@ -4,6 +4,22 @@ import { useProductDetails } from '../../_hooks/useProductDetails';
 import { TextInput } from 'emeralb/app/_shared/atoms/TextInput';
 import { PRODUCT_DETAIL_FIELD } from 'emeralb/app/_shared/productTypes';
 import { InputTitle } from '../../_components/InputTitle';
+import { MapSelectValues, Select, SelectOption } from 'emeralb/app/_shared/atoms/Select';
+
+const currentYear = new Date().getFullYear();
+const minYear = currentYear - 100;
+
+const CAR_DETAILS_YEAR_SELECT_OPTIONS: MapSelectValues<string> =
+  Array(currentYear - minYear).fill('').reduce<Map<string, SelectOption<string>>>((map, __, index) => {
+    const year = (currentYear - index).toString();
+
+    map.set(year, {
+      element: year,
+      value: year
+    });
+
+    return map;
+  }, new Map());
 
 export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
   const { control } = form;
@@ -45,11 +61,10 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
           <InputTitle>
             Viti i prodhimit
           </InputTitle>
-          <TextInput
+          <Select
             name={PRODUCT_DETAIL_FIELD.CAR_YEAR}
-            onChange={setDetails}
-            control={control}
-            defaultValue={details[PRODUCT_DETAIL_FIELD.CAR_YEAR]}
+            values={CAR_DETAILS_YEAR_SELECT_OPTIONS}
+            initialValue={currentYear.toString()}
           />
         </div>
       </div>
