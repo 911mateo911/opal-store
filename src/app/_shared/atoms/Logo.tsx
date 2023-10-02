@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import logoSvg from 'emeralb/app/_shared/icons/logo.svg';
+import logoSvg from 'opal/app/_shared/icons/logo.svg';
 
 export const Logo = () => {
   return (
@@ -9,7 +9,7 @@ export const Logo = () => {
     >
       <Image
         src={logoSvg}
-        alt='emeralb_logo'
+        alt='opal_logo'
         priority
         width={22}
         height={22}

@@ -7,8 +7,8 @@ import {
 } from "@prisma/client";
 import { z } from "zod";
 import { PRODUCT_FORM_CONFIG } from "./_config";
-import { GLOBAL_CONFIG } from "emeralb/app/_config";
-import { PRODUCT_DETAIL_FIELD } from "emeralb/app/_shared/productTypes";
+import { GLOBAL_CONFIG } from "opal/app/_config";
+import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
 
 /**
  * postId: string;

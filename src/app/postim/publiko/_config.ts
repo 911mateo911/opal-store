@@ -1,4 +1,4 @@
-import { SelectOption, SelectValues } from "emeralb/app/_shared/atoms/Select";
+import { SelectOption, SelectValues } from "opal/app/_shared/atoms/Select";
 import {
   PRODUCT_CATEGORIES,
   PRODUCT_CURRENCY,

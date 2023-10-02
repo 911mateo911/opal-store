@@ -23,7 +23,7 @@ export default function PublishPageLayout(
     <div className="max-w-[1000px] mx-auto px-4 py-6 flex justify-center" >
       <FormProvider {...form} >
         <PublishFormSidebar form={form} />
-        <div className='w-full bg-grey-1 rounded-lg dark:bg-grey-95 mb-28' >
+        <div className='w-full bg-grey-1 rounded-lg dark:bg-grey-95 mb-28 h-fit' >
           <PublishFormHeader form={form} />
           <div className="p-[10px]" >
             {children}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { font_RedHatDisplay } from 'emeralb/app/_shared/fonts';
+import { font_RedHatDisplay } from 'opal/app/_shared/fonts';
 import clsx from 'clsx';
 
 export const FormSectionTitle = ({ children, className }: { children: React.ReactNode; className?: string }) => {

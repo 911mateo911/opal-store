@@ -1,9 +1,9 @@
 'use client';
 
-import { ImageWithPreview } from 'emeralb/app/_shared/types';
+import { ImageWithPreview } from 'opal/app/_shared/types';
 import React, { ChangeEvent } from 'react';
 import { ALLOWED_IMAGE_TYPES } from '../_config';
-import { useToast } from 'emeralb/app/_shared/molecules/Toast/useToast';
+import { useToast } from 'opal/app/_shared/molecules/Toast/useToast';
 
 interface FormImageInputProps {
   id: string;

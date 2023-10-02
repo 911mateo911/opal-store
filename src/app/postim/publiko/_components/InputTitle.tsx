@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { font_RedHatDisplay } from 'emeralb/app/_shared/fonts';
+import { font_RedHatDisplay } from 'opal/app/_shared/fonts';
 
 export const InputTitle = ({ children, className }: { children: React.ReactNode; className?: string; }) => {
   return (

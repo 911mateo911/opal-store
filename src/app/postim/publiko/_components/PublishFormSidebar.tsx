@@ -1,8 +1,8 @@
 'use client';
 
 import clsx from 'clsx';
-import { TextInput } from 'emeralb/app/_shared/atoms/TextInput';
-import { font_Inter, font_RedHatDisplay } from 'emeralb/app/_shared/fonts';
+import { TextInput } from 'opal/app/_shared/atoms/TextInput';
+import { font_Inter, font_RedHatDisplay } from 'opal/app/_shared/fonts';
 import React from 'react';
 import { NewProductFormFields, NewProductSchemaType } from '../_formSchema';
 import { InputTitle } from './InputTitle';

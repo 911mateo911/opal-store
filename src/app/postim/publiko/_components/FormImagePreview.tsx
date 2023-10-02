@@ -7,8 +7,8 @@ import { Control, useWatch } from 'react-hook-form';
 import { NewProductFormFields, NewProductSchemaType } from '../_formSchema';
 import Image from 'next/image';
 import clsx from 'clsx';
-import { font_Inter } from 'emeralb/app/_shared/fonts';
-import DeleteIcon from 'emeralb/app/_shared/icons/delete.svg';
+import { font_Inter } from 'opal/app/_shared/fonts';
+import DeleteIcon from 'opal/app/_shared/icons/delete.svg';
 
 interface FormImagePreviewProps {
   formControl: Control<NewProductSchemaType>

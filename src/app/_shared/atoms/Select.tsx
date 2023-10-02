@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
-import DownArrow from 'emeralb/app/_shared/icons/downArrow.svg'
+import DownArrow from 'opal/app/_shared/icons/downArrow.svg'
 import { font_Inter, font_RedHatDisplay } from '../fonts';
 import { useClickOutside } from '../hooks/useClickOutside';
 
@@ -132,7 +132,7 @@ export function Select<N extends string, T extends string>({
         'absolute border border-solid border-grey-10 rounded-b-md w-full',
         'opacity-0 invisible top-1/2 transition-all z-30 overflow-auto max-h-60',
         modalState.isOpen && '!top-[calc(100%_-_1px)] !visible opacity-100',
-        'dark:bg-grey-90 dark:border-grey-85 dark:border-t-0'
+        'dark:border-grey-85'
       )}>
         {options.map(option => {
           const isOptionSelected = option.value === modalState.value;
@@ -143,11 +143,12 @@ export function Select<N extends string, T extends string>({
                 'p-[10px] cursor-pointer border-b border-grey-5 [&:last-child]:border-none text-center text-sm font-normal',
                 font_Inter.className,
                 'text-grey-70 transition-all [&:last-child]:rounded-b-md',
-                'dark:border-grey-85 dark:text-grey-10 dark:[&:first-child]:border-t',
-                'dark:hover:bg-grey-95 dark:hover:text-grey-5',
                 isOptionSelected ?
                   'bg-green-10 hover:bg-green-20 hover:text-green-80' :
-                  'bg-white hover:bg-grey-5 hover:text-grey-100'
+                  'bg-white hover:bg-grey-5 hover:text-grey-100',
+                'dark:bg-grey-90 dark:[&:first-child]:border-t-none',
+                'dark:border-grey-85 dark:text-grey-10',
+                'dark:hover:bg-grey-95 dark:hover:text-grey-5',
               )}
               onClick={() => handleSelect(option)}
               key={option.value}

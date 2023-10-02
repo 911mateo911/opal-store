@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CheckIcon from 'emeralb/app/_shared/icons/check.svg';
+import CheckIcon from 'opal/app/_shared/icons/check.svg';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { font_RedHatDisplay } from '../fonts';

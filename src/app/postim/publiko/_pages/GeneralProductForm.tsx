@@ -1,9 +1,9 @@
 'use client';
 
 import clsx from "clsx";
-import { Select } from "emeralb/app/_shared/atoms/Select";
-import { TextInput } from "emeralb/app/_shared/atoms/TextInput";
-import { font_Inter, font_RedHatDisplay } from "emeralb/app/_shared/fonts";
+import { Select } from "opal/app/_shared/atoms/Select";
+import { TextInput } from "opal/app/_shared/atoms/TextInput";
+import { font_Inter, font_RedHatDisplay } from "opal/app/_shared/fonts";
 import {
   PREFERRED_COMMUNICATION_SELECT_OPTIONS,
   PRODUCT_CURRENCY_SELECT_OPTIONS,
@@ -14,13 +14,13 @@ import {
 import { FormSectionTitle } from "../_components/FormSectionTitle";
 import { NewProductFormFields, NewProductSchemaType } from "../_formSchema";
 import { FormImagePreview } from "../_components/FormImagePreview";
-import CameraIcon from 'emeralb/app/_shared/icons/camera.svg';
+import CameraIcon from 'opal/app/_shared/icons/camera.svg';
 import Image from 'next/image';
 import { FormImageInput } from "../_components/FormImageInput";
-import { ImageWithPreview } from "emeralb/app/_shared/types";
+import { ImageWithPreview } from "opal/app/_shared/types";
 import { InputTitle } from "../_components/InputTitle";
-import { Checkbox } from "emeralb/app/_shared/atoms/Checkbox";
-import { ActionButton } from "emeralb/app/_shared/atoms/ActionButton";
+import { Checkbox } from "opal/app/_shared/atoms/Checkbox";
+import { ActionButton } from "opal/app/_shared/atoms/ActionButton";
 import { FormCategorySegment } from "../_components/FormCategorySegment";
 
 export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {

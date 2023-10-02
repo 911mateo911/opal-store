@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { Chip } from 'emeralb/app/_shared/atoms/Chip';
-import { FilledChipButton } from 'emeralb/app/_shared/atoms/FilledChipButton';
-import backIcon from 'emeralb/app/_shared/icons/backArrow.svg';
+import { Chip } from 'opal/app/_shared/atoms/Chip';
+import { FilledChipButton } from 'opal/app/_shared/atoms/FilledChipButton';
+import backIcon from 'opal/app/_shared/icons/backArrow.svg';
 import { NewProductFormFields } from '../_formSchema';
 import { UseFormReturn, useWatch } from 'react-hook-form';
 import { ProductFormComponentBaseProps } from '../_config';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProductFormComponentBaseProps } from '../_config';
 import { FormSectionTitle } from '../_components/FormSectionTitle';
-import { CarDetails } from './DetailsFormInputs/CarDetails';
+import { CarDetails } from './DetailsFormInputs/CarDetails/CarDetails';
 
 export const DetailsProductForm = ({ form }: ProductFormComponentBaseProps) => {
   return (

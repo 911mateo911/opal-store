@@ -4,7 +4,7 @@ import {
   NewProductSchemaType,
   newProductSchemaInitialValues
 } from "../_formSchema";
-import { PRODUCT_DETAIL_FIELD } from "emeralb/app/_shared/productTypes";
+import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
 
 export const useProductDetails = (form: UseFormReturn<NewProductSchemaType>) => {
   const { control, setValue, getValues } = form;

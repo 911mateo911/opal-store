@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import clsx from 'clsx';
-import { font_Inter } from 'emeralb/app/_shared/fonts';
-import { Select, SelectValues } from 'emeralb/app/_shared/atoms/Select';
+import { font_Inter } from 'opal/app/_shared/fonts';
+import { Select, SelectValues } from 'opal/app/_shared/atoms/Select';
 import { NewProductFormFields, NewProductSchemaType, newProductSchema } from '../_formSchema';
 import { BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS, PRODUCT_SUBCATEGORIES_MAP } from '../_config';
 import { Control, UseFormGetValues, useWatch } from 'react-hook-form';
