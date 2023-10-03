@@ -9,6 +9,7 @@ import {
   PRODUCT_CURRENCY_SELECT_OPTIONS,
   PRODUCT_FORM_IMAGE_PICKER_ID,
   PRODUCT_FORM_STEPS,
+  PRODUCT_STATE_SELECT_OPTIONS,
   ProductFormComponentBaseProps
 } from "../_config";
 import { FormSectionTitle } from "../_components/FormSectionTitle";
@@ -22,6 +23,7 @@ import { InputTitle } from "../_components/InputTitle";
 import { Checkbox } from "opal/app/_shared/atoms/Checkbox";
 import { ActionButton } from "opal/app/_shared/atoms/ActionButton";
 import { FormCategorySegment } from "../_components/FormCategorySegment";
+import { FormPriceSegment } from "../_components/FormPriceSegment";
 
 export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
   const {
@@ -61,46 +63,59 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
   return (
     <div className="pt-[14px]">
       <h2 className={clsx(
-        "text-xl mb-2.5 mt-2 tracking-wide font-bold text-grey-100",
+        "text-xl mt-2 mb-[18px] tracking-wide font-bold text-grey-100",
         font_RedHatDisplay.className,
         'dark:text-grey-5'
       )} >
-        Produkti juaj?
+        Postimi juaj?
       </h2>
-      <FormSectionTitle className="mt-5" >
-        Titulli
-      </FormSectionTitle>
-      <InputTitle>
-        Nje titull i shkurter dhe permbledhes mbi produktin tend.
-      </InputTitle>
-      <TextInput<NewProductFormFields.title, NewProductSchemaType>
-        name={NewProductFormFields.title}
-        onChange={onSimpleInputChange}
-        placeholder="Shitet ..."
-        onBlur={onInputBlur}
-        control={control}
-      />
-      <div className="pt-1.5 grid grid-cols-3 mt-3 gap-2" >
-        <FormCategorySegment
-          onInputChange={onSimpleInputChange}
-          formControl={control}
-          getValues={getValues}
-        />
+      <div className="grid grid-cols-[150px_1fr] gap-[10px]" >
+        <div className="flex items-end" >
+          <div className="w-full" >
+            <InputTitle>
+              Dua te:
+            </InputTitle>
+            <Select
+              name={NewProductFormFields.state}
+              values={PRODUCT_STATE_SELECT_OPTIONS}
+              onSelect={onSimpleInputChange}
+            />
+          </div>
+        </div>
         <div>
-          <p className={clsx(
-            font_Inter.className,
-            'text-sm font-medium mb-1 text-center',
-            'dark:text-grey-20'
-          )} >
-            Monedha
-          </p>
-          <Select
-            name={NewProductFormFields.currency}
-            values={PRODUCT_CURRENCY_SELECT_OPTIONS}
-            initialValue='USD'
-            onSelect={onSimpleInputChange}
+          <FormSectionTitle>
+            Titulli
+          </FormSectionTitle>
+          <TextInput<NewProductFormFields.title, NewProductSchemaType>
+            name={NewProductFormFields.title}
+            onChange={onSimpleInputChange}
+            placeholder="Shitet ..."
+            onBlur={onInputBlur}
+            control={control}
           />
         </div>
+      </div>
+      <FormCategorySegment
+        onInputChange={onSimpleInputChange}
+        formControl={control}
+        getValues={getValues}
+      />
+      <FormPriceSegment
+        control={control}
+        onInputBlur={onInputBlur}
+        onSimpleInputChange={onSimpleInputChange}
+      />
+      <div className="pt-5" >
+        <InputTitle>
+          Vendndodhja
+        </InputTitle>
+        <TextInput
+          name={NewProductFormFields.location}
+          onChange={onSimpleInputChange}
+          placeholder="Shteti, Qyteti, Rruga"
+          onBlur={onInputBlur}
+          control={control}
+        />
       </div>
       <div className="pt-3" >
         <FormSectionTitle>
@@ -169,25 +184,6 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
               name={NewProductFormFields.preferredCommunication}
               values={PREFERRED_COMMUNICATION_SELECT_OPTIONS}
               onSelect={onSimpleInputChange}
-            />
-          </div>
-          <div className="flex items-center pt-[22px]" >
-            <Checkbox
-              name={NewProductFormFields.debatablePrice}
-              onChange={onSimpleInputChange}
-              placeholder="Cmim i diskutueshem"
-            />
-          </div>
-          <div>
-            <InputTitle>
-              Vendndodhja
-            </InputTitle>
-            <TextInput
-              name={NewProductFormFields.location}
-              onChange={onSimpleInputChange}
-              placeholder="Shteti, Qyteti, Rruga"
-              onBlur={onInputBlur}
-              control={control}
             />
           </div>
           <div className="flex items-center pt-[22px]" >

@@ -3,6 +3,7 @@ import {
   PRODUCT_CATEGORIES,
   PRODUCT_CURRENCY,
   PRODUCT_PREFERRED_COMMUNICATION,
+  PRODUCT_STATE,
   PRODUCT_SUBCATEGORIES
 } from "@prisma/client";
 import { z } from "zod";
@@ -57,7 +58,8 @@ export enum NewProductFormFields {
   deliveryAtYourPlace = 'deliveryAtYourPlace',
   formStep = 'formStep',
   hasNextStep = 'hasNextStep',
-  details = 'details'
+  details = 'details',
+  state = 'state'
 }
 
 // TODO: ADD validation messages
@@ -109,7 +111,8 @@ export const newProductSchema = z.object({
     // TODO: type this
     z.nativeEnum(PRODUCT_DETAIL_FIELD),
     z.string().min(1, { message: 'Fusha eshte e detyrueshme.' })
-  )
+  ),
+  [NewProductFormFields.state]: z.nativeEnum(PRODUCT_STATE)
 });
 
 
@@ -135,5 +138,6 @@ export const newProductSchemaInitialValues: NewProductSchemaType = {
   deliveryAtYourPlace: false,
   formStep: 1,
   hasNextStep: true,
-  details: {}
+  details: {},
+  state: PRODUCT_STATE.TO_SELL
 };

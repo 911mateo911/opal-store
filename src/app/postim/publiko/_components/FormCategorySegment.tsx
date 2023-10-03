@@ -6,6 +6,7 @@ import { NewProductFormFields, NewProductSchemaType, newProductSchema } from '..
 import { BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS, PRODUCT_SUBCATEGORIES_MAP } from '../_config';
 import { Control, UseFormGetValues, useWatch } from 'react-hook-form';
 import { PRODUCT_CATEGORIES, PRODUCT_SUBCATEGORIES } from '@prisma/client';
+import { InputTitle } from './InputTitle';
 
 interface FormCategorySegmentProps {
   onInputChange: (value: string | boolean, name: NewProductFormFields) => void;
@@ -46,15 +47,11 @@ export const FormCategorySegment = ({
   }
 
   return (
-    <>
+    <div className="pt-1.5 grid grid-cols-2 mt-3 gap-[10px]" >
       <div>
-        <p className={clsx(
-          font_Inter.className,
-          'text-sm font-medium mb-1 text-center',
-          'dark:text-grey-20'
-        )} >
+        <InputTitle center >
           Kategori
-        </p>
+        </InputTitle>
         <Select
           name={NewProductFormFields.category}
           values={BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS}
@@ -63,19 +60,15 @@ export const FormCategorySegment = ({
         />
       </div>
       <div>
-        <p className={clsx(
-          font_Inter.className,
-          'text-sm font-medium mb-1 text-center',
-          'dark:text-grey-20'
-        )} >
+        <InputTitle center >
           Nenkategori
-        </p>
+        </InputTitle>
         <Select
           name={NewProductFormFields.subCategory}
           values={productSubcategories}
           onSelect={handleSubCategoryChange}
         />
       </div>
-    </>
+    </div>
   )
 }

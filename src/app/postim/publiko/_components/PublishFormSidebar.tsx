@@ -28,7 +28,7 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
       </h2>
       <h6 className={clsx(
         font_Inter.className,
-        'font-bold text-base text-grey-100 mt-4',
+        'font-bold text-base text-grey-100 mt-2',
         'dark:text-grey-20'
       )} >
         Informacionet e kontaktit
@@ -39,7 +39,7 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
       )} >
         Prezantohuni duke plotesuar formen e meposhtme:
       </p>
-      <div className='mt-8 flex flex-col justify-center items-center gap-5' >
+      <div className='mt-4 flex flex-col justify-center items-center gap-5' >
         <div className='w-full mt-0.5' >
           <InputTitle>
             Emer Mbiemer

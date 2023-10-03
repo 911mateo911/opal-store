@@ -3,6 +3,7 @@ import {
   PRODUCT_CATEGORIES,
   PRODUCT_CURRENCY,
   PRODUCT_PREFERRED_COMMUNICATION,
+  PRODUCT_STATE,
   PRODUCT_SUBCATEGORIES
 } from '@prisma/client';
 import { UseFormReturn } from "react-hook-form";
@@ -80,6 +81,29 @@ export const PREFERRED_COMMUNICATION_SELECT_OPTIONS: SelectValues<PRODUCT_PREFER
     value: PRODUCT_PREFERRED_COMMUNICATION.WHATSAPP
   }
 };
+
+export const PRODUCT_STATE_SELECT_OPTIONS: SelectValues<PRODUCT_STATE> = {
+  [PRODUCT_STATE.TO_SELL]: {
+    element: 'Shes',
+    value: PRODUCT_STATE.TO_SELL
+  },
+  [PRODUCT_STATE.TO_BUY]: {
+    element: 'Blej',
+    value: PRODUCT_STATE.TO_BUY
+  },
+  [PRODUCT_STATE.TO_LOAN]: {
+    element: 'Le me qera',
+    value: PRODUCT_STATE.TO_LOAN
+  },
+  [PRODUCT_STATE.TO_REQUEST_LOANING]: {
+    element: 'Marr me qera',
+    value: PRODUCT_STATE.TO_REQUEST_LOANING
+  },
+  [PRODUCT_STATE.TO_TRADE]: {
+    element: 'Shkembej',
+    value: PRODUCT_STATE.TO_TRADE
+  }
+}
 
 interface ProductSubCategoryMetaData {
   hasNextStep?: boolean;
