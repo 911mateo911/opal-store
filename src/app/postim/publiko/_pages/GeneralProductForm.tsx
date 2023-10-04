@@ -3,10 +3,9 @@
 import clsx from "clsx";
 import { Select } from "opal/app/_shared/atoms/Select";
 import { TextInput } from "opal/app/_shared/atoms/TextInput";
-import { font_Inter, font_RedHatDisplay } from "opal/app/_shared/fonts";
+import { font_RedHatDisplay } from "opal/app/_shared/fonts";
 import {
   PREFERRED_COMMUNICATION_SELECT_OPTIONS,
-  PRODUCT_CURRENCY_SELECT_OPTIONS,
   PRODUCT_FORM_IMAGE_PICKER_ID,
   PRODUCT_FORM_STEPS,
   PRODUCT_STATE_SELECT_OPTIONS,

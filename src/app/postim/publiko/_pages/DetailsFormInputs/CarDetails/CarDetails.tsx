@@ -52,7 +52,7 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
           />
         </div>
       </div>
-      <div className='grid grid-cols-2 gap-[10px] pt-3' >
+      <div className='grid grid-cols-2 gap-[10px] pt-5' >
         <div>
           <InputTitle>
             Viti i prodhimit
@@ -61,6 +61,7 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
             name={PRODUCT_DETAIL_FIELD.CAR_YEAR}
             values={CAR_DETAILS_YEAR_SELECT_OPTIONS}
             initialValue={currentYear.toString()}
+            onSelect={setDetails}
           />
         </div>
         <div>
@@ -73,7 +74,7 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
           />
         </div>
       </div>
-      <div className='grid grid-cols-2 gap-[10px] pt-3' >
+      <div className='grid grid-cols-2 gap-[10px] pt-5' >
         <div>
           <InputTitle>
             Karburanti

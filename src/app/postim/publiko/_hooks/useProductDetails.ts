@@ -15,7 +15,7 @@ export const useProductDetails = (form: UseFormReturn<NewProductSchemaType>) => 
     defaultValue: newProductSchemaInitialValues[NewProductFormFields.details]
   });
 
-  const setDetails = (content: string, type: PRODUCT_DETAIL_FIELD) => {
+  const setDetails = (content: string | boolean, type: PRODUCT_DETAIL_FIELD) => {
     const currentDetails = getValues(NewProductFormFields.details);
     setValue(NewProductFormFields.details, {
       ...currentDetails,
