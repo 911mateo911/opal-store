@@ -20,7 +20,7 @@ export const ApartmentDetails = ({
   } = useProductDetails(form);
 
   return (
-    <div className='pt-2'>
+    <div>
       <div className='grid grid-cols-2 gap-[10px]' >
         <div>
           <InputTitle>
@@ -60,7 +60,7 @@ export const ApartmentDetails = ({
           <Checkbox
             name={PRODUCT_DETAIL_FIELD.APARTMENT_FURNITURE}
             onChange={setDetails}
-            placeholder="Cmim i diskutueshem"
+            placeholder="E mobiluar"
           />
         </div>
       </div>

@@ -8,6 +8,7 @@ interface FilledChipButtonProps {
   asLink?: boolean;
   icon?: string;
   textSize?: 'sm' | 'md';
+  onClick?: () => void;
 };
 
 // Conditional Type
@@ -22,7 +23,7 @@ type LinkOrBtnType =
   };
 
 export const FilledChipButton = (props: FilledChipButtonProps & LinkOrBtnType) => {
-  const { textSize } = props;
+  const { textSize, onClick } = props;
 
   const btnClassName = clsx(
     props.className,
@@ -48,14 +49,14 @@ export const FilledChipButton = (props: FilledChipButtonProps & LinkOrBtnType) =
   ) : null;
 
   if (props.asLink) {
-    <Link href={props.to} >
+    <Link onClick={onClick} href={props.to} >
       {icon}
       {props.text}
     </Link>
   }
 
   return (
-    <button className={btnClassName} >
+    <button onClick={onClick} className={btnClassName} >
       {icon}
       {props.text}
     </button>

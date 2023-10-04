@@ -9,6 +9,10 @@ import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
 export const useProductDetails = (form: UseFormReturn<NewProductSchemaType>) => {
   const { control, setValue, getValues } = form;
 
+  const onSimpleInputChange = (value: string | boolean, field: NewProductFormFields) => {
+    setValue(field, value);
+  };
+
   const productDetails = useWatch({
     control,
     name: NewProductFormFields.details,
@@ -25,6 +29,7 @@ export const useProductDetails = (form: UseFormReturn<NewProductSchemaType>) => 
 
   return {
     details: productDetails,
-    setDetails
+    setDetails,
+    onSimpleInputChange
   }
 }

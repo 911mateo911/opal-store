@@ -3,17 +3,36 @@ import { Chip } from 'opal/app/_shared/atoms/Chip';
 import { FilledChipButton } from 'opal/app/_shared/atoms/FilledChipButton';
 import backIcon from 'opal/app/_shared/icons/backArrow.svg';
 import { NewProductFormFields } from '../_formSchema';
-import { UseFormReturn, useWatch } from 'react-hook-form';
-import { ProductFormComponentBaseProps } from '../_config';
+import { useWatch } from 'react-hook-form';
+import { PRODUCT_FORM_STEPS, ProductFormComponentBaseProps } from '../_config';
+import { useRouter } from 'next/navigation';
 
 export const PublishFormHeader = ({ form }: ProductFormComponentBaseProps) => {
-  const { control } = form;
+  const router = useRouter();
+  const { control, setValue, getValues } = form;
 
   const hasNextStep = useWatch({
     control,
     name: NewProductFormFields.hasNextStep,
     defaultValue: true
   });
+
+  const onGoBack = () => {
+    // TODO: refactor this piece of dogshit
+    const currentStep = getValues(NewProductFormFields.formStep);
+
+    if (currentStep === PRODUCT_FORM_STEPS.GENERAL_FORM) {
+      router.back();
+    };
+
+    if (currentStep === PRODUCT_FORM_STEPS.DETAILS_FORM) {
+      setValue(NewProductFormFields.formStep, PRODUCT_FORM_STEPS.GENERAL_FORM);
+    };
+
+    if (currentStep === PRODUCT_FORM_STEPS.VERIFY_AND_PUBLISH) {
+      setValue(NewProductFormFields.formStep, PRODUCT_FORM_STEPS.GENERAL_FORM);
+    };
+  }
 
   return (
     <div className={clsx(
@@ -25,6 +44,7 @@ export const PublishFormHeader = ({ form }: ProductFormComponentBaseProps) => {
         text='Mbrapa'
         icon={backIcon}
         textSize='sm'
+        onClick={onGoBack}
       />
       <div className='flex items-center justify-center gap-2' >
         <Chip

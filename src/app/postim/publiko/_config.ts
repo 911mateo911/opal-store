@@ -1,6 +1,7 @@
 import { SelectOption, SelectValues } from "opal/app/_shared/atoms/Select";
 import {
   PRODUCT_CATEGORIES,
+  PRODUCT_CONDITION,
   PRODUCT_CURRENCY,
   PRODUCT_PREFERRED_COMMUNICATION,
   PRODUCT_STATE,
@@ -166,7 +167,8 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
     },
     [PRODUCT_SUBCATEGORIES.CAR__CARS]: {
       element: 'Makina',
-      value: PRODUCT_SUBCATEGORIES.CAR__CARS
+      value: PRODUCT_SUBCATEGORIES.CAR__CARS,
+      hasNextStep: true
     },
     [PRODUCT_SUBCATEGORIES.CAR__CAR_PARTS]: {
       element: 'Pjese makinash',
@@ -196,31 +198,38 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
   [PRODUCT_CATEGORIES.ELECTRONICS]: {
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__ACCESSORIES]: {
       element: 'Aksesore Elektronik',
-      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__ACCESSORIES
+      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__ACCESSORIES,
+      hasNextStep: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__AUDIO]: {
       element: 'Pajisje Audio',
-      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__AUDIO
+      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__AUDIO,
+      hasNextStep: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__CONSOLES]: {
       element: 'Gaming dhe konsola',
-      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__CONSOLES
+      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__CONSOLES,
+      hasNextStep: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__IOT]: {
       element: 'IOT/Pajisje Smart',
-      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__IOT
+      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__IOT,
+      hasNextStep: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__LAPTOPS]: {
       element: 'Laptope',
-      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__LAPTOPS
+      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__LAPTOPS,
+      hasNextStep: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__PC]: {
       element: 'PC/Kompjuter',
-      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__PC
+      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__PC,
+      hasNextStep: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__SMARTPHONES]: {
       element: 'Smartfone',
-      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__SMARTPHONES
+      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__SMARTPHONES,
+      hasNextStep: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__SMART_PARTS]: {
       element: 'Pjese kembimi elektronike',
@@ -228,11 +237,13 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__TABLETS]: {
       element: 'Tablete',
-      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__TABLETS
+      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__TABLETS,
+      hasNextStep: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__TVS]: {
       element: 'Televizore',
-      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__TVS
+      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__TVS,
+      hasNextStep: true
     }
   },
   [PRODUCT_CATEGORIES.HEALTH]: {
@@ -300,6 +311,25 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
     }
   }
 };
+
+export const PRODUCT_CONDITION_SELECT_OPTIONS: SelectValues<PRODUCT_CONDITION> = {
+  [PRODUCT_CONDITION.NEW]: {
+    element: 'E re',
+    value: PRODUCT_CONDITION.NEW
+  },
+  [PRODUCT_CONDITION.USED]: {
+    element: 'E perdorur',
+    value: PRODUCT_CONDITION.USED
+  },
+  [PRODUCT_CONDITION.USED_LIKE_NEW]: {
+    element: 'E perdorur, si e re',
+    value: PRODUCT_CONDITION.USED_LIKE_NEW
+  },
+  [PRODUCT_CONDITION.USED_IN_GOOD_SHAPE]: {
+    element: 'E perdorur ne gjendje te mire',
+    value: PRODUCT_CONDITION.USED_IN_GOOD_SHAPE
+  },
+}
 
 export enum PRODUCT_FORM_STEPS {
   GENERAL_FORM,

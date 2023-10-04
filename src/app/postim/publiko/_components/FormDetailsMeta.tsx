@@ -1,6 +1,10 @@
 import React from 'react'
 import { FormSectionTitle } from './FormSectionTitle';
-import { BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS, PRODUCT_SUBCATEGORIES_MAP, ProductFormComponentBaseProps } from '../_config';
+import {
+  BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS,
+  PRODUCT_SUBCATEGORIES_MAP,
+  ProductFormComponentBaseProps
+} from '../_config';
 import { useWatch } from 'react-hook-form';
 import { NewProductFormFields } from '../_formSchema';
 import clsx from 'clsx';
@@ -18,7 +22,7 @@ export const FormDetailsMeta = ({ form }: ProductFormComponentBaseProps) => {
   });
 
   return (
-    <div className='flex mb-[18px] items-center gap-2' >
+    <div className='flex mb-[22px] mt-5 items-center gap-2 pb-2' >
       <FormSectionTitle className='!mb-0' >
         Detaje
       </FormSectionTitle>

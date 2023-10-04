@@ -1,6 +1,7 @@
 import {
   PRODUCT_ADVERT_INDEX,
   PRODUCT_CATEGORIES,
+  PRODUCT_CONDITION,
   PRODUCT_CURRENCY,
   PRODUCT_PREFERRED_COMMUNICATION,
   PRODUCT_STATE,
@@ -59,7 +60,8 @@ export enum NewProductFormFields {
   formStep = 'formStep',
   hasNextStep = 'hasNextStep',
   details = 'details',
-  state = 'state'
+  state = 'state',
+  condition = 'condition'
 }
 
 // TODO: ADD validation messages
@@ -112,7 +114,8 @@ export const newProductSchema = z.object({
     z.nativeEnum(PRODUCT_DETAIL_FIELD),
     z.string().min(1, { message: 'Fusha eshte e detyrueshme.' })
   ),
-  [NewProductFormFields.state]: z.nativeEnum(PRODUCT_STATE)
+  [NewProductFormFields.state]: z.nativeEnum(PRODUCT_STATE),
+  [NewProductFormFields.condition]: z.nativeEnum(PRODUCT_CONDITION).optional()
 });
 
 

@@ -25,7 +25,7 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
   console.log(form.watch());
 
   return (
-    <div className='pt-2' >
+    <div>
       <div className='grid grid-cols-2 gap-[10px]' >
         <div>
           <InputTitle>
