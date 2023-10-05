@@ -31,7 +31,7 @@ export const renderCurrentFormDetailsComponent = (
   };
 
   if (ELECTRONIC_SUBCATEGORIES_WITH_DETAILS_FORM.includes(formSubcategory)) {
-    return <ElectronicGadgetsDetails form={form} />
+    return <ElectronicGadgetsDetails form={form} formSubcategory={formSubcategory} />
   };
 
   return null;

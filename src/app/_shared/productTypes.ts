@@ -17,4 +17,16 @@ export enum PRODUCT_DETAIL_FIELD {
   JOBS_EXTRA = 'JOBS_EXTRA'
 };
 
+export enum COMPUTER_PRODUCT_DETAILS {
+  RAM = 'RAM',
+  CPU = 'CPU',
+  ROM = 'ROM',
+  GPU = 'GPU',
+  SCREEN_SIZE = 'SCREEN_SIZE',
+  WITH_CHARGER = 'WITH_CHARGER',
+  WITH_KEYBOARD = 'WITH_KEYBOARD',
+  WITH_MONITOR = 'WITH_MONITOR',
+  WITH_MOUSE = 'WITH_MOUSE'
+};
+
 export type ProductDetailsRecord = Record<PRODUCT_DETAIL_FIELD, string>;

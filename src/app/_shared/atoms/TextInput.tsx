@@ -16,8 +16,23 @@ interface TextInputProps<T extends string, F extends FieldValues> {
   textarea?: boolean;
   onBlur?: (name: T) => void;
   formError?: FieldError;
-  defaultValue?: string;
+  defaultValue?: string | Record<T, string | boolean>;
   control?: Control<F>;
+};
+
+function getDefaultValue<T extends string, F extends FieldValues>(
+  defaultValue: TextInputProps<T, F>['defaultValue'],
+  name: T
+): string | undefined {
+  if (!defaultValue) {
+    return;
+  }
+
+  if (typeof defaultValue === 'string') {
+    return defaultValue;
+  };
+
+  return defaultValue[name].toString();
 }
 
 export function TextInput<T extends string, F extends FieldValues>({
@@ -76,7 +91,7 @@ export function TextInput<T extends string, F extends FieldValues>({
           )}
           onChange={({ target }) => onChange(target.value, name)}
           onBlur={() => onBlur?.(name)}
-          defaultValue={defaultValue}
+          defaultValue={getDefaultValue(defaultValue, name)}
         />
       )
     }

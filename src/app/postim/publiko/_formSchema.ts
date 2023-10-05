@@ -112,12 +112,14 @@ export const newProductSchema = z.object({
   [NewProductFormFields.details]: z.record(
     // TODO: type this
     z.nativeEnum(PRODUCT_DETAIL_FIELD),
-    z.string().min(1, { message: 'Fusha eshte e detyrueshme.' })
+    z.record(
+      z.string(),
+      z.string().min(1, { message: 'Fusha eshte e detyrueshme.' }).or(z.boolean())
+    )
   ),
   [NewProductFormFields.state]: z.nativeEnum(PRODUCT_STATE),
   [NewProductFormFields.condition]: z.nativeEnum(PRODUCT_CONDITION).optional()
 });
-
 
 export type NewProductSchemaType = z.infer<typeof newProductSchema>;
 

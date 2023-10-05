@@ -6,7 +6,11 @@ import {
 } from "../_formSchema";
 import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
 
-export const useProductDetails = (form: UseFormReturn<NewProductSchemaType>) => {
+export type SET_PRODUCT_DETAILS_FUNC = (content: string | boolean, type: PRODUCT_DETAIL_FIELD, extraDetailField?: string) => void;
+
+export const useProductDetails = (
+  form: UseFormReturn<NewProductSchemaType>
+) => {
   const { control, setValue, getValues } = form;
 
   const onSimpleInputChange = (value: string | boolean, field: NewProductFormFields) => {
@@ -19,13 +23,34 @@ export const useProductDetails = (form: UseFormReturn<NewProductSchemaType>) => 
     defaultValue: newProductSchemaInitialValues[NewProductFormFields.details]
   });
 
-  const setDetails = (content: string | boolean, type: PRODUCT_DETAIL_FIELD) => {
+  const setDetails: SET_PRODUCT_DETAILS_FUNC = (
+    content,
+    type,
+    extraDetailField?
+  ) => {
     const currentDetails = getValues(NewProductFormFields.details);
+    const currentSubcategoryDetails = currentDetails[type];
+
+    const newSubcategoryDetailsPayload: typeof currentSubcategoryDetails = {
+      ...currentSubcategoryDetails
+    };
+
+    if (extraDetailField) {
+      newSubcategoryDetailsPayload[extraDetailField] = content;
+    } else {
+      newSubcategoryDetailsPayload[type] = content;
+    };
+
+    const newProductDetailsPayload: NewProductSchemaType['details'] = {
+      ...currentDetails,
+      [type]: newSubcategoryDetailsPayload
+    };
+
     setValue(NewProductFormFields.details, {
       ...currentDetails,
-      [type]: content
-    })
-  }
+      ...newProductDetailsPayload
+    });
+  };
 
   return {
     details: productDetails,

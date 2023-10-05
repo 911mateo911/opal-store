@@ -4,7 +4,10 @@ import { useProductDetails } from '../../../_hooks/useProductDetails';
 import { InputTitle } from '../../../_components/InputTitle';
 import { PRODUCT_DETAIL_FIELD } from 'opal/app/_shared/productTypes';
 import { Select } from 'opal/app/_shared/atoms/Select';
-import { APARTMENT_FLOOR_TYPE_SELECT_OPTIONS, APARTMENT_ROOMS_TYPE_SELECT_OPTIONS } from './config';
+import {
+  APARTMENT_FLOOR_TYPE_SELECT_OPTIONS,
+  APARTMENT_ROOMS_TYPE_SELECT_OPTIONS
+} from './config';
 import { TextInput } from 'opal/app/_shared/atoms/TextInput';
 import { Checkbox } from 'opal/app/_shared/atoms/Checkbox';
 
