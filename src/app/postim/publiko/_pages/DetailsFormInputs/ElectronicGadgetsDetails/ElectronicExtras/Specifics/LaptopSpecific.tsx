@@ -24,7 +24,7 @@ export const LaptopSpecifix = ({
           name={TECH_PRODUCT_DETAILS.SCREEN_SIZE}
           onChange={setDetails}
           control={control}
-          placeholder='Nvidia, E integruar ...'
+          placeholder='18, 21 ...'
         />
       </div>
       <div className="flex items-center justify-center pt-[22px]" >

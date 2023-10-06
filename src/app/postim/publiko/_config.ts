@@ -227,7 +227,7 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
       hasNextStep: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__SMARTPHONES]: {
-      element: 'Smartfone',
+      element: 'Smartphone',
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__SMARTPHONES,
       hasNextStep: true
     },
@@ -243,6 +243,11 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__TVS]: {
       element: 'Televizore',
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__TVS,
+      hasNextStep: true
+    },
+    [PRODUCT_SUBCATEGORIES.ELECTRONICS_PC_SETUP]: {
+      element: 'Setup PC',
+      value: PRODUCT_SUBCATEGORIES.ELECTRONICS_PC_SETUP,
       hasNextStep: true
     }
   },
