@@ -29,12 +29,12 @@ export const SmartPhonesNConsoleDetails = ({ form, formSubcategory }: SmartPhone
         <InputTitle>
           Hapesira
         </InputTitle>
-        {/* TODO: add GB in the end */}
         <TextInput
           name={TECH_PRODUCT_DETAILS.ROM}
           onChange={handleSetExtraDetails}
           control={control}
           placeholder='64, 128 ...'
+          adornment='(GB)'
         />
       </div>
       {formSubcategory !== PRODUCT_SUBCATEGORIES.ELECTRONICS__CONSOLES && (

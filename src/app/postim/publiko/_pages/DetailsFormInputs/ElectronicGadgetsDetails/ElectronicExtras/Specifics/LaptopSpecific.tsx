@@ -19,12 +19,12 @@ export const LaptopSpecifix = ({
         <InputTitle>
           Madhesia e ekranit
         </InputTitle>
-        {/* TODO: Add inch */}
         <TextInput
           name={TECH_PRODUCT_DETAILS.SCREEN_SIZE}
           onChange={setDetails}
           control={control}
           placeholder='18, 21 ...'
+          adornment='"(inch)'
         />
       </div>
       <div className="flex items-center justify-center pt-[22px]" >

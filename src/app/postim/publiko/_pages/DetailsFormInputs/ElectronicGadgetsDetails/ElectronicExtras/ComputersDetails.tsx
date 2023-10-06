@@ -43,12 +43,12 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
           <InputTitle>
             RAM
           </InputTitle>
-          {/* TODO: add GB in the end */}
           <TextInput
             name={TECH_PRODUCT_DETAILS.RAM}
             onChange={handleSetExtraDetails}
             control={control}
             placeholder='2, 4 ...'
+            adornment='(GB)'
           />
         </div>
       </div>
@@ -68,12 +68,12 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
           <InputTitle>
             Harddisk
           </InputTitle>
-          {/* TODO: add GB in the end */}
           <TextInput
             name={TECH_PRODUCT_DETAILS.ROM}
             onChange={handleSetExtraDetails}
             control={control}
             placeholder='256, 512 ...'
+            adornment='(GB)'
           />
         </div>
       </div>

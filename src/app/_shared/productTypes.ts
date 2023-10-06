@@ -23,7 +23,8 @@ export enum TECH_PRODUCT_DETAILS {
   ROM = 'ROM',
   GPU = 'GPU',
   SCREEN_SIZE = 'SCREEN_SIZE',
-  WITH_CHARGER = 'WITH_CHARGER'
+  WITH_CHARGER = 'WITH_CHARGER',
+  SCREEN_RES = 'SCREEN_RES'
 };
 
 export type ProductDetailsRecord = Record<PRODUCT_DETAIL_FIELD, string>;

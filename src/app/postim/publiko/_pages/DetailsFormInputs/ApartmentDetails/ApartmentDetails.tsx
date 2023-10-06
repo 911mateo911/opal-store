@@ -45,6 +45,7 @@ export const ApartmentDetails = ({
             control={control}
             defaultValue={details[PRODUCT_DETAIL_FIELD.APARTMENT_SQAREA]}
             placeholder='100 m2...'
+            adornment='(m2)'
           />
         </div>
       </div>

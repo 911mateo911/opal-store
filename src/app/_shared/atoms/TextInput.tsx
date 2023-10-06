@@ -18,6 +18,7 @@ interface TextInputProps<T extends string, F extends FieldValues> {
   formError?: FieldError;
   defaultValue?: string | Record<T, string | boolean>;
   control?: Control<F>;
+  adornment?: React.ReactNode;
 };
 
 function getDefaultValue<T extends string, F extends FieldValues>(
@@ -46,7 +47,8 @@ export function TextInput<T extends string, F extends FieldValues>({
   textarea,
   onBlur,
   control,
-  defaultValue
+  defaultValue,
+  adornment
 }: TextInputProps<T, F>) {
   const { errors } = useFormState({ control });
 
@@ -78,21 +80,33 @@ export function TextInput<T extends string, F extends FieldValues>({
       );
     } else {
       return (
-        <input
-          value={value}
-          name={name}
-          id={id}
-          placeholder={placeholder}
-          type={type}
-          className={clsx(
-            'h-12 border border-solid border-grey-10 rounded-md pl-4 w-full',
-            className,
-            sharedClasses
+        <div className='w-full flex items-stretch' >
+          <input
+            value={value}
+            name={name}
+            id={id}
+            placeholder={placeholder}
+            type={type}
+            className={clsx(
+              'h-12 border border-solid border-grey-10 rounded-md px-4 w-full',
+              className,
+              adornment && 'rounded-r-none',
+              sharedClasses,
+            )}
+            onChange={({ target }) => onChange(target.value, name)}
+            onBlur={() => onBlur?.(name)}
+            defaultValue={getDefaultValue(defaultValue, name)}
+          />
+          {adornment && (
+            <div className={clsx(
+              font_RedHatDisplay.className,
+              'min-w-[48px] rounded-r-md bg-white border border-l-0 text-xs border-solid border-grey-10',
+              'flex items-center justify-center font-bold text-grey-60',
+            )} >
+              {adornment}
+            </div>
           )}
-          onChange={({ target }) => onChange(target.value, name)}
-          onBlur={() => onBlur?.(name)}
-          defaultValue={getDefaultValue(defaultValue, name)}
-        />
+        </div>
       )
     }
   }, [
@@ -106,7 +120,8 @@ export function TextInput<T extends string, F extends FieldValues>({
     textarea,
     type,
     value,
-    inputError
+    inputError,
+    adornment
   ]);
 
   return (
