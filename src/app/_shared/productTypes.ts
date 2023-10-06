@@ -17,7 +17,7 @@ export enum PRODUCT_DETAIL_FIELD {
   JOBS_EXTRA = 'JOBS_EXTRA'
 };
 
-export enum COMPUTER_PRODUCT_DETAILS {
+export enum TECH_PRODUCT_DETAILS {
   RAM = 'RAM',
   CPU = 'CPU',
   ROM = 'ROM',

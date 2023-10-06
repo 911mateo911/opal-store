@@ -4,11 +4,11 @@ import { useProductDetails } from 'opal/app/postim/publiko/_hooks/useProductDeta
 import { InputTitle } from 'opal/app/postim/publiko/_components/InputTitle';
 import { TextInput } from 'opal/app/_shared/atoms/TextInput';
 import {
-  COMPUTER_PRODUCT_DETAILS,
+  TECH_PRODUCT_DETAILS,
   PRODUCT_DETAIL_FIELD
 } from 'opal/app/_shared/productTypes';
 import { PRODUCT_SUBCATEGORIES } from '@prisma/client';
-import { LaptopSpecifix } from './LaptopSpecific';
+import { LaptopSpecifix } from './Specifics/LaptopSpecific';
 
 interface ComputersDetailsProps extends ProductFormComponentBaseProps {
   formSubcategory: PRODUCT_SUBCATEGORIES;
@@ -21,7 +21,7 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
     setDetails
   } = useProductDetails(form);
 
-  const handleSetExtraDetails = (content: string | boolean, field: COMPUTER_PRODUCT_DETAILS) => {
+  const handleSetExtraDetails = (content: string | boolean, field: TECH_PRODUCT_DETAILS) => {
     setDetails(content, PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA, field);
   };
 
@@ -33,7 +33,7 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
             Procesori
           </InputTitle>
           <TextInput
-            name={COMPUTER_PRODUCT_DETAILS.CPU}
+            name={TECH_PRODUCT_DETAILS.CPU}
             onChange={handleSetExtraDetails}
             control={control}
             placeholder='AMD, Intel ...'
@@ -45,7 +45,7 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
           </InputTitle>
           {/* TODO: add GB in the end */}
           <TextInput
-            name={COMPUTER_PRODUCT_DETAILS.RAM}
+            name={TECH_PRODUCT_DETAILS.RAM}
             onChange={handleSetExtraDetails}
             control={control}
             placeholder='2, 4 ...'
@@ -58,7 +58,7 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
             Karta Grafike
           </InputTitle>
           <TextInput
-            name={COMPUTER_PRODUCT_DETAILS.GPU}
+            name={TECH_PRODUCT_DETAILS.GPU}
             onChange={handleSetExtraDetails}
             control={control}
             placeholder='Nvidia, E integruar ...'
@@ -70,7 +70,7 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
           </InputTitle>
           {/* TODO: add GB in the end */}
           <TextInput
-            name={COMPUTER_PRODUCT_DETAILS.ROM}
+            name={TECH_PRODUCT_DETAILS.ROM}
             onChange={handleSetExtraDetails}
             control={control}
             placeholder='256, 512 ...'
