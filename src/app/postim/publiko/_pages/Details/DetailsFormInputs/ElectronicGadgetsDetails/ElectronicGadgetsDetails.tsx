@@ -2,13 +2,13 @@ import React from 'react';
 import {
   PRODUCT_CONDITION_SELECT_OPTIONS,
   ProductFormComponentBaseProps
-} from '../../../_config';
-import { useProductDetails } from '../../../_hooks/useProductDetails';
-import { InputTitle } from '../../../_components/InputTitle';
+} from '../../../../_config';
+import { useProductDetails } from '../../../../_hooks/useProductDetails';
+import { InputTitle } from '../../../../_components/InputTitle';
 import { TextInput } from 'opal/app/_shared/atoms/TextInput';
 import { PRODUCT_DETAIL_FIELD } from 'opal/app/_shared/productTypes';
 import { Select } from 'opal/app/_shared/atoms/Select';
-import { NewProductFormFields } from '../../../_formSchema';
+import { NewProductFormFields } from '../../../../_formSchema';
 import { PRODUCT_SUBCATEGORIES } from '@prisma/client';
 import { renderElectronicExtraFormComponents } from './config';
 

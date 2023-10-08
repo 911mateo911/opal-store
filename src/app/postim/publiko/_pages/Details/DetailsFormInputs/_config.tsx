@@ -1,9 +1,9 @@
 import { PRODUCT_CATEGORIES, PRODUCT_SUBCATEGORIES } from "@prisma/client";
 import { CarDetails } from "./CarDetails/CarDetails";
 import { UseFormReturn } from "react-hook-form";
-import { NewProductSchemaType } from "../../_formSchema";
+import { NewProductSchemaType } from "../../../_formSchema";
 import { ApartmentDetails } from "./ApartmentDetails/ApartmentDetails";
-import { PRODUCT_SUBCATEGORIES_MAP } from "../../_config";
+import { PRODUCT_SUBCATEGORIES_MAP } from "../../../_config";
 import { ElectronicGadgetsDetails } from "./ElectronicGadgetsDetails/ElectronicGadgetsDetails";
 
 const ELECTRONIC_SUBCATEGORIES_WITH_DETAILS_FORM = Object.values(PRODUCT_SUBCATEGORIES_MAP[PRODUCT_CATEGORIES.ELECTRONICS])

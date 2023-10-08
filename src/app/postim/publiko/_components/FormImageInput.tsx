@@ -4,6 +4,8 @@ import { ImageWithPreview } from 'opal/app/_shared/types';
 import React, { ChangeEvent } from 'react';
 import { ALLOWED_IMAGE_TYPES } from '../_config';
 import { useToast } from 'opal/app/_shared/molecules/Toast/useToast';
+import { nanoid } from 'nanoid'
+import { GLOBAL_CONFIG } from 'opal/app/_config';
 
 interface FormImageInputProps {
   id: string;
@@ -25,12 +27,16 @@ export const FormImageInput = ({ id, onChange }: FormImageInputProps) => {
       const currentFile = files[index];
 
       if (ALLOWED_IMAGE_TYPES.includes(currentFile.type)) {
-        withPreviewFiles.push(Object.assign(
-          currentFile,
-          {
-            preview: URL.createObjectURL(files[index])
-          }
-        ));
+        const fileExtension = currentFile.name.match(GLOBAL_CONFIG.fileExtensionRegex);
+        if (fileExtension) {
+          const [extension] = fileExtension;
+          withPreviewFiles.push(Object.assign(
+            new File([currentFile], `${nanoid()}${extension}`, { type: currentFile.type }),
+            {
+              preview: URL.createObjectURL(files[index])
+            }
+          ));
+        }
       }
     };
 

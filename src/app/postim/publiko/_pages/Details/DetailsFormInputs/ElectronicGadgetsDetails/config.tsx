@@ -1,6 +1,6 @@
 import { PRODUCT_SUBCATEGORIES } from "@prisma/client";
 import { UseFormReturn } from "react-hook-form";
-import { NewProductSchemaType } from "../../../_formSchema";
+import { NewProductSchemaType } from "../../../../_formSchema";
 import { ComputersDetails } from "./ElectronicExtras/ComputersDetails";
 import { SmartPhonesNConsoleDetails } from "./ElectronicExtras/SmartPhonesNConsoleDetails";
 import { SelectValues } from "opal/app/_shared/atoms/Select";

@@ -73,11 +73,9 @@ export const newProductSchema = z.object({
   [NewProductFormFields.description]: z.string()
     .min(1, { message: 'Pershkrimi nuk mund te jete bosh.' })
     .max(PRODUCT_FORM_CONFIG.descMaxLength, { message: `Pershkrimi duhet te jete max ${PRODUCT_FORM_CONFIG.descMaxLength} karaktere.` }),
-  [NewProductFormFields.images]: z.array(z.object({
-    preview: z.string(),
-    size: z.number(),
-    name: z.string()
-  })),
+  [NewProductFormFields.images]: z.array(z.intersection(z.object({
+    preview: z.string()
+  }), z.instanceof(File))),
   [NewProductFormFields.location]: z.string()
     .min(1, { message: 'Vendndodhja nuk mund te jete bosh.' }),
   [NewProductFormFields.price]: z.string(),

@@ -1,7 +1,7 @@
 import React from 'react';
-import { ProductFormComponentBaseProps } from '../../../_config';
-import { useProductDetails } from '../../../_hooks/useProductDetails';
-import { InputTitle } from '../../../_components/InputTitle';
+import { ProductFormComponentBaseProps } from '../../../../_config';
+import { useProductDetails } from '../../../../_hooks/useProductDetails';
+import { InputTitle } from '../../../../_components/InputTitle';
 import { PRODUCT_DETAIL_FIELD } from 'opal/app/_shared/productTypes';
 import { Select } from 'opal/app/_shared/atoms/Select';
 import {
