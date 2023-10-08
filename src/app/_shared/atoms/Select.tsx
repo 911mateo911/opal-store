@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import DownArrow from 'opal/app/_shared/icons/downArrow.svg'
@@ -53,18 +53,32 @@ export function Select<N extends string, T extends string>({
     value: initialValue
   });
 
+  const resetInitialValueToFirst = useCallback(() => {
+    const currentValues = getOptionsFromProps(values);
+
+    if (currentValues.length) {
+      setModalState(currState => ({
+        ...currState,
+        value: currentValues[0].value
+      }));
+    };
+  }, [values]);
+
   useEffect(() => {
     if (!initialValue) {
-      const currentValues = getOptionsFromProps(values);
-
-      if (currentValues.length) {
-        setModalState(currState => ({
-          ...currState,
-          value: currentValues[0].value
-        }))
-      }
-    }
-  }, [initialValue, values]);
+      resetInitialValueToFirst();
+    } else {
+      if (values instanceof Map) {
+        if (!values.get(initialValue)) {
+          resetInitialValueToFirst();
+        };
+      } else {
+        if (!values[initialValue]) {
+          resetInitialValueToFirst();
+        };
+      };
+    };
+  }, [initialValue, resetInitialValueToFirst, values]);
 
   const openModal = () => setModalState(currState => ({ ...currState, isOpen: true }));
   const closeModal = (value?: T) => setModalState(currState => {

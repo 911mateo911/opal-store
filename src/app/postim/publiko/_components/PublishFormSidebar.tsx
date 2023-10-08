@@ -9,7 +9,7 @@ import { InputTitle } from './InputTitle';
 import { ProductFormComponentBaseProps } from '../_config';
 
 export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
-  const { setValue, control, trigger } = form;
+  const { setValue, control, trigger, getValues } = form;
 
   const onStringInputChange = (value: string, field: NewProductFormFields) => {
     setValue(field, value);
@@ -50,6 +50,7 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
             placeholder='John Doe'
             control={control}
             onBlur={onInputBlur}
+            defaultValue={getValues(NewProductFormFields.fullName)}
           />
         </div>
         <div className='w-full' >
@@ -62,6 +63,7 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
             placeholder='johndoe@apple.com'
             control={control}
             onBlur={onInputBlur}
+            defaultValue={getValues(NewProductFormFields.email)}
           />
         </div>
         <div className='w-full' >
@@ -74,6 +76,7 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
             placeholder='+355-123456789'
             control={control}
             onBlur={onInputBlur}
+            defaultValue={getValues(NewProductFormFields.telephone)}
           />
         </div>
         <div className='w-full' >
@@ -86,6 +89,7 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
             placeholder='+355-123456789'
             control={control}
             onBlur={onInputBlur}
+            defaultValue={getValues(NewProductFormFields.whatsapp)}
           />
         </div>
       </div>

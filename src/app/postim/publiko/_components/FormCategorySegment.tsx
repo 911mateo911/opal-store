@@ -25,7 +25,7 @@ export const FormCategorySegment = ({
     defaultValue: BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS.APARTMENT.value
   });
 
-  const productSubcategories = PRODUCT_SUBCATEGORIES_MAP[selectedCategory] as SelectValues<PRODUCT_CATEGORIES>;
+  const productSubcategories = PRODUCT_SUBCATEGORIES_MAP[selectedCategory] as SelectValues<PRODUCT_SUBCATEGORIES>;
 
   useEffect(() => {
     const currentSubCategoryFields = PRODUCT_SUBCATEGORIES_MAP[selectedCategory];
@@ -44,7 +44,7 @@ export const FormCategorySegment = ({
 
     onInputChange(value, name);
     onInputChange(Boolean(subCategory?.hasNextStep), NewProductFormFields.hasNextStep);
-  }
+  };
 
   return (
     <div className="pt-1.5 grid grid-cols-2 mt-3 gap-[10px]" >
@@ -67,6 +67,7 @@ export const FormCategorySegment = ({
           name={NewProductFormFields.subCategory}
           values={productSubcategories}
           onSelect={handleSubCategoryChange}
+          initialValue={getValues(NewProductFormFields.subCategory)}
         />
       </div>
     </div>

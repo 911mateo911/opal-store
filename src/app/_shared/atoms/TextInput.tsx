@@ -76,6 +76,7 @@ export function TextInput<T extends string, F extends FieldValues>({
           )}
           placeholder={placeholder}
           onBlur={() => onBlur?.(name)}
+          defaultValue={getDefaultValue(defaultValue, name)}
         />
       );
     } else {
@@ -102,6 +103,7 @@ export function TextInput<T extends string, F extends FieldValues>({
               font_RedHatDisplay.className,
               'min-w-[48px] rounded-r-md bg-white border border-l-0 text-xs border-solid border-grey-10',
               'flex items-center justify-center font-bold text-grey-60',
+              'dark:bg-grey-90 dark:border-grey-80 dark:text-grey-40'
             )} >
               {adornment}
             </div>

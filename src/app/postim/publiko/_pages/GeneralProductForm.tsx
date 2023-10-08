@@ -78,6 +78,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
               name={NewProductFormFields.state}
               values={PRODUCT_STATE_SELECT_OPTIONS}
               onSelect={onSimpleInputChange}
+              initialValue={getValues(NewProductFormFields.state)}
             />
           </div>
         </div>
@@ -91,6 +92,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
             placeholder="Shitet ..."
             onBlur={onInputBlur}
             control={control}
+            defaultValue={getValues(NewProductFormFields.title)}
           />
         </div>
       </div>
@@ -103,6 +105,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
         control={control}
         onInputBlur={onInputBlur}
         onSimpleInputChange={onSimpleInputChange}
+        getValues={getValues}
       />
       <div className="pt-5" >
         <InputTitle>
@@ -114,6 +117,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
           placeholder="Shteti, Qyteti, Rruga"
           onBlur={onInputBlur}
           control={control}
+          defaultValue={getValues(NewProductFormFields.location)}
         />
       </div>
       <div className="pt-3" >
@@ -168,6 +172,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
           placeholder="Nje permbledhje e vogel mbi produktin"
           onBlur={onInputBlur}
           control={control}
+          defaultValue={getValues(NewProductFormFields.description)}
         />
       </div>
       <div className="pt-4" >
@@ -183,6 +188,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
               name={NewProductFormFields.preferredCommunication}
               values={PREFERRED_COMMUNICATION_SELECT_OPTIONS}
               onSelect={onSimpleInputChange}
+              initialValue={getValues(NewProductFormFields.preferredCommunication)}
             />
           </div>
           <div className="flex items-center pt-[22px]" >
@@ -190,6 +196,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
               name={NewProductFormFields.deliveryAtYourPlace}
               onChange={onSimpleInputChange}
               placeholder="Mund te takohem ne vend te caktuar"
+              defaultChecked={getValues(NewProductFormFields.deliveryAtYourPlace)}
             />
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NewProductFormFields, NewProductSchemaType } from '../_formSchema';
-import { Control } from 'react-hook-form';
+import { Control, UseFormGetValues } from 'react-hook-form';
 import { InputTitle } from './InputTitle';
 import { TextInput } from 'opal/app/_shared/atoms/TextInput';
 import { Checkbox } from 'opal/app/_shared/atoms/Checkbox';
@@ -12,13 +12,15 @@ interface FormPriceSegmentProps {
   onSimpleInputChange: (value: string | boolean, field: NewProductFormFields) => void;
   onInputBlur: (field: NewProductFormFields) => Promise<boolean>;
   control: Control<NewProductSchemaType>;
+  getValues: UseFormGetValues<NewProductSchemaType>
 };
 
 export const FormPriceSegment = ({
   disabled,
   onSimpleInputChange,
   onInputBlur,
-  control
+  control,
+  getValues
 }: FormPriceSegmentProps) => {
   return (
     <div className="pt-[22px] grid grid-cols-3 gap-[10px]" >
@@ -32,6 +34,7 @@ export const FormPriceSegment = ({
           placeholder="Cmimi"
           onBlur={onInputBlur}
           control={control}
+          defaultValue={getValues(NewProductFormFields.price)}
         />
       </div>
       <div>
@@ -41,7 +44,7 @@ export const FormPriceSegment = ({
         <Select
           name={NewProductFormFields.currency}
           values={PRODUCT_CURRENCY_SELECT_OPTIONS}
-          initialValue='USD'
+          initialValue={getValues(NewProductFormFields.currency)}
           onSelect={onSimpleInputChange}
         />
       </div>
@@ -50,6 +53,7 @@ export const FormPriceSegment = ({
           name={NewProductFormFields.debatablePrice}
           onChange={onSimpleInputChange}
           placeholder="Cmim i diskutueshem"
+          defaultChecked={getValues(NewProductFormFields.debatablePrice)}
         />
       </div>
     </div>

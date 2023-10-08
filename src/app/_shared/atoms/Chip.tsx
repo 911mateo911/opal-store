@@ -15,9 +15,9 @@ export const Chip = ({ text, onClick, selected, className }: ChipProps) => {
       onClick={onClick}
       className={clsx(
         font_Inter.className,
-        'py-[6px] px-[10px] bg-green-5 text-green-100 text-xs rounded-full font-medium transition',
+        'py-[6px] px-[10px] bg-green-5 text-green-100 text-xs rounded-full font-medium transition cursor-pointer',
         className,
-        'dark:bg-green-80 dark:text-green-30'
+        'dark:bg-green-30 dark:text-green-100'
       )}
     >
       {text}
