@@ -17,7 +17,6 @@ import { FormImagePreview } from "../_components/FormImagePreview";
 import CameraIcon from 'opal/app/_shared/icons/camera.svg';
 import Image from 'next/image';
 import { FormImageInput } from "../_components/FormImageInput";
-import { ImageWithPreview } from "opal/app/_shared/types";
 import { InputTitle } from "../_components/InputTitle";
 import { Checkbox } from "opal/app/_shared/atoms/Checkbox";
 import { ActionButton } from "opal/app/_shared/atoms/ActionButton";
@@ -39,17 +38,30 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
 
   const onInputBlur = (field: NewProductFormFields) => trigger(field);
 
-  const onDeleteImage = (imagePreview: string) => {
-    const providedImages = getValues(NewProductFormFields.images);
+  const onDeleteImage = (imageName: string) => {
+    const images = getValues(NewProductFormFields.images);
+    const providedImagesArray = Object.values(images);
+    const foundImage = images[imageName];
 
-    const newImages = providedImages.filter(({ preview }) => preview !== imagePreview);
+    if (foundImage) {
+      const newImages = providedImagesArray.filter(({ name }) => name !== foundImage.name);
 
-    URL.revokeObjectURL(imagePreview);
+      if (foundImage.preview) {
+        URL.revokeObjectURL(foundImage.preview);
+      }
 
-    setValue(NewProductFormFields.images, newImages);
+      const newImagesMap = newImages.reduce<NewProductSchemaType['images']>((map, currentImage) => {
+        return {
+          ...map,
+          [currentImage.name]: currentImage
+        }
+      }, {});
+
+      setValue(NewProductFormFields.images, newImagesMap);
+    }
   };
 
-  const onSetImages = (images: ImageWithPreview[]) => {
+  const onSetImages = (images: NewProductSchemaType['images']) => {
     setValue(NewProductFormFields.images, images);
   };
 

@@ -12,7 +12,7 @@ import DeleteIcon from 'opal/app/_shared/icons/delete.svg';
 
 interface FormImagePreviewProps {
   formControl: Control<NewProductSchemaType>
-  onDelete: (imagePreviewId: string) => void;
+  onDelete: (imageName: string) => void;
 };
 
 const sliderOptions: KeenSliderOptions = {
@@ -20,7 +20,9 @@ const sliderOptions: KeenSliderOptions = {
 };
 
 export const FormImagePreview = ({ formControl, onDelete }: FormImagePreviewProps) => {
-  const images = useWatch({ control: formControl, name: NewProductFormFields.images, defaultValue: [] });
+  const images = useWatch({ control: formControl, name: NewProductFormFields.images, defaultValue: {} });
+
+  const imagesArray = Object.values(images);
 
   const [sliderRef, instanceRef] = useKeenSlider(sliderOptions);
 
@@ -30,7 +32,7 @@ export const FormImagePreview = ({ formControl, onDelete }: FormImagePreviewProp
 
   const wrapperClassName = 'bg-grey-10 rounded-md dark:bg-grey-90 w-full h-64'
 
-  if (!images.length) {
+  if (!imagesArray.length) {
     return (
       <div className={clsx(wrapperClassName, 'flex items-center justify-center')} >
         <p className={clsx(
@@ -45,13 +47,13 @@ export const FormImagePreview = ({ formControl, onDelete }: FormImagePreviewProp
 
   return (
     <div ref={sliderRef} className={clsx("keen-slider", wrapperClassName)}>
-      {images.map(image => (
+      {imagesArray.map(image => (
         <div key={image.preview} className="keen-slider__slide relative cursor-grab">
           <div
             className={clsx(
               'absolute shadow right-2 top-2 z-10 cursor-pointer p-2 bg-grey-1 rounded-md dark:bg-grey-80'
             )}
-            onClick={() => onDelete(image.preview)}
+            onClick={() => onDelete(image.name)}
           >
             <Image
               src={DeleteIcon}
@@ -61,12 +63,14 @@ export const FormImagePreview = ({ formControl, onDelete }: FormImagePreviewProp
               className='dark:invert'
             />
           </div>
-          <Image
-            src={image.preview}
-            alt={image.preview}
-            className='object-contain h-full'
-            fill
-          />
+          {image.preview && (
+            <Image
+              src={image.preview}
+              alt={image.preview}
+              className='object-contain h-full'
+              fill
+            />
+          )}
         </div>
       ))}
     </div>

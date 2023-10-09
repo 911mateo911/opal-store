@@ -4,12 +4,12 @@ import { ImageWithPreview } from 'opal/app/_shared/types';
 import React, { ChangeEvent } from 'react';
 import { ALLOWED_IMAGE_TYPES } from '../_config';
 import { useToast } from 'opal/app/_shared/molecules/Toast/useToast';
-import { nanoid } from 'nanoid'
-import { GLOBAL_CONFIG } from 'opal/app/_config';
+
+type ImagesMap = Record<string, ImageWithPreview>;
 
 interface FormImageInputProps {
   id: string;
-  onChange: (images: ImageWithPreview[]) => void;
+  onChange: (images: ImagesMap) => void;
 }
 
 export const FormImageInput = ({ id, onChange }: FormImageInputProps) => {
@@ -20,27 +20,25 @@ export const FormImageInput = ({ id, onChange }: FormImageInputProps) => {
 
     if (!files || !files.length) return;
 
-    const withPreviewFiles: ImageWithPreview[] = [];
+    const withPreviewFiles: ImagesMap = {};
 
     for (let index = 0; index < Number(files?.length); index++) {
 
       const currentFile = files[index];
 
       if (ALLOWED_IMAGE_TYPES.includes(currentFile.type)) {
-        const fileExtension = currentFile.name.match(GLOBAL_CONFIG.fileExtensionRegex);
-        if (fileExtension) {
-          const [extension] = fileExtension;
-          withPreviewFiles.push(Object.assign(
-            new File([currentFile], `${nanoid()}${extension}`, { type: currentFile.type }),
-            {
-              preview: URL.createObjectURL(files[index])
-            }
-          ));
-        }
+        withPreviewFiles[currentFile.name] = Object.assign(
+          currentFile,
+          {
+            preview: URL.createObjectURL(files[index])
+          }
+        );
       }
     };
 
-    if (!withPreviewFiles.length) {
+    const nrOfModifiedFiles = Object.keys(withPreviewFiles).length;
+
+    if (!nrOfModifiedFiles) {
       handleAddToast({
         content: (
           <>
@@ -51,7 +49,7 @@ export const FormImageInput = ({ id, onChange }: FormImageInputProps) => {
       });
     };
 
-    if (withPreviewFiles.length < files.length) {
+    if (nrOfModifiedFiles < files.length) {
       handleAddToast({
         content: (
           <>

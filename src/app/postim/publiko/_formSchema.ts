@@ -73,9 +73,12 @@ export const newProductSchema = z.object({
   [NewProductFormFields.description]: z.string()
     .min(1, { message: 'Pershkrimi nuk mund te jete bosh.' })
     .max(PRODUCT_FORM_CONFIG.descMaxLength, { message: `Pershkrimi duhet te jete max ${PRODUCT_FORM_CONFIG.descMaxLength} karaktere.` }),
-  [NewProductFormFields.images]: z.array(z.intersection(z.object({
-    preview: z.string()
-  }), z.instanceof(File))),
+  [NewProductFormFields.images]: z.record(
+    z.string(),
+    z.intersection(z.object({
+      preview: z.string().optional()
+    }), z.instanceof(File))
+  ),
   [NewProductFormFields.location]: z.string()
     .min(1, { message: 'Vendndodhja nuk mund te jete bosh.' }),
   [NewProductFormFields.price]: z.string(),
@@ -130,7 +133,7 @@ export const newProductSchemaInitialValues: NewProductSchemaType = {
   description: '',
   email: '',
   fullName: '',
-  images: [],
+  images: {},
   keywords: [],
   location: '',
   preferredCommunication: PRODUCT_PREFERRED_COMMUNICATION.TEL,
