@@ -2,9 +2,11 @@ import React, { useCallback, useEffect } from 'react';
 import { ProductFormComponentBaseProps } from '../../_config';
 import { NewProductFormFields, NewProductSchemaType } from '../../_formSchema';
 import Compressor from 'compressorjs';
+import clsx from 'clsx';
+import { font_RedHatDisplay } from 'opal/app/_shared/fonts';
 
 export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
-  const { getValues, setValue, watch } = form;
+  const { getValues, setValue } = form;
 
   const replaceImage = useCallback((newImage: File, images: NewProductSchemaType['images']) => {
     setValue(NewProductFormFields.images, {
@@ -35,11 +37,17 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
     })
   }, [getValues, replaceImage]);
 
-  console.log(watch(NewProductFormFields.images));
+  const title = getValues(NewProductFormFields.title);
 
+  // TODO: find a way to render all the details from subcategories
   return (
     <div>
-
+      <h1 className={clsx(
+        font_RedHatDisplay.className,
+        'text-2xl font-semibold tracking-wide'
+      )} >
+        {title}
+      </h1>
     </div>
   )
 }

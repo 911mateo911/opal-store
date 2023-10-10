@@ -6,10 +6,26 @@ import { font_Inter, font_RedHatDisplay } from 'opal/app/_shared/fonts';
 import React from 'react';
 import { NewProductFormFields, NewProductSchemaType } from '../_formSchema';
 import { InputTitle } from './InputTitle';
-import { ProductFormComponentBaseProps } from '../_config';
+import { PRODUCT_FORM_STEPS, ProductFormComponentBaseProps } from '../_config';
+import { useWatch } from 'react-hook-form';
 
 export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
   const { setValue, control, trigger, getValues } = form;
+
+  const formStep = useWatch({
+    control: form.control,
+    name: NewProductFormFields.formStep,
+    defaultValue: PRODUCT_FORM_STEPS.GENERAL_FORM
+  });
+
+  return null
+
+  if (
+    formStep === PRODUCT_FORM_STEPS.VERIFY_AND_PUBLISH ||
+    formStep === PRODUCT_FORM_STEPS.SHARE
+  ) {
+    return null;
+  }
 
   const onStringInputChange = (value: string, field: NewProductFormFields) => {
     setValue(field, value);

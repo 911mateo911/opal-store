@@ -12,7 +12,7 @@ import DeleteIcon from 'opal/app/_shared/icons/delete.svg';
 
 interface FormImagePreviewProps {
   formControl: Control<NewProductSchemaType>
-  onDelete: (imageName: string) => void;
+  onDelete?: (imageName: string) => void;
 };
 
 const sliderOptions: KeenSliderOptions = {
@@ -53,7 +53,7 @@ export const FormImagePreview = ({ formControl, onDelete }: FormImagePreviewProp
             className={clsx(
               'absolute shadow right-2 top-2 z-10 cursor-pointer p-2 bg-grey-1 rounded-md dark:bg-grey-80'
             )}
-            onClick={() => onDelete(image.name)}
+            onClick={() => onDelete?.(image.name)}
           >
             <Image
               src={DeleteIcon}

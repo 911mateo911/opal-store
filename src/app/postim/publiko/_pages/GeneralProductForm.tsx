@@ -23,6 +23,7 @@ import { ActionButton } from "opal/app/_shared/atoms/ActionButton";
 import { FormCategorySegment } from "../_components/FormCategorySegment";
 import { FormPriceSegment } from "../_components/FormPriceSegment";
 
+// TODO: IMPORTANT, REVOKE ALL OBJECT URL AFTER LEAVING THE FORM PAGE
 export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
   const {
     setValue,

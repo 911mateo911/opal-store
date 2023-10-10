@@ -8,7 +8,7 @@ import {
   PRODUCT_SUBCATEGORIES
 } from "@prisma/client";
 import { z } from "zod";
-import { PRODUCT_FORM_CONFIG } from "./_config";
+import { PRODUCT_FORM_CONFIG, PRODUCT_FORM_STEPS } from "./_config";
 import { GLOBAL_CONFIG } from "opal/app/_config";
 import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
 
@@ -142,7 +142,7 @@ export const newProductSchemaInitialValues: NewProductSchemaType = {
   title: '',
   whatsapp: '',
   deliveryAtYourPlace: false,
-  formStep: 1,
+  formStep: PRODUCT_FORM_STEPS.GENERAL_FORM,
   hasNextStep: true,
   details: {},
   state: PRODUCT_STATE.TO_SELL
