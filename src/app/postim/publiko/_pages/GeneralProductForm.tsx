@@ -22,6 +22,7 @@ import { Checkbox } from "opal/app/_shared/atoms/Checkbox";
 import { ActionButton } from "opal/app/_shared/atoms/ActionButton";
 import { FormCategorySegment } from "../_components/FormCategorySegment";
 import { FormPriceSegment } from "../_components/FormPriceSegment";
+import { Accordion } from "opal/app/_shared/atoms/Accordion";
 
 // TODO: IMPORTANT, REVOKE ALL OBJECT URL AFTER LEAVING THE FORM PAGE
 export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
@@ -72,6 +73,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
     setValue(NewProductFormFields.formStep, PRODUCT_FORM_STEPS.DETAILS_FORM);
   });
 
+  // TODO: add hover states to inputs
   return (
     <div className="pt-[14px]">
       <h2 className={clsx(

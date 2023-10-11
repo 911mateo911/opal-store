@@ -7,6 +7,7 @@ import { font_Inter, font_RedHatDisplay } from 'opal/app/_shared/fonts';
 import { FormImagePreview } from '../../_components/FormImagePreview';
 import { Chip } from 'opal/app/_shared/atoms/Chip';
 import LocationIcon from 'opal/app/_shared/icons/location.svg';
+import { Accordion } from 'opal/app/_shared/atoms/Accordion';
 
 export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
   const { getValues, setValue } = form;
@@ -49,7 +50,6 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
   const location = getValues(NewProductFormFields.location);
 
   // TODO: find a way to render all the details from subcategories
-  // TODO: add a loader state for the images loading
   return (
     <div className="pt-2" >
       <div className="grid grid-cols-2" >
@@ -88,7 +88,13 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
             />
           </div>
           <div>
-
+            <Accordion
+              title="Kontaktet"
+            >
+              <div>
+                Cel: +355699675522
+              </div>
+            </Accordion>
           </div>
         </div>
       </div>
