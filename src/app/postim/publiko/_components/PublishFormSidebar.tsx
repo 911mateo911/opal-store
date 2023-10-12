@@ -18,6 +18,8 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
     defaultValue: PRODUCT_FORM_STEPS.GENERAL_FORM
   });
 
+  return null;
+
   if (
     formStep === PRODUCT_FORM_STEPS.VERIFY_AND_PUBLISH ||
     formStep === PRODUCT_FORM_STEPS.SHARE

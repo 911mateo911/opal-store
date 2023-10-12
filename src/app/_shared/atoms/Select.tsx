@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
-import DownArrow from 'opal/app/_shared/icons/downArrow.svg'
+import DownArrow from 'opal/app/_shared/icons/downArrow.svg?url'
 import { font_Inter, font_RedHatDisplay } from '../fonts';
 import { useClickOutside } from '../hooks/useClickOutside';
 

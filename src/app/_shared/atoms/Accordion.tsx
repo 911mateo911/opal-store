@@ -2,7 +2,7 @@ import React, { CSSProperties, ReactNode, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { font_RedHatDisplay } from '../fonts';
 import Image from 'next/image';
-import DownArrow from 'opal/app/_shared/icons/downArrow.svg';
+import DownArrow from 'opal/app/_shared/icons/downArrow.svg?url';
 
 interface AccordionProps {
   title: string;
@@ -53,7 +53,7 @@ export const Accordion = ({ title, children }: AccordionProps) => {
         ref={headerRef}
         className={clsx(
           font_RedHatDisplay.className,
-          'p-3 rounded-md cursor-pointer font-semibold tracking-wide flex justify-between items-center',
+          'p-3 rounded-md cursor-pointer bg-grey-10 font-semibold tracking-wide flex justify-between items-center',
           'dark:text-grey-10 dark:bg-grey-90'
         )}
         onClick={onToggleAccordion}

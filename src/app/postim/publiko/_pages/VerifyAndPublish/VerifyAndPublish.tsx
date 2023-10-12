@@ -1,13 +1,21 @@
-import React, { useCallback, useEffect, useLayoutEffect } from 'react';
-import { PRODUCT_CURRENCY_SELECT_OPTIONS, PRODUCT_STATE_SELECT_OPTIONS, ProductFormComponentBaseProps } from '../../_config';
-import { NewProductFormFields, NewProductSchemaType } from '../../_formSchema';
+import React from 'react';
+import {
+  PRODUCT_CURRENCY_SELECT_OPTIONS,
+  PRODUCT_STATE_SELECT_OPTIONS,
+  ProductFormComponentBaseProps
+} from '../../_config';
+import { NewProductFormFields } from '../../_formSchema';
 import Compressor from 'compressorjs';
 import clsx from 'clsx';
 import { font_Inter, font_RedHatDisplay } from 'opal/app/_shared/fonts';
 import { FormImagePreview } from '../../_components/FormImagePreview';
 import { Chip } from 'opal/app/_shared/atoms/Chip';
-import LocationIcon from 'opal/app/_shared/icons/location.svg';
+import LocationIcon from 'opal/app/_shared/icons/location.svg?url';
 import { Accordion } from 'opal/app/_shared/atoms/Accordion';
+import EmailIcon from 'opal/app/_shared/icons/email.svg?url';
+import PhoneIcon from 'opal/app/_shared/icons/phone.svg?url';
+import WhatsappIcon from 'opal/app/_shared/icons/whatsapp.svg?url';
+import { ProductAccordionItem } from 'opal/app/postim/_components/ProductAccordionItem';
 
 export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
   const { getValues, setValue } = form;
@@ -51,7 +59,13 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
 
   // TODO: find a way to render all the details from subcategories
   return (
-    <div className="pt-2" >
+    <div>
+      <h1 className={clsx(
+        font_RedHatDisplay.className,
+        'font-semibold text-xl pb-2.5 text-grey-90 border-b border-grey-10 mb-4'
+      )} >
+        Rishiko postimin
+      </h1>
       <div className="grid grid-cols-2" >
         <FormImagePreview
           formControl={form.control}
@@ -87,13 +101,26 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
               pointer={false}
             />
           </div>
-          <div>
+          <div className='mt-4' >
             <Accordion
               title="Kontaktet"
             >
-              <div>
-                Cel: +355699675522
-              </div>
+              <ProductAccordionItem
+                icon={EmailIcon}
+                title='Email'
+                content='malajmateo@gmail.com'
+              />
+              <ProductAccordionItem
+                icon={PhoneIcon}
+                title='Cel'
+                content='+355699675522'
+                favourite
+              />
+              <ProductAccordionItem
+                icon={WhatsappIcon}
+                title='Whatsapp:'
+                content='+355699675522'
+              />
             </Accordion>
           </div>
         </div>

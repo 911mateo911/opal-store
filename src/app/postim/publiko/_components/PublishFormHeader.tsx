@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Chip } from 'opal/app/_shared/atoms/Chip';
 import { FilledChipButton } from 'opal/app/_shared/atoms/FilledChipButton';
-import backIcon from 'opal/app/_shared/icons/backArrow.svg';
+import backIcon from 'opal/app/_shared/icons/backArrow.svg?url';
 import { NewProductFormFields } from '../_formSchema';
 import { useWatch } from 'react-hook-form';
 import { PRODUCT_FORM_STEPS, ProductFormComponentBaseProps } from '../_config';

@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import logoSvg from 'opal/app/_shared/icons/logo.svg';
+import logoSvg from 'opal/app/_shared/icons/logo.svg?url';
 
 export const Logo = () => {
   return (

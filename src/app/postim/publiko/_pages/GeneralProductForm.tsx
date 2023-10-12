@@ -14,7 +14,7 @@ import {
 import { FormSectionTitle } from "../_components/FormSectionTitle";
 import { NewProductFormFields, NewProductSchemaType } from "../_formSchema";
 import { FormImagePreview } from "../_components/FormImagePreview";
-import CameraIcon from 'opal/app/_shared/icons/camera.svg';
+import CameraIcon from 'opal/app/_shared/icons/camera.svg?url';
 import Image from 'next/image';
 import { FormImageInput } from "../_components/FormImageInput";
 import { InputTitle } from "../_components/InputTitle";
