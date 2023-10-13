@@ -5,6 +5,7 @@ import { useWatch } from 'react-hook-form';
 import { renderCurrentFormDetailsComponent } from './DetailsFormInputs/_config';
 import { FormDetailsMeta } from '../../_components/FormDetailsMeta';
 import { ActionButton } from 'opal/app/_shared/atoms/ActionButton';
+import { FormSectionTitle } from '../../_components/FormSectionTitle';
 
 export const DetailsProductForm = ({ form }: ProductFormComponentBaseProps) => {
   const { handleSubmit, setValue } = form;
@@ -21,7 +22,12 @@ export const DetailsProductForm = ({ form }: ProductFormComponentBaseProps) => {
 
   return (
     <div>
-      <FormDetailsMeta form={form} />
+      <div className='flex mb-[22px] mt-5 items-center gap-2 pb-2' >
+        <FormSectionTitle className='!mb-0' >
+          Detaje
+        </FormSectionTitle>
+        <FormDetailsMeta form={form} />
+      </div>
       {renderCurrentFormDetailsComponent(formSubCategory, form)}
       <div className="pb-[10px] pt-6" >
         <ActionButton

@@ -13,13 +13,14 @@ import DeleteIcon from 'opal/app/_shared/icons/delete.svg?url';
 interface FormImagePreviewProps {
   formControl: Control<NewProductSchemaType>
   onDelete?: (imageName: string) => void;
+  editable?: boolean;
 };
 
 const sliderOptions: KeenSliderOptions = {
   vertical: true
 };
 
-export const FormImagePreview = ({ formControl, onDelete }: FormImagePreviewProps) => {
+export const FormImagePreview = ({ formControl, onDelete, editable = true }: FormImagePreviewProps) => {
   const images = useWatch({ control: formControl, name: NewProductFormFields.images, defaultValue: {} });
 
   const imagesArray = Object.values(images);
@@ -49,20 +50,22 @@ export const FormImagePreview = ({ formControl, onDelete }: FormImagePreviewProp
     <div ref={sliderRef} className={clsx("keen-slider", wrapperClassName)}>
       {imagesArray.map(image => (
         <div key={image.preview} className="keen-slider__slide relative cursor-grab">
-          <div
-            className={clsx(
-              'absolute shadow right-2 top-2 z-10 cursor-pointer p-2 bg-grey-1 rounded-md dark:bg-grey-80'
-            )}
-            onClick={() => onDelete?.(image.name)}
-          >
-            <Image
-              src={DeleteIcon}
-              width={24}
-              height={24}
-              alt='delete_image'
-              className='dark:invert'
-            />
-          </div>
+          {editable && (
+            <div
+              className={clsx(
+                'absolute shadow right-2 top-2 z-10 cursor-pointer p-2 bg-grey-1 rounded-md dark:bg-grey-80'
+              )}
+              onClick={() => onDelete?.(image.name)}
+            >
+              <Image
+                src={DeleteIcon}
+                width={24}
+                height={24}
+                alt='delete_image'
+                className='dark:invert'
+              />
+            </div>
+          )}
           {image.preview && (
             <Image
               src={image.preview}

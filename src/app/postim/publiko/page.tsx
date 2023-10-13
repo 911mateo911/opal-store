@@ -19,10 +19,6 @@ export default function PublishPage() {
     defaultValue: PRODUCT_FORM_STEPS.GENERAL_FORM
   });
 
-  return (
-    <VerifyAndPublish form={form} />
-  )
-
   if (formStep === PRODUCT_FORM_STEPS.GENERAL_FORM) {
     return <GeneralProductForm form={form} />
   };

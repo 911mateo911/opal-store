@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { font_Inter } from '../fonts';
 import Image from 'next/image';
 
@@ -10,9 +10,10 @@ interface ChipProps {
   className?: string;
   icon?: string;
   pointer?: boolean
+  children?: ReactNode;
 }
 
-export const Chip = ({ text, onClick, selected, className, icon, pointer = true }: ChipProps) => {
+export const Chip = ({ text, onClick, selected, className, icon, pointer = true, children }: ChipProps) => {
   return (
     <div
       onClick={onClick}
@@ -34,6 +35,7 @@ export const Chip = ({ text, onClick, selected, className, icon, pointer = true 
         />
       )}
       {text}
+      {children}
     </div>
   )
 }

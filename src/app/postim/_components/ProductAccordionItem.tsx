@@ -4,6 +4,7 @@ import Image from 'next/image';
 import CopyIcon from 'opal/app/_shared/icons/copy.svg?url';
 import clsx from 'clsx';
 import StarIconSvg from 'opal/app/_shared/icons/star.svg';
+import { useToast } from 'opal/app/_shared/molecules/Toast/useToast';
 
 interface ProductAccordionItemProps {
   icon: string;
@@ -19,10 +20,15 @@ export const ProductAccordionItem = ({
   favourite
 }: ProductAccordionItemProps) => {
   const contentRef = useRef<HTMLElement>(null);
+  const { handleAddToast } = useToast();
 
   const onCopy = async () => {
     try {
       await navigator.clipboard.writeText(content);
+      handleAddToast({
+        content: 'U kopjua me sukses',
+        type: 'success'
+      })
     } catch {
       // TODO: implement a logger (pls not sentry);
       console.log('didnt copy')
