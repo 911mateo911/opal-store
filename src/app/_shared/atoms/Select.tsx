@@ -6,6 +6,7 @@ import Image from 'next/image';
 import DownArrow from 'opal/app/_shared/icons/downArrow.svg?url'
 import { font_Inter, font_RedHatDisplay } from '../fonts';
 import { useClickOutside } from '../hooks/useClickOutside';
+import { getInputDefaultValue } from '../helpers';
 
 export interface SelectOption<V extends string> {
   element: React.ReactNode;
@@ -20,7 +21,7 @@ export type MapSelectValues<T extends string> = Map<T, SelectOption<T>>;
 interface SelectProps<N extends string, T extends string> {
   name: N;
   values: SelectValues<T> | MapSelectValues<T>;
-  initialValue?: T;
+  initialValue?: string | Record<T, string | boolean>;
   onSelect?: (optionValue: string, name: N) => void;
 };
 
@@ -48,9 +49,11 @@ export function Select<N extends string, T extends string>({
   onSelect,
   name
 }: SelectProps<N, T>) {
+  const propsInitialVal = getInputDefaultValue<T, N>(initialValue, name) as T | undefined;
+
   const [modalState, setModalState] = useState<SelectModalState<T>>({
     isOpen: false,
-    value: initialValue
+    value: propsInitialVal
   });
 
   const resetInitialValueToFirst = useCallback(() => {
@@ -65,20 +68,20 @@ export function Select<N extends string, T extends string>({
   }, [values]);
 
   useEffect(() => {
-    if (!initialValue) {
+    if (!propsInitialVal) {
       resetInitialValueToFirst();
     } else {
       if (values instanceof Map) {
-        if (!values.get(initialValue)) {
+        if (!values.get(propsInitialVal)) {
           resetInitialValueToFirst();
         };
       } else {
-        if (!values[initialValue]) {
+        if (!values[propsInitialVal]) {
           resetInitialValueToFirst();
         };
       };
     };
-  }, [initialValue, resetInitialValueToFirst, values]);
+  }, [propsInitialVal, resetInitialValueToFirst, values]);
 
   const openModal = () => setModalState(currState => ({ ...currState, isOpen: true }));
   const closeModal = (value?: T) => setModalState(currState => {

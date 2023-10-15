@@ -5,14 +5,14 @@ import { PRODUCT_DETAIL_FIELD, TECH_PRODUCT_DETAILS } from 'opal/app/_shared/pro
 import { ProductFormComponentBaseProps } from 'opal/app/postim/publiko/_config';
 import { useProductDetails } from 'opal/app/postim/publiko/_hooks/useProductDetails';
 import { Select } from 'opal/app/_shared/atoms/Select';
-import { TV_DETAILS_SCREEN_RES_TYPE_SELECT_OPTIONS } from '../../config';
+import { TV_DETAILS_SCREEN_RES_TYPE_SELECT_OPTIONS, tvDetailsSchema } from '../../config';
 
 export const TvSpecific = ({ form }: ProductFormComponentBaseProps) => {
   const { control } = form;
 
   const {
     setDetails
-  } = useProductDetails(form);
+  } = useProductDetails(form, tvDetailsSchema);
 
   const handleSetExtraDetails = (content: string, field: TECH_PRODUCT_DETAILS) => {
     setDetails(content, PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA, field);

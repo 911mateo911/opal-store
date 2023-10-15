@@ -358,6 +358,9 @@ interface PRODUCT_FORM_CONFIG_TYPE {
   apartmentSqAreaMax: number;
   carMakeMaxLength: number;
   carModelMaxLength: number;
+  electronicsMakeMaxLength: number;
+  electronicsScreenSizeInchMax: number,
+  electronicsScreenSizeInchMin: number
 };
 
 export const PRODUCT_FORM_CONFIG: PRODUCT_FORM_CONFIG_TYPE = {
@@ -365,5 +368,8 @@ export const PRODUCT_FORM_CONFIG: PRODUCT_FORM_CONFIG_TYPE = {
   descMaxLength: 8000,
   apartmentSqAreaMax: 999999,
   carMakeMaxLength: 15,
-  carModelMaxLength: 20
+  carModelMaxLength: 20,
+  electronicsMakeMaxLength: 30,
+  electronicsScreenSizeInchMax: 120,
+  electronicsScreenSizeInchMin: 5
 };

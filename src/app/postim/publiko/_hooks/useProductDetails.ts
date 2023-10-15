@@ -5,11 +5,13 @@ import {
   newProductSchemaInitialValues
 } from "../_formSchema";
 import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
+import { ZodObject, ZodRawShape } from "zod";
 
 export type SET_PRODUCT_DETAILS_FUNC = (content: string | boolean, type: PRODUCT_DETAIL_FIELD, extraDetailField?: string) => void;
 
-export const useProductDetails = (
-  form: UseFormReturn<NewProductSchemaType>
+export const useProductDetails = <T extends ZodRawShape>(
+  form: UseFormReturn<NewProductSchemaType>,
+  schema: ZodObject<T>
 ) => {
   const { control, setValue, getValues } = form;
 

@@ -9,6 +9,7 @@ import {
 } from 'opal/app/_shared/productTypes';
 import { PRODUCT_SUBCATEGORIES } from '@prisma/client';
 import { LaptopSpecifix } from './Specifics/LaptopSpecific';
+import { computersDetailsSchema } from '../config';
 
 interface ComputersDetailsProps extends ProductFormComponentBaseProps {
   formSubcategory: PRODUCT_SUBCATEGORIES;
@@ -19,7 +20,7 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
 
   const {
     setDetails
-  } = useProductDetails(form);
+  } = useProductDetails(form, computersDetailsSchema);
 
   const handleSetExtraDetails = (content: string | boolean, field: TECH_PRODUCT_DETAILS) => {
     setDetails(content, PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA, field);
@@ -79,8 +80,7 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
       </div>
       {formSubcategory === PRODUCT_SUBCATEGORIES.ELECTRONICS__LAPTOPS && (
         <LaptopSpecifix
-          control={control}
-          setDetails={handleSetExtraDetails}
+          form={form}
         />
       )}
     </>

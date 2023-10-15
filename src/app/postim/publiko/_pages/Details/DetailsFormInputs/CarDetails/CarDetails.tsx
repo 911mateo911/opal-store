@@ -10,6 +10,7 @@ import {
   CAR_DETAILS_PLATE_TYPE_SELECT_OPTIONS,
   CAR_DETAILS_TRANSMISSION_SELECT_OPTIONS,
   CAR_DETAILS_YEAR_SELECT_OPTIONS,
+  carDetailsSchema,
   currentYear
 } from './config';
 
@@ -19,7 +20,7 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
   const {
     setDetails,
     details
-  } = useProductDetails(form);
+  } = useProductDetails(form, carDetailsSchema);
 
   // TODO: add default values
   return (

@@ -5,6 +5,9 @@ import { ComputersDetails } from "./ElectronicExtras/ComputersDetails";
 import { SmartPhonesNConsoleDetails } from "./ElectronicExtras/SmartPhonesNConsoleDetails";
 import { SelectValues } from "opal/app/_shared/atoms/Select";
 import { TvSpecific } from "./ElectronicExtras/Specifics/TvSpecific";
+import { z } from "zod";
+import { PRODUCT_DETAIL_FIELD, TECH_PRODUCT_DETAILS } from "opal/app/_shared/productTypes";
+import { PRODUCT_FORM_CONFIG } from "opal/app/postim/publiko/_config";
 
 const COMPUTERS_SUBCATEGORIES: PRODUCT_SUBCATEGORIES[] = [
   PRODUCT_SUBCATEGORIES.ELECTRONICS__PC,
@@ -81,4 +84,58 @@ export const TV_DETAILS_SCREEN_RES_TYPE_SELECT_OPTIONS: SelectValues<TV_DETAILS_
     element: 'UHD (8k)',
     value: TV_DETAILS_SCREEN_RES_TYPE.UHD_8K
   },
-}
+};
+
+// TODO: also validate the product condition
+export const electronicGadgetsDetailsBaseSchema = z.object({
+  [PRODUCT_DETAIL_FIELD.ELECTRONICS_MAKE]: z.object({
+    [PRODUCT_DETAIL_FIELD.ELECTRONICS_MAKE]: z.string()
+      .min(1, {
+        message: 'Marka nuk mund te jete bosh.'
+      })
+      .max(PRODUCT_FORM_CONFIG.electronicsMakeMaxLength, {
+        message: `Marka duhet te jete max ${PRODUCT_FORM_CONFIG.electronicsMakeMaxLength} karaktere.`
+      })
+  })
+});
+
+const electronicGadgetsExtraDetailsBaseSchema = z.object({
+  [TECH_PRODUCT_DETAILS.CPU]: z.string().optional(),
+  [TECH_PRODUCT_DETAILS.RAM]: z.string().optional(),
+  [TECH_PRODUCT_DETAILS.GPU]: z.string().optional(),
+  [TECH_PRODUCT_DETAILS.ROM]: z.string().optional()
+});
+
+const screenSizeSchema = z.string()
+  .min(PRODUCT_FORM_CONFIG.electronicsScreenSizeInchMin, {
+    message: `Madhesia e ekranit nuk mund te jete me pak se ${PRODUCT_FORM_CONFIG.electronicsScreenSizeInchMin} inch(")`
+  })
+  .max(PRODUCT_FORM_CONFIG.electronicsScreenSizeInchMax, {
+    message: `Madhesia e ekranit nuk mund te jete me shume se ${PRODUCT_FORM_CONFIG.electronicsScreenSizeInchMax} inch(")`
+  });
+
+// TODO: Add modal to explain why this is needed to better indexed
+export const computersDetailsSchema = electronicGadgetsDetailsBaseSchema.extend({
+  [PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]: electronicGadgetsExtraDetailsBaseSchema
+});
+
+export const laptopDetailsSchema = electronicGadgetsDetailsBaseSchema.extend({
+  [PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]: electronicGadgetsExtraDetailsBaseSchema.extend({
+    [TECH_PRODUCT_DETAILS.SCREEN_SIZE]: screenSizeSchema,
+    [TECH_PRODUCT_DETAILS.WITH_CHARGER]: z.boolean()
+  })
+});
+
+export const tvDetailsSchema = electronicGadgetsDetailsBaseSchema.extend({
+  [PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]: electronicGadgetsExtraDetailsBaseSchema.extend({
+    [TECH_PRODUCT_DETAILS.SCREEN_RES]: z.nativeEnum(TV_DETAILS_SCREEN_RES_TYPE),
+    [TECH_PRODUCT_DETAILS.SCREEN_SIZE]: screenSizeSchema
+  })
+});
+
+export const smarphonesNConsoleDetailsSchema = electronicGadgetsDetailsBaseSchema.extend({
+  [PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]: z.object({
+    [TECH_PRODUCT_DETAILS.ROM]: z.string().optional(),
+    [TECH_PRODUCT_DETAILS.WITH_CHARGER]: z.boolean()
+  })
+});

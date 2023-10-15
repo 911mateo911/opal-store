@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import React, { useMemo } from 'react';
 import { font_RedHatDisplay } from '../fonts';
 import { Control, FieldError, FieldValues, useFormState } from 'react-hook-form';
+import { getInputDefaultValue } from '../helpers';
 
 interface TextInputProps<T extends string, F extends FieldValues> {
   value?: string;
@@ -20,21 +21,6 @@ interface TextInputProps<T extends string, F extends FieldValues> {
   control?: Control<F>;
   adornment?: React.ReactNode;
 };
-
-function getDefaultValue<T extends string, F extends FieldValues>(
-  defaultValue: TextInputProps<T, F>['defaultValue'],
-  name: T
-): string | undefined {
-  if (!defaultValue) {
-    return;
-  }
-
-  if (typeof defaultValue === 'string') {
-    return defaultValue;
-  };
-
-  return defaultValue[name].toString();
-}
 
 export function TextInput<T extends string, F extends FieldValues>({
   name,
@@ -76,7 +62,7 @@ export function TextInput<T extends string, F extends FieldValues>({
           )}
           placeholder={placeholder}
           onBlur={() => onBlur?.(name)}
-          defaultValue={getDefaultValue(defaultValue, name)}
+          defaultValue={getInputDefaultValue(defaultValue, name)}
         />
       );
     } else {
@@ -96,7 +82,7 @@ export function TextInput<T extends string, F extends FieldValues>({
             )}
             onChange={({ target }) => onChange(target.value, name)}
             onBlur={() => onBlur?.(name)}
-            defaultValue={getDefaultValue(defaultValue, name)}
+            defaultValue={getInputDefaultValue(defaultValue, name)}
           />
           {adornment && (
             <div className={clsx(

@@ -6,7 +6,8 @@ import { PRODUCT_DETAIL_FIELD } from 'opal/app/_shared/productTypes';
 import { Select } from 'opal/app/_shared/atoms/Select';
 import {
   APARTMENT_FLOOR_TYPE_SELECT_OPTIONS,
-  APARTMENT_ROOMS_TYPE_SELECT_OPTIONS
+  APARTMENT_ROOMS_TYPE_SELECT_OPTIONS,
+  apartmentDetailsSchema
 } from './config';
 import { TextInput } from 'opal/app/_shared/atoms/TextInput';
 import { Checkbox } from 'opal/app/_shared/atoms/Checkbox';
@@ -20,7 +21,7 @@ export const ApartmentDetails = ({
   const {
     setDetails,
     details
-  } = useProductDetails(form);
+  } = useProductDetails(form, apartmentDetailsSchema);
 
   return (
     <div>
@@ -33,6 +34,7 @@ export const ApartmentDetails = ({
             name={PRODUCT_DETAIL_FIELD.APARTMENT_FLOORS}
             values={APARTMENT_FLOOR_TYPE_SELECT_OPTIONS}
             onSelect={setDetails}
+            initialValue={details?.[PRODUCT_DETAIL_FIELD.APARTMENT_FLOORS]}
           />
         </div>
         <div>
@@ -58,6 +60,7 @@ export const ApartmentDetails = ({
             name={PRODUCT_DETAIL_FIELD.APARTMENT_ROOMS}
             values={APARTMENT_ROOMS_TYPE_SELECT_OPTIONS}
             onSelect={setDetails}
+            initialValue={details?.[PRODUCT_DETAIL_FIELD.APARTMENT_ROOMS]}
           />
         </div>
         <div className="flex items-center justify-center pt-[22px]" >
@@ -65,6 +68,7 @@ export const ApartmentDetails = ({
             name={PRODUCT_DETAIL_FIELD.APARTMENT_FURNITURE}
             onChange={setDetails}
             placeholder="E mobiluar"
+            defaultChecked={details?.[PRODUCT_DETAIL_FIELD.APARTMENT_FURNITURE]}
           />
         </div>
       </div>

@@ -3,21 +3,23 @@ import CheckIcon from 'opal/app/_shared/icons/check.svg?url';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { font_RedHatDisplay } from '../fonts';
+import { getBooleanInputDefaultValue } from '../helpers';
 
 interface CheckboxProps<F extends string> {
   name: F;
-  defaultChecked?: boolean;
+  defaultChecked?: boolean | Record<F, string | boolean>;
   onChange: (isChecked: boolean, field: F) => void;
   placeholder?: string;
 }
 
 export function Checkbox<T extends string>({
   name,
-  defaultChecked = false,
+  defaultChecked,
   onChange,
   placeholder
 }: CheckboxProps<T>) {
-  const [isChecked, setChecked] = useState<boolean>(defaultChecked);
+  const initial = getBooleanInputDefaultValue(defaultChecked, name);
+  const [isChecked, setChecked] = useState<boolean>(initial);
 
   const handleChange = () => {
     const newValue = !isChecked;
