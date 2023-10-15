@@ -111,7 +111,6 @@ export const newProductSchema = z.object({
   [NewProductFormFields.formStep]: z.number(),
   [NewProductFormFields.hasNextStep]: z.boolean(),
   [NewProductFormFields.details]: z.record(
-    // TODO: type this
     z.nativeEnum(PRODUCT_DETAIL_FIELD),
     z.record(
       z.string(),

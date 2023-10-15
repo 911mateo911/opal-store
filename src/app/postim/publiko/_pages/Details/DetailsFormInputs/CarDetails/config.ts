@@ -1,4 +1,8 @@
 import { MapSelectValues, SelectOption, SelectValues } from "opal/app/_shared/atoms/Select";
+import { getFirstAndLastKeyInMap } from "opal/app/_shared/helpers";
+import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
+import { PRODUCT_FORM_CONFIG } from "opal/app/postim/publiko/_config";
+import { z } from "zod";
 
 export const currentYear = new Date().getFullYear();
 const minYear = currentYear - 100;
@@ -86,4 +90,45 @@ export const CAR_DETAILS_PLATE_TYPE_SELECT_OPTIONS: SelectValues<CAR_DETAILS_PLA
     element: 'Te huaja',
     value: CAR_DETAILS_PLATE_TYPE.OUTSIDE
   },
-}
+};
+
+const carYearLimits = getFirstAndLastKeyInMap(CAR_DETAILS_YEAR_SELECT_OPTIONS);
+
+export const carDetailsSchema = z.object({
+  [PRODUCT_DETAIL_FIELD.CAR_MAKE]: z.object({
+    [PRODUCT_DETAIL_FIELD.CAR_MAKE]: z.string()
+      .min(1, {
+        message: 'Marka nuk mund te jete bosh.'
+      })
+      .max(PRODUCT_FORM_CONFIG.carMakeMaxLength, {
+        message: `Marka duhet te jete max ${PRODUCT_FORM_CONFIG.carMakeMaxLength} karaktere.`
+      })
+  }),
+  [PRODUCT_DETAIL_FIELD.CAR_MODEL]: z.object({
+    [PRODUCT_DETAIL_FIELD.CAR_MODEL]: z.string()
+      .min(1, {
+        message: 'Modeli nuk mund te jete bosh.'
+      })
+      .max(PRODUCT_FORM_CONFIG.carModelMaxLength, {
+        message: `Marka duhet te jete max ${PRODUCT_FORM_CONFIG.carModelMaxLength} karaktere.`
+      })
+  }),
+  [PRODUCT_DETAIL_FIELD.CAR_YEAR]: z.object({
+    [PRODUCT_DETAIL_FIELD.CAR_YEAR]: z.string()
+      .min(Number(carYearLimits.firstKey), {
+        message: `Automjeti nuk mund te jete me i vjeter se viti ${carYearLimits.firstKey}`
+      })
+      .max(Number(carYearLimits.lastKey), {
+        message: `Automjeti nuk mund te jete me i ri se viti ${carYearLimits.lastKey}`
+      })
+  }),
+  [PRODUCT_DETAIL_FIELD.CAR_TRANSMISSION]: z.object({
+    [PRODUCT_DETAIL_FIELD.CAR_YEAR]: z.nativeEnum(CAR_DETAILS_TRANSMISSION_TYPE)
+  }),
+  [PRODUCT_DETAIL_FIELD.CAR_FUEL]: z.object({
+    [PRODUCT_DETAIL_FIELD.CAR_FUEL]: z.nativeEnum(CAR_DETAILS_FUEL_TYPE)
+  }),
+  [PRODUCT_DETAIL_FIELD.CAR_PLATE]: z.object({
+    [PRODUCT_DETAIL_FIELD.CAR_PLATE]: z.nativeEnum(CAR_DETAILS_PLATE_TYPE)
+  }),
+})

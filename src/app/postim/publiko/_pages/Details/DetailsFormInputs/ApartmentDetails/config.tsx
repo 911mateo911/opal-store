@@ -1,6 +1,9 @@
 import { SelectValues } from "opal/app/_shared/atoms/Select";
+import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
+import { PRODUCT_FORM_CONFIG } from "opal/app/postim/publiko/_config";
+import { z } from "zod";
 
-enum APARTMENT_FLOOR_TYPE {
+export enum APARTMENT_FLOOR_TYPE {
   FLOORS_1 = 'FLOORS_1',
   FLOORS_2 = 'FLOORS_2',
   FLOORS_3 = 'FLOORS_3',
@@ -31,7 +34,7 @@ export const APARTMENT_FLOOR_TYPE_SELECT_OPTIONS: SelectValues<APARTMENT_FLOOR_T
   }
 };
 
-enum APARTMENT_ROOMS_TYPE {
+export enum APARTMENT_ROOMS_TYPE {
   ROOMS_1 = 'ROOMS_1',
   ROOMS_2 = 'ROOMS_2',
   ROOMS_3 = 'ROOMS_3',
@@ -81,3 +84,24 @@ export const APARTMENT_ROOMS_TYPE_SELECT_OPTIONS: SelectValues<APARTMENT_ROOMS_T
     value: APARTMENT_ROOMS_TYPE.ROOMS_MORE_THAN_8
   },
 };
+
+export const apartmentDetailsSchema = z.object({
+  [PRODUCT_DETAIL_FIELD.APARTMENT_FLOORS]: z.object({
+    [PRODUCT_DETAIL_FIELD.APARTMENT_FLOORS]: z.nativeEnum(APARTMENT_FLOOR_TYPE)
+  }),
+  [PRODUCT_DETAIL_FIELD.APARTMENT_ROOMS]: z.object({
+    [PRODUCT_DETAIL_FIELD.APARTMENT_ROOMS]: z.nativeEnum(APARTMENT_ROOMS_TYPE)
+  }),
+  [PRODUCT_DETAIL_FIELD.APARTMENT_FURNITURE]: z.object({
+    [PRODUCT_DETAIL_FIELD.APARTMENT_FURNITURE]: z.boolean()
+  }),
+  [PRODUCT_DETAIL_FIELD.APARTMENT_SQAREA]: z.object({
+    [PRODUCT_DETAIL_FIELD.APARTMENT_SQAREA]: z.number()
+      .min(0, {
+        message: 'Siperfaqja nuk mund te jete 0.'
+      })
+      .max(PRODUCT_FORM_CONFIG.apartmentSqAreaMax, {
+        message: `Siperfaqja nuk mund te jete > ${PRODUCT_FORM_CONFIG.apartmentSqAreaMax}m2.`
+      })
+  })
+});

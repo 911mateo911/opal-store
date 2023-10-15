@@ -21,9 +21,7 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
     details
   } = useProductDetails(form);
 
-  // TODO: Validate form
-  console.log(form.watch());
-
+  // TODO: add default values
   return (
     <div>
       <div className='grid grid-cols-2 gap-[10px]' >

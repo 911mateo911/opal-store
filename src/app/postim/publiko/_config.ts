@@ -355,9 +355,15 @@ export const PRODUCT_FORM_IMAGE_PICKER_ID = 'image_picker';
 interface PRODUCT_FORM_CONFIG_TYPE {
   titleMaxLength: number;
   descMaxLength: number;
+  apartmentSqAreaMax: number;
+  carMakeMaxLength: number;
+  carModelMaxLength: number;
 };
 
 export const PRODUCT_FORM_CONFIG: PRODUCT_FORM_CONFIG_TYPE = {
   titleMaxLength: 3000,
-  descMaxLength: 8000
+  descMaxLength: 8000,
+  apartmentSqAreaMax: 999999,
+  carMakeMaxLength: 15,
+  carModelMaxLength: 20
 };
