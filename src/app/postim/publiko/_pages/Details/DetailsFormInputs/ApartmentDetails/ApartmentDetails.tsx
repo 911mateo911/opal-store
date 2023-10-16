@@ -11,6 +11,7 @@ import {
 } from './config';
 import { TextInput } from 'opal/app/_shared/atoms/TextInput';
 import { Checkbox } from 'opal/app/_shared/atoms/Checkbox';
+import { buildDetailInputErrorPath } from 'opal/app/postim/publiko/_helpers/buildDetailInputErrorPath';
 
 export const ApartmentDetails = ({
   form
@@ -20,7 +21,8 @@ export const ApartmentDetails = ({
 
   const {
     setDetails,
-    details
+    details,
+    onInputBlur
   } = useProductDetails(form, apartmentDetailsSchema);
 
   return (
@@ -48,6 +50,8 @@ export const ApartmentDetails = ({
             defaultValue={details[PRODUCT_DETAIL_FIELD.APARTMENT_SQAREA]}
             placeholder='100 m2...'
             adornment='(m2)'
+            onBlur={onInputBlur}
+            errorPath={buildDetailInputErrorPath(PRODUCT_DETAIL_FIELD.APARTMENT_SQAREA)}
           />
         </div>
       </div>

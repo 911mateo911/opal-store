@@ -5,7 +5,8 @@ import {
   newProductSchemaInitialValues
 } from "../_formSchema";
 import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
-import { ZodObject, ZodRawShape } from "zod";
+import { ZodError, ZodObject, ZodRawShape, z } from "zod";
+import { buildDetailInputErrorPath } from "../_helpers/buildDetailInputErrorPath";
 
 export type SET_PRODUCT_DETAILS_FUNC = (content: string | boolean, type: PRODUCT_DETAIL_FIELD, extraDetailField?: string) => void;
 
@@ -13,7 +14,7 @@ export const useProductDetails = <T extends ZodRawShape>(
   form: UseFormReturn<NewProductSchemaType>,
   schema: ZodObject<T>
 ) => {
-  const { control, setValue, getValues } = form;
+  const { control, setValue, getValues, setError } = form;
 
   const onSimpleInputChange = (value: string | boolean, field: NewProductFormFields) => {
     setValue(field, value);
@@ -54,9 +55,26 @@ export const useProductDetails = <T extends ZodRawShape>(
     });
   };
 
+  const onInputBlur = async (name: keyof T) => {
+    schema.parseAsync(getValues(NewProductFormFields.details))
+      .catch((errors: ZodError) => {
+        const { fieldErrors } = errors.flatten();
+        const currentError = fieldErrors?.[name];
+
+        if (currentError) {
+          const errorMsg = currentError?.[0];
+          if (errorMsg) {
+            const basePath = buildDetailInputErrorPath(name.toString()) as NewProductFormFields
+            setError(basePath, { message: errorMsg });
+          }
+        }
+      })
+  };
+
   return {
     details: productDetails,
     setDetails,
-    onSimpleInputChange
+    onSimpleInputChange,
+    onInputBlur
   }
 }

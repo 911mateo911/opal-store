@@ -3,8 +3,9 @@
 import clsx from 'clsx';
 import React, { useMemo } from 'react';
 import { font_RedHatDisplay } from '../fonts';
-import { Control, FieldError, FieldValues, useFormState } from 'react-hook-form';
+import { Control, FieldValues, useFormState } from 'react-hook-form';
 import { getInputDefaultValue } from '../helpers';
+import get from 'lodash.get';
 
 interface TextInputProps<T extends string, F extends FieldValues> {
   value?: string;
@@ -16,10 +17,10 @@ interface TextInputProps<T extends string, F extends FieldValues> {
   placeholder?: string;
   textarea?: boolean;
   onBlur?: (name: T) => void;
-  formError?: FieldError;
   defaultValue?: string | Record<T, string | boolean>;
   control?: Control<F>;
   adornment?: React.ReactNode;
+  errorPath?: string;
 };
 
 export function TextInput<T extends string, F extends FieldValues>({
@@ -34,11 +35,12 @@ export function TextInput<T extends string, F extends FieldValues>({
   onBlur,
   control,
   defaultValue,
-  adornment
+  adornment,
+  errorPath
 }: TextInputProps<T, F>) {
   const { errors } = useFormState({ control });
 
-  const inputError = errors[name];
+  const inputError = get(errors, errorPath || name);
 
   // TODO: refactor this piece of dogshit
   const renderedInput = useMemo(() => {
