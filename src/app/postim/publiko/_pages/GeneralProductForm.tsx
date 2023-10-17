@@ -34,7 +34,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
     trigger
   } = form;
 
-  const onSimpleInputChange = (value: string | boolean, field: NewProductFormFields) => {
+  const onSimpleInputChange = (value: string | boolean | number, field: NewProductFormFields) => {
     setValue(field, value);
   };
 

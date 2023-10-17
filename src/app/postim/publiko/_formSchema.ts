@@ -114,7 +114,10 @@ export const newProductSchema = z.object({
     z.nativeEnum(PRODUCT_DETAIL_FIELD),
     z.record(
       z.string(),
-      z.string().min(1, { message: 'Fusha eshte e detyrueshme.' }).or(z.boolean())
+      z.string()
+        .min(1, { message: 'Fusha eshte e detyrueshme.' })
+        .or(z.boolean())
+        .or(z.number())
     )
   ),
   [NewProductFormFields.state]: z.nativeEnum(PRODUCT_STATE),

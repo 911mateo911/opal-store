@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { font_RedHatDisplay } from '../fonts';
 import { Control, FieldValues, useFormState } from 'react-hook-form';
 import { getInputDefaultValue } from '../helpers';
@@ -9,7 +9,7 @@ import get from 'lodash.get';
 
 interface TextInputProps<T extends string, F extends FieldValues> {
   value?: string;
-  onChange: (value: string, name: T) => void;
+  onChange: (value: string | number, name: T) => void;
   name: T;
   id?: string;
   type?: 'text' | 'number';
@@ -17,11 +17,13 @@ interface TextInputProps<T extends string, F extends FieldValues> {
   placeholder?: string;
   textarea?: boolean;
   onBlur?: (name: T) => void;
-  defaultValue?: string | Record<T, string | boolean>;
+  defaultValue?: string | Record<T, string | boolean | number>;
   control?: Control<F>;
   adornment?: React.ReactNode;
   errorPath?: string;
 };
+
+const numberInputInvalidCharsRegex = /^[^eE+-]*$/;
 
 export function TextInput<T extends string, F extends FieldValues>({
   name,
@@ -41,6 +43,34 @@ export function TextInput<T extends string, F extends FieldValues>({
   const { errors } = useFormState({ control });
 
   const inputError = get(errors, errorPath || name);
+
+  const onInputKeyDown = useCallback<React.KeyboardEventHandler<HTMLInputElement>>((event) => {
+    if (type === 'text') {
+      return;
+    };
+
+    const { currentTarget } = event;
+
+    // TODO: check this
+    if (!numberInputInvalidCharsRegex.test(currentTarget.value)) {
+      event.preventDefault();
+    }
+  }, [type]);
+
+  const handleChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>((event) => {
+    const { target } = event;
+    let value: string | number = target.value;
+
+    if (type === 'number') {
+      value = Number(target.value);
+
+      if (!target.value) {
+        value = '';
+      };
+    }
+
+    onChange(value, name);
+  }, [name, onChange, type]);
 
   // TODO: refactor this piece of dogshit
   const renderedInput = useMemo(() => {
@@ -82,9 +112,10 @@ export function TextInput<T extends string, F extends FieldValues>({
               adornment && 'rounded-r-none',
               sharedClasses,
             )}
-            onChange={({ target }) => onChange(target.value, name)}
+            onChange={handleChange}
             onBlur={() => onBlur?.(name)}
             defaultValue={getInputDefaultValue(defaultValue, name)}
+            onKeyDown={onInputKeyDown}
           />
           {adornment && (
             <div className={clsx(
@@ -100,18 +131,20 @@ export function TextInput<T extends string, F extends FieldValues>({
       )
     }
   }, [
-    className,
-    defaultValue,
-    id,
-    name,
-    onBlur,
-    onChange,
-    placeholder,
-    textarea,
-    type,
-    value,
     inputError,
-    adornment
+    textarea,
+    name,
+    placeholder,
+    defaultValue,
+    onChange,
+    onBlur,
+    value,
+    id,
+    type,
+    className,
+    adornment,
+    handleChange,
+    onInputKeyDown
   ]);
 
   return (

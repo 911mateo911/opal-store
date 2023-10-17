@@ -7,7 +7,7 @@ import { getBooleanInputDefaultValue } from '../helpers';
 
 interface CheckboxProps<F extends string> {
   name: F;
-  defaultChecked?: boolean | Record<F, string | boolean>;
+  defaultChecked?: boolean | Record<F, string | boolean | number>;
   onChange: (isChecked: boolean, field: F) => void;
   placeholder?: string;
 }

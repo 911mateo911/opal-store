@@ -52,6 +52,7 @@ export const ApartmentDetails = ({
             adornment='(m2)'
             onBlur={onInputBlur}
             errorPath={buildDetailInputErrorPath(PRODUCT_DETAIL_FIELD.APARTMENT_SQAREA)}
+            type='number'
           />
         </div>
       </div>

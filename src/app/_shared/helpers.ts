@@ -7,7 +7,7 @@ export function getFirstAndLastKeyInMap<K, T>(map: Map<K, T>) {
 };
 
 export function getInputDefaultValue<T extends string, N extends string>(
-  defaultValue: string | Record<T, string | boolean> | undefined,
+  defaultValue: string | Record<T, string | boolean | number> | undefined,
   name: N
 ): string | undefined {
   if (!defaultValue) {
@@ -22,7 +22,7 @@ export function getInputDefaultValue<T extends string, N extends string>(
 };
 
 export function getBooleanInputDefaultValue<T extends string>(
-  defaultValue: boolean | Record<T, string | boolean> | undefined,
+  defaultValue: boolean | Record<T, string | boolean | number> | undefined,
   name: T
 ): boolean {
   if (!defaultValue) {

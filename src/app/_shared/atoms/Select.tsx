@@ -21,7 +21,7 @@ export type MapSelectValues<T extends string> = Map<T, SelectOption<T>>;
 interface SelectProps<N extends string, T extends string> {
   name: N;
   values: SelectValues<T> | MapSelectValues<T>;
-  initialValue?: string | Record<T, string | boolean>;
+  initialValue?: string | Record<T, string | boolean | number>;
   onSelect?: (optionValue: string, name: N) => void;
 };
 
