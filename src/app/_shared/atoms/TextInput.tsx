@@ -23,7 +23,7 @@ interface TextInputProps<T extends string, F extends FieldValues> {
   errorPath?: string;
 };
 
-const numberInputInvalidCharsRegex = /^[^eE+-]*$/;
+const numberInputAndDotsRegex = /^\d+(\.\d+)*$/;
 
 export function TextInput<T extends string, F extends FieldValues>({
   name,
@@ -44,29 +44,28 @@ export function TextInput<T extends string, F extends FieldValues>({
 
   const inputError = get(errors, errorPath || name);
 
-  const onInputKeyDown = useCallback<React.KeyboardEventHandler<HTMLInputElement>>((event) => {
-    if (type === 'text') {
-      return;
-    };
-
-    const { currentTarget } = event;
-
-    // TODO: check this
-    if (!numberInputInvalidCharsRegex.test(currentTarget.value)) {
-      event.preventDefault();
-    }
-  }, [type]);
-
   const handleChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>((event) => {
     const { target } = event;
-    let value: string | number = target.value;
+    let value: string | number = target.value.toString();
 
     if (type === 'number') {
-      value = Number(target.value);
+      if (!numberInputAndDotsRegex.test(value)) {
+        const lastCharIsDot = value.at(value.length - 1) === '.';
 
-      if (!target.value) {
-        value = '';
+        if (!lastCharIsDot) {
+          value = value.slice(0, value.length - 1);
+          target.value = value;
+        }
+      }
+
+      const firstCharIsMinus = value.at(0) === '-';
+
+      if (firstCharIsMinus) {
+        value = value.slice(1);
+        target.value = value;
       };
+
+      value = Number(value);
     }
 
     onChange(value, name);
@@ -105,7 +104,6 @@ export function TextInput<T extends string, F extends FieldValues>({
             name={name}
             id={id}
             placeholder={placeholder}
-            type={type}
             className={clsx(
               'h-12 border border-solid border-grey-10 rounded-md px-4 w-full',
               className,
@@ -115,7 +113,6 @@ export function TextInput<T extends string, F extends FieldValues>({
             onChange={handleChange}
             onBlur={() => onBlur?.(name)}
             defaultValue={getInputDefaultValue(defaultValue, name)}
-            onKeyDown={onInputKeyDown}
           />
           {adornment && (
             <div className={clsx(
@@ -143,8 +140,7 @@ export function TextInput<T extends string, F extends FieldValues>({
     type,
     className,
     adornment,
-    handleChange,
-    onInputKeyDown
+    handleChange
   ]);
 
   return (

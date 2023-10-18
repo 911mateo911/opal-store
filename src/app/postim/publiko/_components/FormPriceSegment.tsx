@@ -9,7 +9,7 @@ import { Select } from 'opal/app/_shared/atoms/Select';
 
 interface FormPriceSegmentProps {
   disabled?: boolean;
-  onSimpleInputChange: (value: string | boolean, field: NewProductFormFields) => void;
+  onSimpleInputChange: (value: string | boolean | number, field: NewProductFormFields) => void;
   onInputBlur: (field: NewProductFormFields) => Promise<boolean>;
   control: Control<NewProductSchemaType>;
   getValues: UseFormGetValues<NewProductSchemaType>
@@ -34,6 +34,7 @@ export const FormPriceSegment = ({
           placeholder="Cmimi"
           onBlur={onInputBlur}
           control={control}
+          type='number'
           defaultValue={getValues(NewProductFormFields.price)}
         />
       </div>
