@@ -17,7 +17,7 @@ interface TextInputProps<T extends string, F extends FieldValues> {
   placeholder?: string;
   textarea?: boolean;
   onBlur?: (name: T) => void;
-  defaultValue?: string | Record<T, string | boolean | number>;
+  defaultValue?: string | number | Record<T, string | boolean | number>;
   control?: Control<F>;
   adornment?: React.ReactNode;
   errorPath?: string;
@@ -65,7 +65,11 @@ export function TextInput<T extends string, F extends FieldValues>({
         target.value = value;
       };
 
-      value = Number(value);
+      if (!target.value.length) {
+        value = ''
+      } else {
+        value = Number(value);
+      }
     }
 
     onChange(value, name);
@@ -137,7 +141,6 @@ export function TextInput<T extends string, F extends FieldValues>({
     onBlur,
     value,
     id,
-    type,
     className,
     adornment,
     handleChange

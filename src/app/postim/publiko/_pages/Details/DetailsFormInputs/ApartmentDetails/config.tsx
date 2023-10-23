@@ -103,5 +103,28 @@ export const apartmentDetailsSchema = z.object({
       .max(PRODUCT_FORM_CONFIG.apartmentSqAreaMax, {
         message: `Siperfaqja nuk mund te jete > ${PRODUCT_FORM_CONFIG.apartmentSqAreaMax}m2.`
       })
+      .or(z.string())
+      .refine(price => {
+        if (typeof price === 'string' && !price.length) {
+          return false;
+        };
+
+        return true;
+      }, { message: 'Siperfaqja nuk mund te jete bosh' }),
   })
 });
+
+export const apartmentDetailsSchemaInitialValue: z.infer<typeof apartmentDetailsSchema> = {
+  APARTMENT_FLOORS: {
+    APARTMENT_FLOORS: APARTMENT_FLOOR_TYPE.FLOORS_1
+  },
+  APARTMENT_FURNITURE: {
+    APARTMENT_FURNITURE: false
+  },
+  APARTMENT_ROOMS: {
+    APARTMENT_ROOMS: APARTMENT_ROOMS_TYPE.ROOMS_1
+  },
+  APARTMENT_SQAREA: {
+    APARTMENT_SQAREA: ''
+  }
+};

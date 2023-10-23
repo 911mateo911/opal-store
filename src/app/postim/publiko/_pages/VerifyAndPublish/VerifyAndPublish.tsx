@@ -68,7 +68,8 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
     <div>
       <h1 className={clsx(
         font_RedHatDisplay.className,
-        'font-semibold text-xl pb-2.5 text-grey-90 border-b border-grey-10 mb-4'
+        'font-semibold text-xl pb-2.5 text-grey-90 border-b border-grey-10 mb-4',
+        'dark:text-grey-5 dark:border-grey-90'
       )} >
         Rishiko postimin
       </h1>
@@ -144,7 +145,8 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
           </div>
           <h6 className={clsx(
             font_RedHatDisplay.className,
-            'mt-3 text-base font-semibold border-b border-grey-10'
+            'mt-3 text-base font-semibold border-b border-grey-10',
+            'dark:text-grey-10 dark:border-grey-90'
           )} >
             Pershkrimi
           </h6>

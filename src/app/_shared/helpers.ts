@@ -7,15 +7,15 @@ export function getFirstAndLastKeyInMap<K, T>(map: Map<K, T>) {
 };
 
 export function getInputDefaultValue<T extends string, N extends string>(
-  defaultValue: string | Record<T, string | boolean | number> | undefined,
+  defaultValue: string | number | Record<T, string | boolean | number> | undefined,
   name: N
 ): string | undefined {
   if (!defaultValue) {
     return;
   }
 
-  if (typeof defaultValue === 'string') {
-    return defaultValue;
+  if (typeof defaultValue === 'string' || typeof defaultValue === 'number') {
+    return defaultValue.toString();
   };
 
   return defaultValue[name].toString();

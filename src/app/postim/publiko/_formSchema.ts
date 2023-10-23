@@ -81,7 +81,20 @@ export const newProductSchema = z.object({
   ),
   [NewProductFormFields.location]: z.string()
     .min(1, { message: 'Vendndodhja nuk mund te jete bosh.' }),
-  [NewProductFormFields.price]: z.string(),
+  [NewProductFormFields.price]: z.number()
+    .min(0, { message: 'Cmimi nuk mund te jete me i vogel se 0' })
+    .max(PRODUCT_FORM_CONFIG.priceMax, {
+      // TODO: format price
+      message: `Cmimi nuk mund te jete me i madh se ${PRODUCT_FORM_CONFIG.priceMax}`
+    })
+    .or(z.string())
+    .refine(price => {
+      if (typeof price === 'string' && !price.length) {
+        return false;
+      };
+
+      return true;
+    }, { message: 'Cmimi nuk mund te jete bosh' }),
   [NewProductFormFields.advertIndex]: z.nativeEnum(PRODUCT_ADVERT_INDEX),
   [NewProductFormFields.category]: z.nativeEnum(PRODUCT_CATEGORIES),
   [NewProductFormFields.subCategory]: z.nativeEnum(PRODUCT_SUBCATEGORIES),

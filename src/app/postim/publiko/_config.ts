@@ -360,7 +360,8 @@ interface PRODUCT_FORM_CONFIG_TYPE {
   carModelMaxLength: number;
   electronicsMakeMaxLength: number;
   electronicsScreenSizeInchMax: number,
-  electronicsScreenSizeInchMin: number
+  electronicsScreenSizeInchMin: number,
+  priceMax: number;
 };
 
 export const PRODUCT_FORM_CONFIG: PRODUCT_FORM_CONFIG_TYPE = {
@@ -371,5 +372,6 @@ export const PRODUCT_FORM_CONFIG: PRODUCT_FORM_CONFIG_TYPE = {
   carModelMaxLength: 20,
   electronicsMakeMaxLength: 30,
   electronicsScreenSizeInchMax: 120,
-  electronicsScreenSizeInchMin: 5
+  electronicsScreenSizeInchMin: 5,
+  priceMax: 1_000_000_000
 };

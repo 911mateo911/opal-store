@@ -38,7 +38,8 @@ export const ProductAccordionItem = ({
   return (
     <div className={clsx(
       font_RedHatDisplay.className,
-      'bg-grey-5 rounded-md p-3 mt-1 text-grey-90 font-normal flex items-center justify-between'
+      'bg-grey-5 rounded-md p-3 mt-1 text-grey-90 font-normal flex items-center justify-between',
+      'dark:bg-grey-90'
     )} >
       <span className='flex items-center' >
         <Image
@@ -46,8 +47,12 @@ export const ProductAccordionItem = ({
           width={24}
           height={24}
           alt='accordion_icon'
+          className='dark:invert'
         />
-        <p className='pl-3' >
+        <p className={clsx(
+          font_RedHatDisplay.className,
+          'pl-3 dark:text-grey-20'
+        )} >
           {title}
           <b ref={contentRef} className='font-semibold ml-3' >
             {content}
@@ -58,17 +63,18 @@ export const ProductAccordionItem = ({
         {favourite && (
           <div
             className={clsx(
-              'flex mr-2 items-center justify-center py-1 px-2 rounded-md bg-green-10'
+              'flex mr-2 items-center justify-center py-1 px-2 rounded-md bg-green-10',
+              'dark:bg-green-30'
             )}
           >
             <StarIconSvg
-              className='fill-green-60 mr-1'
+              className='fill-green-60 mr-1 dark:fill-green-70'
               height={18}
               width={18}
             />
             <p className={clsx(
               font_RedHatDisplay.className,
-              'font-semibold text-sm text-green-90'
+              'font-semibold text-sm text-green-90 dark:text-green-100'
             )} >
               E preferuar
             </p>
@@ -79,7 +85,7 @@ export const ProductAccordionItem = ({
           width={22}
           height={22}
           alt='copy_icon'
-          className='cursor-pointer'
+          className='cursor-pointer dark:invert'
           onClick={onCopy}
         />
       </div>

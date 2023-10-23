@@ -25,7 +25,7 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
     return null;
   }
 
-  const onStringInputChange = (value: string, field: NewProductFormFields) => {
+  const onStringInputChange = (value: string | number, field: NewProductFormFields) => {
     setValue(field, value);
   };
 
