@@ -2,14 +2,14 @@ import clsx from 'clsx';
 import { Chip } from 'opal/app/_shared/atoms/Chip';
 import { FilledChipButton } from 'opal/app/_shared/atoms/FilledChipButton';
 import backIcon from 'opal/app/_shared/icons/backArrow.svg?url';
-import { NewProductFormFields } from '../_formSchema';
+import { NewProductFormFields, PRODUCT_FORM_STEPS } from '../_formSchema';
 import { useWatch } from 'react-hook-form';
-import { PRODUCT_FORM_STEPS, ProductFormComponentBaseProps } from '../_config';
+import { ProductFormComponentBaseProps } from '../_config';
 import { useRouter } from 'next/navigation';
 
 export const PublishFormHeader = ({ form }: ProductFormComponentBaseProps) => {
   const router = useRouter();
-  const { control, setValue, getValues } = form;
+  const { control, setValue, getValues, clearErrors } = form;
 
   const hasNextStep = useWatch({
     control,
@@ -25,13 +25,19 @@ export const PublishFormHeader = ({ form }: ProductFormComponentBaseProps) => {
       router.back();
     };
 
+    let nextStep: PRODUCT_FORM_STEPS = PRODUCT_FORM_STEPS.GENERAL_FORM;
+
     if (currentStep === PRODUCT_FORM_STEPS.DETAILS_FORM) {
-      setValue(NewProductFormFields.formStep, PRODUCT_FORM_STEPS.GENERAL_FORM);
+      nextStep = PRODUCT_FORM_STEPS.GENERAL_FORM;
+      setValue(NewProductFormFields.details, {});
     };
 
     if (currentStep === PRODUCT_FORM_STEPS.VERIFY_AND_PUBLISH) {
-      setValue(NewProductFormFields.formStep, PRODUCT_FORM_STEPS.GENERAL_FORM);
+      nextStep = PRODUCT_FORM_STEPS.DETAILS_FORM;
     };
+
+    clearErrors();
+    setValue(NewProductFormFields.formStep, nextStep);
   }
 
   return (

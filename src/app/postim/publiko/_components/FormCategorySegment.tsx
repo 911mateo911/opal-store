@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react';
-import clsx from 'clsx';
-import { font_Inter } from 'opal/app/_shared/fonts';
 import { Select, SelectValues } from 'opal/app/_shared/atoms/Select';
-import { NewProductFormFields, NewProductSchemaType, newProductSchema } from '../_formSchema';
+import { NewProductFormFields, NewProductSchemaType } from '../_formSchema';
 import { BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS, PRODUCT_SUBCATEGORIES_MAP } from '../_config';
-import { Control, UseFormGetValues, useWatch } from 'react-hook-form';
-import { PRODUCT_CATEGORIES, PRODUCT_SUBCATEGORIES } from '@prisma/client';
+import { Control, UseFormGetValues, UseFormSetValue, useWatch } from 'react-hook-form';
+import { PRODUCT_SUBCATEGORIES } from '@prisma/client';
 import { InputTitle } from './InputTitle';
 
 interface FormCategorySegmentProps {
   onInputChange: (value: string | boolean, name: NewProductFormFields) => void;
   formControl: Control<NewProductSchemaType>;
   getValues: UseFormGetValues<NewProductSchemaType>;
+  setValue: UseFormSetValue<NewProductSchemaType>;
 }
 
 export const FormCategorySegment = ({
   onInputChange,
   formControl,
-  getValues
+  getValues,
+  setValue
 }: FormCategorySegmentProps) => {
   const selectedCategory = useWatch({
     control: formControl,
@@ -44,6 +44,10 @@ export const FormCategorySegment = ({
 
     onInputChange(value, name);
     onInputChange(Boolean(subCategory?.hasNextStep), NewProductFormFields.hasNextStep);
+    if (subCategory?.initialValues) {
+      // TODO: use some damn cache
+      setValue(NewProductFormFields.details, {});
+    };
   };
 
   return (

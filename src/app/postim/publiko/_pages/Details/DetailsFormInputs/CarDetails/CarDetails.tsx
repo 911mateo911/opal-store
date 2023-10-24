@@ -13,13 +13,15 @@ import {
   carDetailsSchema,
   currentYear
 } from './config';
+import { buildDetailInputErrorPath } from 'opal/app/postim/publiko/_helpers/buildDetailInputErrorPath';
 
 export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
   const { control } = form;
 
   const {
     setDetails,
-    details
+    details,
+    onInputBlur
   } = useProductDetails(form, carDetailsSchema);
 
   // TODO: add default values
@@ -36,6 +38,8 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
             control={control}
             defaultValue={details[PRODUCT_DETAIL_FIELD.CAR_MAKE]}
             placeholder='BMW, Audi...'
+            onBlur={onInputBlur}
+            errorPath={buildDetailInputErrorPath(PRODUCT_DETAIL_FIELD.CAR_MAKE)}
           />
         </div>
         <div>
@@ -48,6 +52,8 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
             control={control}
             defaultValue={details[PRODUCT_DETAIL_FIELD.CAR_MODEL]}
             placeholder='X5, Q7...'
+            onBlur={onInputBlur}
+            errorPath={buildDetailInputErrorPath(PRODUCT_DETAIL_FIELD.CAR_MODEL)}
           />
         </div>
       </div>

@@ -7,12 +7,12 @@ import { font_RedHatDisplay } from "opal/app/_shared/fonts";
 import {
   PREFERRED_COMMUNICATION_SELECT_OPTIONS,
   PRODUCT_FORM_IMAGE_PICKER_ID,
-  PRODUCT_FORM_STEPS,
   PRODUCT_STATE_SELECT_OPTIONS,
+  PRODUCT_SUBCATEGORIES_MAP,
   ProductFormComponentBaseProps
 } from "../_config";
 import { FormSectionTitle } from "../_components/FormSectionTitle";
-import { NewProductFormFields, NewProductSchemaType } from "../_formSchema";
+import { NewProductFormFields, NewProductSchemaType, PRODUCT_FORM_STEPS } from "../_formSchema";
 import { FormImagePreview } from "../_components/FormImagePreview";
 import CameraIcon from 'opal/app/_shared/icons/camera.svg?url';
 import Image from 'next/image';
@@ -22,7 +22,6 @@ import { Checkbox } from "opal/app/_shared/atoms/Checkbox";
 import { ActionButton } from "opal/app/_shared/atoms/ActionButton";
 import { FormCategorySegment } from "../_components/FormCategorySegment";
 import { FormPriceSegment } from "../_components/FormPriceSegment";
-import { Accordion } from "opal/app/_shared/atoms/Accordion";
 
 // TODO: IMPORTANT, REVOKE ALL OBJECT URL AFTER LEAVING THE FORM PAGE
 export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
@@ -31,7 +30,8 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
     getValues,
     control,
     handleSubmit,
-    trigger
+    trigger,
+    clearErrors
   } = form;
 
   const onSimpleInputChange = (value: string | boolean | number, field: NewProductFormFields) => {
@@ -68,10 +68,22 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
   };
 
   const onSubmit = handleSubmit((formData) => {
-    // TODO: Validate and go to next form based on subcategory
-    console.log({ formData });
-    setValue(NewProductFormFields.formStep, PRODUCT_FORM_STEPS.DETAILS_FORM);
-  });
+    const selectedCategory = formData.category;
+    const selectedSubcategory = formData.subCategory;
+
+    const selectedSubcategorySelectOption = PRODUCT_SUBCATEGORIES_MAP?.[selectedCategory]?.[selectedSubcategory];
+
+    let nextStep: PRODUCT_FORM_STEPS = PRODUCT_FORM_STEPS.VERIFY_AND_PUBLISH;
+
+    if (formData.hasNextStep) {
+      nextStep = PRODUCT_FORM_STEPS.DETAILS_FORM;
+    };
+    if (selectedSubcategorySelectOption?.initialValues) {
+      setValue(NewProductFormFields.details, selectedSubcategorySelectOption.initialValues);
+    }
+    clearErrors();
+    setValue(NewProductFormFields.formStep, nextStep);
+  }, console.log);
 
   // TODO: add hover states to inputs
   return (
@@ -115,6 +127,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
         onInputChange={onSimpleInputChange}
         formControl={control}
         getValues={getValues}
+        setValue={setValue}
       />
       <FormPriceSegment
         control={control}

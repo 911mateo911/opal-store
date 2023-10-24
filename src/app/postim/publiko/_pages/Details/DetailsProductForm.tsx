@@ -1,6 +1,6 @@
 import React from 'react';
-import { PRODUCT_FORM_STEPS, ProductFormComponentBaseProps } from '../../_config';
-import { NewProductFormFields } from '../../_formSchema';
+import { ProductFormComponentBaseProps } from '../../_config';
+import { NewProductFormFields, PRODUCT_FORM_STEPS } from '../../_formSchema';
 import { useWatch } from 'react-hook-form';
 import { renderCurrentFormDetailsComponent } from './DetailsFormInputs/_config';
 import { FormDetailsMeta } from '../../_components/FormDetailsMeta';
