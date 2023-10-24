@@ -4,9 +4,9 @@ import clsx from 'clsx';
 import { TextInput } from 'opal/app/_shared/atoms/TextInput';
 import { font_Inter, font_RedHatDisplay } from 'opal/app/_shared/fonts';
 import React from 'react';
-import { NewProductFormFields, NewProductSchemaType } from '../_formSchema';
+import { NewProductFormFields, NewProductSchemaType, PRODUCT_FORM_STEPS } from '../_formSchema';
 import { InputTitle } from './InputTitle';
-import { PRODUCT_FORM_STEPS, ProductFormComponentBaseProps } from '../_config';
+import { ProductFormComponentBaseProps } from '../_config';
 import { useWatch } from 'react-hook-form';
 
 export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {

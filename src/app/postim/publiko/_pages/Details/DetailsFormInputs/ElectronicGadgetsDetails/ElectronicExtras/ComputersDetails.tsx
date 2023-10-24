@@ -22,7 +22,7 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
     setDetails
   } = useProductDetails(form, computersDetailsSchema);
 
-  const handleSetExtraDetails = (content: string | boolean, field: TECH_PRODUCT_DETAILS) => {
+  const handleSetExtraDetails = (content: string | number | boolean, field: TECH_PRODUCT_DETAILS) => {
     setDetails(content, PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA, field);
   };
 

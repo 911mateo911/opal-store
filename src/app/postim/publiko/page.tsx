@@ -5,8 +5,8 @@ import { GeneralProductForm } from "./_pages/GeneralProductForm";
 import {
   NewProductFormFields,
   NewProductSchemaType,
+  PRODUCT_FORM_STEPS,
 } from "./_formSchema";
-import { PRODUCT_FORM_STEPS } from "./_config";
 import { DetailsProductForm } from "./_pages/Details/DetailsProductForm";
 import { VerifyAndPublish } from "./_pages/VerifyAndPublish/VerifyAndPublish";
 

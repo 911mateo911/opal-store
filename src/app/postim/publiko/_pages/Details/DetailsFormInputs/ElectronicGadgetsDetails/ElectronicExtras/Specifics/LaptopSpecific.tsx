@@ -14,7 +14,7 @@ export const LaptopSpecifix = ({ form }: ProductFormComponentBaseProps) => {
     setDetails
   } = useProductDetails(form, laptopDetailsSchema);
 
-  const handleSetExtraDetails = (content: string | boolean, field: TECH_PRODUCT_DETAILS) => {
+  const handleSetExtraDetails = (content: string | number | boolean, field: TECH_PRODUCT_DETAILS) => {
     setDetails(content, PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA, field);
   };
 

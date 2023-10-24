@@ -9,6 +9,15 @@ import {
 } from '@prisma/client';
 import { UseFormReturn } from "react-hook-form";
 import { NewProductSchemaType } from "./_formSchema";
+import { apartmentDetailsSchemaInitialValue } from "./_pages/Details/DetailsFormInputs/ApartmentDetails/config";
+import { carDetailsSchemaInitialValue } from "./_pages/Details/DetailsFormInputs/CarDetails/config";
+import {
+  computersDetailsSchemaInitialValue,
+  electronicGadgetsDetailsBaseSchemaInitialValue,
+  laptopDetailsSchemaInitialValue,
+  smartphonesNConsoleDetailsSchemaInitialValue,
+  tvDetailsSchemaInitialValue
+} from "./_pages/Details/DetailsFormInputs/ElectronicGadgetsDetails/config";
 
 export const BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS: SelectValues<PRODUCT_CATEGORIES> = {
   APARTMENT: {
@@ -108,6 +117,8 @@ export const PRODUCT_STATE_SELECT_OPTIONS: SelectValues<PRODUCT_STATE> = {
 
 interface ProductSubCategoryMetaData {
   hasNextStep?: boolean;
+  // keeps track of the initial values of each subcategory
+  initialValues?: Record<string, Record<string, string | number | boolean>>;
 };
 
 type ExtendedProductSubcategoryWithDataSelectOption<T extends string> = Partial<Record<T, SelectOption<T> & ProductSubCategoryMetaData>>;
@@ -119,7 +130,8 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
     [PRODUCT_SUBCATEGORIES.APARTMENT__APARTMENT]: {
       element: 'Apartament',
       value: PRODUCT_SUBCATEGORIES.APARTMENT__APARTMENT,
-      hasNextStep: true
+      hasNextStep: true,
+      initialValues: apartmentDetailsSchemaInitialValue
     },
     [PRODUCT_SUBCATEGORIES.APARTMENT__AREA]: {
       element: 'Zone/Toke',
@@ -168,7 +180,8 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
     [PRODUCT_SUBCATEGORIES.CAR__CARS]: {
       element: 'Makina',
       value: PRODUCT_SUBCATEGORIES.CAR__CARS,
-      hasNextStep: true
+      hasNextStep: true,
+      initialValues: carDetailsSchemaInitialValue
     },
     [PRODUCT_SUBCATEGORIES.CAR__CAR_PARTS]: {
       element: 'Pjese makinash',
@@ -199,62 +212,73 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__ACCESSORIES]: {
       element: 'Aksesore Elektronik',
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__ACCESSORIES,
-      hasNextStep: true
+      hasNextStep: true,
+      initialValues: electronicGadgetsDetailsBaseSchemaInitialValue
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__AUDIO]: {
       element: 'Pajisje Audio',
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__AUDIO,
-      hasNextStep: true
+      hasNextStep: true,
+      initialValues: electronicGadgetsDetailsBaseSchemaInitialValue
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__CONSOLES]: {
       element: 'Gaming dhe konsola',
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__CONSOLES,
-      hasNextStep: true
+      hasNextStep: true,
+      initialValues: smartphonesNConsoleDetailsSchemaInitialValue
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__IOT]: {
       element: 'IOT/Pajisje Smart',
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__IOT,
-      hasNextStep: true
+      hasNextStep: true,
+      initialValues: electronicGadgetsDetailsBaseSchemaInitialValue
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__LAPTOPS]: {
       element: 'Laptope',
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__LAPTOPS,
-      hasNextStep: true
+      hasNextStep: true,
+      initialValues: laptopDetailsSchemaInitialValue
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__PC]: {
       element: 'PC/Kompjuter',
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__PC,
-      hasNextStep: true
+      hasNextStep: true,
+      initialValues: computersDetailsSchemaInitialValue
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__SMARTPHONES]: {
       element: 'Smartphone',
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__SMARTPHONES,
-      hasNextStep: true
+      hasNextStep: true,
+      initialValues: smartphonesNConsoleDetailsSchemaInitialValue
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__SMART_PARTS]: {
       element: 'Pjese kembimi elektronike',
-      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__SMART_PARTS
+      value: PRODUCT_SUBCATEGORIES.ELECTRONICS__SMART_PARTS,
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__TABLETS]: {
       element: 'Tablete',
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__TABLETS,
-      hasNextStep: true
+      hasNextStep: true,
+      initialValues: smartphonesNConsoleDetailsSchemaInitialValue
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__TVS]: {
       element: 'Televizore',
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__TVS,
-      hasNextStep: true
+      hasNextStep: true,
+      initialValues: tvDetailsSchemaInitialValue
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS_PC_SETUP]: {
       element: 'Setup PC',
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS_PC_SETUP,
-      hasNextStep: true
+      hasNextStep: true,
+      initialValues: computersDetailsSchemaInitialValue
     }
   },
   [PRODUCT_CATEGORIES.HEALTH]: {
     [PRODUCT_SUBCATEGORIES.HEALTH__GYM_SUPPLEMENTS]: {
       element: 'Suplemente Palestre',
       value: PRODUCT_SUBCATEGORIES.HEALTH__GYM_SUPPLEMENTS,
+      // TODO: dont forget to add initial value here
       hasNextStep: true
     },
     [PRODUCT_SUBCATEGORIES.HEALTH__HEALTH_CONTENT]: {
@@ -337,13 +361,6 @@ export const PRODUCT_CONDITION_SELECT_OPTIONS: SelectValues<PRODUCT_CONDITION> =
   },
 }
 
-export enum PRODUCT_FORM_STEPS {
-  GENERAL_FORM,
-  DETAILS_FORM,
-  VERIFY_AND_PUBLISH,
-  SHARE
-};
-
 export interface ProductFormComponentBaseProps {
   form: UseFormReturn<NewProductSchemaType>
 };
@@ -351,27 +368,3 @@ export interface ProductFormComponentBaseProps {
 export const ALLOWED_IMAGE_TYPES = ['image/webp', 'image/png', 'image/jpeg'];
 
 export const PRODUCT_FORM_IMAGE_PICKER_ID = 'image_picker';
-
-interface PRODUCT_FORM_CONFIG_TYPE {
-  titleMaxLength: number;
-  descMaxLength: number;
-  apartmentSqAreaMax: number;
-  carMakeMaxLength: number;
-  carModelMaxLength: number;
-  electronicsMakeMaxLength: number;
-  electronicsScreenSizeInchMax: number,
-  electronicsScreenSizeInchMin: number,
-  priceMax: number;
-};
-
-export const PRODUCT_FORM_CONFIG: PRODUCT_FORM_CONFIG_TYPE = {
-  titleMaxLength: 3000,
-  descMaxLength: 8000,
-  apartmentSqAreaMax: 999999,
-  carMakeMaxLength: 15,
-  carModelMaxLength: 20,
-  electronicsMakeMaxLength: 30,
-  electronicsScreenSizeInchMax: 120,
-  electronicsScreenSizeInchMin: 5,
-  priceMax: 1_000_000_000
-};

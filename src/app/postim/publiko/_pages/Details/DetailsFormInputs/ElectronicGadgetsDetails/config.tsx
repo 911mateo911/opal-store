@@ -1,59 +1,7 @@
-import { PRODUCT_SUBCATEGORIES } from "@prisma/client";
-import { UseFormReturn } from "react-hook-form";
-import { NewProductSchemaType } from "../../../../_formSchema";
-import { ComputersDetails } from "./ElectronicExtras/ComputersDetails";
-import { SmartPhonesNConsoleDetails } from "./ElectronicExtras/SmartPhonesNConsoleDetails";
 import { SelectValues } from "opal/app/_shared/atoms/Select";
-import { TvSpecific } from "./ElectronicExtras/Specifics/TvSpecific";
 import { z } from "zod";
 import { PRODUCT_DETAIL_FIELD, TECH_PRODUCT_DETAILS } from "opal/app/_shared/productTypes";
-import { PRODUCT_FORM_CONFIG } from "opal/app/postim/publiko/_config";
-
-const COMPUTERS_SUBCATEGORIES: PRODUCT_SUBCATEGORIES[] = [
-  PRODUCT_SUBCATEGORIES.ELECTRONICS__PC,
-  PRODUCT_SUBCATEGORIES.ELECTRONICS__LAPTOPS,
-  PRODUCT_SUBCATEGORIES.ELECTRONICS__PC,
-  PRODUCT_SUBCATEGORIES.ELECTRONICS_PC_SETUP
-];
-
-const SMARTPHONES_CONSOLE_CATEGORIES: PRODUCT_SUBCATEGORIES[] = [
-  PRODUCT_SUBCATEGORIES.ELECTRONICS__SMARTPHONES,
-  PRODUCT_SUBCATEGORIES.ELECTRONICS__TABLETS,
-  PRODUCT_SUBCATEGORIES.ELECTRONICS__CONSOLES
-];
-
-export const renderElectronicExtraFormComponents = (
-  formSubcategory: PRODUCT_SUBCATEGORIES,
-  form: UseFormReturn<NewProductSchemaType>
-) => {
-  if (COMPUTERS_SUBCATEGORIES.includes(formSubcategory)) {
-    return (
-      <ComputersDetails
-        form={form}
-        formSubcategory={formSubcategory}
-      />
-    );
-  };
-
-  if (SMARTPHONES_CONSOLE_CATEGORIES.includes(formSubcategory)) {
-    return (
-      <SmartPhonesNConsoleDetails
-        form={form}
-        formSubcategory={formSubcategory}
-      />
-    );
-  };
-
-  if (formSubcategory === PRODUCT_SUBCATEGORIES.ELECTRONICS__TVS) {
-    return (
-      <TvSpecific
-        form={form}
-      />
-    )
-  }
-
-  return null;
-};
+import { PRODUCT_FORM_CONFIG } from "opal/app/postim/publiko/_formSchema";
 
 enum TV_DETAILS_SCREEN_RES_TYPE {
   SD = 'SD',
@@ -99,6 +47,12 @@ export const electronicGadgetsDetailsBaseSchema = z.object({
   })
 });
 
+export const electronicGadgetsDetailsBaseSchemaInitialValue: z.infer<typeof electronicGadgetsDetailsBaseSchema> = {
+  ELECTRONICS_MAKE: {
+    ELECTRONICS_MAKE: ''
+  }
+};
+
 const electronicGadgetsExtraDetailsBaseSchema = z.object({
   [TECH_PRODUCT_DETAILS.CPU]: z.string().optional(),
   [TECH_PRODUCT_DETAILS.RAM]: z.string().optional(),
@@ -119,12 +73,35 @@ export const computersDetailsSchema = electronicGadgetsDetailsBaseSchema.extend(
   [PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]: electronicGadgetsExtraDetailsBaseSchema
 });
 
+// TODO: THIS FILE IS A FUCKING MESS
+export const computersDetailsSchemaInitialValue: z.infer<typeof computersDetailsSchema> = {
+  ...electronicGadgetsDetailsBaseSchemaInitialValue,
+  ELECTRONICS_EXTRA: {
+    CPU: '',
+    GPU: '',
+    RAM: '',
+    ROM: ''
+  }
+};
+
 export const laptopDetailsSchema = electronicGadgetsDetailsBaseSchema.extend({
   [PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]: electronicGadgetsExtraDetailsBaseSchema.extend({
     [TECH_PRODUCT_DETAILS.SCREEN_SIZE]: screenSizeSchema,
     [TECH_PRODUCT_DETAILS.WITH_CHARGER]: z.boolean()
   })
 });
+
+export const laptopDetailsSchemaInitialValue: z.infer<typeof laptopDetailsSchema> = {
+  ...electronicGadgetsDetailsBaseSchemaInitialValue,
+  ELECTRONICS_EXTRA: {
+    CPU: '',
+    SCREEN_SIZE: '',
+    WITH_CHARGER: false,
+    GPU: '',
+    RAM: '',
+    ROM: ''
+  }
+};
 
 export const tvDetailsSchema = electronicGadgetsDetailsBaseSchema.extend({
   [PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]: electronicGadgetsExtraDetailsBaseSchema.extend({
@@ -133,9 +110,29 @@ export const tvDetailsSchema = electronicGadgetsDetailsBaseSchema.extend({
   })
 });
 
-export const smarphonesNConsoleDetailsSchema = electronicGadgetsDetailsBaseSchema.extend({
+export const tvDetailsSchemaInitialValue: z.infer<typeof tvDetailsSchema> = {
+  ...electronicGadgetsDetailsBaseSchemaInitialValue,
+  ELECTRONICS_EXTRA: {
+    SCREEN_RES: TV_DETAILS_SCREEN_RES_TYPE.HD_1080,
+    SCREEN_SIZE: '',
+    CPU: '',
+    GPU: '',
+    RAM: '',
+    ROM: ''
+  }
+};
+
+export const smartphonesNConsoleDetailsSchema = electronicGadgetsDetailsBaseSchema.extend({
   [PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]: z.object({
     [TECH_PRODUCT_DETAILS.ROM]: z.string().optional(),
     [TECH_PRODUCT_DETAILS.WITH_CHARGER]: z.boolean()
   })
 });
+
+export const smartphonesNConsoleDetailsSchemaInitialValue: z.infer<typeof smartphonesNConsoleDetailsSchema> = {
+  ...electronicGadgetsDetailsBaseSchemaInitialValue,
+  ELECTRONICS_EXTRA: {
+    WITH_CHARGER: false,
+    ROM: ''
+  }
+};

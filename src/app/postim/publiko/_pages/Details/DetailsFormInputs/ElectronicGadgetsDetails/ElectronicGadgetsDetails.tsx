@@ -10,7 +10,8 @@ import { PRODUCT_DETAIL_FIELD } from 'opal/app/_shared/productTypes';
 import { Select } from 'opal/app/_shared/atoms/Select';
 import { NewProductFormFields } from '../../../../_formSchema';
 import { PRODUCT_SUBCATEGORIES } from '@prisma/client';
-import { electronicGadgetsDetailsBaseSchema, renderElectronicExtraFormComponents } from './config';
+import { electronicGadgetsDetailsBaseSchema } from './config';
+import { renderElectronicExtraFormComponents } from './helpers';
 
 interface ElectronicGadgetsDetailsProps extends ProductFormComponentBaseProps {
   formSubcategory: PRODUCT_SUBCATEGORIES

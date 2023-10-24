@@ -1,6 +1,6 @@
 import { SelectValues } from "opal/app/_shared/atoms/Select";
 import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
-import { PRODUCT_FORM_CONFIG } from "opal/app/postim/publiko/_config";
+import { PRODUCT_FORM_CONFIG } from "opal/app/postim/publiko/_formSchema";
 import { z } from "zod";
 
 export enum APARTMENT_FLOOR_TYPE {

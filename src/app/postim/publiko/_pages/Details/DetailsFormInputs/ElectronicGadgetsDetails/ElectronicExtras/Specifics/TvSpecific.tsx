@@ -14,7 +14,7 @@ export const TvSpecific = ({ form }: ProductFormComponentBaseProps) => {
     setDetails
   } = useProductDetails(form, tvDetailsSchema);
 
-  const handleSetExtraDetails = (content: string, field: TECH_PRODUCT_DETAILS) => {
+  const handleSetExtraDetails = (content: string | number, field: TECH_PRODUCT_DETAILS) => {
     setDetails(content, PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA, field);
   };
 

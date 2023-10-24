@@ -8,9 +8,39 @@ import {
   PRODUCT_SUBCATEGORIES
 } from "@prisma/client";
 import { z } from "zod";
-import { PRODUCT_FORM_CONFIG, PRODUCT_FORM_STEPS } from "./_config";
 import { GLOBAL_CONFIG } from "opal/app/_config";
 import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
+
+export enum PRODUCT_FORM_STEPS {
+  GENERAL_FORM,
+  DETAILS_FORM,
+  VERIFY_AND_PUBLISH,
+  SHARE
+};
+
+interface PRODUCT_FORM_CONFIG_TYPE {
+  titleMaxLength: number;
+  descMaxLength: number;
+  apartmentSqAreaMax: number;
+  carMakeMaxLength: number;
+  carModelMaxLength: number;
+  electronicsMakeMaxLength: number;
+  electronicsScreenSizeInchMax: number,
+  electronicsScreenSizeInchMin: number,
+  priceMax: number;
+};
+
+export const PRODUCT_FORM_CONFIG: PRODUCT_FORM_CONFIG_TYPE = {
+  titleMaxLength: 3000,
+  descMaxLength: 8000,
+  apartmentSqAreaMax: 999999,
+  carMakeMaxLength: 15,
+  carModelMaxLength: 20,
+  electronicsMakeMaxLength: 30,
+  electronicsScreenSizeInchMax: 120,
+  electronicsScreenSizeInchMin: 5,
+  priceMax: 1_000_000_000
+};
 
 /**
  * postId: string;

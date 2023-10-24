@@ -1,7 +1,7 @@
 import { MapSelectValues, SelectOption, SelectValues } from "opal/app/_shared/atoms/Select";
 import { getFirstAndLastKeyInMap } from "opal/app/_shared/helpers";
 import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
-import { PRODUCT_FORM_CONFIG } from "opal/app/postim/publiko/_config";
+import { PRODUCT_FORM_CONFIG } from "opal/app/postim/publiko/_formSchema";
 import { z } from "zod";
 
 export const currentYear = new Date().getFullYear();
@@ -114,7 +114,7 @@ export const carDetailsSchema = z.object({
       })
   }),
   [PRODUCT_DETAIL_FIELD.CAR_YEAR]: z.object({
-    [PRODUCT_DETAIL_FIELD.CAR_YEAR]: z.string()
+    [PRODUCT_DETAIL_FIELD.CAR_YEAR]: z.number()
       .min(Number(carYearLimits.firstKey), {
         message: `Automjeti nuk mund te jete me i vjeter se viti ${carYearLimits.firstKey}`
       })
@@ -123,7 +123,7 @@ export const carDetailsSchema = z.object({
       })
   }),
   [PRODUCT_DETAIL_FIELD.CAR_TRANSMISSION]: z.object({
-    [PRODUCT_DETAIL_FIELD.CAR_YEAR]: z.nativeEnum(CAR_DETAILS_TRANSMISSION_TYPE)
+    [PRODUCT_DETAIL_FIELD.CAR_TRANSMISSION]: z.nativeEnum(CAR_DETAILS_TRANSMISSION_TYPE)
   }),
   [PRODUCT_DETAIL_FIELD.CAR_FUEL]: z.object({
     [PRODUCT_DETAIL_FIELD.CAR_FUEL]: z.nativeEnum(CAR_DETAILS_FUEL_TYPE)
@@ -131,4 +131,25 @@ export const carDetailsSchema = z.object({
   [PRODUCT_DETAIL_FIELD.CAR_PLATE]: z.object({
     [PRODUCT_DETAIL_FIELD.CAR_PLATE]: z.nativeEnum(CAR_DETAILS_PLATE_TYPE)
   }),
-})
+});
+
+export const carDetailsSchemaInitialValue: z.infer<typeof carDetailsSchema> = {
+  CAR_FUEL: {
+    CAR_FUEL: CAR_DETAILS_FUEL_TYPE.DIESEL
+  },
+  CAR_MAKE: {
+    CAR_MAKE: ''
+  },
+  CAR_MODEL: {
+    CAR_MODEL: ''
+  },
+  CAR_PLATE: {
+    CAR_PLATE: CAR_DETAILS_PLATE_TYPE.INSIDE
+  },
+  CAR_TRANSMISSION: {
+    CAR_TRANSMISSION: CAR_DETAILS_TRANSMISSION_TYPE.AUTOMATIC
+  },
+  CAR_YEAR: {
+    CAR_YEAR: currentYear
+  }
+}
