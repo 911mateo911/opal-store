@@ -60,6 +60,7 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
   const location = getValues(NewProductFormFields.location);
   const deliveryAtYourPlace = getValues(NewProductFormFields.deliveryAtYourPlace);
   const preferredCommunication = getValues(NewProductFormFields.preferredCommunication);
+  const description = getValues(NewProductFormFields.description);
 
   // TODO: find a way to render all the details from subcategories
   // TODO: A LOT OF REUSABLE COMPONENTS
@@ -108,6 +109,7 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
               className="w-max mx-auto border-green-30 relative !bg-green-10 border"
               icon={LocationIcon}
               pointer={false}
+              iconClassName='max-w-[16px] max-h-[16px]'
             >
               {deliveryAtYourPlace && (
                 <span className={clsx(
@@ -150,6 +152,13 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
           )} >
             Pershkrimi
           </h6>
+          {/* TODO: check if you can reuse this to the product page later */}
+          <p className={clsx(
+            font_Inter.className,
+            'whitespace-pre-line tracking-normal text-sm leading-6 pr-1 text-grey-100 font-normal mt-[1px]'
+          )} >
+            {description}
+          </p>
         </div>
       </div>
     </div>

@@ -8,7 +8,6 @@ import {
   PREFERRED_COMMUNICATION_SELECT_OPTIONS,
   PRODUCT_FORM_IMAGE_PICKER_ID,
   PRODUCT_STATE_SELECT_OPTIONS,
-  PRODUCT_SUBCATEGORIES_MAP,
   ProductFormComponentBaseProps
 } from "../_config";
 import { FormSectionTitle } from "../_components/FormSectionTitle";
@@ -22,6 +21,7 @@ import { Checkbox } from "opal/app/_shared/atoms/Checkbox";
 import { ActionButton } from "opal/app/_shared/atoms/ActionButton";
 import { FormCategorySegment } from "../_components/FormCategorySegment";
 import { FormPriceSegment } from "../_components/FormPriceSegment";
+import { PRODUCT_SUBCATEGORIES_MAP } from "../_subcategoriesMetaData";
 
 // TODO: IMPORTANT, REVOKE ALL OBJECT URL AFTER LEAVING THE FORM PAGE
 export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
@@ -83,6 +83,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
     }
     clearErrors();
     setValue(NewProductFormFields.formStep, nextStep);
+    console.log({ formData })
   }, console.log);
 
   // TODO: add hover states to inputs

@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { Select, SelectValues } from 'opal/app/_shared/atoms/Select';
 import { NewProductFormFields, NewProductSchemaType } from '../_formSchema';
-import { BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS, PRODUCT_SUBCATEGORIES_MAP } from '../_config';
+import { BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS } from '../_config';
 import { Control, UseFormGetValues, UseFormSetValue, useWatch } from 'react-hook-form';
 import { PRODUCT_SUBCATEGORIES } from '@prisma/client';
 import { InputTitle } from './InputTitle';
+import { PRODUCT_SUBCATEGORIES_MAP } from '../_subcategoriesMetaData';
 
 interface FormCategorySegmentProps {
   onInputChange: (value: string | boolean, name: NewProductFormFields) => void;

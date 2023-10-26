@@ -11,9 +11,23 @@ interface ChipProps {
   icon?: string;
   pointer?: boolean
   children?: ReactNode;
+  iconHeight?: number;
+  iconWidth?: number;
+  iconClassName?: string;
 }
 
-export const Chip = ({ text, onClick, selected, className, icon, pointer = true, children }: ChipProps) => {
+export const Chip = ({
+  text,
+  onClick,
+  selected,
+  className,
+  icon,
+  pointer = true,
+  iconHeight = 20,
+  iconWidth = 20,
+  iconClassName,
+  children
+}: ChipProps) => {
   return (
     <div
       onClick={onClick}
@@ -29,9 +43,9 @@ export const Chip = ({ text, onClick, selected, className, icon, pointer = true,
         <Image
           src={icon}
           alt='btn_icon'
-          height={20}
-          width={20}
-          className='mr-1 -ml-0.5'
+          height={iconHeight}
+          width={iconWidth}
+          className={clsx('mr-1 -ml-0.5', iconClassName)}
         />
       )}
       {text}

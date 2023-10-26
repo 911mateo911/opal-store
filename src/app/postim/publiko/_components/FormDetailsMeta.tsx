@@ -1,12 +1,12 @@
 import React from 'react'
 import {
   BASE_PRODUCT_CATEGORIES_SELECT_OPTIONS,
-  PRODUCT_SUBCATEGORIES_MAP,
   ProductFormComponentBaseProps
 } from '../_config';
 import { NewProductFormFields } from '../_formSchema';
 import clsx from 'clsx';
 import { font_RedHatDisplay } from 'opal/app/_shared/fonts';
+import { PRODUCT_SUBCATEGORIES_MAP } from '../_subcategoriesMetaData';
 
 export const FormDetailsMeta = ({ form }: ProductFormComponentBaseProps) => {
   const category = form.getValues(NewProductFormFields.category);
