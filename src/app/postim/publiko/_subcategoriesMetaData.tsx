@@ -10,12 +10,10 @@ import {
 } from "./_pages/Details/DetailsFormInputs/ElectronicGadgetsDetails/config";
 import { SelectOption } from "opal/app/_shared/atoms/Select";
 
-
 interface ProductSubCategoryMetaData {
   hasNextStep?: boolean;
   // keeps track of the initial values of each subcategory
   initialValues?: Record<string, Record<string, string | number | boolean>>;
-  renderIcon?: JSX.Element;
 };
 
 type ExtendedProductSubcategoryWithDataSelectOption<T extends string> = Partial<Record<T, SelectOption<T> & ProductSubCategoryMetaData>>;
