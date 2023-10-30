@@ -1,12 +1,12 @@
+import { z } from "zod";
 import { SelectValues } from "opal/app/_shared/atoms/Select";
 import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
-import { MappedKeysOfSchemaObject } from "opal/app/_shared/types";
+import { MappedKeysOfSchemaObject, ProductDetailsRenderData } from "opal/app/_shared/types";
 import { PRODUCT_FORM_CONFIG } from "opal/app/postim/publiko/_formSchema";
-import { z } from "zod";
-import BuildingIcon from 'opal/app/_shared/icons/details/building.svg';
-import DimensionsIcon from 'opal/app/_shared/icons/details/dimensions.svg';
-import FurnitureIcon from 'opal/app/_shared/icons/details/furniture.svg';
-import RoomIcon from 'opal/app/_shared/icons/details/room.svg';
+import BuildingIcon from 'opal/app/_shared/icons/details/building.svg?url';
+import DimensionsIcon from 'opal/app/_shared/icons/details/dimensions.svg?url';
+import FurnitureIcon from 'opal/app/_shared/icons/details/furniture.svg?url';
+import RoomIcon from 'opal/app/_shared/icons/details/room.svg?url';
 
 export enum APARTMENT_FLOOR_TYPE {
   FLOORS_1 = 'FLOORS_1',
@@ -134,11 +134,30 @@ export const apartmentDetailsSchemaInitialValue: z.infer<typeof apartmentDetails
   }
 };
 
-// use this as labelling
 // TODO: add translations
-export const apartamentDetailsIconMap: MappedKeysOfSchemaObject<typeof apartmentDetailsSchema, string> = {
-  APARTMENT_FLOORS: BuildingIcon,
-  APARTMENT_FURNITURE: FurnitureIcon,
-  APARTMENT_ROOMS: RoomIcon,
-  APARTMENT_SQAREA: DimensionsIcon
+export const apartamentDetailsRenderDataMap: MappedKeysOfSchemaObject<typeof apartmentDetailsSchema, ProductDetailsRenderData> = {
+  APARTMENT_SQAREA: {
+    detailName: 'Siperfaqja',
+    iconSrc: DimensionsIcon,
+    metricUnit: '(m2)'
+  },
+  APARTMENT_FLOORS: {
+    detailName: 'Kate',
+    iconSrc: BuildingIcon,
+    selectValueMapping: APARTMENT_FLOOR_TYPE_SELECT_OPTIONS
+  },
+  APARTMENT_ROOMS: {
+    detailName: 'Dhoma',
+    iconSrc: RoomIcon,
+    selectValueMapping: APARTMENT_ROOMS_TYPE_SELECT_OPTIONS,
+    metricUnit: 'dhoma'
+  },
+  APARTMENT_FURNITURE: {
+    detailName: 'Mobilimi',
+    iconSrc: FurnitureIcon,
+    boolValueMapping: {
+      truthy: 'E mobiluar',
+      false: 'E pa mobiluar'
+    }
+  }
 };

@@ -18,6 +18,7 @@ import WhatsappIcon from 'opal/app/_shared/icons/whatsapp.svg?url';
 import { ProductAccordionItem } from 'opal/app/postim/_components/ProductAccordionItem';
 import { FormDetailsMeta } from '../../_components/FormDetailsMeta';
 import { PRODUCT_PREFERRED_COMMUNICATION } from '@prisma/client';
+import { ProductDetails } from '../../_components/DetailsSection/ProductDetails';
 
 export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
   const { getValues, setValue } = form;
@@ -75,10 +76,15 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
         Rishiko postimin
       </h1>
       <div className="grid grid-cols-2" >
-        <FormImagePreview
-          formControl={form.control}
-          editable={false}
-        />
+        <div className='flex items-center justify-center w-full flex-col' >
+          <FormImagePreview
+            formControl={form.control}
+            editable={false}
+          />
+          <div className='w-full mt-[10px]' >
+            <ProductDetails form={form} />
+          </div>
+        </div>
         <div className="pl-[10px]" >
           <FormDetailsMeta form={form} />
           <h1 className={clsx(
@@ -155,7 +161,8 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
           {/* TODO: check if you can reuse this to the product page later */}
           <p className={clsx(
             font_Inter.className,
-            'whitespace-pre-line tracking-normal text-sm leading-6 pr-1 text-grey-100 font-normal mt-[1px]'
+            'whitespace-pre-line tracking-normal text-sm leading-6 pr-1 text-grey-100 font-normal mt-[1px]',
+            'dark:text-grey-20'
           )} >
             {description}
           </p>

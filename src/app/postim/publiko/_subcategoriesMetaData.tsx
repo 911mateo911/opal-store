@@ -1,5 +1,8 @@
 import { PRODUCT_CATEGORIES, PRODUCT_SUBCATEGORIES } from "@prisma/client";
-import { apartmentDetailsSchemaInitialValue } from "./_pages/Details/DetailsFormInputs/ApartmentDetails/config";
+import {
+  apartamentDetailsRenderDataMap,
+  apartmentDetailsSchemaInitialValue
+} from "./_pages/Details/DetailsFormInputs/ApartmentDetails/config";
 import { carDetailsSchemaInitialValue } from "./_pages/Details/DetailsFormInputs/CarDetails/config";
 import {
   computersDetailsSchemaInitialValue,
@@ -9,14 +12,16 @@ import {
   tvDetailsSchemaInitialValue
 } from "./_pages/Details/DetailsFormInputs/ElectronicGadgetsDetails/config";
 import { SelectOption } from "opal/app/_shared/atoms/Select";
+import { ProductDetailsRenderData, ProductDetailsRenderDataMap } from "opal/app/_shared/types";
 
-interface ProductSubCategoryMetaData {
+export interface ProductSubCategoryMetaData<T extends string> extends SelectOption<T> {
   hasNextStep?: boolean;
   // keeps track of the initial values of each subcategory
   initialValues?: Record<string, Record<string, string | number | boolean>>;
+  detailsRenderData?: ProductDetailsRenderDataMap<keyof this['initialValues'] | string>
 };
 
-type ExtendedProductSubcategoryWithDataSelectOption<T extends string> = Partial<Record<T, SelectOption<T> & ProductSubCategoryMetaData>>;
+type ExtendedProductSubcategoryWithDataSelectOption<T extends string> = Partial<Record<T, ProductSubCategoryMetaData<T>>>;
 
 type PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = Record<PRODUCT_CATEGORIES, ExtendedProductSubcategoryWithDataSelectOption<PRODUCT_SUBCATEGORIES>>;
 
@@ -26,7 +31,8 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
       element: 'Apartament',
       value: PRODUCT_SUBCATEGORIES.APARTMENT__APARTMENT,
       hasNextStep: true,
-      initialValues: apartmentDetailsSchemaInitialValue
+      initialValues: apartmentDetailsSchemaInitialValue,
+      detailsRenderData: apartamentDetailsRenderDataMap
     },
     [PRODUCT_SUBCATEGORIES.APARTMENT__AREA]: {
       element: 'Zone/Toke',
