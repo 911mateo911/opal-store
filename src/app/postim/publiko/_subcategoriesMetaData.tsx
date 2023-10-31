@@ -3,7 +3,7 @@ import {
   apartamentDetailsRenderDataMap,
   apartmentDetailsSchemaInitialValue
 } from "./_pages/Details/DetailsFormInputs/ApartmentDetails/config";
-import { carDetailsSchemaInitialValue } from "./_pages/Details/DetailsFormInputs/CarDetails/config";
+import { carDetailsRenderDataMap, carDetailsSchemaInitialValue } from "./_pages/Details/DetailsFormInputs/CarDetails/config";
 import {
   computersDetailsSchemaInitialValue,
   electronicGadgetsDetailsBaseSchemaInitialValue,
@@ -82,7 +82,8 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
       element: 'Makina',
       value: PRODUCT_SUBCATEGORIES.CAR__CARS,
       hasNextStep: true,
-      initialValues: carDetailsSchemaInitialValue
+      initialValues: carDetailsSchemaInitialValue,
+      detailsRenderData: carDetailsRenderDataMap
     },
     [PRODUCT_SUBCATEGORIES.CAR__CAR_PARTS]: {
       element: 'Pjese makinash',

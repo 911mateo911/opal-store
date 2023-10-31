@@ -33,17 +33,17 @@ export function Checkbox<T extends string>({
       onClick={handleChange} >
       <div
         className={clsx(
-          'border-2 border-solid h-6 w-6 rounded-md',
+          'border-solid h-6 w-6 rounded-md',
           'flex items-center justify-center select-none',
-          isChecked ? 'bg-green-50 border-green-50' : 'border-grey-30 bg-white dark:bg-grey-85'
+          isChecked ? 'bg-green-50 border-green-50 border-none' : 'border-grey-30 bg-white dark:bg-grey-85 border-2'
         )}
       >
         {isChecked && (
           <Image
             alt='check_icon'
             src={CheckIcon}
-            width={18}
-            height={18}
+            width={24}
+            height={24}
             className='invert'
           />
         )}

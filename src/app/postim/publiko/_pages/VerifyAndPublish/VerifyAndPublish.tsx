@@ -76,7 +76,7 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
         Rishiko postimin
       </h1>
       <div className="grid grid-cols-2" >
-        <div className='flex items-center justify-center w-full flex-col' >
+        <div className='flex w-full flex-col' >
           <FormImagePreview
             formControl={form.control}
             editable={false}
@@ -112,7 +112,7 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
             </p>
             <Chip
               text={location}
-              className="w-max mx-auto border-green-30 relative !bg-green-10 border"
+              className="w-max mx-auto border-green-30 relative !bg-green-10 border min-w-[150px]"
               icon={LocationIcon}
               pointer={false}
               iconClassName='max-w-[16px] max-h-[16px]'

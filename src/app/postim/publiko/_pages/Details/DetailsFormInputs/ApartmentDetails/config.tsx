@@ -3,10 +3,10 @@ import { SelectValues } from "opal/app/_shared/atoms/Select";
 import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
 import { MappedKeysOfSchemaObject, ProductDetailsRenderData } from "opal/app/_shared/types";
 import { PRODUCT_FORM_CONFIG } from "opal/app/postim/publiko/_formSchema";
-import BuildingIcon from 'opal/app/_shared/icons/details/building.svg?url';
-import DimensionsIcon from 'opal/app/_shared/icons/details/dimensions.svg?url';
-import FurnitureIcon from 'opal/app/_shared/icons/details/furniture.svg?url';
-import RoomIcon from 'opal/app/_shared/icons/details/room.svg?url';
+import BuildingIcon from 'opal/app/_shared/icons/details/apartments/building.svg?url';
+import DimensionsIcon from 'opal/app/_shared/icons/details/apartments/dimensions.svg?url';
+import FurnitureIcon from 'opal/app/_shared/icons/details/apartments/furniture.svg?url';
+import RoomIcon from 'opal/app/_shared/icons/details/apartments/room.svg?url';
 
 export enum APARTMENT_FLOOR_TYPE {
   FLOORS_1 = 'FLOORS_1',

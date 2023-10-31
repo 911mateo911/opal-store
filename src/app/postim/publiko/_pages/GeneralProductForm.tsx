@@ -79,7 +79,14 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
       nextStep = PRODUCT_FORM_STEPS.DETAILS_FORM;
     };
     if (selectedSubcategorySelectOption?.initialValues) {
-      setValue(NewProductFormFields.details, selectedSubcategorySelectOption.initialValues);
+      // If the subcategory wasnt changed then dont revert the details
+      const initialValuesForSubcategory = selectedSubcategorySelectOption.initialValues;
+      const formDataDetailsKeys = Object.keys(formData[NewProductFormFields.details]);
+      const wasPassedTheSameSubcategory = formDataDetailsKeys.every(key => initialValuesForSubcategory[key]);
+
+      if (!wasPassedTheSameSubcategory || !formDataDetailsKeys.length) {
+        setValue(NewProductFormFields.details, selectedSubcategorySelectOption.initialValues);
+      };
     }
     clearErrors();
     setValue(NewProductFormFields.formStep, nextStep);
@@ -128,7 +135,6 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
         onInputChange={onSimpleInputChange}
         formControl={control}
         getValues={getValues}
-        setValue={setValue}
       />
       <FormPriceSegment
         control={control}

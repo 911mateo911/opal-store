@@ -76,6 +76,8 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
           <Select
             name={PRODUCT_DETAIL_FIELD.CAR_TRANSMISSION}
             values={CAR_DETAILS_TRANSMISSION_SELECT_OPTIONS}
+            initialValue={details?.[PRODUCT_DETAIL_FIELD.CAR_TRANSMISSION]}
+            onSelect={setDetails}
           />
         </div>
       </div>
@@ -87,6 +89,8 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
           <Select
             name={PRODUCT_DETAIL_FIELD.CAR_FUEL}
             values={CAR_DETAILS_FUEL_TYPE_SELECT_OPTIONS}
+            initialValue={details?.[PRODUCT_DETAIL_FIELD.CAR_FUEL]}
+            onSelect={setDetails}
           />
         </div>
         <div>
@@ -96,6 +100,8 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
           <Select
             name={PRODUCT_DETAIL_FIELD.CAR_PLATE}
             values={CAR_DETAILS_PLATE_TYPE_SELECT_OPTIONS}
+            initialValue={details?.[PRODUCT_DETAIL_FIELD.CAR_PLATE]}
+            onSelect={setDetails}
           />
         </div>
       </div>

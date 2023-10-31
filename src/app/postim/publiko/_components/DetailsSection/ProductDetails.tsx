@@ -4,7 +4,6 @@ import { NewProductFormFields } from '../../_formSchema';
 import { PRODUCT_SUBCATEGORIES_MAP } from '../../_subcategoriesMetaData';
 import { mapDetailsToCardProps } from './mapDetailsToCardProps';
 import { ProductDetailCard } from './ProductDetailCard';
-import { FormSectionTitle } from '../FormSectionTitle';
 import { font_RedHatDisplay } from 'opal/app/_shared/fonts';
 import clsx from 'clsx';
 

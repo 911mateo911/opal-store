@@ -15,7 +15,7 @@ export const mapDetailsToCardProps = (
     const { iconSrc, detailName, metricUnit, boolValueMapping, selectValueMapping } = detailsRenderData[currentKey];
     const detailFieldFromRenderData = details[currentKey]?.[currentKey];
 
-    if (!detailFieldFromRenderData) {
+    if (typeof detailFieldFromRenderData === 'undefined') {
       return previousData;
     };
 

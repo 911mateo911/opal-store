@@ -11,8 +11,8 @@ export interface ProductDetailCardProps extends ProductDetailsRenderData {
 export const ProductDetailCard = ({ data, detailName, iconSrc }: ProductDetailCardProps) => {
   return (
     <div className={clsx(
-      'shadow bg-grey-1 p-2 w-full rounded-md flex items-center justify-center flex-col',
-      'dark:bg-grey-90'
+      'shadow bg-grey-1 p-2 w-full rounded-md flex items-center justify-center flex-col border border-grey-2',
+      'dark:bg-grey-90 dark:border-grey-95'
     )} >
       <p className={clsx(
         font_RedHatDisplay.className,

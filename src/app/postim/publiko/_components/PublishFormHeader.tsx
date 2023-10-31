@@ -29,7 +29,6 @@ export const PublishFormHeader = ({ form }: ProductFormComponentBaseProps) => {
 
     if (currentStep === PRODUCT_FORM_STEPS.DETAILS_FORM) {
       nextStep = PRODUCT_FORM_STEPS.GENERAL_FORM;
-      setValue(NewProductFormFields.details, {});
     };
 
     if (currentStep === PRODUCT_FORM_STEPS.VERIFY_AND_PUBLISH) {

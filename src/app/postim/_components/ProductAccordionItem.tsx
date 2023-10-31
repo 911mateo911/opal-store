@@ -68,7 +68,7 @@ export const ProductAccordionItem = ({
             )}
           >
             <StarIconSvg
-              className='fill-green-60 mr-1 dark:fill-green-70'
+              className='text-green-60 mr-1 dark:text-green-70'
               height={18}
               width={18}
             />

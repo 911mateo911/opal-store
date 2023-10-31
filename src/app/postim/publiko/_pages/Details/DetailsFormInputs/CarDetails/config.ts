@@ -1,8 +1,15 @@
 import { MapSelectValues, SelectOption, SelectValues } from "opal/app/_shared/atoms/Select";
 import { getFirstAndLastKeyInMap } from "opal/app/_shared/helpers";
 import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
+import { MappedKeysOfSchemaObject, ProductDetailsRenderData } from "opal/app/_shared/types";
 import { PRODUCT_FORM_CONFIG } from "opal/app/postim/publiko/_formSchema";
 import { z } from "zod";
+import CarFuelIcon from 'opal/app/_shared/icons/details/autos/car_fuel.svg?url';
+import CarMakeIcon from 'opal/app/_shared/icons/details/autos/car.svg?url';
+import CarModelIcon from 'opal/app/_shared/icons/details/autos/car_model.svg?url';
+import CarPlateIcon from 'opal/app/_shared/icons/details/autos/car_plate.svg?url';
+import CarGearboxIcon from 'opal/app/_shared/icons/details/autos/car_gearbox.svg?url';
+import CalendarIcon from 'opal/app/_shared/icons/calendar.svg?url';
 
 export const currentYear = new Date().getFullYear();
 const minYear = currentYear - 100;
@@ -38,7 +45,7 @@ export const CAR_DETAILS_TRANSMISSION_SELECT_OPTIONS: SelectValues<CAR_DETAILS_T
     element: 'Gjysem Automatik',
     value: CAR_DETAILS_TRANSMISSION_TYPE.SEMI_AUTOMATIC
   },
-}
+};
 
 enum CAR_DETAILS_FUEL_TYPE {
   GASOLINE = 'GASOLINE',
@@ -74,7 +81,7 @@ export const CAR_DETAILS_FUEL_TYPE_SELECT_OPTIONS: SelectValues<CAR_DETAILS_FUEL
     element: 'Gaz',
     value: CAR_DETAILS_FUEL_TYPE.GAS
   },
-}
+};
 
 enum CAR_DETAILS_PLATE_TYPE {
   OUTSIDE = 'OUTSIDE',
@@ -152,4 +159,34 @@ export const carDetailsSchemaInitialValue: z.infer<typeof carDetailsSchema> = {
   CAR_YEAR: {
     CAR_YEAR: currentYear
   }
-}
+};
+
+export const carDetailsRenderDataMap: MappedKeysOfSchemaObject<typeof carDetailsSchema, ProductDetailsRenderData> = {
+  CAR_MAKE: {
+    detailName: 'Marka',
+    iconSrc: CarMakeIcon,
+  },
+  CAR_MODEL: {
+    detailName: 'Modeli',
+    iconSrc: CarModelIcon
+  },
+  CAR_FUEL: {
+    detailName: 'Karburanti',
+    iconSrc: CarFuelIcon,
+    selectValueMapping: CAR_DETAILS_FUEL_TYPE_SELECT_OPTIONS
+  },
+  CAR_YEAR: {
+    detailName: 'Viti i prodhimit',
+    iconSrc: CalendarIcon
+  },
+  CAR_TRANSMISSION: {
+    detailName: 'Tranmisioni',
+    iconSrc: CarGearboxIcon,
+    selectValueMapping: CAR_DETAILS_TRANSMISSION_SELECT_OPTIONS
+  },
+  CAR_PLATE: {
+    detailName: 'Targa',
+    iconSrc: CarPlateIcon,
+    selectValueMapping: CAR_DETAILS_PLATE_TYPE_SELECT_OPTIONS
+  }
+};
