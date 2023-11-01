@@ -1,24 +1,57 @@
 import React from 'react';
 import { ProductFormComponentBaseProps } from '../../_config';
 import { NewProductFormFields, PRODUCT_FORM_STEPS } from '../../_formSchema';
-import { useWatch } from 'react-hook-form';
+import { useFormState, useWatch } from 'react-hook-form';
 import { renderCurrentFormDetailsComponent } from './DetailsFormInputs/_config';
 import { FormDetailsMeta } from '../../_components/FormDetailsMeta';
 import { ActionButton } from 'opal/app/_shared/atoms/ActionButton';
 import { FormSectionTitle } from '../../_components/FormSectionTitle';
+import { PRODUCT_SUBCATEGORIES_MAP } from '../../_subcategoriesMetaData';
+import { ZodError } from 'zod';
 
 export const DetailsProductForm = ({ form }: ProductFormComponentBaseProps) => {
-  const { handleSubmit, setValue } = form;
+  const { handleSubmit, getValues, setValue, setError } = form;
 
   const formSubCategory = useWatch({
     control: form.control,
     name: NewProductFormFields.subCategory,
   });
 
-  const onSubmit = handleSubmit((formData) => {
-    console.log({ formData });
+  const goToNextStep = handleSubmit(data => {
+    console.log({ data });
     setValue(NewProductFormFields.formStep, PRODUCT_FORM_STEPS.VERIFY_AND_PUBLISH);
   });
+
+  const onSubmit = async () => {
+    const providedCategory = getValues(NewProductFormFields.category);
+    const proviedSubcategory = getValues(NewProductFormFields.subCategory);
+
+    const schemaToParse = PRODUCT_SUBCATEGORIES_MAP?.[providedCategory]?.[proviedSubcategory]?.zodDetailsSchema;
+
+    if (schemaToParse) {
+      try {
+        await schemaToParse.parseAsync(getValues(NewProductFormFields.details));
+
+        goToNextStep();
+      } catch (catchedError) {
+        const error = catchedError as ZodError;
+
+        if (error?.issues) {
+          error.issues.forEach(issue => {
+            const issuePath = `${NewProductFormFields.details}.${issue.path[0].toString()}` as NewProductFormFields;
+            setError(issuePath, {
+              message: issue.message
+            })
+          })
+        }
+
+        // TODO: do sum damn logging
+        console.log({ error });
+      }
+    } else {
+      goToNextStep();
+    }
+  };
 
   return (
     <div>

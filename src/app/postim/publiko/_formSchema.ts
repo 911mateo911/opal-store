@@ -153,16 +153,41 @@ export const newProductSchema = z.object({
   [NewProductFormFields.deliveryAtYourPlace]: z.boolean(),
   [NewProductFormFields.formStep]: z.number(),
   [NewProductFormFields.hasNextStep]: z.boolean(),
-  [NewProductFormFields.details]: z.record(
+  [NewProductFormFields.details]: z.preprocess(() => {
+    // Skip validation on general product form
+    // TODO: This works good but it might be a better solution out there
+    return {};
+  }, z.record(
     z.nativeEnum(PRODUCT_DETAIL_FIELD),
     z.record(
       z.string(),
       z.string()
-        .min(1, { message: 'Fusha eshte e detyrueshme.' })
         .or(z.boolean())
         .or(z.number())
+        .superRefine((data, context) => {
+          const dataType = typeof data;
+          const allowedTypes = ['string', 'number', 'boolean'];
+
+          if (!allowedTypes.includes(dataType)) {
+            context.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Fusha eshte e detyrueshme.',
+              path: []
+            });
+          };
+
+          if (dataType === 'string') {
+            if (!data.toString().length) {
+              context.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: 'Fusha eshte e detyrueshme.',
+                path: []
+              });
+            }
+          };
+        })
     )
-  ),
+  )),
   [NewProductFormFields.state]: z.nativeEnum(PRODUCT_STATE),
   [NewProductFormFields.condition]: z.nativeEnum(PRODUCT_CONDITION).optional()
 });

@@ -31,7 +31,8 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
     control,
     handleSubmit,
     trigger,
-    clearErrors
+    clearErrors,
+    formState
   } = form;
 
   const onSimpleInputChange = (value: string | boolean | number, field: NewProductFormFields) => {

@@ -5,7 +5,7 @@ import {
   newProductSchemaInitialValues
 } from "../_formSchema";
 import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
-import { ZodError, ZodObject, ZodRawShape, z } from "zod";
+import { ZodError, ZodObject, ZodRawShape } from "zod";
 import { buildDetailInputErrorPath } from "../_helpers/buildDetailInputErrorPath";
 import get from "lodash.get";
 
@@ -57,28 +57,33 @@ export const useProductDetails = <T extends ZodRawShape>(
   };
 
   const onInputBlur = async (name: keyof T) => {
-    schema.parseAsync(getValues(NewProductFormFields.details))
-      .catch((errors: ZodError) => {
-        const { fieldErrors } = errors.flatten();
-        const currentError = fieldErrors?.[name];
+    try {
+      await schema.parseAsync(getValues(NewProductFormFields.details));
 
-        const oldErrors = formState.errors;
-        const currentInputDetailNestedPath = buildDetailInputErrorPath(name.toString()) as NewProductFormFields;
+      const currentInputDetailNestedPath = buildDetailInputErrorPath(name.toString()) as NewProductFormFields;
 
-        const hasCurrentInputError = get(oldErrors, currentInputDetailNestedPath);
+      clearErrors(currentInputDetailNestedPath);
+    } catch (throwenError) {
+      const errors = throwenError as ZodError;
+      const { fieldErrors } = errors.flatten();
+      const currentError = fieldErrors?.[name];
 
-        // TODO: test this
-        if (hasCurrentInputError) {
-          clearErrors(currentInputDetailNestedPath);
+      const oldErrors = formState.errors;
+      const currentInputDetailNestedPath = buildDetailInputErrorPath(name.toString()) as NewProductFormFields;
+
+      const hasCurrentInputError = get(oldErrors, currentInputDetailNestedPath);
+
+      if (hasCurrentInputError) {
+        clearErrors(currentInputDetailNestedPath);
+      }
+
+      if (currentError) {
+        const errorMsg = currentError?.[0];
+        if (errorMsg) {
+          setError(currentInputDetailNestedPath, { message: errorMsg });
         }
-
-        if (currentError) {
-          const errorMsg = currentError?.[0];
-          if (errorMsg) {
-            setError(currentInputDetailNestedPath, { message: errorMsg });
-          }
-        }
-      })
+      }
+    }
   };
 
   return {

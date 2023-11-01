@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import { font_RedHatDisplay } from '../fonts';
 import { Control, FieldValues, useFormState } from 'react-hook-form';
 import { getInputDefaultValue } from '../helpers';
@@ -42,7 +42,20 @@ export function TextInput<T extends string, F extends FieldValues>({
 }: TextInputProps<T, F>) {
   const { errors } = useFormState({ control });
 
-  const inputError = get(errors, errorPath || name);
+  const getInputError = useCallback(() => {
+    const foundError = get(errors, errorPath || name);
+
+    if (foundError && name in foundError) {
+      const deepErrorPath: string = `${errorPath}.${name}`;
+      const deepError = get(errors, deepErrorPath);
+
+      return deepError;
+    };
+
+    return foundError;
+  }, [errorPath, errors, name]);
+
+  const inputError = getInputError();
 
   const handleChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>((event) => {
     const { target } = event;
