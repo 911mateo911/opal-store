@@ -31,8 +31,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
     control,
     handleSubmit,
     trigger,
-    clearErrors,
-    formState
+    clearErrors
   } = form;
 
   const onSimpleInputChange = (value: string | boolean | number, field: NewProductFormFields) => {
@@ -68,31 +67,39 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
     setValue(NewProductFormFields.images, images);
   };
 
-  const onSubmit = handleSubmit((formData) => {
-    const selectedCategory = formData.category;
-    const selectedSubcategory = formData.subCategory;
+  const validateAndGoToNextStep = (previousDetails: NewProductSchemaType['details']) => {
+    return handleSubmit((formData) => {
+      const selectedCategory = formData.category;
+      const selectedSubcategory = formData.subCategory;
 
-    const selectedSubcategorySelectOption = PRODUCT_SUBCATEGORIES_MAP?.[selectedCategory]?.[selectedSubcategory];
+      const selectedSubcategorySelectOption = PRODUCT_SUBCATEGORIES_MAP?.[selectedCategory]?.[selectedSubcategory];
 
-    let nextStep: PRODUCT_FORM_STEPS = PRODUCT_FORM_STEPS.VERIFY_AND_PUBLISH;
+      let nextStep: PRODUCT_FORM_STEPS = PRODUCT_FORM_STEPS.VERIFY_AND_PUBLISH;
 
-    if (formData.hasNextStep) {
-      nextStep = PRODUCT_FORM_STEPS.DETAILS_FORM;
-    };
-    if (selectedSubcategorySelectOption?.initialValues) {
-      // If the subcategory wasnt changed then dont revert the details
-      const initialValuesForSubcategory = selectedSubcategorySelectOption.initialValues;
-      const formDataDetailsKeys = Object.keys(formData[NewProductFormFields.details]);
-      const wasPassedTheSameSubcategory = formDataDetailsKeys.every(key => initialValuesForSubcategory[key]);
-
-      if (!wasPassedTheSameSubcategory || !formDataDetailsKeys.length) {
-        setValue(NewProductFormFields.details, selectedSubcategorySelectOption.initialValues);
+      if (formData.hasNextStep) {
+        nextStep = PRODUCT_FORM_STEPS.DETAILS_FORM;
       };
-    }
-    clearErrors();
-    setValue(NewProductFormFields.formStep, nextStep);
-    console.log({ formData })
-  }, console.log);
+      if (selectedSubcategorySelectOption?.initialValues) {
+        // If the subcategory wasnt changed then dont revert the details
+        const initialValuesForSubcategory = selectedSubcategorySelectOption.initialValues;
+        const previousFormDataDetailsKeys = Object.keys(previousDetails);
+        const wasPassedTheSameSubcategory = previousFormDataDetailsKeys.every(key => initialValuesForSubcategory[key]);
+
+        if (!wasPassedTheSameSubcategory) {
+          setValue(NewProductFormFields.details, selectedSubcategorySelectOption.initialValues);
+        };
+      }
+      clearErrors();
+      setValue(NewProductFormFields.formStep, nextStep);
+      console.log({ formData })
+    }, console.log);
+  };
+
+  const onSubmit = () => {
+    validateAndGoToNextStep(
+      getValues(NewProductFormFields.details)
+    )();
+  };
 
   // TODO: add hover states to inputs
   return (

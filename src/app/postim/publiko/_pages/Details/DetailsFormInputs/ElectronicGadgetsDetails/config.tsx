@@ -1,7 +1,7 @@
 import { SelectValues } from "opal/app/_shared/atoms/Select";
 import { z } from "zod";
 import { PRODUCT_DETAIL_FIELD, TECH_PRODUCT_DETAILS } from "opal/app/_shared/productTypes";
-import { PRODUCT_FORM_CONFIG } from "opal/app/postim/publiko/_formSchema";
+import { PRODUCT_FORM_CONFIG } from "opal/app/_config";
 
 enum TV_DETAILS_SCREEN_RES_TYPE {
   SD = 'SD',

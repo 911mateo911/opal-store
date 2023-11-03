@@ -2,7 +2,6 @@ import { MapSelectValues, SelectOption, SelectValues } from "opal/app/_shared/at
 import { getFirstAndLastKeyInMap } from "opal/app/_shared/helpers";
 import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
 import { MappedKeysOfSchemaObject, ProductDetailsRenderData } from "opal/app/_shared/types";
-import { PRODUCT_FORM_CONFIG } from "opal/app/postim/publiko/_formSchema";
 import { z } from "zod";
 import CarFuelIcon from 'opal/app/_shared/icons/details/autos/car_fuel.svg?url';
 import CarMakeIcon from 'opal/app/_shared/icons/details/autos/car.svg?url';
@@ -10,6 +9,7 @@ import CarModelIcon from 'opal/app/_shared/icons/details/autos/car_model.svg?url
 import CarPlateIcon from 'opal/app/_shared/icons/details/autos/car_plate.svg?url';
 import CarGearboxIcon from 'opal/app/_shared/icons/details/autos/car_gearbox.svg?url';
 import CalendarIcon from 'opal/app/_shared/icons/calendar.svg?url';
+import { PRODUCT_FORM_CONFIG } from "opal/app/_config";
 
 export const currentYear = new Date().getFullYear();
 const minYear = currentYear - 100;
