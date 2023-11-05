@@ -67,6 +67,7 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
             values={CAR_DETAILS_YEAR_SELECT_OPTIONS}
             initialValue={currentYear.toString()}
             onSelect={setDetails}
+            numeric
           />
         </div>
         <div>

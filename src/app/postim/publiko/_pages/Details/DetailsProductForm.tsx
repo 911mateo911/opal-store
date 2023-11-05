@@ -38,7 +38,8 @@ export const DetailsProductForm = ({ form }: ProductFormComponentBaseProps) => {
 
         if (error?.issues) {
           error.issues.forEach(issue => {
-            const issuePath = `${NewProductFormFields.details}.${issue.path[0].toString()}` as NewProductFormFields;
+            const normalizedIssuePath = Array.from(new Set(issue.path)).join('.');
+            const issuePath = `${NewProductFormFields.details}.${normalizedIssuePath}` as NewProductFormFields;
             setError(issuePath, {
               message: issue.message
             })

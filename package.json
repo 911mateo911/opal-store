@@ -20,6 +20,7 @@
     "keen-slider": "^6.8.6",
     "lodash.get": "^4.4.2",
     "next": "^14.0.0",
+    "next-intl": "^2.22.1",
     "postcss": "8.4.28",
     "react": "18.2.0",
     "react-day-picker": "^8.8.2",
@@ -32,11 +33,10 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
-    "prisma": "^5.3.1",
     "@types/lodash.get": "^4.4.7",
     "@types/node": "20.5.1",
     "@types/react": "18.2.20",
-    "@types/react-dom": "18.2.7"
+    "@types/react-dom": "18.2.7",
+    "prisma": "^5.3.1"
   }
 }
-

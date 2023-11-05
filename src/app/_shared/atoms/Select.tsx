@@ -22,7 +22,8 @@ interface SelectProps<N extends string, T extends string> {
   name: N;
   values: SelectValues<T> | MapSelectValues<T>;
   initialValue?: string | Record<T, string | boolean | number>;
-  onSelect?: (optionValue: string, name: N) => void;
+  onSelect?: (optionValue: string | number, name: N) => void;
+  numeric?: boolean;
 };
 
 interface SelectModalState<V extends string> {
@@ -47,7 +48,8 @@ export function Select<N extends string, T extends string>({
   values,
   initialValue,
   onSelect,
-  name
+  name,
+  numeric
 }: SelectProps<N, T>) {
   const propsInitialVal = getInputDefaultValue<T, N>(initialValue, name) as T | undefined;
 
@@ -99,7 +101,17 @@ export function Select<N extends string, T extends string>({
 
   const handleSelect = (option: SelectOption<T>) => {
     closeModal(option.value);
-    onSelect?.(option.value, name);
+
+    let valueToEmit: string | number = option.value;
+    if (numeric) {
+      valueToEmit = Number(option.value);
+
+      if (isNaN(valueToEmit)) {
+        // TODO: better logs
+        throw new Error(`Provided value for NUMERIC select component with name ${name} is NaN. Value: ${option.value}`)
+      }
+    };
+    onSelect?.(valueToEmit, name);
   }
 
   const selectedValue = useMemo(() => {

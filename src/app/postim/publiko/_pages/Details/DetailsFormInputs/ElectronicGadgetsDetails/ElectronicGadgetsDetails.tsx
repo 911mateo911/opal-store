@@ -12,6 +12,7 @@ import { NewProductFormFields } from '../../../../_formSchema';
 import { PRODUCT_SUBCATEGORIES } from '@prisma/client';
 import { electronicGadgetsDetailsBaseSchema } from './config';
 import { renderElectronicExtraFormComponents } from './helpers';
+import { buildDetailInputErrorPath } from 'opal/app/postim/publiko/_helpers/buildDetailInputErrorPath';
 
 interface ElectronicGadgetsDetailsProps extends ProductFormComponentBaseProps {
   formSubcategory: PRODUCT_SUBCATEGORIES
@@ -22,7 +23,9 @@ export const ElectronicGadgetsDetails = ({ form, formSubcategory }: ElectronicGa
 
   const {
     setDetails,
-    onSimpleInputChange
+    onSimpleInputChange,
+    onInputBlur,
+    details
   } = useProductDetails(form, electronicGadgetsDetailsBaseSchema);
 
   return (
@@ -37,6 +40,9 @@ export const ElectronicGadgetsDetails = ({ form, formSubcategory }: ElectronicGa
             onChange={setDetails}
             control={control}
             placeholder='Apple, Samsung...'
+            onBlur={onInputBlur}
+            defaultValue={details[PRODUCT_DETAIL_FIELD.ELECTRONICS_MAKE]}
+            errorPath={buildDetailInputErrorPath(PRODUCT_DETAIL_FIELD.ELECTRONICS_MAKE)}
           />
         </div>
         <div>

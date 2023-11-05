@@ -54,10 +54,28 @@ export const electronicGadgetsDetailsBaseSchemaInitialValue: z.infer<typeof elec
 };
 
 const electronicGadgetsExtraDetailsBaseSchema = z.object({
-  [TECH_PRODUCT_DETAILS.CPU]: z.string().optional(),
-  [TECH_PRODUCT_DETAILS.RAM]: z.string().optional(),
-  [TECH_PRODUCT_DETAILS.GPU]: z.string().optional(),
-  [TECH_PRODUCT_DETAILS.ROM]: z.string().optional()
+  [TECH_PRODUCT_DETAILS.CPU]: z.string()
+    .max(PRODUCT_FORM_CONFIG.techDetailsCpuMaxLength, {
+      message: `CPU duhet te jete max ${PRODUCT_FORM_CONFIG.techDetailsCpuMaxLength} karaktere.`
+    })
+    .optional(),
+  [TECH_PRODUCT_DETAILS.RAM]: z.number()
+    .max(PRODUCT_FORM_CONFIG.techDetailsRamMaxValue, {
+      message: `Kapaciteti i RAM nuk mund te jete > ${PRODUCT_FORM_CONFIG.techDetailsRamMaxValue}GB.`
+    })
+    .or(z.string())
+    .optional(),
+  [TECH_PRODUCT_DETAILS.GPU]: z.string()
+    .max(PRODUCT_FORM_CONFIG.techDetailsGpuMaxLength, {
+      message: `GPU duhet te jete max ${PRODUCT_FORM_CONFIG.techDetailsGpuMaxLength} karaktere.`
+    })
+    .optional(),
+  [TECH_PRODUCT_DETAILS.ROM]: z.number()
+    .max(PRODUCT_FORM_CONFIG.techDetailsRomMaxValue, {
+      message: `Kapaciteti i harddisk nuk mund te jete > ${PRODUCT_FORM_CONFIG.techDetailsRomMaxValue}GB.`
+    })
+    .or(z.string())
+    .optional(),
 });
 
 const screenSizeSchema = z.string()

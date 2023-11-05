@@ -10,6 +10,7 @@ import {
 import { PRODUCT_SUBCATEGORIES } from '@prisma/client';
 import { LaptopSpecifix } from './Specifics/LaptopSpecific';
 import { computersDetailsSchema } from '../config';
+import { buildDetailInputErrorPath } from 'opal/app/postim/publiko/_helpers/buildDetailInputErrorPath';
 
 interface ComputersDetailsProps extends ProductFormComponentBaseProps {
   formSubcategory: PRODUCT_SUBCATEGORIES;
@@ -19,7 +20,9 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
   const { control } = form;
 
   const {
-    setDetails
+    setDetails,
+    onInputBlur,
+    details
   } = useProductDetails(form, computersDetailsSchema);
 
   const handleSetExtraDetails = (content: string | number | boolean, field: TECH_PRODUCT_DETAILS) => {
@@ -38,6 +41,8 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
             onChange={handleSetExtraDetails}
             control={control}
             placeholder='AMD, Intel ...'
+            defaultValue={details[PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]}
+            errorPath={buildDetailInputErrorPath(PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA, { extraField: TECH_PRODUCT_DETAILS.CPU })}
           />
         </div>
         <div>
@@ -50,6 +55,9 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
             control={control}
             placeholder='2, 4 ...'
             adornment='(GB)'
+            defaultValue={details[PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]}
+            errorPath={buildDetailInputErrorPath(PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA, { extraField: TECH_PRODUCT_DETAILS.RAM })}
+            type='number'
           />
         </div>
       </div>
@@ -63,6 +71,8 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
             onChange={handleSetExtraDetails}
             control={control}
             placeholder='Nvidia, E integruar ...'
+            defaultValue={details[PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]}
+            errorPath={buildDetailInputErrorPath(PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA, { extraField: TECH_PRODUCT_DETAILS.GPU })}
           />
         </div>
         <div>

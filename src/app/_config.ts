@@ -8,6 +8,10 @@ interface PRODUCT_FORM_CONFIG_TYPE {
   electronicsScreenSizeInchMax: number,
   electronicsScreenSizeInchMin: number,
   priceMax: number;
+  techDetailsCpuMaxLength: number;
+  techDetailsRamMaxValue: number;
+  techDetailsGpuMaxLength: number;
+  techDetailsRomMaxValue: number;
 };
 
 export const PRODUCT_FORM_CONFIG: PRODUCT_FORM_CONFIG_TYPE = {
@@ -19,7 +23,11 @@ export const PRODUCT_FORM_CONFIG: PRODUCT_FORM_CONFIG_TYPE = {
   electronicsMakeMaxLength: 30,
   electronicsScreenSizeInchMax: 120,
   electronicsScreenSizeInchMin: 5,
-  priceMax: 1_000_000_000
+  priceMax: 1_000_000_000,
+  techDetailsCpuMaxLength: 20,
+  techDetailsRamMaxValue: 1_024,
+  techDetailsGpuMaxLength: 30,
+  techDetailsRomMaxValue: 10_000
 };
 
 interface GLOBAL_CONFIG_TYPE {
@@ -30,4 +38,4 @@ interface GLOBAL_CONFIG_TYPE {
 export const GLOBAL_CONFIG: GLOBAL_CONFIG_TYPE = {
   emailRegex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   fileExtensionRegex: /\.[0-9a-z]+$/i
-}
+};

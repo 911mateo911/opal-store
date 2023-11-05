@@ -17,7 +17,7 @@ export const useProductDetails = <T extends ZodRawShape>(
 ) => {
   const { control, setValue, getValues, setError, formState, clearErrors } = form;
 
-  const onSimpleInputChange = (value: string | boolean, field: NewProductFormFields) => {
+  const onSimpleInputChange = (value: string | boolean | number, field: NewProductFormFields) => {
     setValue(field, value);
   };
 
@@ -67,6 +67,8 @@ export const useProductDetails = <T extends ZodRawShape>(
       const errors = throwenError as ZodError;
       const { fieldErrors } = errors.flatten();
       const currentError = fieldErrors?.[name];
+
+      console.log({ currentError, fieldErrors, name, errors })
 
       const oldErrors = formState.errors;
       const currentInputDetailNestedPath = buildDetailInputErrorPath(name.toString()) as NewProductFormFields;
