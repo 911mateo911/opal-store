@@ -1,4 +1,4 @@
-import { UseFormReturn, useWatch } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import {
   NewProductFormFields,
   NewProductSchemaType,
@@ -15,17 +15,13 @@ export const useProductDetails = <T extends ZodRawShape>(
   form: UseFormReturn<NewProductSchemaType>,
   schema: ZodObject<T>
 ) => {
-  const { control, setValue, getValues, setError, formState, clearErrors } = form;
+  const { setValue, getValues, setError, formState, clearErrors } = form;
+
+  const productDetails = getValues(NewProductFormFields.details) || newProductSchemaInitialValues[NewProductFormFields.details];
 
   const onSimpleInputChange = (value: string | boolean | number, field: NewProductFormFields) => {
     setValue(field, value);
   };
-
-  const productDetails = useWatch({
-    control,
-    name: NewProductFormFields.details,
-    defaultValue: newProductSchemaInitialValues[NewProductFormFields.details]
-  });
 
   const setDetails: SET_PRODUCT_DETAILS_FUNC = (
     content,
@@ -56,36 +52,44 @@ export const useProductDetails = <T extends ZodRawShape>(
     });
   };
 
-  const onInputBlur = async (name: keyof T) => {
+  const onInputBlur = async (name: keyof T | string, context?: string) => {
+    const normalizedName = name.toString();
+    const inputPath = context ? `${context}.${normalizedName}` : normalizedName;
+
     try {
       await schema.parseAsync(getValues(NewProductFormFields.details));
 
-      const currentInputDetailNestedPath = buildDetailInputErrorPath(name.toString()) as NewProductFormFields;
+      const currentInputDetailNestedPath = buildDetailInputErrorPath(inputPath) as NewProductFormFields;
 
       clearErrors(currentInputDetailNestedPath);
     } catch (throwenError) {
       const errors = throwenError as ZodError;
       const { fieldErrors } = errors.flatten();
-      const currentError = fieldErrors?.[name];
+      let currentError = fieldErrors?.[name];
 
-      console.log({ currentError, fieldErrors, name, errors })
+      if (context) {
+        const foundDeepError = errors.issues.find(({ path }) => inputPath === path.join('.'));
+        if (foundDeepError) {
+          currentError = [foundDeepError.message];
+        };
+      };
 
       const oldErrors = formState.errors;
-      const currentInputDetailNestedPath = buildDetailInputErrorPath(name.toString()) as NewProductFormFields;
+      const currentInputDetailNestedPath = buildDetailInputErrorPath(inputPath) as NewProductFormFields;
 
       const hasCurrentInputError = get(oldErrors, currentInputDetailNestedPath);
 
       if (hasCurrentInputError) {
         clearErrors(currentInputDetailNestedPath);
-      }
+      };
 
       if (currentError) {
         const errorMsg = currentError?.[0];
         if (errorMsg) {
           setError(currentInputDetailNestedPath, { message: errorMsg });
-        }
-      }
-    }
+        };
+      };
+    };
   };
 
   return {

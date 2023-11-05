@@ -43,6 +43,8 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
             placeholder='AMD, Intel ...'
             defaultValue={details[PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]}
             errorPath={buildDetailInputErrorPath(PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA, { extraField: TECH_PRODUCT_DETAILS.CPU })}
+            context={PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA}
+            onBlur={onInputBlur}
           />
         </div>
         <div>
@@ -58,6 +60,8 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
             defaultValue={details[PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]}
             errorPath={buildDetailInputErrorPath(PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA, { extraField: TECH_PRODUCT_DETAILS.RAM })}
             type='number'
+            context={PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA}
+            onBlur={onInputBlur}
           />
         </div>
       </div>
@@ -73,6 +77,8 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
             placeholder='Nvidia, E integruar ...'
             defaultValue={details[PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]}
             errorPath={buildDetailInputErrorPath(PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA, { extraField: TECH_PRODUCT_DETAILS.GPU })}
+            context={PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA}
+            onBlur={onInputBlur}
           />
         </div>
         <div>
@@ -85,6 +91,11 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
             control={control}
             placeholder='256, 512 ...'
             adornment='(GB)'
+            defaultValue={details[PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]}
+            errorPath={buildDetailInputErrorPath(PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA, { extraField: TECH_PRODUCT_DETAILS.ROM })}
+            type='number'
+            context={PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA}
+            onBlur={onInputBlur}
           />
         </div>
       </div>

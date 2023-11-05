@@ -16,11 +16,12 @@ interface TextInputProps<T extends string, F extends FieldValues> {
   className?: string;
   placeholder?: string;
   textarea?: boolean;
-  onBlur?: (name: T) => void;
+  onBlur?: (name: T, context?: string) => void;
   defaultValue?: string | number | Record<T, string | boolean | number>;
   control?: Control<F>;
   adornment?: React.ReactNode;
   errorPath?: string;
+  context?: string;
 };
 
 const numberInputAndDotsRegex = /^\d+(\.\d+)*$/;
@@ -38,7 +39,8 @@ export function TextInput<T extends string, F extends FieldValues>({
   control,
   defaultValue,
   adornment,
-  errorPath
+  errorPath,
+  context
 }: TextInputProps<T, F>) {
   const { errors } = useFormState({ control });
 
@@ -109,7 +111,7 @@ export function TextInput<T extends string, F extends FieldValues>({
             sharedClasses
           )}
           placeholder={placeholder}
-          onBlur={() => onBlur?.(name)}
+          onBlur={() => onBlur?.(name, context)}
           defaultValue={getInputDefaultValue(defaultValue, name)}
         />
       );
@@ -128,7 +130,7 @@ export function TextInput<T extends string, F extends FieldValues>({
               sharedClasses,
             )}
             onChange={handleChange}
-            onBlur={() => onBlur?.(name)}
+            onBlur={() => onBlur?.(name, context)}
             defaultValue={getInputDefaultValue(defaultValue, name)}
           />
           {adornment && (
@@ -156,7 +158,8 @@ export function TextInput<T extends string, F extends FieldValues>({
     id,
     className,
     adornment,
-    handleChange
+    handleChange,
+    context
   ]);
 
   return (

@@ -27,7 +27,7 @@ export const PRODUCT_FORM_CONFIG: PRODUCT_FORM_CONFIG_TYPE = {
   techDetailsCpuMaxLength: 20,
   techDetailsRamMaxValue: 1_024,
   techDetailsGpuMaxLength: 30,
-  techDetailsRomMaxValue: 10_000
+  techDetailsRomMaxValue: 100_000
 };
 
 interface GLOBAL_CONFIG_TYPE {
