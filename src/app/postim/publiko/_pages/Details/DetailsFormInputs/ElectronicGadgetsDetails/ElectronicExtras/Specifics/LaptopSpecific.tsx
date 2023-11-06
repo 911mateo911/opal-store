@@ -5,7 +5,7 @@ import { PRODUCT_DETAIL_FIELD, TECH_PRODUCT_DETAILS } from 'opal/app/_shared/pro
 import { Checkbox } from 'opal/app/_shared/atoms/Checkbox';
 import { ProductFormComponentBaseProps } from 'opal/app/postim/publiko/_config';
 import { useProductDetails } from 'opal/app/postim/publiko/_hooks/useProductDetails';
-import { laptopDetailsSchema } from '../../config';
+import { laptopDetailsSchema } from './config';
 
 export const LaptopSpecifix = ({ form }: ProductFormComponentBaseProps) => {
   const { control } = form;

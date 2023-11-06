@@ -18,7 +18,7 @@ export function getInputDefaultValue<T extends string, N extends string>(
     return defaultValue.toString();
   };
 
-  return defaultValue[name].toString();
+  return defaultValue[name]?.toString();
 };
 
 export function getBooleanInputDefaultValue<T extends string>(

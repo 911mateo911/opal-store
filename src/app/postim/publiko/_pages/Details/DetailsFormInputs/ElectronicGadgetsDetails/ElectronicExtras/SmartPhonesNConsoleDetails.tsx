@@ -6,7 +6,7 @@ import { InputTitle } from 'opal/app/postim/publiko/_components/InputTitle';
 import { ProductFormComponentBaseProps } from 'opal/app/postim/publiko/_config';
 import { useProductDetails } from 'opal/app/postim/publiko/_hooks/useProductDetails';
 import { PRODUCT_SUBCATEGORIES } from '@prisma/client';
-import { smartphonesNConsoleDetailsSchema } from '../config';
+import { smartphonesNConsoleDetailsSchema } from './config';
 
 interface SmartPhonesNConsoleDetailsProps extends ProductFormComponentBaseProps {
   formSubcategory: PRODUCT_SUBCATEGORIES;

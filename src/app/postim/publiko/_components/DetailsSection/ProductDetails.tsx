@@ -2,7 +2,7 @@ import React from 'react';
 import { ProductFormComponentBaseProps } from '../../_config';
 import { NewProductFormFields } from '../../_formSchema';
 import { PRODUCT_SUBCATEGORIES_MAP } from '../../_subcategoriesMetaData';
-import { mapDetailsToCardProps } from './mapDetailsToCardProps';
+import { createProductConditionDetailsCardProps, mapDetailsToCardProps } from './mapDetailsToCardProps';
 import { ProductDetailCard } from './ProductDetailCard';
 import { font_RedHatDisplay } from 'opal/app/_shared/fonts';
 import clsx from 'clsx';
@@ -22,6 +22,10 @@ export const ProductDetails = ({ form }: ProductFormComponentBaseProps) => {
   };
 
   const cardRenderProps = mapDetailsToCardProps(details, detailsMap.detailsRenderData);
+
+  if (detailsMap.showConditionOnDetails) {
+    cardRenderProps.unshift(createProductConditionDetailsCardProps(form.getValues(NewProductFormFields.condition)));
+  };
 
   // TODO: make the last element be full width
   return (

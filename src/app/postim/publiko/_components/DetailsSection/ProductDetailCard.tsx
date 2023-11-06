@@ -16,7 +16,7 @@ export const ProductDetailCard = ({ data, detailName, iconSrc }: ProductDetailCa
     )} >
       <p className={clsx(
         font_RedHatDisplay.className,
-        'font-bold text-sm tracking-wide leading-4 mb-1.5 text-center text-grey-90',
+        'font-bold text-sm tracking-wide leading-4 mb-1.5 text-center text-grey-90 whitespace-pre',
         'dark:text-grey-30'
       )} >
         {detailName}

@@ -4,22 +4,31 @@ import {
   apartmentDetailsSchema,
   apartmentDetailsSchemaInitialValue
 } from "./_pages/Details/DetailsFormInputs/ApartmentDetails/config";
-import { carDetailsRenderDataMap, carDetailsSchema, carDetailsSchemaInitialValue } from "./_pages/Details/DetailsFormInputs/CarDetails/config";
 import {
-  computersDetailsSchema,
-  computersDetailsSchemaInitialValue,
+  carDetailsRenderDataMap,
+  carDetailsSchema,
+  carDetailsSchemaInitialValue
+} from "./_pages/Details/DetailsFormInputs/CarDetails/config";
+import {
   electronicGadgetsDetailsBaseSchema,
   electronicGadgetsDetailsBaseSchemaInitialValue,
-  laptopDetailsSchema,
-  laptopDetailsSchemaInitialValue,
-  smartphonesNConsoleDetailsSchema,
-  smartphonesNConsoleDetailsSchemaInitialValue,
-  tvDetailsSchema,
-  tvDetailsSchemaInitialValue
 } from "./_pages/Details/DetailsFormInputs/ElectronicGadgetsDetails/config";
 import { SelectOption } from "opal/app/_shared/atoms/Select";
 import { ProductDetailsRenderDataMap } from "opal/app/_shared/types";
 import { ZodObject, ZodRawShape } from "zod";
+import {
+  smartphonesNConsoleDetailsSchemaInitialValue,
+  smartphonesNConsoleDetailsSchema,
+  computersDetailsSchemaInitialValue,
+  computersDetailsSchema,
+  computersDetailsRenderDataMap
+} from "./_pages/Details/DetailsFormInputs/ElectronicGadgetsDetails/ElectronicExtras/config";
+import {
+  laptopDetailsSchemaInitialValue,
+  laptopDetailsSchema,
+  tvDetailsSchemaInitialValue,
+  tvDetailsSchema
+} from "./_pages/Details/DetailsFormInputs/ElectronicGadgetsDetails/ElectronicExtras/Specifics/config";
 
 export interface ProductSubCategoryMetaData<T extends string> extends SelectOption<T> {
   hasNextStep?: boolean;
@@ -27,6 +36,7 @@ export interface ProductSubCategoryMetaData<T extends string> extends SelectOpti
   initialValues?: Record<string, Record<string, string | number | boolean>>;
   detailsRenderData?: ProductDetailsRenderDataMap<keyof this['initialValues'] | string>;
   zodDetailsSchema?: ZodObject<ZodRawShape>;
+  showConditionOnDetails?: boolean;
 };
 
 type ExtendedProductSubcategoryWithDataSelectOption<T extends string> = Partial<Record<T, ProductSubCategoryMetaData<T>>>;
@@ -126,7 +136,7 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__ACCESSORIES,
       hasNextStep: true,
       initialValues: electronicGadgetsDetailsBaseSchemaInitialValue,
-      zodDetailsSchema: electronicGadgetsDetailsBaseSchema
+      zodDetailsSchema: electronicGadgetsDetailsBaseSchema,
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__AUDIO]: {
       element: 'Pajisje Audio',
@@ -161,7 +171,9 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__PC,
       hasNextStep: true,
       initialValues: computersDetailsSchemaInitialValue,
-      zodDetailsSchema: computersDetailsSchema
+      zodDetailsSchema: computersDetailsSchema,
+      detailsRenderData: computersDetailsRenderDataMap,
+      showConditionOnDetails: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__SMARTPHONES]: {
       element: 'Smartphone',

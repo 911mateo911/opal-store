@@ -9,8 +9,8 @@ import {
 } from 'opal/app/_shared/productTypes';
 import { PRODUCT_SUBCATEGORIES } from '@prisma/client';
 import { LaptopSpecifix } from './Specifics/LaptopSpecific';
-import { computersDetailsSchema } from '../config';
 import { buildDetailInputErrorPath } from 'opal/app/postim/publiko/_helpers/buildDetailInputErrorPath';
+import { computersDetailsSchema } from './config';
 
 interface ComputersDetailsProps extends ProductFormComponentBaseProps {
   formSubcategory: PRODUCT_SUBCATEGORIES;

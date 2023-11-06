@@ -166,7 +166,7 @@ export const newProductSchema = z.object({
     )
   )),
   [NewProductFormFields.state]: z.nativeEnum(PRODUCT_STATE),
-  [NewProductFormFields.condition]: z.nativeEnum(PRODUCT_CONDITION).optional()
+  [NewProductFormFields.condition]: z.nativeEnum(PRODUCT_CONDITION)
 });
 
 export type NewProductSchemaType = z.infer<typeof newProductSchema>;
@@ -192,5 +192,6 @@ export const newProductSchemaInitialValues: NewProductSchemaType = {
   formStep: PRODUCT_FORM_STEPS.GENERAL_FORM,
   hasNextStep: true,
   details: PRODUCT_SUBCATEGORIES_MAP[PRODUCT_CATEGORIES.APARTMENT][PRODUCT_SUBCATEGORIES.APARTMENT__APARTMENT]?.initialValues || {},
-  state: PRODUCT_STATE.TO_SELL
+  state: PRODUCT_STATE.TO_SELL,
+  condition: PRODUCT_CONDITION.NEW
 };
