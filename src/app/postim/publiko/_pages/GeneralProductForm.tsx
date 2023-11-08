@@ -81,9 +81,8 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
       };
       if (selectedSubcategorySelectOption?.initialValues) {
         // If the subcategory wasnt changed then dont revert the details
-        const initialValuesForSubcategory = selectedSubcategorySelectOption.initialValues;
-        const previousFormDataDetailsKeys = Object.keys(previousDetails);
-        const wasPassedTheSameSubcategory = previousFormDataDetailsKeys.every(key => initialValuesForSubcategory[key]);
+        const initialValuesForSubcategoryKeys = Object.keys(selectedSubcategorySelectOption.initialValues);
+        const wasPassedTheSameSubcategory = initialValuesForSubcategoryKeys.every((key) => previousDetails?.[key as keyof typeof previousDetails]);
 
         if (!wasPassedTheSameSubcategory) {
           setValue(NewProductFormFields.details, selectedSubcategorySelectOption.initialValues);

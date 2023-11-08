@@ -7,6 +7,7 @@ import { ProductFormComponentBaseProps } from 'opal/app/postim/publiko/_config';
 import { useProductDetails } from 'opal/app/postim/publiko/_hooks/useProductDetails';
 import { PRODUCT_SUBCATEGORIES } from '@prisma/client';
 import { smartphonesNConsoleDetailsSchema } from './config';
+import { buildDetailInputErrorPath } from 'opal/app/postim/publiko/_helpers/buildDetailInputErrorPath';
 
 interface SmartPhonesNConsoleDetailsProps extends ProductFormComponentBaseProps {
   formSubcategory: PRODUCT_SUBCATEGORIES;
@@ -17,7 +18,9 @@ export const SmartPhonesNConsoleDetails = ({ form, formSubcategory }: SmartPhone
   const { control } = form;
 
   const {
-    setDetails
+    setDetails,
+    details,
+    onInputBlur
   } = useProductDetails(form, smartphonesNConsoleDetailsSchema);
 
   const handleSetExtraDetails = (content: string | number | boolean, field: TECH_PRODUCT_DETAILS) => {
@@ -36,6 +39,11 @@ export const SmartPhonesNConsoleDetails = ({ form, formSubcategory }: SmartPhone
           control={control}
           placeholder='64, 128 ...'
           adornment='(GB)'
+          defaultValue={details[PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]}
+          errorPath={buildDetailInputErrorPath(PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA, { extraField: TECH_PRODUCT_DETAILS.ROM })}
+          type='number'
+          context={PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA}
+          onBlur={onInputBlur}
         />
       </div>
       {formSubcategory !== PRODUCT_SUBCATEGORIES.ELECTRONICS__CONSOLES && (
@@ -44,6 +52,7 @@ export const SmartPhonesNConsoleDetails = ({ form, formSubcategory }: SmartPhone
             name={TECH_PRODUCT_DETAILS.WITH_CHARGER}
             onChange={handleSetExtraDetails}
             placeholder="Me karikues"
+            defaultChecked={details[PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]}
           />
         </div>
       )}

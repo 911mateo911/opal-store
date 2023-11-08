@@ -24,9 +24,9 @@ export const mapDetailsToCardProps = (
 
     let data: typeof detailFieldFromRenderData | ReactNode = detailFieldFromRenderData;
 
-    if (!data) {
+    if (typeof data !== 'boolean' && !data) {
       return previousData;
-    }
+    };
 
     if (boolValueMapping) {
       data = data ? boolValueMapping.truthy : boolValueMapping.false;

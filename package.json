@@ -16,10 +16,10 @@
     "compressorjs": "^1.2.1",
     "date-fns": "^2.30.0",
     "eslint": "8.47.0",
-    "eslint-config-next": "^14.0.0",
+    "eslint-config-next": "^14.0.1",
     "keen-slider": "^6.8.6",
     "lodash.get": "^4.4.2",
-    "next": "^14.0.0",
+    "next": "^14.0.1",
     "next-intl": "^2.22.1",
     "postcss": "8.4.28",
     "react": "18.2.0",
@@ -40,3 +40,4 @@
     "prisma": "^5.3.1"
   }
 }
+

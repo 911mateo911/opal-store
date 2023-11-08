@@ -12,6 +12,7 @@ import {
 import {
   electronicGadgetsDetailsBaseSchema,
   electronicGadgetsDetailsBaseSchemaInitialValue,
+  electronicGadgetsDetailsRenderDataMap,
 } from "./_pages/Details/DetailsFormInputs/ElectronicGadgetsDetails/config";
 import { SelectOption } from "opal/app/_shared/atoms/Select";
 import { ProductDetailsRenderDataMap } from "opal/app/_shared/types";
@@ -21,7 +22,8 @@ import {
   smartphonesNConsoleDetailsSchema,
   computersDetailsSchemaInitialValue,
   computersDetailsSchema,
-  computersDetailsRenderDataMap
+  computersDetailsRenderDataMap,
+  smartphonesNConsoleDetailsRenderDataMap
 } from "./_pages/Details/DetailsFormInputs/ElectronicGadgetsDetails/ElectronicExtras/config";
 import {
   laptopDetailsSchemaInitialValue,
@@ -137,20 +139,26 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
       hasNextStep: true,
       initialValues: electronicGadgetsDetailsBaseSchemaInitialValue,
       zodDetailsSchema: electronicGadgetsDetailsBaseSchema,
+      detailsRenderData: electronicGadgetsDetailsRenderDataMap,
+      showConditionOnDetails: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__AUDIO]: {
       element: 'Pajisje Audio',
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__AUDIO,
       hasNextStep: true,
       initialValues: electronicGadgetsDetailsBaseSchemaInitialValue,
-      zodDetailsSchema: electronicGadgetsDetailsBaseSchema
+      zodDetailsSchema: electronicGadgetsDetailsBaseSchema,
+      detailsRenderData: electronicGadgetsDetailsRenderDataMap,
+      showConditionOnDetails: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__CONSOLES]: {
       element: 'Gaming dhe konsola',
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__CONSOLES,
       hasNextStep: true,
       initialValues: smartphonesNConsoleDetailsSchemaInitialValue,
-      zodDetailsSchema: smartphonesNConsoleDetailsSchema
+      zodDetailsSchema: smartphonesNConsoleDetailsSchema,
+      detailsRenderData: smartphonesNConsoleDetailsRenderDataMap,
+      showConditionOnDetails: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__IOT]: {
       element: 'IOT/Pajisje Smart',
@@ -180,7 +188,9 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__SMARTPHONES,
       hasNextStep: true,
       initialValues: smartphonesNConsoleDetailsSchemaInitialValue,
-      zodDetailsSchema: smartphonesNConsoleDetailsSchema
+      zodDetailsSchema: smartphonesNConsoleDetailsSchema,
+      detailsRenderData: smartphonesNConsoleDetailsRenderDataMap,
+      showConditionOnDetails: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__SMART_PARTS]: {
       element: 'Pjese kembimi elektronike',
