@@ -18,6 +18,7 @@ export type ProductDetailsRenderData = {
   };
   selectValueMapping?: SelectValues<string>;
   extraField?: string;
+  hide?: boolean;
 };
 
 export type ProductDetailsRenderDataMap<T extends string | number | symbol> = Record<T, ProductDetailsRenderData>;

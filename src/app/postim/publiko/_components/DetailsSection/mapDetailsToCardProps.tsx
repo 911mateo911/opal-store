@@ -15,10 +15,18 @@ export const mapDetailsToCardProps = (
   };
 
   return Object.keys(detailsRenderData).reduce<ProductDetailCardProps[]>((previousData, currentKey) => {
-    const { iconSrc, detailName, metricUnit, boolValueMapping, selectValueMapping, extraField } = detailsRenderData[currentKey];
+    const {
+      iconSrc,
+      detailName,
+      metricUnit,
+      boolValueMapping,
+      selectValueMapping,
+      extraField,
+      hide
+    } = detailsRenderData[currentKey];
     const detailFieldFromRenderData = details[extraField ? extraField : currentKey]?.[currentKey];
 
-    if (typeof detailFieldFromRenderData === 'undefined') {
+    if (typeof detailFieldFromRenderData === 'undefined' || hide) {
       return previousData;
     };
 

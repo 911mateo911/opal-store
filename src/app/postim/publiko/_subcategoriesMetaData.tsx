@@ -23,7 +23,7 @@ import {
   computersDetailsSchemaInitialValue,
   computersDetailsSchema,
   computersDetailsRenderDataMap,
-  smartphonesNConsoleDetailsRenderDataMap
+  getSmartphonesNConsoleDetailsRenderDataMap
 } from "./_pages/Details/DetailsFormInputs/ElectronicGadgetsDetails/ElectronicExtras/config";
 import {
   laptopDetailsSchemaInitialValue,
@@ -157,7 +157,7 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
       hasNextStep: true,
       initialValues: smartphonesNConsoleDetailsSchemaInitialValue,
       zodDetailsSchema: smartphonesNConsoleDetailsSchema,
-      detailsRenderData: smartphonesNConsoleDetailsRenderDataMap,
+      detailsRenderData: getSmartphonesNConsoleDetailsRenderDataMap({ hideCharger: true }),
       showConditionOnDetails: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__IOT]: {
@@ -165,7 +165,9 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__IOT,
       hasNextStep: true,
       initialValues: electronicGadgetsDetailsBaseSchemaInitialValue,
-      zodDetailsSchema: electronicGadgetsDetailsBaseSchema
+      zodDetailsSchema: electronicGadgetsDetailsBaseSchema,
+      detailsRenderData: electronicGadgetsDetailsRenderDataMap,
+      showConditionOnDetails: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__LAPTOPS]: {
       element: 'Laptope',
@@ -189,7 +191,7 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
       hasNextStep: true,
       initialValues: smartphonesNConsoleDetailsSchemaInitialValue,
       zodDetailsSchema: smartphonesNConsoleDetailsSchema,
-      detailsRenderData: smartphonesNConsoleDetailsRenderDataMap,
+      detailsRenderData: getSmartphonesNConsoleDetailsRenderDataMap({ hideCharger: false }),
       showConditionOnDetails: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__SMART_PARTS]: {

@@ -74,27 +74,28 @@ export const smartphonesNConsoleDetailsSchema = electronicGadgetsDetailsBaseSche
 });
 
 // WHAT THE FUCK IS GOOD TYPING RRRAAAAAH
-export const smartphonesNConsoleDetailsRenderDataMap:
+export const getSmartphonesNConsoleDetailsRenderDataMap = ({ hideCharger }: { hideCharger: boolean }):
   ElectronicGadgetsDetailsRenderDataWrapperMap<
     ProductDetailsRenderDataMap<keyof z.infer<typeof smartphonesNConsoleDetailsExtraSchema>>
-  > = {
-  ROM: {
-    detailName: 'Kapaciteti ruajtes',
-    iconSrc: ElectronicsRomIcon,
-    metricUnit: '(GB)',
-    extraField: PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA
-  },
-  WITH_CHARGER: {
-    detailName: 'Karikues/Ushqyes',
-    iconSrc: ElectronicsChargerIcon,
-    boolValueMapping: {
-      truthy: 'Me karikues',
-      false: 'Pa karikues'
+  > => ({
+    ROM: {
+      detailName: 'Kapaciteti ruajtes',
+      iconSrc: ElectronicsRomIcon,
+      metricUnit: '(GB)',
+      extraField: PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA
     },
-    extraField: PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA
-  },
-  ...electronicGadgetsDetailsRenderDataMap
-}
+    WITH_CHARGER: {
+      detailName: 'Karikues/Ushqyes',
+      iconSrc: ElectronicsChargerIcon,
+      boolValueMapping: {
+        truthy: 'Me karikues',
+        false: 'Pa karikues'
+      },
+      extraField: PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA,
+      hide: hideCharger
+    },
+    ...electronicGadgetsDetailsRenderDataMap
+  })
 
 export const smartphonesNConsoleDetailsSchemaInitialValue: z.infer<typeof smartphonesNConsoleDetailsSchema> = {
   ...electronicGadgetsDetailsBaseSchemaInitialValue,
