@@ -8,7 +8,7 @@ import { InputTitle } from './InputTitle';
 import { PRODUCT_SUBCATEGORIES_MAP } from '../_subcategoriesMetaData';
 
 interface FormCategorySegmentProps {
-  onInputChange: (value: string | boolean, name: NewProductFormFields) => void;
+  onInputChange: (value: string | boolean | number, name: NewProductFormFields) => void;
   formControl: Control<NewProductSchemaType>;
   getValues: UseFormGetValues<NewProductSchemaType>;
 }

@@ -29,7 +29,8 @@ import {
   laptopDetailsSchemaInitialValue,
   laptopDetailsSchema,
   tvDetailsSchemaInitialValue,
-  tvDetailsSchema
+  tvDetailsSchema,
+  laptopsDetailsRenderDataMap
 } from "./_pages/Details/DetailsFormInputs/ElectronicGadgetsDetails/ElectronicExtras/Specifics/config";
 
 export interface ProductSubCategoryMetaData<T extends string> extends SelectOption<T> {
@@ -174,7 +175,9 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__LAPTOPS,
       hasNextStep: true,
       initialValues: laptopDetailsSchemaInitialValue,
-      zodDetailsSchema: laptopDetailsSchema
+      zodDetailsSchema: laptopDetailsSchema,
+      detailsRenderData: laptopsDetailsRenderDataMap,
+      showConditionOnDetails: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__PC]: {
       element: 'PC/Kompjuter',

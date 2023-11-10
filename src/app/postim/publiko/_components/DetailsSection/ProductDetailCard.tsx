@@ -8,6 +8,7 @@ export interface ProductDetailCardProps extends ProductDetailsRenderData {
   data: React.ReactNode;
 };
 
+// TODO: fix double lined details
 export const ProductDetailCard = ({ data, detailName, iconSrc }: ProductDetailCardProps) => {
   return (
     <div className={clsx(

@@ -1,7 +1,9 @@
 import { z } from 'zod';
 import {
+  ElectronicGadgetsDetailsRenderDataWrapperMap,
   electronicGadgetsDetailsBaseSchema,
   electronicGadgetsDetailsBaseSchemaInitialValue,
+  electronicGadgetsDetailsRenderDataMap,
   electronicGadgetsExtraDetailsBaseSchema,
   screenSizeSchema
 } from '../../config';
@@ -10,6 +12,10 @@ import {
   TECH_PRODUCT_DETAILS
 } from 'opal/app/_shared/productTypes';
 import { SelectValues } from 'opal/app/_shared/atoms/Select';
+import { ProductDetailsRenderDataMap } from 'opal/app/_shared/types';
+import { computersDetailsRenderDataMap } from '../config';
+import ElectronicsChargerIcon from 'opal/app/_shared/icons/details/electronics/electronics_charger.svg?url';
+import ElectronicsDisplayIcon from 'opal/app/_shared/icons/details/electronics/electronics_display.svg?url';
 
 export enum TV_DETAILS_SCREEN_RES_TYPE {
   SD = 'SD',
@@ -42,11 +48,13 @@ export const TV_DETAILS_SCREEN_RES_TYPE_SELECT_OPTIONS: SelectValues<TV_DETAILS_
   },
 };
 
+const laptopDetailsExtraSchema = {
+  [TECH_PRODUCT_DETAILS.SCREEN_SIZE]: screenSizeSchema,
+  [TECH_PRODUCT_DETAILS.WITH_CHARGER]: z.boolean()
+};
+
 export const laptopDetailsSchema = electronicGadgetsDetailsBaseSchema.extend({
-  [PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]: electronicGadgetsExtraDetailsBaseSchema.extend({
-    [TECH_PRODUCT_DETAILS.SCREEN_SIZE]: screenSizeSchema,
-    [TECH_PRODUCT_DETAILS.WITH_CHARGER]: z.boolean()
-  })
+  [PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]: electronicGadgetsExtraDetailsBaseSchema.extend(laptopDetailsExtraSchema)
 });
 
 export const laptopDetailsSchemaInitialValue: z.infer<typeof laptopDetailsSchema> = {
@@ -60,6 +68,29 @@ export const laptopDetailsSchemaInitialValue: z.infer<typeof laptopDetailsSchema
     ROM: ''
   }
 };
+
+export const laptopsDetailsRenderDataMap: ElectronicGadgetsDetailsRenderDataWrapperMap<
+  ProductDetailsRenderDataMap<keyof (z.infer<typeof electronicGadgetsExtraDetailsBaseSchema> & typeof laptopDetailsExtraSchema)>
+> = {
+  ...computersDetailsRenderDataMap,
+  ...electronicGadgetsDetailsRenderDataMap,
+  WITH_CHARGER: {
+    detailName: 'Karikues/Ushqyes',
+    iconSrc: ElectronicsChargerIcon,
+    boolValueMapping: {
+      truthy: 'Me karikues',
+      false: 'Pa karikues'
+    },
+    extraField: PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA,
+    hide: false
+  },
+  SCREEN_SIZE: {
+    detailName: 'Madhesia e ekranit',
+    iconSrc: ElectronicsDisplayIcon,
+    extraField: PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA,
+    metricUnit: `"(inch)`
+  }
+}
 
 export const tvDetailsSchema = electronicGadgetsDetailsBaseSchema.extend({
   [PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]: electronicGadgetsExtraDetailsBaseSchema.extend({

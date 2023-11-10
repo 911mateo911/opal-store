@@ -56,11 +56,12 @@ export const electronicGadgetsExtraDetailsBaseSchema = z.object({
     .optional(),
 });
 
-export const screenSizeSchema = z.string()
+export const screenSizeSchema = z.number()
   .min(PRODUCT_FORM_CONFIG.electronicsScreenSizeInchMin, {
-    message: `Madhesia e ekranit nuk mund te jete me pak se ${PRODUCT_FORM_CONFIG.electronicsScreenSizeInchMin} inch(")`
+    message: `Madhesia e ekranit nuk mund te jete me pak se ${PRODUCT_FORM_CONFIG.electronicsScreenSizeInchMin}"(inch)`
   })
   .max(PRODUCT_FORM_CONFIG.electronicsScreenSizeInchMax, {
-    message: `Madhesia e ekranit nuk mund te jete me shume se ${PRODUCT_FORM_CONFIG.electronicsScreenSizeInchMax} inch(")`
-  });
+    message: `Madhesia e ekranit nuk mund te jete me shume se ${PRODUCT_FORM_CONFIG.electronicsScreenSizeInchMax}"(inch)`
+  })
+  .or(z.string())
 
