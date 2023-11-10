@@ -19,7 +19,7 @@ interface ElectronicGadgetsDetailsProps extends ProductFormComponentBaseProps {
 }
 
 export const ElectronicGadgetsDetails = ({ form, formSubcategory }: ElectronicGadgetsDetailsProps) => {
-  const { control } = form;
+  const { control, getValues } = form;
 
   const {
     setDetails,
@@ -53,6 +53,7 @@ export const ElectronicGadgetsDetails = ({ form, formSubcategory }: ElectronicGa
             name={NewProductFormFields.condition}
             values={PRODUCT_CONDITION_SELECT_OPTIONS}
             onSelect={onSimpleInputChange}
+            initialValue={getValues(NewProductFormFields.condition)}
           />
         </div>
       </div>

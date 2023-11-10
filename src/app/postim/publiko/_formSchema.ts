@@ -68,7 +68,8 @@ export enum NewProductFormFields {
   hasNextStep = 'hasNextStep',
   details = 'details',
   state = 'state',
-  condition = 'condition'
+  condition = 'condition',
+  detailsId = 'detailsId'
 }
 
 // TODO: ADD validation messages
@@ -166,7 +167,8 @@ export const newProductSchema = z.object({
     )
   )),
   [NewProductFormFields.state]: z.nativeEnum(PRODUCT_STATE),
-  [NewProductFormFields.condition]: z.nativeEnum(PRODUCT_CONDITION)
+  [NewProductFormFields.condition]: z.nativeEnum(PRODUCT_CONDITION),
+  [NewProductFormFields.detailsId]: z.nativeEnum(PRODUCT_SUBCATEGORIES)
 });
 
 export type NewProductSchemaType = z.infer<typeof newProductSchema>;
@@ -193,5 +195,6 @@ export const newProductSchemaInitialValues: NewProductSchemaType = {
   hasNextStep: true,
   details: PRODUCT_SUBCATEGORIES_MAP[PRODUCT_CATEGORIES.APARTMENT][PRODUCT_SUBCATEGORIES.APARTMENT__APARTMENT]?.initialValues || {},
   state: PRODUCT_STATE.TO_SELL,
-  condition: PRODUCT_CONDITION.NEW
+  condition: PRODUCT_CONDITION.NEW,
+  detailsId: PRODUCT_SUBCATEGORIES.APARTMENT__APARTMENT,
 };

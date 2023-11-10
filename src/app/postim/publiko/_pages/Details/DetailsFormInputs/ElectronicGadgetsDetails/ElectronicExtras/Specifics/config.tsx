@@ -16,6 +16,7 @@ import { ProductDetailsRenderDataMap } from 'opal/app/_shared/types';
 import { computersDetailsRenderDataMap } from '../config';
 import ElectronicsChargerIcon from 'opal/app/_shared/icons/details/electronics/electronics_charger.svg?url';
 import ElectronicsDisplayIcon from 'opal/app/_shared/icons/details/electronics/electronics_display.svg?url';
+import ElectronicsScreenResIcon from 'opal/app/_shared/icons/details/electronics/electronics_screen_res.svg?url';
 
 export enum TV_DETAILS_SCREEN_RES_TYPE {
   SD = 'SD',
@@ -90,23 +91,38 @@ export const laptopsDetailsRenderDataMap: ElectronicGadgetsDetailsRenderDataWrap
     extraField: PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA,
     metricUnit: `"(inch)`
   }
-}
+};
+
+const tvDetailsExtraSchema = z.object({
+  [TECH_PRODUCT_DETAILS.SCREEN_RES]: z.nativeEnum(TV_DETAILS_SCREEN_RES_TYPE),
+  [TECH_PRODUCT_DETAILS.SCREEN_SIZE]: screenSizeSchema
+});
 
 export const tvDetailsSchema = electronicGadgetsDetailsBaseSchema.extend({
-  [PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]: electronicGadgetsExtraDetailsBaseSchema.extend({
-    [TECH_PRODUCT_DETAILS.SCREEN_RES]: z.nativeEnum(TV_DETAILS_SCREEN_RES_TYPE),
-    [TECH_PRODUCT_DETAILS.SCREEN_SIZE]: screenSizeSchema
-  })
+  [PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]: tvDetailsExtraSchema
 });
 
 export const tvDetailsSchemaInitialValue: z.infer<typeof tvDetailsSchema> = {
   ...electronicGadgetsDetailsBaseSchemaInitialValue,
   ELECTRONICS_EXTRA: {
     SCREEN_RES: TV_DETAILS_SCREEN_RES_TYPE.HD_1080,
-    SCREEN_SIZE: '',
-    CPU: '',
-    GPU: '',
-    RAM: '',
-    ROM: ''
+    SCREEN_SIZE: ''
   }
 };
+
+export const tvDetailsRenderDataMap: ElectronicGadgetsDetailsRenderDataWrapperMap<
+  ProductDetailsRenderDataMap<keyof z.infer<typeof tvDetailsExtraSchema>>> = {
+  ...electronicGadgetsDetailsRenderDataMap,
+  SCREEN_SIZE: {
+    detailName: 'Madhesia e ekranit',
+    iconSrc: ElectronicsDisplayIcon,
+    extraField: PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA,
+    metricUnit: `"(inch)`
+  },
+  SCREEN_RES: {
+    detailName: 'Rezolucioni i ekranit',
+    iconSrc: ElectronicsScreenResIcon,
+    extraField: PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA,
+    selectValueMapping: TV_DETAILS_SCREEN_RES_TYPE_SELECT_OPTIONS
+  },
+}

@@ -30,7 +30,8 @@ import {
   laptopDetailsSchema,
   tvDetailsSchemaInitialValue,
   tvDetailsSchema,
-  laptopsDetailsRenderDataMap
+  laptopsDetailsRenderDataMap,
+  tvDetailsRenderDataMap
 } from "./_pages/Details/DetailsFormInputs/ElectronicGadgetsDetails/ElectronicExtras/Specifics/config";
 
 export interface ProductSubCategoryMetaData<T extends string> extends SelectOption<T> {
@@ -206,21 +207,18 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__TABLETS,
       hasNextStep: true,
       initialValues: smartphonesNConsoleDetailsSchemaInitialValue,
-      zodDetailsSchema: smartphonesNConsoleDetailsSchema
+      zodDetailsSchema: smartphonesNConsoleDetailsSchema,
+      detailsRenderData: getSmartphonesNConsoleDetailsRenderDataMap({ hideCharger: false }),
+      showConditionOnDetails: true
     },
     [PRODUCT_SUBCATEGORIES.ELECTRONICS__TVS]: {
       element: 'Televizore',
       value: PRODUCT_SUBCATEGORIES.ELECTRONICS__TVS,
       hasNextStep: true,
       initialValues: tvDetailsSchemaInitialValue,
-      zodDetailsSchema: tvDetailsSchema
-    },
-    [PRODUCT_SUBCATEGORIES.ELECTRONICS_PC_SETUP]: {
-      element: 'Setup PC',
-      value: PRODUCT_SUBCATEGORIES.ELECTRONICS_PC_SETUP,
-      hasNextStep: true,
-      initialValues: computersDetailsSchemaInitialValue,
-      zodDetailsSchema: computersDetailsSchema
+      zodDetailsSchema: tvDetailsSchema,
+      detailsRenderData: tvDetailsRenderDataMap,
+      showConditionOnDetails: true
     }
   },
   [PRODUCT_CATEGORIES.HEALTH]: {

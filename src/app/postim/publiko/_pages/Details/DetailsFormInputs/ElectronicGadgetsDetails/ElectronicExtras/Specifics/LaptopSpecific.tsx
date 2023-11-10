@@ -45,6 +45,7 @@ export const LaptopSpecifix = ({ form }: ProductFormComponentBaseProps) => {
           name={TECH_PRODUCT_DETAILS.WITH_CHARGER}
           onChange={handleSetExtraDetails}
           placeholder="Me karikues"
+          defaultChecked={details[PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]}
         />
       </div>
     </div>

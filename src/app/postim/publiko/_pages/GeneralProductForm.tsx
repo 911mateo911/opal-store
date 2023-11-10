@@ -67,7 +67,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
     setValue(NewProductFormFields.images, images);
   };
 
-  const validateAndGoToNextStep = (previousDetails: NewProductSchemaType['details']) => {
+  const validateAndGoToNextStep = (previousDetailsId: NewProductSchemaType['detailsId']) => {
     return handleSubmit((formData) => {
       const selectedCategory = formData.category;
       const selectedSubcategory = formData.subCategory;
@@ -81,14 +81,14 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
       };
       if (selectedSubcategorySelectOption?.initialValues) {
         // If the subcategory wasnt changed then dont revert the details
-        const initialValuesForSubcategoryKeys = Object.keys(selectedSubcategorySelectOption.initialValues);
-        const wasPassedTheSameSubcategory = initialValuesForSubcategoryKeys.every((key) => previousDetails?.[key as keyof typeof previousDetails]);
+        const wasPassedTheSameSubcategory = previousDetailsId === selectedSubcategory;
 
         if (!wasPassedTheSameSubcategory) {
           setValue(NewProductFormFields.details, selectedSubcategorySelectOption.initialValues);
         };
       }
       clearErrors();
+      setValue(NewProductFormFields.detailsId, selectedSubcategory)
       setValue(NewProductFormFields.formStep, nextStep);
       console.log({ formData })
     }, console.log);
@@ -96,7 +96,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
 
   const onSubmit = () => {
     validateAndGoToNextStep(
-      getValues(NewProductFormFields.details)
+      getValues(NewProductFormFields.detailsId)
     )();
   };
 
