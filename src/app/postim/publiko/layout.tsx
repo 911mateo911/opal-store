@@ -10,6 +10,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PublishFormSidebar } from "./_components/PublishFormSidebar";
 import { PublishFormHeader } from "./_components/PublishFormHeader";
+import clsx from "clsx";
+import { FormGoBack } from "./_components/FormGoBack";
 
 export default function PublishPageLayout(
   { children }: { children: ReactNode }
@@ -20,8 +22,17 @@ export default function PublishPageLayout(
   });
 
   return (
-    <div className="max-w-[1000px] mx-auto px-4 py-6 flex justify-center" >
+    <div className={clsx(
+      "max-w-[1000px] mx-auto px-4 py-6 flex justify-center",
+      'max-tablet-sm:flex-col max-tablet-sm:max-w-xl max-tablet-sm:pt-16'
+    )} >
       <FormProvider {...form} >
+        <FormGoBack
+          form={form}
+          hideMobile={false}
+          hideDesktop
+          className='justify-center max-w-xs mx-auto w-full my-2'
+        />
         <PublishFormSidebar form={form} />
         <div className='w-full bg-grey-1 rounded-lg dark:bg-grey-95 mb-28 h-fit' >
           <PublishFormHeader form={form} />

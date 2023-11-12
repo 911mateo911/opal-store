@@ -6,17 +6,23 @@ import { ApartmentDetails } from "./ApartmentDetails/ApartmentDetails";
 import { ElectronicGadgetsDetails } from "./ElectronicGadgetsDetails/ElectronicGadgetsDetails";
 import { PRODUCT_SUBCATEGORIES_MAP } from "../../../_subcategoriesMetaData";
 
-const ELECTRONIC_SUBCATEGORIES_WITH_DETAILS_FORM = Object.values(PRODUCT_SUBCATEGORIES_MAP[PRODUCT_CATEGORIES.ELECTRONICS])
-  .reduce<PRODUCT_SUBCATEGORIES[]>((prevValues, { hasNextStep, value }) => {
-    if (hasNextStep) {
-      return [
-        ...prevValues,
-        value
-      ];
-    };
+const extractSubcategoriesNamesFromCategoryMap = (categoryMetaData: typeof PRODUCT_SUBCATEGORIES_MAP[PRODUCT_CATEGORIES]) => {
+  return Object.values(categoryMetaData)
+    .reduce<PRODUCT_SUBCATEGORIES[]>((prevValues, { hasNextStep, value }) => {
+      if (hasNextStep) {
+        return [
+          ...prevValues,
+          value
+        ];
+      };
 
-    return prevValues;
-  }, []);
+      return prevValues;
+    }, []);
+}
+
+const ELECTRONIC_SUBCATEGORIES_WITH_DETAILS_FORM = extractSubcategoriesNamesFromCategoryMap(
+  PRODUCT_SUBCATEGORIES_MAP[PRODUCT_CATEGORIES.ELECTRONICS]
+);
 
 export const renderCurrentFormDetailsComponent = (
   formSubcategory: PRODUCT_SUBCATEGORIES,

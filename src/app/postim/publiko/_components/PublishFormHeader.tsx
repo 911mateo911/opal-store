@@ -1,15 +1,13 @@
 import clsx from 'clsx';
 import { Chip } from 'opal/app/_shared/atoms/Chip';
-import { FilledChipButton } from 'opal/app/_shared/atoms/FilledChipButton';
-import backIcon from 'opal/app/_shared/icons/backArrow.svg?url';
-import { NewProductFormFields, PRODUCT_FORM_STEPS } from '../_formSchema';
+import { NewProductFormFields } from '../_formSchema';
 import { useWatch } from 'react-hook-form';
 import { ProductFormComponentBaseProps } from '../_config';
-import { useRouter } from 'next/navigation';
+import { FormGoBack } from './FormGoBack';
 
 export const PublishFormHeader = ({ form }: ProductFormComponentBaseProps) => {
-  const router = useRouter();
-  const { control, setValue, getValues, clearErrors } = form;
+
+  const { control } = form;
 
   const hasNextStep = useWatch({
     control,
@@ -17,41 +15,20 @@ export const PublishFormHeader = ({ form }: ProductFormComponentBaseProps) => {
     defaultValue: true
   });
 
-  const onGoBack = () => {
-    // TODO: refactor this piece of dogshit
-    const currentStep = getValues(NewProductFormFields.formStep);
-
-    if (currentStep === PRODUCT_FORM_STEPS.GENERAL_FORM) {
-      router.back();
-    };
-
-    let nextStep: PRODUCT_FORM_STEPS = PRODUCT_FORM_STEPS.GENERAL_FORM;
-
-    if (currentStep === PRODUCT_FORM_STEPS.DETAILS_FORM) {
-      nextStep = PRODUCT_FORM_STEPS.GENERAL_FORM;
-    };
-
-    if (currentStep === PRODUCT_FORM_STEPS.VERIFY_AND_PUBLISH) {
-      nextStep = PRODUCT_FORM_STEPS.DETAILS_FORM;
-    };
-
-    clearErrors();
-    setValue(NewProductFormFields.formStep, nextStep);
-  }
-
   return (
     <div className={clsx(
       'px-[10px] py-3 rounded-lg border-solid border border-grey-10 flex',
       'items-center justify-between bg-white',
-      'dark:bg-grey-90 dark:border-grey-95'
+      'dark:bg-grey-90 dark:border-grey-95',
+      'max-tablet-sm:fixed max-tablet-sm:top-24 max-tablet-sm:left-1/2',
+      'max-tablet-sm:max-w-xl max-tablet-sm:-translate-x-1/2 max-tablet-sm:w-full max-tablet-sm:z-40'
     )} >
-      <FilledChipButton
-        text='Mbrapa'
-        icon={backIcon}
-        textSize='sm'
-        onClick={onGoBack}
+      <FormGoBack
+        form={form}
+        hideDesktop={false}
+        hideMobile
       />
-      <div className='flex items-center justify-center gap-2' >
+      <div className='flex items-center justify-center gap-2 max-tablet-sm:ml-auto' >
         <Chip
           text='Ploteso Formen'
         />

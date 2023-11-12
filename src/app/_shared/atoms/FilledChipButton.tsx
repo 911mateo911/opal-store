@@ -26,7 +26,6 @@ export const FilledChipButton = (props: FilledChipButtonProps & LinkOrBtnType) =
   const { textSize, onClick } = props;
 
   const btnClassName = clsx(
-    props.className,
     'select-none text-green-80 font-medium rounded-full bg-green-20 transition text-base',
     'py-1 flex items-center',
     'hover:bg-green-30 hover:text-green-70',
@@ -35,7 +34,8 @@ export const FilledChipButton = (props: FilledChipButtonProps & LinkOrBtnType) =
     props.icon ? 'pl-2 pr-3' : 'px-4',
     {
       ['text-sm']: textSize === 'sm'
-    }
+    },
+    props.className
   );
 
   const icon = props.icon ? (

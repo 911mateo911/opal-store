@@ -221,7 +221,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
         <FormSectionTitle>
           Te tjera
         </FormSectionTitle>
-        <div className="grid gap-x-6 gap-y-2 grid-cols-[repeat(2,1fr)] w-full" >
+        <div className="grid gap-x-6 gap-y-2 grid-cols-[repeat(2,1fr)] w-full max-tablet:grid-cols-1 max-tablet:gap-y-0" >
           <div>
             <InputTitle>
               Preferoj te pergjigjem ne:

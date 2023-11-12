@@ -47,6 +47,10 @@ type ExtendedProductSubcategoryWithDataSelectOption<T extends string> = Partial<
 
 type PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = Record<PRODUCT_CATEGORIES, ExtendedProductSubcategoryWithDataSelectOption<PRODUCT_SUBCATEGORIES>>;
 
+// TODO: maybe add more details for the subcategories left
+// TODO?: think
+// TODO: make this lighter for the select
+// TODO?: dont mess with this piece of shit
 export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = {
   [PRODUCT_CATEGORIES.APARTMENT]: {
     [PRODUCT_SUBCATEGORIES.APARTMENT__APARTMENT]: {
@@ -224,9 +228,7 @@ export const PRODUCT_SUBCATEGORIES_MAP: PRODUCT_SUBCATEGORIES_MAP_BY_CATEGORY = 
   [PRODUCT_CATEGORIES.HEALTH]: {
     [PRODUCT_SUBCATEGORIES.HEALTH__GYM_SUPPLEMENTS]: {
       element: 'Suplemente Palestre',
-      value: PRODUCT_SUBCATEGORIES.HEALTH__GYM_SUPPLEMENTS,
-      // TODO: dont forget to add initial value here
-      hasNextStep: true
+      value: PRODUCT_SUBCATEGORIES.HEALTH__GYM_SUPPLEMENTS
     },
     [PRODUCT_SUBCATEGORIES.HEALTH__HEALTH_CONTENT]: {
       element: 'Shendeti',

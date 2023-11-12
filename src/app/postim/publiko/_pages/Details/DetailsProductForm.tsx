@@ -1,7 +1,6 @@
 import React from 'react';
 import { ProductFormComponentBaseProps } from '../../_config';
 import { NewProductFormFields, PRODUCT_FORM_STEPS } from '../../_formSchema';
-import { useFormState, useWatch } from 'react-hook-form';
 import { renderCurrentFormDetailsComponent } from './DetailsFormInputs/_config';
 import { FormDetailsMeta } from '../../_components/FormDetailsMeta';
 import { ActionButton } from 'opal/app/_shared/atoms/ActionButton';
@@ -12,10 +11,7 @@ import { ZodError } from 'zod';
 export const DetailsProductForm = ({ form }: ProductFormComponentBaseProps) => {
   const { handleSubmit, getValues, setValue, setError } = form;
 
-  const formSubCategory = useWatch({
-    control: form.control,
-    name: NewProductFormFields.subCategory,
-  });
+  const formSubcategory = getValues(NewProductFormFields.subCategory);
 
   const goToNextStep = handleSubmit(data => {
     console.log({ data });
@@ -62,7 +58,7 @@ export const DetailsProductForm = ({ form }: ProductFormComponentBaseProps) => {
         </FormSectionTitle>
         <FormDetailsMeta form={form} />
       </div>
-      {renderCurrentFormDetailsComponent(formSubCategory, form)}
+      {renderCurrentFormDetailsComponent(formSubcategory, form)}
       <div className="pb-[10px] pt-6" >
         <ActionButton
           text="Vazhdo"

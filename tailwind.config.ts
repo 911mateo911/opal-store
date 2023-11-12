@@ -8,6 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        'max-tablet': {
+          max: '1000px'
+        },
+        'max-tablet-sm': {
+          max: '860px'
+        },
+      },
       fontFamily: {
         red_hat_display: ['--font-red_hat_display'],
         inter: ['--font-inter']

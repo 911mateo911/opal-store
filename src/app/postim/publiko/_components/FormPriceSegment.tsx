@@ -23,7 +23,7 @@ export const FormPriceSegment = ({
   getValues
 }: FormPriceSegmentProps) => {
   return (
-    <div className="pt-[22px] grid grid-cols-3 gap-[10px]" >
+    <div className="pt-[22px] grid grid-cols-3 gap-[10px] max-tablet:grid-cols-2" >
       <div>
         <InputTitle>
           Cmimi
@@ -49,7 +49,7 @@ export const FormPriceSegment = ({
           onSelect={onSimpleInputChange}
         />
       </div>
-      <div className="flex items-center justify-end pt-[22px]" >
+      <div className="flex items-center justify-end pt-[22px] max-tablet:col-[1/-1] max-tablet:mx-auto" >
         <Checkbox
           name={NewProductFormFields.debatablePrice}
           onChange={onSimpleInputChange}

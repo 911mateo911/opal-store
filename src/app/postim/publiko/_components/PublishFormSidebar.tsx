@@ -32,28 +32,32 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
   const onInputBlur = (field: NewProductFormFields) => trigger(field);
 
   return (
-    <div className='max-w-xs sticky h-fit top-28 left-0 mr-5' >
+    <div className={clsx(
+      'max-w-xs sticky h-fit top-28 left-0 mr-5',
+      'max-tablet-sm:static max-tablet-sm:max-w-none max-tablet-sm:pb-5 max-tablet-sm:mb-5 max-tablet-sm:mr-0',
+      'max-tablet-sm:border-b max-tablet-sm:border-grey-10 max-tablet-sm:dark:border-grey-90'
+    )} >
       <h2 className={clsx(
         font_RedHatDisplay.className,
         'font-black text-2xl text-grey-100',
-        'dark:text-grey-20 mt-3'
+        'dark:text-grey-20 mt-1'
       )} >
         Juve jeni?
       </h2>
       <h6 className={clsx(
         font_Inter.className,
-        'font-bold text-base text-grey-100 mt-2',
+        'font-bold text-base text-grey-100 mt-6',
         'dark:text-grey-20'
       )} >
         Informacionet e kontaktit
       </h6>
       <p className={clsx(
         font_RedHatDisplay.className,
-        'text-sm tracking-wider font-light text-grey-80 dark:text-grey-20 mt-2'
+        'text-sm tracking-wider font-light text-grey-80 dark:text-grey-20'
       )} >
         Prezantohuni duke plotesuar formen e meposhtme:
       </p>
-      <div className='mt-4 flex flex-col justify-center items-center gap-5' >
+      <div className='mt-4 flex flex-col justify-center items-center gap-5 max-tablet-sm:gap-2.5 max-tablet-sm:mt-2.5' >
         <div className='w-full mt-0.5' >
           <InputTitle>
             Emer Mbiemer
