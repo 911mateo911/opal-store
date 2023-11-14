@@ -20,8 +20,8 @@ export const PublishFormHeader = ({ form }: ProductFormComponentBaseProps) => {
       'px-[10px] py-3 rounded-lg border-solid border border-grey-10 flex',
       'items-center justify-between bg-white',
       'dark:bg-grey-90 dark:border-grey-95',
-      'max-tablet-sm:fixed max-tablet-sm:top-24 max-tablet-sm:left-1/2',
-      'max-tablet-sm:max-w-xl max-tablet-sm:-translate-x-1/2 max-tablet-sm:w-full max-tablet-sm:z-40'
+      'max-tablet-sm:absolute max-tablet-sm:top-24 max-tablet-sm:left-1/2',
+      'max-tablet-sm:max-w-[34rem] max-tablet-sm:-translate-x-1/2 max-tablet-sm:w-max'
     )} >
       <FormGoBack
         form={form}

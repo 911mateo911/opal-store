@@ -102,11 +102,12 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
 
   // TODO: add hover states to inputs
   return (
-    <div className="pt-[14px]">
+    <div className="pt-[14px] max-tablet-sm:pt-1.5">
       <h2 className={clsx(
         "text-xl mt-2 mb-[18px] tracking-wide font-bold text-grey-100",
         font_RedHatDisplay.className,
-        'dark:text-grey-5'
+        'dark:text-grey-5',
+        'max-tablet-sm:mt-0'
       )} >
         Postimi juaj?
       </h2>
