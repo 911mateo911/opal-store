@@ -14,6 +14,7 @@ interface ChipProps {
   iconHeight?: number;
   iconWidth?: number;
   iconClassName?: string;
+  textClass?: string;
 }
 
 export const Chip = ({
@@ -26,6 +27,7 @@ export const Chip = ({
   iconHeight = 20,
   iconWidth = 20,
   iconClassName,
+  textClass,
   children
 }: ChipProps) => {
   return (
@@ -33,10 +35,11 @@ export const Chip = ({
       onClick={onClick}
       className={clsx(
         font_Inter.className,
-        'py-[6px] flex items-center whitespace-pre px-[10px] bg-green-5 max-h-7 text-green-100 text-xs rounded-full font-medium transition',
+        'py-[6px] flex items-center whitespace-pre px-[10px]  max-h-7 text-green-100 text-xs rounded-full font-medium transition',
         pointer && 'cursor-pointer',
         className,
-        'dark:bg-green-30 dark:text-green-100'
+        'dark:text-green-100',
+        selected ? 'bg-green-40 dark:bg-green-50' : 'bg-green-5 dark:bg-green-30'
       )}
     >
       {icon && (
@@ -48,7 +51,7 @@ export const Chip = ({
           className={clsx('mr-1 -ml-0.5', iconClassName)}
         />
       )}
-      {text}
+      <span className={textClass} >{text}</span>
       {children}
     </div>
   )

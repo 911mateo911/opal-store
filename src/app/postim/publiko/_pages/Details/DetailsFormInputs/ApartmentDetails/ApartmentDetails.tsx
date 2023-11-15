@@ -27,7 +27,7 @@ export const ApartmentDetails = ({
 
   return (
     <div>
-      <div className='grid grid-cols-2 gap-[10px]' >
+      <div className='grid grid-cols-2 gap-[10px] max-mobile:grid-cols-1' >
         <div>
           <InputTitle>
             Kate
@@ -56,7 +56,7 @@ export const ApartmentDetails = ({
           />
         </div>
       </div>
-      <div className='grid grid-cols-2 gap-[10px] pt-5' >
+      <div className='grid grid-cols-2 gap-[10px] pt-5 max-mobile:grid-cols-1 max-tablet-sm:pt-2.5' >
         <div>
           <InputTitle>
             Nr. i dhomave
@@ -68,12 +68,13 @@ export const ApartmentDetails = ({
             initialValue={details?.[PRODUCT_DETAIL_FIELD.APARTMENT_ROOMS]}
           />
         </div>
-        <div className="flex items-center justify-center pt-[22px]" >
+        <div className="flex items-center justify-center pt-[22px] max-tablet-sm:pt-2.5" >
           <Checkbox
             name={PRODUCT_DETAIL_FIELD.APARTMENT_FURNITURE}
             onChange={setDetails}
             placeholder="E mobiluar"
             defaultChecked={details?.[PRODUCT_DETAIL_FIELD.APARTMENT_FURNITURE]}
+            centerMobile
           />
         </div>
       </div>

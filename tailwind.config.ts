@@ -15,6 +15,10 @@ const config: Config = {
         'max-tablet-sm': {
           max: '860px'
         },
+        'betweeen-tablet-sm-md': {
+          min: '860px',
+          max: '940px'
+        },
         'max-mobile': {
           max: '550px'
         }

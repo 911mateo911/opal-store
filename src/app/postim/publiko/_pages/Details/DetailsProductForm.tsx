@@ -52,7 +52,7 @@ export const DetailsProductForm = ({ form }: ProductFormComponentBaseProps) => {
 
   return (
     <div>
-      <div className='flex mb-[22px] mt-5 items-center gap-2 pb-2' >
+      <div className='flex mb-[22px] mt-5 items-center gap-2 pb-2 max-tablet-sm:mt-1.5 max-tablet-sm:mb-1.5' >
         <FormSectionTitle className='!mb-0' >
           Detaje
         </FormSectionTitle>

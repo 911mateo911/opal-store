@@ -10,13 +10,15 @@ interface CheckboxProps<F extends string> {
   defaultChecked?: boolean | Record<F, string | boolean | number>;
   onChange: (isChecked: boolean, field: F) => void;
   placeholder?: string;
+  centerMobile?: boolean;
 }
 
 export function Checkbox<T extends string>({
   name,
   defaultChecked,
   onChange,
-  placeholder
+  placeholder,
+  centerMobile
 }: CheckboxProps<T>) {
   const initial = getBooleanInputDefaultValue(defaultChecked, name);
   const [isChecked, setChecked] = useState<boolean>(initial);
@@ -29,7 +31,7 @@ export function Checkbox<T extends string>({
 
   return (
     <div
-      className='flex items-center gap-4 cursor-pointer min-w-[200px]'
+      className={clsx('flex items-center gap-4 cursor-pointer min-w-[200px]', centerMobile && 'max-tablet-sm:justify-center')}
       onClick={handleChange} >
       <div
         className={clsx(

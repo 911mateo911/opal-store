@@ -37,7 +37,8 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
         'max-w-xs sticky h-fit top-28 left-0 mr-5',
         'max-tablet-sm:static max-tablet-sm:max-w-none max-tablet-sm:mb-5 max-tablet-sm:mr-0',
         'max-tablet-sm:rounded-lg max-tablet-sm:px-[10px]',
-        'max-tablet-sm:pb-0.5 max-tablet-sm:pt-4'
+        'max-tablet-sm:pb-0.5 max-tablet-sm:pt-4',
+        formStep !== PRODUCT_FORM_STEPS.GENERAL_FORM && 'max-tablet-sm:hidden'
       )} >
         <h2 className={clsx(
           font_RedHatDisplay.className,
@@ -115,7 +116,12 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
           </div>
         </div>
       </div>
-      <hr className='max-tablet-sm:block hidden h-[1px] bg-grey-1 mx-[10px] dark:bg-grey-90 border-none' />
+      <hr
+        className={clsx(
+          'max-tablet-sm:block hidden h-[1px] bg-grey-1 mx-[10px] dark:bg-grey-90 border-none',
+          formStep !== PRODUCT_FORM_STEPS.GENERAL_FORM && 'max-tablet-sm:hidden'
+        )}
+      />
     </>
   )
 }
