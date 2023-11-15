@@ -34,7 +34,7 @@ export default function PublishPageLayout(
           className='justify-center max-w-xs mx-auto w-full my-2 max-tablet-sm:mb-0'
         />
         <PublishFormSidebar form={form} />
-        <div className='w-full bg-grey-1 rounded-lg dark:bg-grey-95 mb-28 h-fit max-tablet-sm:bg-inherit max-tablet-sm:dark:bg-inherit' >
+        <div className='w-full bg-grey-1 rounded-lg dark:bg-grey-95 h-fit max-tablet-sm:bg-inherit max-tablet-sm:dark:bg-inherit' >
           <PublishFormHeader form={form} />
           <div className="p-[10px]" >
             {children}

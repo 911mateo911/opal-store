@@ -161,7 +161,7 @@ export function Select<N extends string, T extends string>({
         'absolute border border-solid border-grey-10 rounded-b-md w-full',
         'opacity-0 invisible top-1/2 transition-all z-30 overflow-auto max-h-60',
         modalState.isOpen && '!top-[calc(100%_-_1px)] !visible opacity-100',
-        'dark:border-grey-85'
+        'dark:border-grey-85 max-mobile:shadow-xl'
       )}>
         {options.map(option => {
           const isOptionSelected = option.value === modalState.value;

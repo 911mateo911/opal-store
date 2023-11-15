@@ -107,7 +107,8 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
         "text-xl mt-2 mb-[18px] tracking-wide font-bold text-grey-100",
         font_RedHatDisplay.className,
         'dark:text-grey-5',
-        'max-tablet-sm:mt-0'
+        'max-tablet-sm:mt-0',
+        'max-tablet-sm:mb-2'
       )} >
         Postimi juaj?
       </h2>
@@ -150,7 +151,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
         onSimpleInputChange={onSimpleInputChange}
         getValues={getValues}
       />
-      <div className="pt-5" >
+      <div className="pt-5 max-mobile:pt-[10px]" >
         <InputTitle>
           Vendndodhja
         </InputTitle>
@@ -167,7 +168,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
         <FormSectionTitle>
           Ngarko Imazhe
         </FormSectionTitle>
-        <div className="grid grid-cols-[1fr,_150px] w-full pb-2 gap-[10px]" >
+        <div className="grid grid-cols-[1fr,_150px] w-full pb-2 gap-[10px] max-mobile:grid-cols-1" >
           <div>
             <FormImagePreview
               formControl={control}
@@ -179,7 +180,8 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
               'flex items-center rounded-md justify-center flex-col h-[150px] w-[150px]',
               'bg-grey-2 text-grey-30 shadow cursor-pointer transition-all',
               'hover:bg-green-5 [&>img]:hover:scale-110 [&>p]:hover:text-green-100',
-              'dark:bg-grey-85 dark:hover:bg-grey-70 dark:[&>p]:hover:text-grey-10'
+              'dark:bg-grey-85 dark:hover:bg-grey-70 dark:[&>p]:hover:text-grey-10',
+              'max-mobile:w-full max-mobile:h-28'
             )}
             htmlFor={PRODUCT_FORM_IMAGE_PICKER_ID}
           >
@@ -244,7 +246,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
           </div>
         </div>
       </div>
-      <div className="pb-[10px] pt-6" >
+      <div className="pt-6" >
         <ActionButton
           text="Vazhdo"
           onClick={onSubmit}

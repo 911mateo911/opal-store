@@ -15,6 +15,9 @@ const config: Config = {
         'max-tablet-sm': {
           max: '860px'
         },
+        'max-mobile': {
+          max: '550px'
+        }
       },
       fontFamily: {
         red_hat_display: ['--font-red_hat_display'],

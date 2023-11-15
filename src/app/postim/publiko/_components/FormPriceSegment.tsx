@@ -23,7 +23,7 @@ export const FormPriceSegment = ({
   getValues
 }: FormPriceSegmentProps) => {
   return (
-    <div className="pt-[22px] grid grid-cols-3 gap-[10px] max-tablet:grid-cols-2" >
+    <div className="pt-[22px] grid grid-cols-3 gap-[10px] max-tablet:grid-cols-2 max-mobile:grid-cols-[1fr_120px] max-mobile:[row-gap:0] max-mobile:pt-8" >
       <div>
         <InputTitle>
           Cmimi

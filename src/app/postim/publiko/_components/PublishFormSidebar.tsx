@@ -50,7 +50,7 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
         <h6 className={clsx(
           font_Inter.className,
           'font-bold text-base text-grey-100 mt-6',
-          'dark:text-grey-20'
+          'dark:text-grey-20 max-tablet-sm:mt-[10px]'
         )} >
           Informacionet e kontaktit
         </h6>
@@ -115,7 +115,7 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
           </div>
         </div>
       </div>
-      <hr className='max-tablet-sm:block hidden h-[1px] bg-grey-1 mx-[10px] dark:bg-grey-95' />
+      <hr className='max-tablet-sm:block hidden h-[1px] bg-grey-1 mx-[10px] dark:bg-grey-90 border-none' />
     </>
   )
 }

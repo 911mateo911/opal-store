@@ -15,6 +15,7 @@ export const PublishFormHeader = ({ form }: ProductFormComponentBaseProps) => {
     defaultValue: true
   });
 
+  // TODO: add label hapat on mobile in order to make the width more fitting
   return (
     <div className={clsx(
       'px-[10px] py-3 rounded-lg border-solid border border-grey-10 flex',

@@ -46,7 +46,7 @@ export const FormCategorySegment = ({
   };
 
   return (
-    <div className="pt-1.5 grid grid-cols-2 mt-3 gap-[10px]" >
+    <div className="pt-1.5 grid grid-cols-2 mt-3 gap-[10px] max-mobile:grid-cols-1 max-mobile:pt-0 max-mobile:mt-8 max-mobile:mx-2" >
       <div>
         <InputTitle center >
           Kategori
