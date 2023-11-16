@@ -7,6 +7,7 @@ import { ProductFormComponentBaseProps } from 'opal/app/postim/publiko/_config';
 import { useProductDetails } from 'opal/app/postim/publiko/_hooks/useProductDetails';
 import { laptopDetailsSchema } from './config';
 import { buildDetailInputErrorPath } from 'opal/app/postim/publiko/_helpers/buildDetailInputErrorPath';
+import { FormDoubleInputSectionWrapper } from 'opal/app/postim/publiko/_components/FormDoubleInputSectionWrapper';
 
 export const LaptopSpecifix = ({ form }: ProductFormComponentBaseProps) => {
   const { control } = form;
@@ -22,7 +23,7 @@ export const LaptopSpecifix = ({ form }: ProductFormComponentBaseProps) => {
   };
 
   return (
-    <div className='grid grid-cols-2 gap-[10px] pt-5' >
+    <FormDoubleInputSectionWrapper stacked >
       <div>
         <InputTitle>
           Madhesia e ekranit
@@ -40,14 +41,15 @@ export const LaptopSpecifix = ({ form }: ProductFormComponentBaseProps) => {
           onBlur={onInputBlur}
         />
       </div>
-      <div className="flex items-center justify-center pt-[22px]" >
+      <div className="flex items-center justify-center pt-[22px] max-tablet-sm:pt-2.5" >
         <Checkbox
           name={TECH_PRODUCT_DETAILS.WITH_CHARGER}
           onChange={handleSetExtraDetails}
           placeholder="Me karikues"
           defaultChecked={details[PRODUCT_DETAIL_FIELD.ELECTRONICS_EXTRA]}
+          centerMobile
         />
       </div>
-    </div>
+    </FormDoubleInputSectionWrapper>
   )
 }

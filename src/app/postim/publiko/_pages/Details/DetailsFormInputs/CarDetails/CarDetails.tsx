@@ -14,6 +14,7 @@ import {
   currentYear
 } from './config';
 import { buildDetailInputErrorPath } from 'opal/app/postim/publiko/_helpers/buildDetailInputErrorPath';
+import { FormDoubleInputSectionWrapper } from 'opal/app/postim/publiko/_components/FormDoubleInputSectionWrapper';
 
 export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
   const { control } = form;
@@ -27,7 +28,7 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
   // TODO: add default values
   return (
     <div>
-      <div className='grid grid-cols-2 gap-[10px]' >
+      <FormDoubleInputSectionWrapper>
         <div>
           <InputTitle>
             Marka
@@ -56,8 +57,8 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
             errorPath={buildDetailInputErrorPath(PRODUCT_DETAIL_FIELD.CAR_MODEL)}
           />
         </div>
-      </div>
-      <div className='grid grid-cols-2 gap-[10px] pt-5' >
+      </FormDoubleInputSectionWrapper>
+      <FormDoubleInputSectionWrapper stacked >
         <div>
           <InputTitle>
             Viti i prodhimit
@@ -81,8 +82,8 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
             onSelect={setDetails}
           />
         </div>
-      </div>
-      <div className='grid grid-cols-2 gap-[10px] pt-5' >
+      </FormDoubleInputSectionWrapper>
+      <FormDoubleInputSectionWrapper stacked >
         <div>
           <InputTitle>
             Karburanti
@@ -105,7 +106,7 @@ export const CarDetails = ({ form }: ProductFormComponentBaseProps) => {
             onSelect={setDetails}
           />
         </div>
-      </div>
+      </FormDoubleInputSectionWrapper>
     </div>
   )
 }

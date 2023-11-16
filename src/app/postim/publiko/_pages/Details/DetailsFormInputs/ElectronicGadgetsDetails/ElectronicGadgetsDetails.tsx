@@ -13,6 +13,7 @@ import { PRODUCT_SUBCATEGORIES } from '@prisma/client';
 import { electronicGadgetsDetailsBaseSchema } from './config';
 import { renderElectronicExtraFormComponents } from './helpers';
 import { buildDetailInputErrorPath } from 'opal/app/postim/publiko/_helpers/buildDetailInputErrorPath';
+import { FormDoubleInputSectionWrapper } from 'opal/app/postim/publiko/_components/FormDoubleInputSectionWrapper';
 
 interface ElectronicGadgetsDetailsProps extends ProductFormComponentBaseProps {
   formSubcategory: PRODUCT_SUBCATEGORIES
@@ -30,7 +31,7 @@ export const ElectronicGadgetsDetails = ({ form, formSubcategory }: ElectronicGa
 
   return (
     <div>
-      <div className='grid grid-cols-2 gap-[10px]' >
+      <FormDoubleInputSectionWrapper>
         <div>
           <InputTitle>
             Marka
@@ -56,7 +57,7 @@ export const ElectronicGadgetsDetails = ({ form, formSubcategory }: ElectronicGa
             initialValue={getValues(NewProductFormFields.condition)}
           />
         </div>
-      </div>
+      </FormDoubleInputSectionWrapper>
       {renderElectronicExtraFormComponents(formSubcategory, form)}
     </div>
   )

@@ -101,6 +101,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
   };
 
   // TODO: add hover states to inputs
+  // TODO: fix title on mobile <400vw
   return (
     <div className="pt-[14px] max-tablet-sm:pt-1.5">
       <h2 className={clsx(

@@ -128,6 +128,7 @@ export function Select<N extends string, T extends string>({
 
   const options = getOptionsFromProps(values);
 
+  // TODO: fix out of viewport select
   return (
     <div className='relative' ref={wrapperRef} >
       <div

@@ -11,6 +11,7 @@ import { PRODUCT_SUBCATEGORIES } from '@prisma/client';
 import { LaptopSpecifix } from './Specifics/LaptopSpecific';
 import { buildDetailInputErrorPath } from 'opal/app/postim/publiko/_helpers/buildDetailInputErrorPath';
 import { computersDetailsSchema } from './config';
+import { FormDoubleInputSectionWrapper } from 'opal/app/postim/publiko/_components/FormDoubleInputSectionWrapper';
 
 interface ComputersDetailsProps extends ProductFormComponentBaseProps {
   formSubcategory: PRODUCT_SUBCATEGORIES;
@@ -31,7 +32,7 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
 
   return (
     <>
-      <div className='grid grid-cols-2 gap-[10px] pt-5' >
+      <FormDoubleInputSectionWrapper stacked >
         <div>
           <InputTitle>
             Procesori
@@ -64,8 +65,8 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
             onBlur={onInputBlur}
           />
         </div>
-      </div>
-      <div className='grid grid-cols-2 gap-[10px] pt-5' >
+      </FormDoubleInputSectionWrapper>
+      <FormDoubleInputSectionWrapper stacked >
         <div>
           <InputTitle>
             Karta Grafike
@@ -98,7 +99,7 @@ export const ComputersDetails = ({ form, formSubcategory }: ComputersDetailsProp
             onBlur={onInputBlur}
           />
         </div>
-      </div>
+      </FormDoubleInputSectionWrapper>
       {formSubcategory === PRODUCT_SUBCATEGORIES.ELECTRONICS__LAPTOPS && (
         <LaptopSpecifix
           form={form}

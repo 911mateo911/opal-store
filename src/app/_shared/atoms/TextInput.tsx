@@ -132,6 +132,7 @@ export function TextInput<T extends string, F extends FieldValues>({
             onChange={handleChange}
             onBlur={() => onBlur?.(name, context)}
             defaultValue={getInputDefaultValue(defaultValue, name)}
+            type={type}
           />
           {adornment && (
             <div className={clsx(
@@ -159,7 +160,8 @@ export function TextInput<T extends string, F extends FieldValues>({
     className,
     adornment,
     handleChange,
-    context
+    context,
+    type
   ]);
 
   return (

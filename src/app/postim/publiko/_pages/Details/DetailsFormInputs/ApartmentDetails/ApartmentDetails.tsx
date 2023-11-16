@@ -12,6 +12,7 @@ import {
 import { TextInput } from 'opal/app/_shared/atoms/TextInput';
 import { Checkbox } from 'opal/app/_shared/atoms/Checkbox';
 import { buildDetailInputErrorPath } from 'opal/app/postim/publiko/_helpers/buildDetailInputErrorPath';
+import { FormDoubleInputSectionWrapper } from 'opal/app/postim/publiko/_components/FormDoubleInputSectionWrapper';
 
 export const ApartmentDetails = ({
   form
@@ -27,7 +28,7 @@ export const ApartmentDetails = ({
 
   return (
     <div>
-      <div className='grid grid-cols-2 gap-[10px] max-mobile:grid-cols-1' >
+      <FormDoubleInputSectionWrapper>
         <div>
           <InputTitle>
             Kate
@@ -55,8 +56,8 @@ export const ApartmentDetails = ({
             type='number'
           />
         </div>
-      </div>
-      <div className='grid grid-cols-2 gap-[10px] pt-5 max-mobile:grid-cols-1 max-tablet-sm:pt-2.5' >
+      </FormDoubleInputSectionWrapper>
+      <FormDoubleInputSectionWrapper stacked >
         <div>
           <InputTitle>
             Nr. i dhomave
@@ -77,7 +78,7 @@ export const ApartmentDetails = ({
             centerMobile
           />
         </div>
-      </div>
+      </FormDoubleInputSectionWrapper>
     </div>
   )
 }
