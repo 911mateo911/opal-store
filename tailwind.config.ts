@@ -9,18 +9,42 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
+        // Tablets
         'max-tablet': {
           max: '1000px'
         },
         'max-tablet-sm': {
           max: '860px'
         },
-        'betweeen-tablet-sm-md': {
-          min: '860px',
-          max: '940px'
+        'max-tablet-xs': {
+          max: '768px'
+        },
+        // Mobiles
+        'max-mobile-lg': {
+          max: '680px'
         },
         'max-mobile': {
           max: '550px'
+        },
+        'max-mobile-sm': {
+          max: '440px'
+        },
+        // Betweens: order descending
+        'between-mobile-md-lg': {
+          min: '550px',
+          max: '680px'
+        },
+        'between-mobile-lg-tablet-xs': {
+          min: '680px',
+          max: '768px'
+        },
+        'between-tablet-xs-sm': {
+          min: '768px',
+          max: '860px'
+        },
+        'between-tablet-sm-md': {
+          min: '860px',
+          max: '940px'
         }
       },
       fontFamily: {

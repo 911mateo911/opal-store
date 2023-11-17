@@ -101,7 +101,6 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
   };
 
   // TODO: add hover states to inputs
-  // TODO: fix title on mobile <400vw
   return (
     <div className="pt-[14px] max-tablet-sm:pt-1.5">
       <h2 className={clsx(
@@ -113,7 +112,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
       )} >
         Postimi juaj?
       </h2>
-      <div className="grid grid-cols-[150px_1fr] gap-[10px]" >
+      <div className="grid grid-cols-[150px_1fr] gap-[10px] max-mobile-sm:grid-cols-[120px_1fr]" >
         <div className="flex items-end" >
           <div className="w-full" >
             <InputTitle>
@@ -174,6 +173,10 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
             <FormImagePreview
               formControl={control}
               onDelete={onDeleteImage}
+              className={clsx(
+                "between-tablet-sm-md:h-60 between-tablet-xs-sm:h-80 between-mobile-lg-tablet-xs:h-72",
+                'between-mobile-md-lg:h-56', 'max-mobile-sm:h-52'
+              )}
             />
           </div>
           <label

@@ -47,7 +47,7 @@ export const PublishFormHeader = ({ form }: ProductFormComponentBaseProps) => {
           text='Ploteso Formen'
           icon={FormWriteIcon}
           selected={isGeneralForm}
-          iconClassName={clsx('betweeen-tablet-sm-md:hidden', !isGeneralForm && 'max-mobile:mx-0')}
+          iconClassName={clsx('between-tablet-sm-md:hidden', !isGeneralForm && 'max-mobile:mx-0')}
           textClass={clsx(!isGeneralForm && 'max-mobile:hidden')}
           className={clsx(!isGeneralForm && 'max-mobile:px-1.5')}
         />
@@ -56,7 +56,7 @@ export const PublishFormHeader = ({ form }: ProductFormComponentBaseProps) => {
             text='Detaje'
             icon={DetailsIcon}
             selected={isDetailsForm}
-            iconClassName={clsx('betweeen-tablet-sm-md:hidden', !isDetailsForm && 'max-mobile:mx-0')}
+            iconClassName={clsx('between-tablet-sm-md:hidden', !isDetailsForm && 'max-mobile:mx-0')}
             textClass={clsx(!isDetailsForm && 'max-mobile:hidden')}
             className={clsx(!isDetailsForm && 'max-mobile:px-1.5')}
           />
@@ -65,7 +65,7 @@ export const PublishFormHeader = ({ form }: ProductFormComponentBaseProps) => {
           text='Verifiko dhe publiko'
           icon={CloudUploadIcon}
           selected={isVerifyAndPublishForm}
-          iconClassName={clsx('betweeen-tablet-sm-md:hidden', !isVerifyAndPublishForm && 'max-mobile:mx-0')}
+          iconClassName={clsx('between-tablet-sm-md:hidden', !isVerifyAndPublishForm && 'max-mobile:mx-0')}
           textClass={clsx(!isVerifyAndPublishForm && 'max-mobile:hidden')}
           className={clsx(!isVerifyAndPublishForm && 'max-mobile:px-1.5')}
         />
@@ -73,7 +73,7 @@ export const PublishFormHeader = ({ form }: ProductFormComponentBaseProps) => {
           text='Shperndaj'
           icon={ShareIcon}
           selected={isSharePage}
-          iconClassName={clsx('betweeen-tablet-sm-md:hidden', !isSharePage && 'max-mobile:mx-0')}
+          iconClassName={clsx('between-tablet-sm-md:hidden', !isSharePage && 'max-mobile:mx-0')}
           textClass={clsx(!isSharePage && 'max-mobile:hidden')}
           className={clsx(!isSharePage && 'max-mobile:px-1.5')}
         />

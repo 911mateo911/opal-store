@@ -7,6 +7,7 @@ import { useProductDetails } from 'opal/app/postim/publiko/_hooks/useProductDeta
 import { Select } from 'opal/app/_shared/atoms/Select';
 import { tvDetailsSchema, TV_DETAILS_SCREEN_RES_TYPE_SELECT_OPTIONS } from './config';
 import { buildDetailInputErrorPath } from 'opal/app/postim/publiko/_helpers/buildDetailInputErrorPath';
+import { FormDoubleInputSectionWrapper } from 'opal/app/postim/publiko/_components/FormDoubleInputSectionWrapper';
 
 export const TvSpecific = ({ form }: ProductFormComponentBaseProps) => {
   const { control } = form;
@@ -22,7 +23,7 @@ export const TvSpecific = ({ form }: ProductFormComponentBaseProps) => {
   };
 
   return (
-    <div className='grid grid-cols-2 gap-[10px] pt-5' >
+    <FormDoubleInputSectionWrapper stacked >
       <div>
         <InputTitle>
           Rezolucioni
@@ -51,6 +52,6 @@ export const TvSpecific = ({ form }: ProductFormComponentBaseProps) => {
           onBlur={onInputBlur}
         />
       </div>
-    </div>
+    </FormDoubleInputSectionWrapper>
   )
 }

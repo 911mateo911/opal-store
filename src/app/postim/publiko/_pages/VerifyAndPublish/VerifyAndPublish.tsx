@@ -21,7 +21,7 @@ import { PRODUCT_PREFERRED_COMMUNICATION } from '@prisma/client';
 import { ProductDetails } from '../../_components/DetailsSection/ProductDetails';
 
 export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
-  const { getValues, setValue } = form;
+  const { getValues } = form;
 
   // TODO: do the optimization when the form submits
   // const replaceImage = useCallback((newImage: File, images: NewProductSchemaType['images']) => {
@@ -63,7 +63,6 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
   const preferredCommunication = getValues(NewProductFormFields.preferredCommunication);
   const description = getValues(NewProductFormFields.description);
 
-  // TODO: find a way to render all the details from subcategories
   // TODO: A LOT OF REUSABLE COMPONENTS
   // TODO: THE DESCRIPTION
   return (
@@ -75,11 +74,12 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
       )} >
         Rishiko postimin
       </h1>
-      <div className="grid grid-cols-2" >
+      <div className="grid grid-cols-2 max-tablet-sm:grid-cols-1" >
         <div className='flex w-full flex-col' >
           <FormImagePreview
             formControl={form.control}
             editable={false}
+            className='between-tablet-xs-sm:h-[440px] between-mobile-lg-tablet-xs:h-96 between-mobile-md-lg:h-80 max-mobile-sm:h-52'
           />
           <div className='w-full mt-[10px]' >
             <ProductDetails form={form} />

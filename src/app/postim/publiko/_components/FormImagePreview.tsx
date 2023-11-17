@@ -14,13 +14,14 @@ interface FormImagePreviewProps {
   formControl: Control<NewProductSchemaType>
   onDelete?: (imageName: string) => void;
   editable?: boolean;
+  className?: string;
 };
 
 const sliderOptions: KeenSliderOptions = {
   vertical: true
 };
 
-export const FormImagePreview = ({ formControl, onDelete, editable = true }: FormImagePreviewProps) => {
+export const FormImagePreview = ({ formControl, onDelete, editable = true, className }: FormImagePreviewProps) => {
   const images = useWatch({ control: formControl, name: NewProductFormFields.images, defaultValue: {} });
 
   const imagesArray = Object.values(images);
@@ -31,7 +32,7 @@ export const FormImagePreview = ({ formControl, onDelete, editable = true }: For
     instanceRef.current?.update(sliderOptions);
   }, [images, instanceRef]);
 
-  const wrapperClassName = 'bg-grey-10 rounded-md dark:bg-grey-90 w-full h-64'
+  const wrapperClassName = clsx('bg-grey-10 rounded-md dark:bg-grey-90 w-full h-64', className);
 
   if (!imagesArray.length) {
     return (

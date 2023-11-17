@@ -146,7 +146,8 @@ export function Select<N extends string, T extends string>({
       >
         <p className={clsx(
           'text-sm m-0 text-center mx-6 w-full font-semibold',
-          'dark:text-grey-10'
+          'dark:text-grey-10',
+          'max-mobile-sm:overflow-hidden max-mobile-sm:whitespace-pre max-mobile-sm:text-ellipsis'
         )} >
           {selectedValue?.element}
         </p>
