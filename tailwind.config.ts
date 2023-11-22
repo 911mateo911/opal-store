@@ -26,6 +26,9 @@ const config: Config = {
         'max-mobile': {
           max: '550px'
         },
+        'max-mobile-md': {
+          max: '510px'
+        },
         'max-mobile-sm': {
           max: '440px'
         },

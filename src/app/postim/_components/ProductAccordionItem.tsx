@@ -38,10 +38,17 @@ export const ProductAccordionItem = ({
   return (
     <div className={clsx(
       font_RedHatDisplay.className,
-      'bg-grey-5 rounded-md p-3 mt-1 text-grey-90 font-normal flex items-center justify-between',
-      'dark:bg-grey-90'
+      'rounded-md p-3 mt-1 text-grey-90 font-normal grid grid-cols-[calc(100%_-_2rem)_2rem]',
+      'bg-grey-5 dark:bg-grey-90 relative'
     )} >
-      <span className='flex items-center' >
+      {favourite && (
+        <StarIconSvg
+          height={18}
+          width={18}
+          className='text-green-70 absolute left-0 -top-1'
+        />
+      )}
+      <div className='flex items-center' >
         <Image
           src={icon}
           width={24}
@@ -51,41 +58,22 @@ export const ProductAccordionItem = ({
         />
         <p className={clsx(
           font_RedHatDisplay.className,
-          'pl-3 dark:text-grey-20'
+          'pl-3 dark:text-grey-20',
+          'whitespace-pre text-ellipsis overflow-hidden'
         )} >
           {title}
           <b ref={contentRef} className='font-semibold ml-3' >
             {content}
           </b>
         </p>
-      </span>
+      </div>
       <div className='flex items-center' >
-        {favourite && (
-          <div
-            className={clsx(
-              'flex mr-2 items-center justify-center py-1 px-2 rounded-md bg-green-10',
-              'dark:bg-green-30'
-            )}
-          >
-            <StarIconSvg
-              className='text-green-60 mr-1 dark:text-green-70'
-              height={18}
-              width={18}
-            />
-            <p className={clsx(
-              font_RedHatDisplay.className,
-              'font-semibold text-sm text-green-90 dark:text-green-100'
-            )} >
-              E preferuar
-            </p>
-          </div>
-        )}
         <Image
           src={CopyIcon}
           width={22}
           height={22}
           alt='copy_icon'
-          className='cursor-pointer dark:invert'
+          className='cursor-pointer dark:invert ml-auto'
           onClick={onCopy}
         />
       </div>

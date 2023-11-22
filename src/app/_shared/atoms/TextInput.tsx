@@ -25,6 +25,7 @@ interface TextInputProps<T extends string, F extends FieldValues> {
 };
 
 const numberInputAndDotsRegex = /^\d+(\.\d+)*$/;
+const matchAllNonNumericsRegex = /[^\d.-]/g;
 
 export function TextInput<T extends string, F extends FieldValues>({
   name,
@@ -59,32 +60,49 @@ export function TextInput<T extends string, F extends FieldValues>({
 
   const inputError = getInputError();
 
+  // FIX THIS FUCKING MESS OF A CODE JA QIFSHA ROBT NPIDH
   const handleChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>((event) => {
     const { target } = event;
     let value: string | number = target.value.toString();
+    const hasUnallowedChars = value.match(matchAllNonNumericsRegex)?.length;
 
     if (type === 'number') {
-      if (!numberInputAndDotsRegex.test(value)) {
-        const lastCharIsDot = value.at(value.length - 1) === '.';
+      const numberOfDots = value.match(/\./g)?.length || 0;
 
-        if (!lastCharIsDot) {
-          value = value.slice(0, value.length - 1);
-          target.value = value;
-        }
-      }
+      const isNegativeNumber = value.at(0) === '-';
+      const startsWithDot = value.at(0) === '.';
 
-      const firstCharIsMinus = value.at(0) === '-';
-
-      if (firstCharIsMinus) {
+      if (isNegativeNumber || startsWithDot) {
         value = value.slice(1);
         target.value = value;
       };
 
+      if (numberOfDots > 1) {
+        const indexOfFirstDot = value.indexOf('.');
+        const replacedAllOtherDots = value.slice(indexOfFirstDot).replace(/\./g, '');
+        value = `${value.slice(0, indexOfFirstDot)}.${replacedAllOtherDots}`;
+        target.value = value;
+      }
+
+      if (!numberInputAndDotsRegex.test(value)) {
+        const lastCharIsDot = value.at(value.length - 1) === '.';
+
+        if (!lastCharIsDot && !hasUnallowedChars) {
+          value = value.slice(0, value.length - 1);
+          target.value = value;
+        };
+      };
+
+      if (hasUnallowedChars) {
+        value = value.replace(/[^\d.-]/g, '');
+        target.value = value;
+      };
+
       if (!target.value.length) {
-        value = ''
+        value = '';
       } else {
         value = Number(value);
-      }
+      };
     }
 
     onChange(value, name);
@@ -132,7 +150,7 @@ export function TextInput<T extends string, F extends FieldValues>({
             onChange={handleChange}
             onBlur={() => onBlur?.(name, context)}
             defaultValue={getInputDefaultValue(defaultValue, name)}
-            type={type}
+            type={type === 'text' ? 'text' : 'tel'}
           />
           {adornment && (
             <div className={clsx(

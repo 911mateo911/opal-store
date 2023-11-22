@@ -70,31 +70,37 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
       <h1 className={clsx(
         font_RedHatDisplay.className,
         'font-semibold text-xl pb-2.5 text-grey-90 border-b border-grey-10 mb-4',
-        'dark:text-grey-5 dark:border-grey-90'
+        'dark:text-grey-5 dark:border-grey-90 max-tablet-sm:mb-2 max-tablet-sm:pb-0.5'
       )} >
         Rishiko postimin
       </h1>
+      <FormDetailsMeta form={form} className='hidden max-tablet-sm:flex max-tablet-sm:mb-2' />
       <div className="grid grid-cols-2 max-tablet-sm:grid-cols-1" >
         <div className='flex w-full flex-col' >
           <FormImagePreview
             formControl={form.control}
             editable={false}
             className='between-tablet-xs-sm:h-[440px] between-mobile-lg-tablet-xs:h-96 between-mobile-md-lg:h-80 max-mobile-sm:h-52'
+            horizontal
           />
           <div className='w-full mt-[10px]' >
             <ProductDetails form={form} />
           </div>
         </div>
-        <div className="pl-[10px]" >
-          <FormDetailsMeta form={form} />
+        <div className="pl-[10px] max-tablet-sm:pl-0" >
+          <FormDetailsMeta form={form} className='max-tablet-sm:hidden' />
           <h1 className={clsx(
             font_RedHatDisplay.className,
-            'text-2xl font-semibold pb-1 tracking-wide border-b border-grey-10 mt-1.5',
-            'dark:text-grey-10 dark:border-grey-90'
+            'text-2xl font-semibold mt-1 pb-1.5 tracking-wide border-b border-grey-10 mb-0.5',
+            'dark:text-grey-10 dark:border-grey-90 max-tablet-sm:mt-2'
           )} >
             Dua te {PRODUCT_STATE_SELECT_OPTIONS[state].element}: {title}
           </h1>
-          <div className="pt-3 grid grid-cols-[1fr_min-content] gap-[10px] items-center" >
+          <div className={clsx(
+            "pt-3 grid grid-cols-[1fr_min-content] gap-[10px] items-center",
+            'max-mobile-sm:grid-cols-1',
+            deliveryAtYourPlace ? '!gap-5' : '!gap-3.5'
+          )} >
             <p className={clsx(
               font_Inter.className,
               "py-2 relative text-center bg-blue-20 rounded-full font-semibold tracking-wider",
@@ -112,7 +118,7 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
             </p>
             <Chip
               text={location}
-              className="w-max mx-auto border-green-30 relative !bg-green-10 border min-w-[150px]"
+              className='w-max mx-auto border-green-30 relative !bg-green-10 border min-w-[150px] max-mobile-sm:justify-center max-mobile-sm:min-w-[200px]'
               icon={LocationIcon}
               pointer={false}
               iconClassName='max-w-[16px] max-h-[16px]'

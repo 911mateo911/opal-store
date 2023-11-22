@@ -37,7 +37,7 @@ export const ProductDetails = ({ form }: ProductFormComponentBaseProps) => {
       )} >
         Detajet
       </h6>
-      <div className='grid grid-cols-3 w-full gap-[10px]' >
+      <div className='grid grid-cols-3 w-full gap-[10px] between-tablet-xs-sm:grid-cols-4 between-mobile-lg-tablet-xs:grid-cols-4' >
         {cardRenderProps.map(props => (
           <ProductDetailCard key={props.detailName} {...props} />
         ))}

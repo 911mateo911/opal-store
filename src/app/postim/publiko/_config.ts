@@ -1,4 +1,4 @@
-import { SelectOption, SelectValues } from "opal/app/_shared/atoms/Select";
+import { SelectValues } from "opal/app/_shared/atoms/Select";
 import {
   PRODUCT_CATEGORIES,
   PRODUCT_CONDITION,

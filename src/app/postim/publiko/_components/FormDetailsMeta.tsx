@@ -8,12 +8,16 @@ import clsx from 'clsx';
 import { font_RedHatDisplay } from 'opal/app/_shared/fonts';
 import { PRODUCT_SUBCATEGORIES_MAP } from '../_subcategoriesMetaData';
 
-export const FormDetailsMeta = ({ form }: ProductFormComponentBaseProps) => {
+interface FormDetailsMetaProps extends ProductFormComponentBaseProps {
+  className?: string;
+}
+
+export const FormDetailsMeta = ({ form, className }: FormDetailsMetaProps) => {
   const category = form.getValues(NewProductFormFields.category);
   const subCategory = form.getValues(NewProductFormFields.subCategory);
 
   return (
-    <div className='bg-green-10 rounded-full w-fit px-4 py-0.5 flex items-center justify-center' >
+    <div className={clsx('bg-green-10 rounded-full w-fit px-4 py-0.5 flex items-center justify-center', className)} >
       <div className='flex items-end h-4'>
         <p
           className={clsx(

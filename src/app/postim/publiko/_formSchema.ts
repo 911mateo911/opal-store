@@ -107,7 +107,9 @@ export const newProductSchema = z.object({
   [NewProductFormFields.category]: z.nativeEnum(PRODUCT_CATEGORIES),
   [NewProductFormFields.subCategory]: z.nativeEnum(PRODUCT_SUBCATEGORIES),
   [NewProductFormFields.keywords]: z.array(z.string()),
-  [NewProductFormFields.telephone]: z.string(),
+  [NewProductFormFields.telephone]: z.string()
+    .min(1, { message: 'Numri i telefonit nuk mund te jete bosh' })
+    .regex(GLOBAL_CONFIG.phoneNumberRegex, { message: 'Numri eshte invalid' }),
   [NewProductFormFields.whatsapp]: z.string().optional(),
   [NewProductFormFields.email]: z.string()
     .min(1, { message: 'Email nuk mund te jete bosh' })

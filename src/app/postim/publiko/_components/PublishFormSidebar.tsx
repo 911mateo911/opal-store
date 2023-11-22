@@ -99,6 +99,7 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
               control={control}
               onBlur={onInputBlur}
               defaultValue={getValues(NewProductFormFields.telephone)}
+              type='number'
             />
           </div>
           <div className='w-full' >

@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect } from 'react';
 import 'keen-slider/keen-slider.min.css'
+import React, { useEffect, useMemo, useState } from 'react';
 import { KeenSliderOptions, useKeenSlider } from 'keen-slider/react'
 import { Control, useWatch } from 'react-hook-form';
 import { NewProductFormFields, NewProductSchemaType } from '../_formSchema';
@@ -15,22 +15,26 @@ interface FormImagePreviewProps {
   onDelete?: (imageName: string) => void;
   editable?: boolean;
   className?: string;
+  horizontal?: boolean;
 };
 
-const sliderOptions: KeenSliderOptions = {
-  vertical: true
-};
-
-export const FormImagePreview = ({ formControl, onDelete, editable = true, className }: FormImagePreviewProps) => {
+export const FormImagePreview = ({ formControl, onDelete, editable = true, className, horizontal = false }: FormImagePreviewProps) => {
+  const [sliderIndex, setSliderIndex] = useState<number>(0);
   const images = useWatch({ control: formControl, name: NewProductFormFields.images, defaultValue: {} });
+  const sliderOptions = useMemo<KeenSliderOptions>(() => ({ vertical: !horizontal }), [horizontal]);
 
   const imagesArray = Object.values(images);
 
   const [sliderRef, instanceRef] = useKeenSlider(sliderOptions);
 
+  instanceRef.current?.on('slideChanged', ({ track }) => setSliderIndex(track.details.rel));
+
   useEffect(() => {
     instanceRef.current?.update(sliderOptions);
-  }, [images, instanceRef]);
+    if (instanceRef.current) {
+      setSliderIndex(instanceRef.current.track.details.rel);
+    }
+  }, [images, instanceRef, sliderOptions]);
 
   const wrapperClassName = clsx('bg-grey-10 rounded-md dark:bg-grey-90 w-full h-64', className);
 
@@ -44,8 +48,8 @@ export const FormImagePreview = ({ formControl, onDelete, editable = true, class
           Nuk eshte zgjedhur asnje foto
         </p>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div ref={sliderRef} className={clsx("keen-slider", wrapperClassName)}>
@@ -77,6 +81,22 @@ export const FormImagePreview = ({ formControl, onDelete, editable = true, class
           )}
         </div>
       ))}
+      {imagesArray.length > 1 && (
+        <div className={clsx(
+          'absolute items-center justify-center gap-1 flex',
+          'bg-grey-1 rounded-full shadow',
+          sliderOptions.vertical ? 'top-1/2 -translate-y-1/2 flex-col right-2 px-1 py-2' : 'left-1/2 -translate-x-1/2 bottom-2 py-1 px-2'
+        )} >
+          {imagesArray.map((image, indicatorIndex) => {
+            return (
+              <span key={image.preview} className={clsx(
+                'block w-1 h-1 bg-green-20 rounded-full',
+                sliderIndex === indicatorIndex && 'bg-green-60'
+              )} />
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }
