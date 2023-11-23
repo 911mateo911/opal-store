@@ -32,6 +32,9 @@ const config: Config = {
         'max-mobile-sm': {
           max: '440px'
         },
+        'max-mobile-xs': {
+          max: '410px'
+        },
         // Betweens: order descending
         'between-mobile-md-lg': {
           min: '550px',

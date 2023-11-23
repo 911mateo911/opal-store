@@ -100,6 +100,7 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
               onBlur={onInputBlur}
               defaultValue={getValues(NewProductFormFields.telephone)}
               type='number'
+              dontValidateNumber
             />
           </div>
           <div className='w-full' >
@@ -113,6 +114,8 @@ export const PublishFormSidebar = ({ form }: ProductFormComponentBaseProps) => {
               control={control}
               onBlur={onInputBlur}
               defaultValue={getValues(NewProductFormFields.whatsapp)}
+              type='number'
+              dontValidateNumber
             />
           </div>
         </div>

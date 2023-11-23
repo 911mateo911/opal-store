@@ -85,13 +85,15 @@ export const FormImagePreview = ({ formControl, onDelete, editable = true, class
         <div className={clsx(
           'absolute items-center justify-center gap-1 flex',
           'bg-grey-1 rounded-full shadow',
-          sliderOptions.vertical ? 'top-1/2 -translate-y-1/2 flex-col right-2 px-1 py-2' : 'left-1/2 -translate-x-1/2 bottom-2 py-1 px-2'
+          sliderOptions.vertical ? 'top-1/2 -translate-y-1/2 flex-col right-2 px-1 py-2' : 'left-1/2 -translate-x-1/2 bottom-2 py-1 px-2',
+          'dark:bg-grey-75'
         )} >
           {imagesArray.map((image, indicatorIndex) => {
             return (
               <span key={image.preview} className={clsx(
                 'block w-1 h-1 bg-green-20 rounded-full',
-                sliderIndex === indicatorIndex && 'bg-green-60'
+                sliderIndex === indicatorIndex && 'bg-green-60 dark:bg-green-70',
+                'dark:bg-green-30'
               )} />
             )
           })}

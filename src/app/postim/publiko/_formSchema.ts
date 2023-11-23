@@ -11,6 +11,7 @@ import { z } from "zod";
 import { GLOBAL_CONFIG, PRODUCT_FORM_CONFIG } from "opal/app/_config";
 import { PRODUCT_DETAIL_FIELD } from "opal/app/_shared/productTypes";
 import { PRODUCT_SUBCATEGORIES_MAP } from "./_subcategoriesMetaData";
+import { formatMoney } from "opal/app/_shared/formatters";
 
 export enum PRODUCT_FORM_STEPS {
   GENERAL_FORM,
@@ -76,7 +77,7 @@ export enum NewProductFormFields {
 export const newProductSchema = z.object({
   [NewProductFormFields.title]: z.string()
     .min(1, { message: 'Titulli nuk mund te jete bosh.' })
-    .max(PRODUCT_FORM_CONFIG.titleMaxLength, { message: `Titulli duhet te jete max ${PRODUCT_FORM_CONFIG.titleMaxLength} karaktere.` }),
+    .max(PRODUCT_FORM_CONFIG.titleMaxLength, { message: `Titulli nuk lejohet >${PRODUCT_FORM_CONFIG.titleMaxLength} karaktere.` }),
   [NewProductFormFields.debatablePrice]: z.boolean(),
   [NewProductFormFields.description]: z.string()
     .min(1, { message: 'Pershkrimi nuk mund te jete bosh.' })
@@ -93,7 +94,7 @@ export const newProductSchema = z.object({
     .min(0, { message: 'Cmimi nuk mund te jete me i vogel se 0' })
     .max(PRODUCT_FORM_CONFIG.priceMax, {
       // TODO: format price
-      message: `Cmimi nuk mund te jete me i madh se ${PRODUCT_FORM_CONFIG.priceMax}`
+      message: `Maksimumi i lejuar eshte ${formatMoney(PRODUCT_FORM_CONFIG.priceMax)}`
     })
     .or(z.string())
     .refine(price => {
@@ -110,7 +111,9 @@ export const newProductSchema = z.object({
   [NewProductFormFields.telephone]: z.string()
     .min(1, { message: 'Numri i telefonit nuk mund te jete bosh' })
     .regex(GLOBAL_CONFIG.phoneNumberRegex, { message: 'Numri eshte invalid' }),
-  [NewProductFormFields.whatsapp]: z.string().optional(),
+  [NewProductFormFields.whatsapp]: z.string()
+    .regex(GLOBAL_CONFIG.phoneNumberRegex, { message: 'Numri eshte invalid' })
+    .optional(),
   [NewProductFormFields.email]: z.string()
     .min(1, { message: 'Email nuk mund te jete bosh' })
     .regex(GLOBAL_CONFIG.emailRegex, { message: 'Email eshte invalid' }),

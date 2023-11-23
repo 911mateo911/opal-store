@@ -22,6 +22,7 @@ interface TextInputProps<T extends string, F extends FieldValues> {
   adornment?: React.ReactNode;
   errorPath?: string;
   context?: string;
+  dontValidateNumber?: boolean;
 };
 
 const numberInputAndDotsRegex = /^\d+(\.\d+)*$/;
@@ -41,7 +42,8 @@ export function TextInput<T extends string, F extends FieldValues>({
   defaultValue,
   adornment,
   errorPath,
-  context
+  context,
+  dontValidateNumber = false
 }: TextInputProps<T, F>) {
   const { errors } = useFormState({ control });
 
@@ -66,7 +68,7 @@ export function TextInput<T extends string, F extends FieldValues>({
     let value: string | number = target.value.toString();
     const hasUnallowedChars = value.match(matchAllNonNumericsRegex)?.length;
 
-    if (type === 'number') {
+    if (type === 'number' && !dontValidateNumber) {
       const numberOfDots = value.match(/\./g)?.length || 0;
 
       const isNegativeNumber = value.at(0) === '-';
@@ -106,7 +108,7 @@ export function TextInput<T extends string, F extends FieldValues>({
     }
 
     onChange(value, name);
-  }, [name, onChange, type]);
+  }, [name, onChange, type, dontValidateNumber]);
 
   // TODO: refactor this piece of dogshit
   const renderedInput = useMemo(() => {
