@@ -5,7 +5,6 @@ import {
   ProductFormComponentBaseProps
 } from '../../_config';
 import { NewProductFormFields } from '../../_formSchema';
-import Compressor from 'compressorjs';
 import clsx from 'clsx';
 import { font_Inter, font_RedHatDisplay } from 'opal/app/_shared/fonts';
 import { FormImagePreview } from '../../_components/FormImagePreview';
@@ -19,39 +18,13 @@ import { ProductAccordionItem } from 'opal/app/postim/_components/ProductAccordi
 import { FormDetailsMeta } from '../../_components/FormDetailsMeta';
 import { PRODUCT_PREFERRED_COMMUNICATION } from '@prisma/client';
 import { ProductDetails } from '../../_components/DetailsSection/ProductDetails';
+import { usePublishNewProduct } from './usePublishNewProduct';
 
 export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
   const { getValues } = form;
-
-  // TODO: do the optimization when the form submits
-  // const replaceImage = useCallback((newImage: File, images: NewProductSchemaType['images']) => {
-  //   setValue(NewProductFormFields.images, {
-  //     ...images,
-  //     [newImage.name]: newImage
-  //   })
-  // }, [setValue])
-
-  // useLayoutEffect(() => {
-  //   const images = getValues(NewProductFormFields.images);
-  //   const imagesArray = Object.values(images);
-
-  //   imagesArray.forEach(image => {
-  //     if (image.preview) {
-  //       URL.revokeObjectURL(image.preview);
-  //     }
-  //     new Compressor(image, {
-  //       quality: 0.6,
-  //       success(fileOrBlob) {
-  //         if (fileOrBlob instanceof File) {
-  //           replaceImage(fileOrBlob, images)
-  //         } else {
-  //           const newFile = new File([fileOrBlob], fileOrBlob.name);
-  //           replaceImage(newFile, images);
-  //         }
-  //       },
-  //     })
-  //   });
-  // }, [getValues, replaceImage]);
+  const {
+    onSubmit
+  } = usePublishNewProduct(form);
 
   const title = getValues(NewProductFormFields.title);
   const state = getValues(NewProductFormFields.state);

@@ -2,7 +2,7 @@ import { ZodObject, ZodRawShape, z } from "zod";
 import { SelectValues } from "./atoms/Select";
 
 export interface ImageWithPreview extends File {
-  preview: string;
+  preview?: string;
 };
 
 // Get all keys on a zod schema and map to whatever u like

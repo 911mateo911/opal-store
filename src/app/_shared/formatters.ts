@@ -1,9 +1,5 @@
-import { createFormatter } from "next-intl";
-
-const nextFormatter = createFormatter({ locale: 'en-US' });
-
 export const formatMoney = (
   price: number
 ) => {
-  return nextFormatter.number(price, { style: 'currency', currency: 'ALL' })
+  return new Intl.NumberFormat('en-UK', { style: 'currency', currency: 'ALL' }).format(price);
 }

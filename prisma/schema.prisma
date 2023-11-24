@@ -7,7 +7,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model PRODUCT {
+model Product {
   id                     String                          @id @unique
   category               PRODUCT_CATEGORIES
   currency               PRODUCT_CURRENCY
@@ -17,39 +17,37 @@ model PRODUCT {
   condition              PRODUCT_CONDITION
 }
 
-model USER {
-  id             String              @id @unique
+model User {
+  id             String               @id @unique
   fullName       String
-  createdAt      DateTime            @default(now())
+  createdAt      DateTime             @default(now())
   draftProductId String?
-  draftProduct   DRAFT_PRODUCT_FORM? @relation(fields: [draftProductId], references: [draftId])
+  draftProducts  Draft_Product_Form[]
 }
 
-model DRAFT_PRODUCT_FORM {
-  draftId         String                @id @unique
-  title           String
-  debatablePrice  Boolean
-  description     String
-  images          String[]
-  location        String
-  price           Int
-  advertIndex     PRODUCT_ADVERT_INDEX
-  sellerId        String
-  category        PRODUCT_CATEGORIES
-  subCategory     PRODUCT_SUBCATEGORIES
-  keywords        String[]
-  telephone       String
-  whatsapp        String
-  email           String
-  date            DateTime
-  slug            String
-  sluggedKeywords String
-  sellerName      String
-  currency        PRODUCT_CURRENCY
-  USER            USER[]
-  details         Json?
-  state           PRODUCT_STATE
-  condition       PRODUCT_CONDITION
+model Draft_Product_Form {
+  draftId        String                @id @default(uuid())
+  title          String
+  debatablePrice Boolean
+  description    String
+  images         String[]
+  location       String
+  price          Int
+  advertIndex    PRODUCT_ADVERT_INDEX
+  category       PRODUCT_CATEGORIES
+  subCategory    PRODUCT_SUBCATEGORIES
+  telephone      String
+  whatsapp       String?
+  email          String
+  created_at     DateTime              @default(now())
+  slug           String
+  sellerName     String
+  currency       PRODUCT_CURRENCY
+  details        Json?
+  state          PRODUCT_STATE
+  condition      PRODUCT_CONDITION
+  User           User?                 @relation(fields: [userId], references: [id])
+  userId         String?
 }
 
 enum PRODUCT_CONDITION {
