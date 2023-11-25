@@ -43,7 +43,7 @@ model Draft_Product_Form {
   slug           String
   sellerName     String
   currency       PRODUCT_CURRENCY
-  details        Json?
+  details        Json
   state          PRODUCT_STATE
   condition      PRODUCT_CONDITION
   User           User?                 @relation(fields: [userId], references: [id])
