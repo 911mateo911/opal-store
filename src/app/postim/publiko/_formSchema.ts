@@ -57,7 +57,6 @@ export enum NewProductFormFields {
   advertIndex = 'advertIndex',
   category = 'category',
   subCategory = 'subCategory',
-  keywords = 'keywords',
   telephone = 'telephone',
   whatsapp = 'whatsapp',
   email = 'email',
@@ -82,8 +81,7 @@ export const newProductSchema = z.object({
   [NewProductFormFields.description]: z.string()
     .min(1, { message: 'Pershkrimi nuk mund te jete bosh.' })
     .max(PRODUCT_FORM_CONFIG.descMaxLength, { message: `Pershkrimi duhet te jete max ${PRODUCT_FORM_CONFIG.descMaxLength} karaktere.` }),
-  [NewProductFormFields.images]: z.record(
-    z.string(),
+  [NewProductFormFields.images]: z.array(
     z.intersection(z.object({
       preview: z.string().optional()
     }), z.instanceof(File))
@@ -107,7 +105,6 @@ export const newProductSchema = z.object({
   [NewProductFormFields.advertIndex]: z.nativeEnum(PRODUCT_ADVERT_INDEX),
   [NewProductFormFields.category]: z.nativeEnum(PRODUCT_CATEGORIES),
   [NewProductFormFields.subCategory]: z.nativeEnum(PRODUCT_SUBCATEGORIES),
-  [NewProductFormFields.keywords]: z.array(z.string()),
   [NewProductFormFields.telephone]: z.string()
     .min(1, { message: 'Numri i telefonit nuk mund te jete bosh' })
     .regex(GLOBAL_CONFIG.phoneNumberRegex, { message: 'Numri eshte invalid' }),
@@ -187,8 +184,7 @@ export const newProductSchemaInitialValues: NewProductSchemaType = {
   description: '',
   email: '',
   fullName: '',
-  images: {},
-  keywords: [],
+  images: [],
   location: '',
   preferredCommunication: PRODUCT_PREFERRED_COMMUNICATION.TEL,
   price: '',

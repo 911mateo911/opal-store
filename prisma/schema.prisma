@@ -26,28 +26,30 @@ model User {
 }
 
 model Draft_Product_Form {
-  draftId        String                @id @default(uuid())
-  title          String
-  debatablePrice Boolean
-  description    String
-  images         String[]
-  location       String
-  price          Int
-  advertIndex    PRODUCT_ADVERT_INDEX
-  category       PRODUCT_CATEGORIES
-  subCategory    PRODUCT_SUBCATEGORIES
-  telephone      String
-  whatsapp       String?
-  email          String
-  created_at     DateTime              @default(now())
-  slug           String
-  sellerName     String
-  currency       PRODUCT_CURRENCY
-  details        Json
-  state          PRODUCT_STATE
-  condition      PRODUCT_CONDITION
-  User           User?                 @relation(fields: [userId], references: [id])
-  userId         String?
+  draftId                String                          @id @default(uuid())
+  title                  String
+  debatablePrice         Boolean
+  description            String
+  images                 String[]
+  location               String
+  price                  Int
+  advertIndex            PRODUCT_ADVERT_INDEX
+  category               PRODUCT_CATEGORIES
+  subCategory            PRODUCT_SUBCATEGORIES
+  telephone              String
+  whatsapp               String?
+  email                  String
+  created_at             DateTime                        @default(now())
+  slug                   String
+  fullName               String
+  currency               PRODUCT_CURRENCY
+  details                Json
+  state                  PRODUCT_STATE
+  condition              PRODUCT_CONDITION
+  User                   User?                           @relation(fields: [userId], references: [id])
+  userId                 String?
+  preferredCommunication PRODUCT_PREFERRED_COMMUNICATION
+  deliveryAtYourPlace    Boolean
 }
 
 enum PRODUCT_CONDITION {

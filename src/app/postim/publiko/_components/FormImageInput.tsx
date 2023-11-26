@@ -5,11 +5,9 @@ import React, { ChangeEvent } from 'react';
 import { ALLOWED_IMAGE_TYPES } from '../_config';
 import { useToast } from 'opal/app/_shared/molecules/Toast/useToast';
 
-type ImagesMap = Record<string, ImageWithPreview>;
-
 interface FormImageInputProps {
   id: string;
-  onChange: (images: ImagesMap) => void;
+  onChange: (images: ImageWithPreview[]) => void;
 }
 
 export const FormImageInput = ({ id, onChange }: FormImageInputProps) => {
@@ -20,18 +18,20 @@ export const FormImageInput = ({ id, onChange }: FormImageInputProps) => {
 
     if (!files || !files.length) return;
 
-    const withPreviewFiles: ImagesMap = {};
+    const withPreviewFiles: ImageWithPreview[] = [];
 
     for (let index = 0; index < Number(files?.length); index++) {
 
       const currentFile = files[index];
 
       if (ALLOWED_IMAGE_TYPES.includes(currentFile.type)) {
-        withPreviewFiles[currentFile.name] = Object.assign(
-          currentFile,
-          {
-            preview: URL.createObjectURL(files[index])
-          }
+        withPreviewFiles.push(
+          Object.assign(
+            currentFile,
+            {
+              preview: URL.createObjectURL(files[index])
+            }
+          )
         );
       }
     };

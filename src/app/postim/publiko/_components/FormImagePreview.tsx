@@ -20,10 +20,8 @@ interface FormImagePreviewProps {
 
 export const FormImagePreview = ({ formControl, onDelete, editable = true, className, horizontal = false }: FormImagePreviewProps) => {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
-  const images = useWatch({ control: formControl, name: NewProductFormFields.images, defaultValue: {} });
+  const images = useWatch({ control: formControl, name: NewProductFormFields.images, defaultValue: [] });
   const sliderOptions = useMemo<KeenSliderOptions>(() => ({ vertical: !horizontal }), [horizontal]);
-
-  const imagesArray = Object.values(images);
 
   const [sliderRef, instanceRef] = useKeenSlider(sliderOptions);
 
@@ -38,7 +36,7 @@ export const FormImagePreview = ({ formControl, onDelete, editable = true, class
 
   const wrapperClassName = clsx('bg-grey-10 rounded-md dark:bg-grey-90 w-full h-64', className);
 
-  if (!imagesArray.length) {
+  if (!images.length) {
     return (
       <div className={clsx(wrapperClassName, 'flex items-center justify-center')} >
         <p className={clsx(
@@ -53,7 +51,7 @@ export const FormImagePreview = ({ formControl, onDelete, editable = true, class
 
   return (
     <div ref={sliderRef} className={clsx("keen-slider", wrapperClassName)}>
-      {imagesArray.map(image => (
+      {images.map(image => (
         <div key={image.preview} className="keen-slider__slide relative cursor-grab">
           {editable && (
             <div
@@ -81,14 +79,14 @@ export const FormImagePreview = ({ formControl, onDelete, editable = true, class
           )}
         </div>
       ))}
-      {imagesArray.length > 1 && (
+      {images.length > 1 && (
         <div className={clsx(
           'absolute items-center justify-center gap-1 flex',
           'bg-grey-1 rounded-full shadow',
           sliderOptions.vertical ? 'top-1/2 -translate-y-1/2 flex-col right-2 px-1 py-2' : 'left-1/2 -translate-x-1/2 bottom-2 py-1 px-2',
           'dark:bg-grey-75'
         )} >
-          {imagesArray.map((image, indicatorIndex) => {
+          {images.map((image, indicatorIndex) => {
             return (
               <span key={image.preview} className={clsx(
                 'block w-1 h-1 bg-green-20 rounded-full',

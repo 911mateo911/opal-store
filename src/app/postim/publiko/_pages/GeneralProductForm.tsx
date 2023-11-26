@@ -43,7 +43,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
   const onDeleteImage = (imageName: string) => {
     const images = getValues(NewProductFormFields.images);
     const providedImagesArray = Object.values(images);
-    const foundImage = images[imageName];
+    const foundImage = images.find(({ name }) => name === imageName);
 
     if (foundImage) {
       const newImages = providedImagesArray.filter(({ name }) => name !== foundImage.name);
@@ -52,14 +52,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
         URL.revokeObjectURL(foundImage.preview);
       }
 
-      const newImagesMap = newImages.reduce<NewProductSchemaType['images']>((map, currentImage) => {
-        return {
-          ...map,
-          [currentImage.name]: currentImage
-        }
-      }, {});
-
-      setValue(NewProductFormFields.images, newImagesMap);
+      setValue(NewProductFormFields.images, newImages);
     }
   };
 

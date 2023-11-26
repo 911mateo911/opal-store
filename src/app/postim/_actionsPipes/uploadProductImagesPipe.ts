@@ -2,10 +2,10 @@
 
 import { mediaDb } from "opal/app/_shared/mediaDb";
 import { NewProductFormFields, NewProductSchemaType } from "../publiko/_formSchema";
-import { PolishedProductType } from "./types";
+import { ProductTypeWithUploadedImages } from "./types";
 
-export const uploadProductImagesPipe = async (product: NewProductSchemaType): Promise<PolishedProductType> => {
-  const images = Object.values(product[NewProductFormFields.images]);
+export const uploadProductImagesPipe = async (product: NewProductSchemaType): Promise<ProductTypeWithUploadedImages> => {
+  const images = product[NewProductFormFields.images];
 
   const binaryImages = await Promise.all(images.map(image => image.arrayBuffer()));
 
@@ -24,7 +24,7 @@ export const uploadProductImagesPipe = async (product: NewProductSchemaType): Pr
 
   return {
     ...product,
-    images: uploadedImages.reduce<PolishedProductType['images']>(
+    images: uploadedImages.reduce<ProductTypeWithUploadedImages['images']>(
       (accumulator, currentImagePromise) => {
         if (currentImagePromise.status === 'fulfilled') {
           accumulator.push(currentImagePromise.value.secure_url);
