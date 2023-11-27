@@ -134,7 +134,9 @@ export const VerifyAndPublish = ({ form }: ProductFormComponentBaseProps) => {
             font_RedHatDisplay.className,
             'mt-3 text-base font-semibold border-b border-grey-10',
             'dark:text-grey-10 dark:border-grey-90'
-          )} >
+          )}
+            onClick={onSubmit}
+          >
             Pershkrimi
           </h6>
           {/* TODO: check if you can reuse this to the product page later */}

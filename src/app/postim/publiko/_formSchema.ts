@@ -20,33 +20,6 @@ export enum PRODUCT_FORM_STEPS {
   SHARE
 };
 
-/**
- * postId: string;
-    title: string;
-    debatablePrice: boolean;
-    description: string;
-    images: Image[];
-    location: string;
-    price: number;
-    isInSale: boolean;
-    inSaleFor: Date | null;
-    advertIndex: 1 | 2 | 3;
-    sellerId: string;
-    category: string;
-    subCategory: string;
-    favouritedBy: string[];
-    keywords: string[];
-    telephone: number;
-    whatsapp?: number;
-    email: string;
-    date: Date,
-    slug: string;
-    sluggedKeywords: string;
-    sellerName: string;
-    currency: CurrencyType;
-    likes: string[];
- */
-
 export enum NewProductFormFields {
   title = 'title',
   debatablePrice = 'debatablePrice',
@@ -72,7 +45,6 @@ export enum NewProductFormFields {
   detailsId = 'detailsId'
 }
 
-// TODO: ADD validation messages
 export const newProductSchema = z.object({
   [NewProductFormFields.title]: z.string()
     .min(1, { message: 'Titulli nuk mund te jete bosh.' })
@@ -91,7 +63,6 @@ export const newProductSchema = z.object({
   [NewProductFormFields.price]: z.number()
     .min(0, { message: 'Cmimi nuk mund te jete me i vogel se 0' })
     .max(PRODUCT_FORM_CONFIG.priceMax, {
-      // TODO: format price
       message: `Maksimumi i lejuar eshte ${formatMoney(PRODUCT_FORM_CONFIG.priceMax)}`
     })
     .or(z.string())
@@ -192,10 +163,10 @@ export const newProductSchemaInitialValues: NewProductSchemaType = {
   title: '',
   whatsapp: '',
   deliveryAtYourPlace: false,
-  formStep: PRODUCT_FORM_STEPS.GENERAL_FORM,
-  hasNextStep: true,
+  [NewProductFormFields.formStep]: PRODUCT_FORM_STEPS.GENERAL_FORM,
+  [NewProductFormFields.hasNextStep]: true,
   details: PRODUCT_SUBCATEGORIES_MAP[PRODUCT_CATEGORIES.APARTMENT][PRODUCT_SUBCATEGORIES.APARTMENT__APARTMENT]?.initialValues || {},
   state: PRODUCT_STATE.TO_SELL,
   condition: PRODUCT_CONDITION.NEW,
-  detailsId: PRODUCT_SUBCATEGORIES.APARTMENT__APARTMENT,
+  [NewProductFormFields.detailsId]: PRODUCT_SUBCATEGORIES.APARTMENT__APARTMENT,
 };

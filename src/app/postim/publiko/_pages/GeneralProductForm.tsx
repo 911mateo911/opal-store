@@ -60,7 +60,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
     setValue(NewProductFormFields.images, images);
   };
 
-  const validateAndGoToNextStep = (previousDetailsId: NewProductSchemaType['detailsId']) => {
+  const validateAndGoToNextStep = (previousDetailsId: NewProductSchemaType[NewProductFormFields.detailsId]) => {
     return handleSubmit((formData) => {
       const selectedCategory = formData.category;
       const selectedSubcategory = formData.subCategory;
@@ -69,7 +69,7 @@ export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
 
       let nextStep: PRODUCT_FORM_STEPS = PRODUCT_FORM_STEPS.VERIFY_AND_PUBLISH;
 
-      if (formData.hasNextStep) {
+      if (formData[NewProductFormFields.hasNextStep]) {
         nextStep = PRODUCT_FORM_STEPS.DETAILS_FORM;
       };
       if (selectedSubcategorySelectOption?.initialValues) {

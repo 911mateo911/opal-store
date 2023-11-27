@@ -3,6 +3,7 @@ import { ProductFormComponentBaseProps } from "../../_config";
 import { NewProductFormFields } from "../../_formSchema";
 import { promiseCompressImages } from "../../_helpers/promiseCompressImages";
 import { uploadAction } from "opal/app/postim/_actionsPipes/uploadAction";
+import { convertProductToFormData } from "opal/app/postim/_actionsPipes/productToSerializableToProduct";
 
 export enum ProductFormPublishState {
   STALE = 'STALE',
@@ -24,10 +25,14 @@ export const usePublishNewProduct = (form: ProductFormComponentBaseProps['form']
       const compressedImages = await promiseCompressImages(images);
       setFormState(ProductFormPublishState.UPLOADING);
 
-      uploadAction({
+      const formData = convertProductToFormData({
         ...product,
         images: compressedImages
-      })
+      });
+
+      const uploadedProduct = await uploadAction(formData);
+
+      // console.log(uploadedProduct);
     } catch (error) {
       // TODO: Build a damn logger man
       console.log(error);

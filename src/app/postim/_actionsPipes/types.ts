@@ -1,7 +1,7 @@
 import { Draft_Product_Form } from "@prisma/client";
 import { NewProductSchemaType } from "../publiko/_formSchema";
 
-export interface ProductTypeWithUploadedImages extends Omit<NewProductSchemaType, 'images'> {
+export interface ProductTypeWithUploadedImages extends Omit<NewProductSchemaType, 'images' | 'detailsId' | 'hasNextStep' | 'formStep'> {
   images: string[];
 };
 
