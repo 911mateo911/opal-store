@@ -7,7 +7,7 @@ export const font_RedHatDisplay = Red_Hat_Display({
 });
 
 export const font_Inter = Inter({
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '900'],
   subsets: ['latin'],
   variable: '--font-inter'
 })

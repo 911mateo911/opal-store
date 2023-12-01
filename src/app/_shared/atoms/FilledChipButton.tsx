@@ -7,7 +7,7 @@ interface FilledChipButtonProps {
   className?: string;
   asLink?: boolean;
   icon?: string;
-  textSize?: 'sm' | 'md';
+  textSize?: 'sm' | 'md' | 'lg';
   onClick?: () => void;
 };
 
@@ -33,7 +33,8 @@ export const FilledChipButton = (props: FilledChipButtonProps & LinkOrBtnType) =
     'dark:bg-green-30 dark:text-green-100',
     props.icon ? 'pl-2 pr-3' : 'px-4',
     {
-      ['text-sm']: textSize === 'sm'
+      ['text-sm']: textSize === 'sm',
+      ['text-lg py-1.5']: textSize === 'lg'
     },
     props.className
   );

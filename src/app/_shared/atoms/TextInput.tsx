@@ -8,7 +8,6 @@ import { getInputDefaultValue } from '../helpers';
 import get from 'lodash.get';
 
 interface TextInputProps<T extends string, F extends FieldValues> {
-  value?: string;
   onChange: (value: string | number, name: T) => void;
   name: T;
   id?: string;
@@ -31,7 +30,6 @@ const matchAllNonNumericsRegex = /[^\d.-]/g;
 export function TextInput<T extends string, F extends FieldValues>({
   name,
   onChange,
-  value,
   className,
   id,
   type = 'text',
@@ -139,7 +137,6 @@ export function TextInput<T extends string, F extends FieldValues>({
       return (
         <div className='w-full flex items-stretch' >
           <input
-            value={value}
             name={name}
             id={id}
             placeholder={placeholder}
@@ -175,7 +172,6 @@ export function TextInput<T extends string, F extends FieldValues>({
     defaultValue,
     onChange,
     onBlur,
-    value,
     id,
     className,
     adornment,

@@ -24,6 +24,8 @@ import { FormPriceSegment } from "../_components/FormPriceSegment";
 import { PRODUCT_SUBCATEGORIES_MAP } from "../_subcategoriesMetaData";
 
 // TODO: IMPORTANT, REVOKE ALL OBJECT URL AFTER LEAVING THE FORM PAGE
+// TODO: fix all the fucking bugs
+// TODO: Proceeding to signup
 export const GeneralProductForm = ({ form }: ProductFormComponentBaseProps) => {
   const {
     setValue,

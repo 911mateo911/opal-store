@@ -141,6 +141,9 @@ const config: Config = {
       },
       animation: {
         'fadeIn': 'fadeIn .2s ease-in-out forwards'
+      },
+      height: {
+        'max-screen-desktop': 'calc(100vh - 172px)'
       }
     }
   },

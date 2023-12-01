@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className='dark:bg-grey-100' >
         <ToastController />
         <Navbar />
-        <div className='pt-24' >
+        <div className='pt-24 max-w-[1000px] mx-auto px-4 max-tablet-sm:px-1.5' >
           {children}
         </div>
       </body>

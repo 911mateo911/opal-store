@@ -23,8 +23,8 @@ export default function PublishPageLayout(
 
   return (
     <div className={clsx(
-      "max-w-[1000px] mx-auto px-4 py-6 flex justify-center",
-      'max-tablet-sm:flex-col max-tablet-sm:pt-16 max-tablet-sm:px-1.5 max-mobile:pb-0'
+      "py-6 flex justify-center",
+      'max-tablet-sm:flex-col max-tablet-sm:pt-16 max-mobile:pb-0'
     )} >
       <FormProvider {...form} >
         <FormGoBack

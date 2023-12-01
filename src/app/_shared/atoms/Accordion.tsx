@@ -24,7 +24,6 @@ const initialAccordionStyles: AccordionStyles = {
 };
 
 export const Accordion = ({ title, children }: AccordionProps) => {
-  const headerRef = useRef<HTMLDivElement>(null);
   const childWrapperRef = useRef<HTMLDivElement>(null);
   const [accordionStyles, setAccordionStyles] = useState<AccordionStyles>(initialAccordionStyles);
 
@@ -50,7 +49,6 @@ export const Accordion = ({ title, children }: AccordionProps) => {
   return (
     <div>
       <div
-        ref={headerRef}
         className={clsx(
           font_RedHatDisplay.className,
           'p-3 rounded-md cursor-pointer bg-grey-10 font-semibold tracking-wide flex justify-between items-center',

@@ -1,11 +1,16 @@
 import React from 'react';
 import Image from 'next/image';
 import logoSvg from 'opal/app/_shared/icons/logo.svg?url';
+import clsx from 'clsx';
 
-export const Logo = () => {
+interface LogoProps {
+  className?: string;
+}
+
+export const Logo = ({ className }: LogoProps) => {
   return (
     <div
-      className='h-10 w-10 bg-green-40 flex items-center justify-center rounded-md'
+      className={clsx('h-10 w-10 bg-green-40 flex items-center justify-center rounded-md', className)}
     >
       <Image
         src={logoSvg}
