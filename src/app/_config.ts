@@ -34,10 +34,14 @@ interface GLOBAL_CONFIG_TYPE {
   emailRegex: RegExp;
   fileExtensionRegex: RegExp;
   phoneNumberRegex: RegExp;
+  usernameRegex: RegExp;
+  passwordRegex: RegExp;
 };
 
 export const GLOBAL_CONFIG: GLOBAL_CONFIG_TYPE = {
   emailRegex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   fileExtensionRegex: /\.[0-9a-z]+$/i,
-  phoneNumberRegex: /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/
+  phoneNumberRegex: /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
+  usernameRegex: /^[a-zA-Z_](?!.*?\.{2})[\w.]{1,28}[\w]$/,
+  passwordRegex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,}$/
 };

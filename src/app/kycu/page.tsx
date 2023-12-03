@@ -1,22 +1,10 @@
-'use client';
-
-import { useForm } from "react-hook-form";
-import { TextInput } from "../_shared/atoms/TextInput";
-import { InputTitle } from "../postim/publiko/_components/InputTitle";
-import { LoginFormFields, loginSchema, loginSchemaInitialValues } from "./_formSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
 import { font_Inter, font_RedHatDisplay } from "../_shared/fonts";
-import { FilledChipButton } from "../_shared/atoms/FilledChipButton";
 import { Logo } from "../_shared/atoms/Logo";
 import Link from "next/link";
+import { LoginForm } from "./LoginForm";
 
 export default function LoginPage() {
-  const form = useForm({
-    defaultValues: loginSchemaInitialValues,
-    resolver: zodResolver(loginSchema)
-  });
-
   return (
     <div className="mx-auto h-max-screen-desktop flex flex-col justify-center px-3 max-tablet-sm:px-[22px] landscape-mobile:h-auto landscape-mobile:py-6" >
       <span className="flex items-center mb-4" >
@@ -36,35 +24,7 @@ export default function LoginPage() {
         )} >
           Streha jote e <b className="text-green-50" >blerjeve</b>
         </h2>
-        <div className="w-96 grid gap-[10px] relative ml-auto max-tablet-sm:mx-auto max-tablet-sm:mt-6 max-mobile-slg:w-full">
-          <div>
-            <InputTitle>
-              Username/Email
-            </InputTitle>
-            <TextInput
-              name={LoginFormFields.emailOrUsername}
-              placeholder="email@provider.com"
-              onChange={console.log}
-              control={form.control}
-            />
-          </div>
-          <div>
-            <InputTitle>
-              Password
-            </InputTitle>
-            {/* TODO: add password input */}
-            <TextInput
-              name="email"
-              placeholder="email@provider.com"
-              onChange={console.log}
-              control={form.control}
-            />
-          </div>
-          <FilledChipButton
-            text="Logohu"
-            textSize="lg"
-            className="justify-center mt-2"
-          />
+        <LoginForm>
           <div className="absolute left-0 -bottom-9 flex w-full items-center justify-center max-tablet-sm:static max-tablet-sm:mt-2" >
             <p
               className={clsx(
@@ -84,7 +44,7 @@ export default function LoginPage() {
               Rregjistrohu
             </Link>
           </div>
-        </div>
+        </LoginForm>
       </div>
     </div>
   )

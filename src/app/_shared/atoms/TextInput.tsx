@@ -1,17 +1,22 @@
 'use client';
 
 import clsx from 'clsx';
-import React, { useCallback, useMemo, useRef } from 'react';
+import React, { InputHTMLAttributes, useCallback, useMemo, useRef, useState } from 'react';
 import { font_RedHatDisplay } from '../fonts';
 import { Control, FieldValues, useFormState } from 'react-hook-form';
 import { getInputDefaultValue } from '../helpers';
 import get from 'lodash.get';
+import EyeOpenIcon from 'opal/app/_shared/icons/eyeOpen.svg?url';
+import EyeCloseIcon from 'opal/app/_shared/icons/eyeClosed.svg?url';
+import Image from 'next/image';
+
+type TextInputType = 'text' | 'number' | 'password';
 
 interface TextInputProps<T extends string, F extends FieldValues> {
   onChange: (value: string | number, name: T) => void;
   name: T;
   id?: string;
-  type?: 'text' | 'number';
+  type?: TextInputType;
   className?: string;
   placeholder?: string;
   textarea?: boolean;
@@ -27,6 +32,21 @@ interface TextInputProps<T extends string, F extends FieldValues> {
 const numberInputAndDotsRegex = /^\d+(\.\d+)*$/;
 const matchAllNonNumericsRegex = /[^\d.-]/g;
 
+const inputTypeMap: Record<TextInputType, InputHTMLAttributes<HTMLInputElement>['type']> = {
+  number: 'tel',
+  password: 'password',
+  text: 'text'
+};
+
+const getInputType = (inputType: TextInputType, passwordOpen: boolean) => {
+  if (inputType !== 'password') {
+    return inputTypeMap[inputType];
+  };
+
+  return passwordOpen ? inputTypeMap.text : inputTypeMap.password;
+};
+
+// TODO: REFACTOR THAT HORRENDOUS MEMO PLEASE JA QIFSHA ROBT SE MA SHPIFI
 export function TextInput<T extends string, F extends FieldValues>({
   name,
   onChange,
@@ -41,9 +61,11 @@ export function TextInput<T extends string, F extends FieldValues>({
   adornment,
   errorPath,
   context,
-  dontValidateNumber = false
+  dontValidateNumber = false,
 }: TextInputProps<T, F>) {
   const { errors } = useFormState({ control });
+  const isPasswordInput = type === 'password';
+  const [passwordOpen, setPasswordOpen] = useState<boolean>(false);
 
   const getInputError = useCallback(() => {
     const foundError = get(errors, errorPath || name);
@@ -143,14 +165,29 @@ export function TextInput<T extends string, F extends FieldValues>({
             className={clsx(
               'h-12 border border-solid border-grey-10 rounded-md px-4 w-full',
               className,
-              adornment && 'rounded-r-none',
+              adornment || isPasswordInput && 'rounded-r-none',
               sharedClasses,
             )}
             onChange={handleChange}
             onBlur={() => onBlur?.(name, context)}
             defaultValue={getInputDefaultValue(defaultValue, name)}
-            type={type === 'text' ? 'text' : 'tel'}
+            type={getInputType(type, passwordOpen)}
           />
+          {isPasswordInput && (
+            <div className={clsx(
+              'w-14 rounded-r-md flex items-center justify-center border border-l-0 border-solid border-grey-10',
+              'dark:border-grey-80 dark:bg-grey-90'
+            )} >
+              <Image
+                src={passwordOpen ? EyeOpenIcon : EyeCloseIcon}
+                alt='show_password'
+                width={24}
+                height={24}
+                className='cursor-pointer dark:invert opacity-90'
+                onClick={() => setPasswordOpen(isOpen => !isOpen)}
+              />
+            </div>
+          )}
           {adornment && (
             <div className={clsx(
               font_RedHatDisplay.className,
@@ -177,7 +214,9 @@ export function TextInput<T extends string, F extends FieldValues>({
     adornment,
     handleChange,
     context,
-    type
+    type,
+    isPasswordInput,
+    passwordOpen
   ]);
 
   return (
