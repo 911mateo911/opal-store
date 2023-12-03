@@ -13,6 +13,9 @@ const config: Config = {
         'max-tablet': {
           max: '1000px'
         },
+        'max-tablet-md': {
+          max: '940px'
+        },
         'max-tablet-sm': {
           max: '860px'
         },
@@ -22,6 +25,9 @@ const config: Config = {
         // Mobiles
         'max-mobile-lg': {
           max: '680px'
+        },
+        'max-mobile-slg': {
+          'max': '570px'
         },
         'max-mobile': {
           max: '550px'
@@ -51,6 +57,10 @@ const config: Config = {
         'between-tablet-sm-md': {
           min: '860px',
           max: '940px'
+        },
+        // Landscapes
+        'landscape-mobile': {
+          'raw': '(orientation: landscape) and (max-height: 550px)'
         }
       },
       fontFamily: {
