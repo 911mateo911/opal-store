@@ -26,6 +26,9 @@ const config: Config = {
         'max-mobile-lg': {
           max: '680px'
         },
+        'max-mobile-mlg': {
+          'max': '600px'
+        },
         'max-mobile-slg': {
           'max': '570px'
         },

@@ -5,9 +5,10 @@ import clsx from 'clsx';
 
 interface LogoProps {
   className?: string;
+  imgClassName?: string;
 }
 
-export const Logo = ({ className }: LogoProps) => {
+export const Logo = ({ className, imgClassName }: LogoProps) => {
   return (
     <div
       className={clsx('h-10 w-10 bg-green-40 flex items-center justify-center rounded-md', className)}
@@ -18,6 +19,7 @@ export const Logo = ({ className }: LogoProps) => {
         priority
         width={22}
         height={22}
+        className={imgClassName}
       />
     </div>
   )

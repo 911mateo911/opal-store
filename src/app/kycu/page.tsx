@@ -25,6 +25,7 @@ export default function LoginPage() {
           Streha jote e <b className="text-green-50" >blerjeve</b>
         </h2>
         <LoginForm>
+          {/* TODO: Rethink this please, its a bit ugly */}
           <div className="absolute left-0 -bottom-9 flex w-full items-center justify-center max-tablet-sm:static max-tablet-sm:mt-2" >
             <p
               className={clsx(

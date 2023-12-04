@@ -32,6 +32,8 @@ export const Navbar = () => {
         <FilledChipButton
           className='ml-4'
           text='Kycu'
+          asLink
+          to='/kycu'
         />
       </div>
     </div>

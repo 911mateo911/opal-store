@@ -1,6 +1,9 @@
+'use client';
+
 import clsx from "clsx";
 import Link from "next/link";
 import Image from 'next/image';
+import { font_Inter } from "../fonts";
 
 interface FilledChipButtonProps {
   text: string;
@@ -26,6 +29,7 @@ export const FilledChipButton = (props: FilledChipButtonProps & LinkOrBtnType) =
   const { textSize, onClick } = props;
 
   const btnClassName = clsx(
+    font_Inter.className,
     'select-none text-green-80 font-medium rounded-full bg-green-20 transition text-base',
     'py-1 flex items-center',
     'hover:bg-green-30 hover:text-green-70',
