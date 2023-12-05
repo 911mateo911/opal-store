@@ -6,7 +6,6 @@ export enum LoginFormFields {
   password = 'password'
 }
 
-// TODO: finish this
 export const loginSchema = z.object({
   [LoginFormFields.emailOrUsername]:
     z.string()
@@ -36,10 +35,7 @@ export const loginSchema = z.object({
   [LoginFormFields.password]:
     z.string()
       .min(1, { message: 'Passwordi nuk mund te jete bosh' })
-      .refine(password => {
-        // TODO: add shiko rregullat ketu aswell
-        return GLOBAL_CONFIG.passwordRegex.test(password);
-      }, { message: 'Password eshte invalid' })
+      .regex(GLOBAL_CONFIG.passwordRegex, { message: 'Password eshte invalid' })
 });
 
 export type LoginSchemaType = z.infer<typeof loginSchema>;

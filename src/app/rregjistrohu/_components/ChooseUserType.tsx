@@ -17,18 +17,18 @@ export const ChooseUserType = () => {
         />
         <h1 className={clsx(
           font_RedHatDisplay.className,
-          'text-center text-3xl font-bold text-grey-70'
+          'text-center text-3xl font-bold text-grey-70 dark:text-grey-30'
         )} >
           Rregjistrohu si:
         </h1>
         <div className='grid grid-cols-2 w-full mt-16 gap-24 max-tablet-sm:gap-12 max-mobile-mlg:grid-cols-1 max-mobile-md:mt-8' >
           <Link
-            href='/rregjistrohu/dyqan'
+            href='/rregjistrohu/biznes'
             className={clsx(
               'shadow-navbar_shadow bg-grey-1 flex items-center justify-center p-24 rounded-[10px] relative',
               '[&>img]:hover:scale-110 [&>span]:hover:scale-110 max-tablet-sm:p-20 max-tablet-sm:[&>span]:hover:scale-105',
               'max-tablet-sm:[&>img]:hover:scale-105 max-tablet-sm:min-w-[224px] max-mobile-xs:w-[224px] max-mobile-xs:mx-auto',
-              'hover:bg-green-5 transition-all'
+              'hover:bg-green-5 transition-all dark:bg-grey-90 dark:hover:bg-grey-85'
             )} >
             <Image
               src={StoreIcon}
@@ -41,7 +41,7 @@ export const ChooseUserType = () => {
               className={clsx(
                 font_Inter.className,
                 'absolute bottom-14 text-grey-85 text-base transition-all max-tablet-sm:bottom-11',
-                'max-tablet-sm:text-sm'
+                'max-tablet-sm:text-sm dark:text-grey-20'
               )}
             >Dyqan/Biznes</span>
           </Link>
@@ -51,7 +51,7 @@ export const ChooseUserType = () => {
               'shadow-navbar_shadow bg-grey-1 flex items-center justify-center p-24 rounded-[10px] relative',
               '[&>img]:hover:scale-110 [&>span]:hover:scale-110 max-tablet-sm:p-20 max-tablet-sm:[&>span]:hover:scale-105',
               'max-tablet-sm:[&>img]:hover:scale-105 max-tablet-sm:min-w-[224px] max-mobile-xs:w-[224px] max-mobile-xs:mx-auto',
-              'hover:bg-green-5 transition-all'
+              'hover:bg-green-5 transition-all dark:bg-grey-90 dark:hover:bg-grey-85'
             )} >
             <Image
               src={UserIcon}
@@ -64,7 +64,7 @@ export const ChooseUserType = () => {
               className={clsx(
                 font_Inter.className,
                 'absolute bottom-14 text-grey-85 text-base transition-all max-tablet-sm:bottom-11',
-                'max-tablet-sm:text-sm'
+                'max-tablet-sm:text-sm dark:text-grey-20'
               )}
             >Perdorues/Shites Privat</span>
           </Link>

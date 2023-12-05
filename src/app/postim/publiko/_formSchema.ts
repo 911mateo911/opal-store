@@ -79,6 +79,7 @@ export const newProductSchema = z.object({
   [NewProductFormFields.telephone]: z.string()
     .min(1, { message: 'Numri i telefonit nuk mund te jete bosh' })
     .regex(GLOBAL_CONFIG.phoneNumberRegex, { message: 'Numri eshte invalid' }),
+  // TODO: fix this shit
   [NewProductFormFields.whatsapp]: z.string()
     .regex(GLOBAL_CONFIG.phoneNumberRegex, { message: 'Numri eshte invalid' })
     .optional(),

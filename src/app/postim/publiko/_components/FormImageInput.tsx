@@ -8,9 +8,10 @@ import { useToast } from 'opal/app/_shared/molecules/Toast/useToast';
 interface FormImageInputProps {
   id: string;
   onChange: (images: ImageWithPreview[]) => void;
+  multiple?: boolean;
 }
 
-export const FormImageInput = ({ id, onChange }: FormImageInputProps) => {
+export const FormImageInput = ({ id, onChange, multiple = true }: FormImageInputProps) => {
   const { handleAddToast } = useToast();
 
   const handleOnChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +50,7 @@ export const FormImageInput = ({ id, onChange }: FormImageInputProps) => {
       });
     };
 
+    // TODO: modify the message when the input is not multiple
     if (nrOfModifiedFiles < files.length) {
       handleAddToast({
         content: (
@@ -69,7 +71,7 @@ export const FormImageInput = ({ id, onChange }: FormImageInputProps) => {
   return (
     <input
       type='file'
-      multiple
+      multiple={multiple}
       className='invisible h-0.5 w-0'
       id={id}
       onChange={handleOnChange}
