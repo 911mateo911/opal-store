@@ -138,7 +138,8 @@ export function TextInput<T extends string, F extends FieldValues>({
       'dark:bg-grey-90 dark:border-grey-80',
       'dark:focus:outline-blue-900 dark:focus:outline-none',
       'dark:placeholder:text-grey-75 dark:focus:bg-grey-80 dark:text-grey-20',
-      inputError && 'border-red-50 border-2 dark:border-red-60'
+      inputError && 'border-red-50 border-2 dark:border-red-60',
+      inputError && isPasswordInput && 'border-r-0'
     );
 
     if (textarea) {
@@ -166,7 +167,7 @@ export function TextInput<T extends string, F extends FieldValues>({
               'h-12 border border-solid border-grey-10 rounded-md px-4 w-full',
               className,
               adornment || isPasswordInput && 'rounded-r-none',
-              sharedClasses,
+              sharedClasses
             )}
             onChange={handleChange}
             onBlur={() => onBlur?.(name, context)}
@@ -176,7 +177,8 @@ export function TextInput<T extends string, F extends FieldValues>({
           {isPasswordInput && (
             <div className={clsx(
               'w-14 rounded-r-md flex items-center justify-center border border-l-0 border-solid border-grey-10',
-              'dark:border-grey-80 dark:bg-grey-90'
+              'dark:border-grey-80 dark:bg-grey-90',
+              inputError && '!border-l-red-50 border-l-2'
             )} >
               <Image
                 src={passwordOpen ? EyeOpenIcon : EyeCloseIcon}

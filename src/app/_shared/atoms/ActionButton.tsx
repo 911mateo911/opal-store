@@ -8,6 +8,7 @@ interface ActionButtonProps {
   className?: string;
 }
 
+// TODO: this is fucking ugly and delete this piece of shit
 export const ActionButton = ({ text, onClick, className }: ActionButtonProps) => {
   return (
     <button

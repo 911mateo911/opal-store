@@ -10,7 +10,7 @@ import { Logo } from 'opal/app/_shared/atoms/Logo';
 export const ChooseUserType = () => {
   return (
     <div className='h-max-screen-desktop flex justify-center max-tablet-sm:px-6 max-mobile-xs:px-0 max-mobile-xs:mx-1.5' >
-      <div className='rounded-[10px] shadow-navbar_shadow p-24 my-auto pt-20 max-tablet-sm:p-12 max-mobile-mlg:w-full max-mobile-md:pt-6' >
+      <div className='rounded-[10px] shadow-navbar_shadow p-24 my-auto pt-20 max-tablet-sm:p-12 max-mobile-mlg:w-full max-mobile-md:pt-6 max-mobile-lg:shadow-none landscape-mobile:shadow-none' >
         <Logo
           className='w-16 h-16 mx-auto mb-4'
           imgClassName='w-10 h-10'
