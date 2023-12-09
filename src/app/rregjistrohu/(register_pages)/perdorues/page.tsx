@@ -5,46 +5,35 @@ import { TextInput } from 'opal/app/_shared/atoms/TextInput';
 import { font_RedHatDisplay } from 'opal/app/_shared/fonts';
 import { InputTitle } from 'opal/app/postim/publiko/_components/InputTitle';
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { ProfilePictureInput } from '../../_components/ProfilePictureInput';
-import UserIcon from 'opal/app/_shared/icons/user.svg?url';
+
 import {
   SharedRegisterFormFields,
-  UserRegisterFormField,
-  registerUserSchema,
-  registerUserSchemaInitialValue
+  SharedRegisterSchemaType,
 } from '../../_formSchema';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { FilledChipButton } from 'opal/app/_shared/atoms/FilledChipButton';
 
 // TODO: maybe add some more info below the heading
 export default function NewUserForm() {
-  const {
-    control,
-    setValue,
-    trigger
-  } = useForm({
-    defaultValues: registerUserSchemaInitialValue,
-    resolver: zodResolver(registerUserSchema)
-  });
+  const { setValue, trigger, control } = useFormContext<SharedRegisterSchemaType>();
 
-  const onInputChange = (value: string | number, field: UserRegisterFormField | SharedRegisterFormFields) => {
+  const onInputChange = (value: string | number, field: SharedRegisterFormFields) => {
     setValue(field, value.toString());
   };
 
-  const onInputBlur = (field: UserRegisterFormField | SharedRegisterFormFields) => trigger(field);
+  const onInputBlur = (field: SharedRegisterFormFields) => trigger(field);
 
   return (
-    <div className='' >
+    <div>
       <h1 className={clsx(
         font_RedHatDisplay.className,
         'text-grey-95 text-2xl text-center dark:text-grey-5'
       )} >
-        Perdorues i ri
+        Rregjistrohu si perdorues
       </h1>
       <div className='flex justify-between gap-8 mt-6 max-tablet-md:gap-4 max-tablet-xs:flex-col max-tablet-xs:mt-4' >
         <ProfilePictureInput
-          imageSrc={UserIcon}
           control={control}
           setValue={setValue}
           className='max-tablet-xs:mx-auto'
@@ -56,7 +45,7 @@ export default function NewUserForm() {
                 Emer Mbiemer
               </InputTitle>
               <TextInput
-                name={UserRegisterFormField.fullName}
+                name={SharedRegisterFormFields.name}
                 onChange={onInputChange}
                 onBlur={onInputBlur}
                 control={control}

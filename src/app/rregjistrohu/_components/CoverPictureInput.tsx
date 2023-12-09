@@ -1,28 +1,25 @@
-import clsx from 'clsx';
-import Image from 'next/image';
-import { font_Inter } from 'opal/app/_shared/fonts';
-import { FormImageInput } from 'opal/app/postim/publiko/_components/FormImageInput';
+'use client';
+
 import React from 'react';
-import { Control, UseFormSetValue, useWatch } from 'react-hook-form';
-import { SharedRegisterSchemaType, SharedRegisterFormFields } from '../_formSchema';
+import clsx from 'clsx';
+import { font_Inter } from 'opal/app/_shared/fonts';
+import BusinessIcon from 'opal/app/_shared/icons/store.svg?url';
+import Image from 'next/image';
+import { FormImageInput } from 'opal/app/postim/publiko/_components/FormImageInput';
+import { ProfilePictureInputProps } from './ProfilePictureInput';
+import { useWatch } from 'react-hook-form';
+import { SharedRegisterFormFields } from '../_formSchema';
 import { ImageWithPreview } from 'opal/app/_shared/types';
 import TrashIcon from 'opal/app/_shared/icons/trash.svg';
-import UserIcon from 'opal/app/_shared/icons/user.svg?url';
 
-export interface ProfilePictureInputProps {
-  control: Control<SharedRegisterSchemaType>;
-  setValue: UseFormSetValue<SharedRegisterSchemaType>;
-  className?: string;
-};
+export const COVER_PIC_HTML_INPUT_ID = 'cover_pic_upload';
 
-export const PROFILE_PIC_HTML_INPUT_ID = 'profile_pic_upload';
-
-export const ProfilePictureInput = ({
+export const CoverPictureInput = ({
+  className,
   control,
-  setValue,
-  className
+  setValue
 }: ProfilePictureInputProps) => {
-  const image = useWatch({ control, name: SharedRegisterFormFields.profile_pic });
+  const image = useWatch({ control, name: SharedRegisterFormFields.cover_photo });
 
   const onAttachProfilePic = (files: ImageWithPreview[]) => {
     const [profilePic] = files;
@@ -39,14 +36,11 @@ export const ProfilePictureInput = ({
     setValue(SharedRegisterFormFields.profile_pic, undefined);
   }
 
-  const sharedClasses = clsx('w-full h-full aspect-square max-w-[248px] rounded-full', className);
+  const sharedClasses = clsx('w-full rounded-md', className);
 
   if (image?.preview) {
     return (
-      <div className={clsx(
-        sharedClasses,
-        'flex items-stretch justify-center relative'
-      )} >
+      <div className={sharedClasses} >
         <Image
           src={image.preview}
           alt='upload_profile_pic'
@@ -66,33 +60,29 @@ export const ProfilePictureInput = ({
   }
 
   return (
-    <label
-      className={clsx(
-        sharedClasses,
-        'bg-grey-1 flex items-center justify-center',
-        'cursor-pointer border border-grey-2 [&>div]:hover:scale-105',
-        'dark:bg-grey-95 dark:border-grey-90 relative'
-      )}
-      htmlFor={PROFILE_PIC_HTML_INPUT_ID}
-    >
-      <div className='transition' >
+    <label className={clsx(
+      sharedClasses,
+      'bg-grey-1 border-grey-2 border cursor-pointer flex items-center justify-center',
+      'dark:bg-grey-95 dark:border-grey-90 [&>div]:hover:scale-105'
+    )} >
+      <div className='transition flex items-center' >
         <Image
-          src={UserIcon}
-          alt='upload_profile_pic'
+          src={BusinessIcon}
+          alt='cover_profile_pic'
           height={48}
           width={48}
-          className='mx-auto'
+          className='mr-2'
         />
         <p className={clsx(
           font_Inter.className,
-          'text-sm text-grey-95 tracking-wide mt-0.5 dark:text-grey-10'
+          'text-sm py-20 text-grey-95 tracking-wide mt-0.5 dark:text-grey-10'
         )} >
-          Ngarko fotografi
+          Ngarko kopertine
         </p>
       </div>
       <FormImageInput
-        id={PROFILE_PIC_HTML_INPUT_ID}
-        onChange={onAttachProfilePic}
+        id={COVER_PIC_HTML_INPUT_ID}
+        onChange={console.log}
         multiple={false}
       />
     </label>
