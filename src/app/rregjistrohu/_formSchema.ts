@@ -1,6 +1,9 @@
 import { z } from "zod";
 import { GLOBAL_CONFIG } from "../_config";
+import { SelectValues } from "../_shared/atoms/Select";
+import { BUSINESS_LOCATION } from "@prisma/client";
 
+// TODO: this file is a fucking mess
 export enum SharedRegisterFormFields {
   name = 'name',
   email = 'email',
@@ -13,8 +16,9 @@ export enum SharedRegisterFormFields {
   cover_photo = 'cover_photo',
   website = 'website',
   availability = 'availability', // hour range here
-  location = 'location',
-  description = 'description'
+  location = 'location', // select here
+  description = 'description',
+  formStep = 'formStep'
 };
 
 // TODO: maybe merge these with the publish form schema
@@ -62,6 +66,32 @@ export const basicRegisterSchema = z.object({
     }, { message: 'Emri i plote eshte invalid' })
 });
 
+export const BUSINESS_LOCATION_SELECT_OPTION: SelectValues<BUSINESS_LOCATION> = {
+  ONLINE_ANYWHERE: {
+    element: 'Online/Kudo',
+    value: BUSINESS_LOCATION.ONLINE_ANYWHERE
+  },
+  ONLINE_PHYSICAL: {
+    element: 'Online/Fizik',
+    value: BUSINESS_LOCATION.ONLINE_PHYSICAL
+  },
+  ONLINE_REGION: {
+    element: 'Online/Brenda rajonit',
+    value: BUSINESS_LOCATION.ONLINE_REGION
+  },
+  PHYSICAL: {
+    element: 'Fizik',
+    value: BUSINESS_LOCATION.PHYSICAL
+  }
+};
+
+export enum BusinessFormStep {
+  GENERAL_INFO = 'GENERAL_INFO',
+  CONTACT = 'CONTACT',
+  AVAILABILITY = 'AVAILABILITY',
+  PICTURES = 'PICTURES'
+};
+
 // TODO: Do a schema generator function
 export const businessRegisterSchema = basicRegisterSchema.extend({
   [SharedRegisterFormFields.cover_photo]: z.intersection(
@@ -74,9 +104,10 @@ export const businessRegisterSchema = basicRegisterSchema.extend({
   // TODO: add search filter here
   [SharedRegisterFormFields.availability]: z.string(),
   // TODO: maybe add maps here ? 👀👀👀👀👀👀👀👀👀👀👀👀👀
-  [SharedRegisterFormFields.location]: z.string(),
+  [SharedRegisterFormFields.location]: z.nativeEnum(BUSINESS_LOCATION),
   // TODO: validate
   [SharedRegisterFormFields.description]: z.string(),
+  [SharedRegisterFormFields.formStep]: z.nativeEnum(BusinessFormStep)
 });
 
 export const generateSharedRegisterSchema = (isBusinessForm: boolean):
@@ -107,6 +138,7 @@ export const registerUserSchemaInitialValue: SharedRegisterSchemaType = {
   [SharedRegisterFormFields.cover_photo]: undefined,
   [SharedRegisterFormFields.website]: '',
   [SharedRegisterFormFields.availability]: '',
-  [SharedRegisterFormFields.location]: '',
-  [SharedRegisterFormFields.description]: ''
+  [SharedRegisterFormFields.location]: BUSINESS_LOCATION.ONLINE_ANYWHERE,
+  [SharedRegisterFormFields.description]: '',
+  [SharedRegisterFormFields.formStep]: BusinessFormStep.GENERAL_INFO
 }

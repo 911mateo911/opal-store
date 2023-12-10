@@ -13,6 +13,7 @@ export interface ProfilePictureInputProps {
   control: Control<SharedRegisterSchemaType>;
   setValue: UseFormSetValue<SharedRegisterSchemaType>;
   className?: string;
+  imageClass?: string;
 };
 
 export const PROFILE_PIC_HTML_INPUT_ID = 'profile_pic_upload';
@@ -20,7 +21,8 @@ export const PROFILE_PIC_HTML_INPUT_ID = 'profile_pic_upload';
 export const ProfilePictureInput = ({
   control,
   setValue,
-  className
+  className,
+  imageClass
 }: ProfilePictureInputProps) => {
   const image = useWatch({ control, name: SharedRegisterFormFields.profile_pic });
 
@@ -52,7 +54,7 @@ export const ProfilePictureInput = ({
           alt='upload_profile_pic'
           width={248}
           height={248}
-          className='object-cover rounded-full'
+          className={clsx('object-cover rounded-full', imageClass)}
         />
         <TrashIcon
           className={clsx(

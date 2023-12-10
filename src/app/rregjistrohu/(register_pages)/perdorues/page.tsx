@@ -32,11 +32,19 @@ export default function NewUserForm() {
       )} >
         Rregjistrohu si perdorues
       </h1>
+      <p
+        className={clsx(
+          font_RedHatDisplay.className,
+          'text-grey-90 text-center font-light text-xs mt-1 dark:text-grey-20'
+        )}
+      >
+        Gjithashtu mund te postoni njoftime por nuk mund te jeni ne nje kategori me bizneset *
+      </p>
       <div className='flex justify-between gap-8 mt-6 max-tablet-md:gap-4 max-tablet-xs:flex-col max-tablet-xs:mt-4' >
         <ProfilePictureInput
           control={control}
           setValue={setValue}
-          className='max-tablet-xs:mx-auto'
+          className='mx-auto'
         />
         <div>
           <div className='grid grid-cols-2 gap-x-8 gap-y-4 w-full h-fit max-tablet-md:gap-x-4 max-tablet-md:gap-y-3.5 max-mobile-md:grid-cols-1' >

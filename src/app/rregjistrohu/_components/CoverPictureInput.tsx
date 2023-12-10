@@ -21,39 +21,38 @@ export const CoverPictureInput = ({
 }: ProfilePictureInputProps) => {
   const image = useWatch({ control, name: SharedRegisterFormFields.cover_photo });
 
-  const onAttachProfilePic = (files: ImageWithPreview[]) => {
-    const [profilePic] = files;
+  const onAttachCoverPic = (files: ImageWithPreview[]) => {
+    const [coverPic] = files;
 
-    if (profilePic) {
-      setValue(SharedRegisterFormFields.profile_pic, profilePic);
+    if (coverPic) {
+      setValue(SharedRegisterFormFields.cover_photo, coverPic);
     };
   };
 
-  const onRemoveProfilePic = () => {
+  const onRemoveCoverPic = () => {
     if (image?.preview) {
       URL.revokeObjectURL(image.preview);
     }
-    setValue(SharedRegisterFormFields.profile_pic, undefined);
+    setValue(SharedRegisterFormFields.cover_photo, undefined);
   }
 
-  const sharedClasses = clsx('w-full rounded-md', className);
+  const sharedClasses = clsx('w-full rounded-md h-60', className);
 
   if (image?.preview) {
     return (
-      <div className={sharedClasses} >
+      <div className={clsx(sharedClasses, 'relative')} >
         <Image
           src={image.preview}
           alt='upload_profile_pic'
-          width={248}
-          height={248}
-          className='object-cover rounded-full'
+          fill
+          className='object-cover h-60 !relative'
         />
         <TrashIcon
           className={clsx(
             'absolute left-1/2 -translate-x-1/2 -bottom-3.5 w-8 h-8 cursor-pointer [&>path]:stroke-red-60 rounded-full p-1.5',
             'border border-red-60 bg-grey-1 dark:bg-grey-95'
           )}
-          onClick={onRemoveProfilePic}
+          onClick={onRemoveCoverPic}
         />
       </div>
     )
@@ -75,14 +74,15 @@ export const CoverPictureInput = ({
         />
         <p className={clsx(
           font_Inter.className,
-          'text-sm py-20 text-grey-95 tracking-wide mt-0.5 dark:text-grey-10'
+          'text-sm text-grey-95 tracking-wide mt-0.5 dark:text-grey-10'
         )} >
           Ngarko kopertine
         </p>
       </div>
       <FormImageInput
         id={COVER_PIC_HTML_INPUT_ID}
-        onChange={console.log}
+        // TODO: maybe add a slide or touch FX to center the photo
+        onChange={onAttachCoverPic}
         multiple={false}
       />
     </label>
