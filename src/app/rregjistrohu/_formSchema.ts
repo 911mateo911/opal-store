@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { GLOBAL_CONFIG } from "../_config";
 import { SelectValues } from "../_shared/atoms/Select";
-import { BUSINESS_LOCATION } from "@prisma/client";
+import { BUSINESS_TYPE } from "@prisma/client";
 
 // TODO: this file is a fucking mess
 export enum SharedRegisterFormFields {
@@ -18,7 +18,8 @@ export enum SharedRegisterFormFields {
   availability = 'availability', // hour range here
   location = 'location', // select here
   description = 'description',
-  formStep = 'formStep'
+  formStep = 'formStep',
+  type = 'type'
 };
 
 // TODO: maybe merge these with the publish form schema
@@ -66,22 +67,22 @@ export const basicRegisterSchema = z.object({
     }, { message: 'Emri i plote eshte invalid' })
 });
 
-export const BUSINESS_LOCATION_SELECT_OPTION: SelectValues<BUSINESS_LOCATION> = {
+export const BUSINESS_TYPE_SELECT_OPTION: SelectValues<BUSINESS_TYPE> = {
   ONLINE_ANYWHERE: {
     element: 'Online/Kudo',
-    value: BUSINESS_LOCATION.ONLINE_ANYWHERE
+    value: BUSINESS_TYPE.ONLINE_ANYWHERE
   },
   ONLINE_PHYSICAL: {
     element: 'Online/Fizik',
-    value: BUSINESS_LOCATION.ONLINE_PHYSICAL
+    value: BUSINESS_TYPE.ONLINE_PHYSICAL
   },
   ONLINE_REGION: {
     element: 'Online/Brenda rajonit',
-    value: BUSINESS_LOCATION.ONLINE_REGION
+    value: BUSINESS_TYPE.ONLINE_REGION
   },
   PHYSICAL: {
     element: 'Fizik',
-    value: BUSINESS_LOCATION.PHYSICAL
+    value: BUSINESS_TYPE.PHYSICAL
   }
 };
 
@@ -104,10 +105,11 @@ export const businessRegisterSchema = basicRegisterSchema.extend({
   // TODO: add search filter here
   [SharedRegisterFormFields.availability]: z.string(),
   // TODO: maybe add maps here ? 👀👀👀👀👀👀👀👀👀👀👀👀👀
-  [SharedRegisterFormFields.location]: z.nativeEnum(BUSINESS_LOCATION),
+  [SharedRegisterFormFields.type]: z.nativeEnum(BUSINESS_TYPE),
   // TODO: validate
   [SharedRegisterFormFields.description]: z.string(),
-  [SharedRegisterFormFields.formStep]: z.nativeEnum(BusinessFormStep)
+  [SharedRegisterFormFields.formStep]: z.nativeEnum(BusinessFormStep),
+  [SharedRegisterFormFields.location]: z.string()
 });
 
 export const generateSharedRegisterSchema = (isBusinessForm: boolean):
@@ -138,7 +140,8 @@ export const registerUserSchemaInitialValue: SharedRegisterSchemaType = {
   [SharedRegisterFormFields.cover_photo]: undefined,
   [SharedRegisterFormFields.website]: '',
   [SharedRegisterFormFields.availability]: '',
-  [SharedRegisterFormFields.location]: BUSINESS_LOCATION.ONLINE_ANYWHERE,
+  [SharedRegisterFormFields.type]: BUSINESS_TYPE.ONLINE_ANYWHERE,
   [SharedRegisterFormFields.description]: '',
-  [SharedRegisterFormFields.formStep]: BusinessFormStep.GENERAL_INFO
+  [SharedRegisterFormFields.formStep]: BusinessFormStep.GENERAL_INFO,
+  [SharedRegisterFormFields.location]: ''
 }

@@ -1,7 +1,10 @@
 import { InputTitle } from "opal/app/postim/publiko/_components/InputTitle";
 import { RegisterBusinessStepPageProps } from "./types"
 import { TextInput } from "opal/app/_shared/atoms/TextInput";
-import { BUSINESS_LOCATION_SELECT_OPTION, SharedRegisterFormFields } from "opal/app/rregjistrohu/_formSchema";
+import {
+  BUSINESS_TYPE_SELECT_OPTION,
+  SharedRegisterFormFields
+} from "opal/app/rregjistrohu/_formSchema";
 import { Select } from "opal/app/_shared/atoms/Select";
 import clsx from "clsx";
 import { font_RedHatDisplay } from "opal/app/_shared/fonts";
@@ -18,7 +21,7 @@ export const RegisterBusinessInfoStep = ({ form }: RegisterBusinessStepPageProps
 
   return (
     <div>
-      <div className="grid grid-cols-2 gap-x-5" >
+      <div className="grid grid-cols-2 gap-x-5 max-tablet-md:gap-x-3 max-mobile-md:grid-cols-1 max-mobile-md:gap-y-3.5" >
         <div>
           <InputTitle>
             Emri i biznesit
@@ -36,9 +39,9 @@ export const RegisterBusinessInfoStep = ({ form }: RegisterBusinessStepPageProps
             Vendndodhja
           </InputTitle>
           <Select
-            name={SharedRegisterFormFields.location}
+            name={SharedRegisterFormFields.type}
             onSelect={onInputChange}
-            values={BUSINESS_LOCATION_SELECT_OPTION}
+            values={BUSINESS_TYPE_SELECT_OPTION}
           />
         </div>
       </div>
@@ -49,7 +52,7 @@ export const RegisterBusinessInfoStep = ({ form }: RegisterBusinessStepPageProps
       )} >
         Te dhena autentifikimi:
       </p>
-      <div className="grid grid-cols-2 gap-x-5 gap-y-4" >
+      <div className="grid grid-cols-2 gap-x-5 gap-y-4 max-tablet-md:gap-x-3 max-mobile-md:grid-cols-1 max-mobile-md:gap-y-3.5" >
         <div>
           <InputTitle>
             Email
@@ -106,7 +109,7 @@ export const RegisterBusinessInfoStep = ({ form }: RegisterBusinessStepPageProps
       <FilledChipButton
         text='Vazhdo'
         onClick={console.log}
-        className='mt-8 mx-auto w-64 justify-center'
+        className='mt-8 mx-auto w-64 justify-center max-tablet-xs:mb-2'
       />
     </div>
   )

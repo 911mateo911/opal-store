@@ -23,7 +23,7 @@ model User {
   created_at     DateTime             @default(now())
   draftProductId String?
   draftProducts  Draft_Product_Form[]
-  location       BUSINESS_LOCATION
+  type           BUSINESS_TYPE
 }
 
 model Draft_Product_Form {
@@ -144,7 +144,7 @@ enum PRODUCT_SUBCATEGORIES {
   JOBS__PART_TIME
 }
 
-enum BUSINESS_LOCATION {
+enum BUSINESS_TYPE {
   ONLINE_ANYWHERE
   ONLINE_REGION
   PHYSICAL

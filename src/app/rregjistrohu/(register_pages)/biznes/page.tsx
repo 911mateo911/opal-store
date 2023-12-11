@@ -19,11 +19,11 @@ export default function NewBusinessForm() {
       )} >
         Rregjistrohu si Dyqan/Biznes
       </h1>
-      <div className='grid grid-cols-[min-content_1px_1fr] gap-5 mt-4' >
+      <div className='grid grid-cols-[min-content_1px_1fr] gap-5 mt-4 max-tablet-xs:grid-cols-1 max-tablet-xs:gap-0' >
         <BusinessFormStepComp
           control={form.control}
         />
-        <div className='my-4 bg-grey-20 dark:bg-grey-85' />
+        <div className='my-4 bg-grey-20 dark:bg-grey-85 max-tablet-xs:hidden' />
         <div className='pt-6' >
           <RegisterBusinessInfoStep
             form={form}
