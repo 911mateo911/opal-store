@@ -3,13 +3,20 @@
 import clsx from 'clsx';
 import { font_RedHatDisplay } from 'opal/app/_shared/fonts';
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
-import { SharedRegisterSchemaType } from '../../_formSchema';
+import { useFormContext, useWatch } from 'react-hook-form';
+import { BusinessFormStep, SharedRegisterFormFields, SharedRegisterSchemaType } from '../../_formSchema';
 import { RegisterBusinessInfoStep } from './_steps/RegisterBusinessInfoStep';
 import { BusinessFormStepComp } from './_steps/BusinessFormStepComp';
+import { RegisterBusinessContactStep } from './_steps/RegisterBusinessContactStep';
 
 export default function NewBusinessForm() {
   const form = useFormContext<SharedRegisterSchemaType>();
+
+  const formStep = useWatch({
+    control: form.control,
+    name: SharedRegisterFormFields.formStep,
+    defaultValue: BusinessFormStep.GENERAL_INFO
+  });
 
   return (
     <div className='h-full' >
@@ -25,32 +32,18 @@ export default function NewBusinessForm() {
         />
         <div className='my-4 bg-grey-20 dark:bg-grey-85 max-tablet-xs:hidden' />
         <div className='pt-6' >
-          <RegisterBusinessInfoStep
-            form={form}
-          />
+          {formStep === BusinessFormStep.GENERAL_INFO && (
+            <RegisterBusinessInfoStep
+              form={form}
+            />
+          )}
+          {formStep === BusinessFormStep.CONTACT && (
+            <RegisterBusinessContactStep
+              form={form}
+            />
+          )}
         </div>
       </div>
-      {/* <CoverPictureInput
-        className='mt-6'
-        control={control}
-        setValue={setValue}
-      />
-      <div className='w-full mt-8' >
-        <p
-          className={clsx(
-            font_RedHatDisplay.className,
-            'text-grey-90 text-sm text-center font-semibold dark:text-grey-10 pb-8'
-          )}
-        >
-          Informacion
-        </p>
-        <ProfilePictureInput
-          className='rounded-md'
-          control={control}
-          setValue={setValue}
-          imageClass='rounded-md'
-        />
-      </div> */}
     </div>
   )
 }

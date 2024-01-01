@@ -14,12 +14,21 @@ export enum SharedRegisterFormFields {
   whatsapp = 'whatsapp',
   // below are business only
   cover_photo = 'cover_photo',
+  work_telephone = 'work_telephone',
+  work_email = 'work_email',
   website = 'website',
   availability = 'availability', // hour range here
   location = 'location', // select here
   description = 'description',
   formStep = 'formStep',
   type = 'type'
+};
+
+export enum BusinessFormStep {
+  GENERAL_INFO = 'GENERAL_INFO',
+  CONTACT = 'CONTACT',
+  AVAILABILITY = 'AVAILABILITY',
+  PICTURES = 'PICTURES'
 };
 
 // TODO: maybe merge these with the publish form schema
@@ -44,10 +53,10 @@ export const basicRegisterSchema = z.object({
   [SharedRegisterFormFields.telephone]: z.string()
     .min(1, { message: 'Numri i telefonit nuk mund te jete bosh' })
     .regex(GLOBAL_CONFIG.phoneNumberRegex, { message: 'Numri eshte invalid' }),
-  // TODO: fix this shit
   [SharedRegisterFormFields.whatsapp]: z.string()
     .regex(GLOBAL_CONFIG.phoneNumberRegex, { message: 'Numri eshte invalid' })
-    .optional(),
+    .optional()
+    .or(z.literal('')),
   // TODO: fix this also on general product form
   // TODO: PLEASE ITS HORRIBLE TF DID U THINK
   // TODO: split this by context, if it is a business or not
@@ -64,7 +73,8 @@ export const basicRegisterSchema = z.object({
       const [firstName, lastName] = providedString.split(' ');
 
       return firstName?.length > 2 && lastName?.length > 2;
-    }, { message: 'Emri i plote eshte invalid' })
+    }, { message: 'Emri i plote eshte invalid' }),
+  [SharedRegisterFormFields.formStep]: z.nativeEnum(BusinessFormStep).optional(),
 });
 
 export const BUSINESS_TYPE_SELECT_OPTION: SelectValues<BUSINESS_TYPE> = {
@@ -86,14 +96,6 @@ export const BUSINESS_TYPE_SELECT_OPTION: SelectValues<BUSINESS_TYPE> = {
   }
 };
 
-export enum BusinessFormStep {
-  GENERAL_INFO = 'GENERAL_INFO',
-  CONTACT = 'CONTACT',
-  AVAILABILITY = 'AVAILABILITY',
-  PICTURES = 'PICTURES'
-};
-
-// TODO: Do a schema generator function
 export const businessRegisterSchema = basicRegisterSchema.extend({
   [SharedRegisterFormFields.cover_photo]: z.intersection(
     z.object({
@@ -109,7 +111,17 @@ export const businessRegisterSchema = basicRegisterSchema.extend({
   // TODO: validate
   [SharedRegisterFormFields.description]: z.string(),
   [SharedRegisterFormFields.formStep]: z.nativeEnum(BusinessFormStep),
-  [SharedRegisterFormFields.location]: z.string()
+  [SharedRegisterFormFields.location]: z.string(),
+  [SharedRegisterFormFields.work_telephone]: z
+    .string()
+    .regex(GLOBAL_CONFIG.phoneNumberRegex, { message: 'Numri eshte invalid' })
+    .optional()
+    .or(z.literal('')),
+  [SharedRegisterFormFields.work_email]: z
+    .string()
+    .regex(GLOBAL_CONFIG.emailRegex, { message: 'Email eshte invalid' })
+    .optional()
+    .or(z.literal(''))
 });
 
 export const generateSharedRegisterSchema = (isBusinessForm: boolean):

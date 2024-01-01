@@ -9,6 +9,7 @@ import { Select } from "opal/app/_shared/atoms/Select";
 import clsx from "clsx";
 import { font_RedHatDisplay } from "opal/app/_shared/fonts";
 import { FilledChipButton } from "opal/app/_shared/atoms/FilledChipButton";
+import { useBusinessForm } from "../_hooks/useBusinessForm";
 
 export const RegisterBusinessInfoStep = ({ form }: RegisterBusinessStepPageProps) => {
   const { setValue, control, trigger } = form;
@@ -18,6 +19,8 @@ export const RegisterBusinessInfoStep = ({ form }: RegisterBusinessStepPageProps
   };
 
   const onInputBlur = (field: SharedRegisterFormFields) => trigger(field);
+
+  const { validateAndGoToNextStep } = useBusinessForm(form);
 
   return (
     <div>
@@ -106,9 +109,10 @@ export const RegisterBusinessInfoStep = ({ form }: RegisterBusinessStepPageProps
           />
         </div>
       </div>
+      {/* TODO: maybe reuse this */}
       <FilledChipButton
         text='Vazhdo'
-        onClick={console.log}
+        onClick={validateAndGoToNextStep}
         className='mt-8 mx-auto w-64 justify-center max-tablet-xs:mb-2'
       />
     </div>
